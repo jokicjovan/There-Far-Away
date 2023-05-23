@@ -3,12 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Three_Far_Away"
+        xmlns:local="clr-namespace:Three_Far_Away" 
+        xmlns:views="clr-namespace:Three_Far_Away.Views"
+        xmlns:vms="clr-namespace:Three_Far_Away.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="260,217,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="238,138,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        Title="ThereFarAway" 
+        Height="430" 
+        Width="750"
+        ResizeMode="CanMinimize"
+        FontSize="14">
+    <Grid Margin="20 10">
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>            
+            <DataTemplate DataType="{x:Type vms:AgentMainViewModel}">
+                <views:AgentMainView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:UserMainViewModel}">
+                <views:UserMainView/>
+            </DataTemplate>
+        </Grid.Resources>
 
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>
