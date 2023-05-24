@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Three_Far_Away.Models
 {
     [Table("users")]
-    public class User
+    public class User : IBaseEntity
     {
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

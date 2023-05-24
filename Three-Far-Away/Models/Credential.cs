@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Three_Far_Away.Models
 {
     [Table("credentials")]
-    public class Credentials
+    public class Credential : IBaseEntity
     {
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,8 +22,8 @@ namespace Three_Far_Away.Models
 
         public User User { get; set; }
 
-        public Credentials() { }
-        public Credentials(Guid id, string username, string password, User user)
+        public Credential() { }
+        public Credential(Guid id, string username, string password, User user)
         {
             Id = id;
             Username = username;

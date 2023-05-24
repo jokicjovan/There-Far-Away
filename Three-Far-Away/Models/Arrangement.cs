@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Three_Far_Away.Models
 {
     [Table("arrangements")]
-    public class Arrangement
+    public class Arrangement : IBaseEntity
     {
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

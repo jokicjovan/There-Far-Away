@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Stores;
 using Three_Far_Away.Services;
+using System.Windows.Navigation;
 
 namespace Three_Far_Away.ViewModels
 {
@@ -42,9 +43,9 @@ namespace Three_Far_Away.ViewModels
 
         public ICommand SubmitCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(NavigationService<UserMainViewModel> navigationService)
         {
-            SubmitCommand = new LoginCommand(this);
+            SubmitCommand = new NavigateCommand<UserMainViewModel>(navigationService);
         }
     }
 }

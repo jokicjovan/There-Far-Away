@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Three_Far_Away.Models
 {
     [Table("journeys")]
-    public class Journey
+    public class Journey : IBaseEntity
     {
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -32,13 +32,10 @@ namespace Three_Far_Away.Models
         [Column("price")]
         public Double Price { get; set; }
 
-        [Column("attractions")]
         public List<Attraction> Attractions{ get; set; }
 
-        [Column("accomodations")]
         public List<Attraction> Accomodations { get; set; }
 
-        [Column("restaurants")]
         public List<Attraction> Restaurants { get; set; }
 
         [Column("transportation")]

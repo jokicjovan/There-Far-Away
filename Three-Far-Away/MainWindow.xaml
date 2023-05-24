@@ -16,10 +16,12 @@
         <Grid.Resources>
             <DataTemplate DataType="{x:Type vms:LoginViewModel}">
                 <views:LoginView/>
-            </DataTemplate>            
+            </DataTemplate> 
+            
             <DataTemplate DataType="{x:Type vms:AgentMainViewModel}">
                 <views:AgentMainView/>
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type vms:UserMainViewModel}">
                 <views:UserMainView/>
             </DataTemplate>
