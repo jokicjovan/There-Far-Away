@@ -26,11 +26,7 @@ namespace Three_Far_Away.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Journey>()
-                .HasOne(e => e.StartLocation)
-                .WithOne()
-                .HasForeignKey<Location>(c => c.Id)
-                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

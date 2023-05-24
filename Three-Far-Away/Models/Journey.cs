@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Three_Far_Away.Models
 {
@@ -24,26 +21,23 @@ namespace Three_Far_Away.Models
         public DateTime EndDate { get; set; }
 
         [Column("startLocation")]
-        public Location StartLocation { get; set; }
+        public Location? StartLocation { get; set; }
 
         [Column("endLocation")]
-        public Location EndLocation{ get; set; }
+        public Location? EndLocation{ get; set; }
 
         [Column("price")]
         public Double Price { get; set; }
 
+        [Column("attractions")]
         public List<Attraction> Attractions{ get; set; }
-
-        public List<Attraction> Accomodations { get; set; }
-
-        public List<Attraction> Restaurants { get; set; }
 
         [Column("transportation")]
         public TransportationType Transportation { get; set; }
 
         public Journey() { }
 
-        public Journey(Guid id, string name, DateTime startDate, DateTime endDate, Location startLocation, Location endLocation, double price, List<Attraction> attractions, List<Attraction> accomodations, List<Attraction> restaurants, TransportationType transportation)
+        public Journey(Guid id, string name, DateTime startDate, DateTime endDate, Location startLocation, Location endLocation, double price, List<Attraction> attractions, TransportationType transportation)
         {
             Id = id;
             Name = name;
@@ -53,8 +47,6 @@ namespace Three_Far_Away.Models
             EndLocation = endLocation;
             Price = price;
             Attractions = attractions;
-            Accomodations = accomodations;
-            Restaurants = restaurants;
             Transportation = transportation;
         }
     }
