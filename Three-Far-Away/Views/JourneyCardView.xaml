@@ -39,7 +39,7 @@
                 <!-- Top row (2nd part) -->
                 <Grid Grid.Row="1">
                     <!-- Content for right column -->
-                    <TextBlock Text="17.6.2023.-27.6.2023."/>
+                    <TextBlock Text="17.6.2023. - 27.6.2023."/>
                 </Grid>
 
                 <!-- Bottom row -->
