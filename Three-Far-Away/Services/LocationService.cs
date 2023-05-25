@@ -13,6 +13,8 @@ namespace Three_Far_Away.Services
         {
             _locationRepository = locationRepository;
         }
+
+        #region CRUD
         public Location Create(Location entity)
         {
             return _locationRepository.Create(entity);
@@ -32,5 +34,6 @@ namespace Three_Far_Away.Services
         {
             return _locationRepository.Delete(id);
         }
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,10 @@ namespace Three_Far_Away.Repositories
     {
         public CredentialRepository(ThereFarAwayDbContext context) : base(context)
         {
+        }
+
+        public async Task<Credential> FindCredentialByUsername(string username) {
+            return await _entities.Include(i => i.User).FirstOrDefaultAsync(c => c.Username == username);
         }
     }
 }

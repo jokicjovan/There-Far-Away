@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Three_Far_Away.Exceptions;
 using Three_Far_Away.Models;
 using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Services.Interfaces;
@@ -17,6 +15,8 @@ namespace Three_Far_Away.Services
         {
             _credentialRepository = credentialRepository;
         }
+
+        #region CRUD
         public Credential Create(Credential entity)
         {
             return _credentialRepository.Create(entity);
@@ -36,5 +36,16 @@ namespace Three_Far_Away.Services
         {
             return _credentialRepository.Delete(id);
         }
+        #endregion
+
+        public async Task<User> Authenticate(string username, string password) {
+            Credential credential = await _credentialRepository.FindCredentialByUsername(username);
+            if (credential == null || !BCrypt.Net.BCrypt.Verify(password, credential.Password))
+            {
+                throw new CredentialException("Invalid username or password!");
+            }
+
+            return credential.User;
+        } 
     }
 }

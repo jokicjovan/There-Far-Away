@@ -19,6 +19,7 @@ namespace Three_Far_Away.Services
             _attractionRepository = attractionRepository;
         }
 
+        #region CRUD
         public Attraction Create(Attraction entity)
         {
             return _attractionRepository.Create(entity);
@@ -38,5 +39,6 @@ namespace Three_Far_Away.Services
         {
             return _attractionRepository.Delete(id);
         }
+        #endregion
     }
 }
