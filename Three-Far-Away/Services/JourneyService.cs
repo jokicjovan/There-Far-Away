@@ -51,6 +51,7 @@ namespace Three_Far_Away.Services
             List<Journey> newJourneys = new List<Journey>();
             for (int i = page * size; i < (page + 1) * size; i++)
             {
+                if(i > journeys.Count - 1 || i < 0) break;
                 newJourneys.Add(journeys[i]);
             }
             return newJourneys;

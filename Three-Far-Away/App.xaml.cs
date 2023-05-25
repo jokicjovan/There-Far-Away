@@ -130,7 +130,7 @@ namespace Three_Far_Away
             // credential.Password = BCrypt.Net.BCrypt.HashPassword("asd");
             // credential = _host.Services.GetService<ICredentialService>().Create(credential);
 
-            _host.Services.GetRequiredService<NavigationService<AgentJourneysViewModel>>().Navigate();
+            _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 

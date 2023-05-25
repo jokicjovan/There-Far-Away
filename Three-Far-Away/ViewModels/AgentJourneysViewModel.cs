@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
 using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Services.Interfaces;
@@ -15,6 +17,9 @@ namespace Three_Far_Away.ViewModels
     {
         public readonly IJourneyService journeyService;
         private ObservableCollection<JourneyForCard> journeys;
+        public int page = 0;
+        public ICommand NextPageCommand { get; }
+        public ICommand PreviousPageCommand { get; }
         public ObservableCollection<JourneyForCard> Journeys
         {
             get { return journeys; }
@@ -41,18 +46,20 @@ namespace Three_Far_Away.ViewModels
             journeyService = _journeyService;
             Journeys = new ObservableCollection<JourneyForCard>(readCards(0, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
+            NextPageCommand = new NextPageJourniesCommand(this);
+            PreviousPageCommand = new PreviousPageJourniesCommand(this);
         }
 
         private List<JourneyForCard> readCards(int page, int pageSize)
         {
-            List<Journey> journeys = journeyService.ReadPage(0, 4);
+            List<Journey> journeys = journeyService.ReadPage(page, 4);
             List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
             foreach(var journey in journeys)
                 journeysForCard.Add(new JourneyForCard(journey));
             return journeysForCard;
         }
 
-        private List<JourneyCardViewModel> CreateJourneyCardViews()
+        public List<JourneyCardViewModel> CreateJourneyCardViews()
         {
             List<JourneyCardViewModel> journeyCardViews = new List<JourneyCardViewModel>();
 
@@ -63,5 +70,7 @@ namespace Three_Far_Away.ViewModels
 
             return journeyCardViews;
         }
+
+
     }
 }
