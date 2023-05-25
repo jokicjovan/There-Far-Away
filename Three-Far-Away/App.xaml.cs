@@ -46,6 +46,14 @@ namespace Three_Far_Away
                 services.AddSingleton<Func<CreateJourneyViewModel>>((s) => () => s.GetRequiredService<CreateJourneyViewModel>());
                 services.AddSingleton<NavigationService<CreateJourneyViewModel>>();
 
+                services.AddTransient<AgentJourneysViewModel>();
+                services.AddSingleton<Func<AgentJourneysViewModel>>((s) => () => s.GetRequiredService<AgentJourneysViewModel>());
+                services.AddSingleton<NavigationService<AgentJourneysViewModel>>();
+                
+                services.AddTransient<JourneyCardViewModel>();
+                services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
+                services.AddSingleton<NavigationService<JourneyCardViewModel>>();
+
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
                 {
@@ -78,7 +86,7 @@ namespace Three_Far_Away
         {
             _host.Start();
 
-            _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
+            _host.Services.GetRequiredService<NavigationService<AgentJourneysViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 

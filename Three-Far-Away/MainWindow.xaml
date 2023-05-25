@@ -28,6 +28,12 @@
             <DataTemplate DataType="{x:Type vms:CreateJourneyViewModel}">
                 <views:CreateJourneyView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:AgentJourneysViewModel}">
+                <views:AgentJourneysView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
+                <views:JourneyCardView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <ContentControl Content="{Binding CurrentViewModel}"/>

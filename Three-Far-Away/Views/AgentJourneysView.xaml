@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="430" d:DesignWidth="750">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -23,7 +23,7 @@
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderThickness="0"
                             CornerRadius="10">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
@@ -38,6 +38,36 @@
         <!-- Content Section -->
         <Grid Grid.Row="1">
             <!-- Add your content here -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <local:JourneyCardView Grid.Row="0" Grid.Column="0" Margin="20, 5"/>
+                <local:JourneyCardView Grid.Row="1" Grid.Column="0" Margin="20, 5"/>
+                
+                <!-- Cells in the second column -->
+                <local:JourneyCardView Grid.Row="0" Grid.Column="1" Margin="20, 5"/>
+                <local:JourneyCardView Grid.Row="1" Grid.Column="1" Margin="20, 5"/>
+            </Grid>
+            <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0, 0, 0, -10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Previous" Margin="5" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A"/>
+                <Button Content="Next" Margin="5" HorizontalAlignment="Right" Grid.Column="1" Foreground="White"  />
+            </Grid>
         </Grid>
+
     </Grid>
+
 </UserControl>
