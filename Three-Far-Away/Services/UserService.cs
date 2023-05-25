@@ -29,6 +29,11 @@ namespace Three_Far_Away.Services
             return _userRepository.Read(id);
         }
 
+        public List<User> ReadAll()
+        {
+            return (List<User>)_userRepository.ReadAll();
+        }
+
         public User Update(User entity)
         {
             return _userRepository.Update(entity);

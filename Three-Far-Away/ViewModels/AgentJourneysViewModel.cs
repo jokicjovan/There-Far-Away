@@ -1,12 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Three_Far_Away.Models;
+using Three_Far_Away.Models.DTOs;
+using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class AgentJourneysViewModel : ViewModelBase
+    public class AgentJourneysViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        public readonly IJourneyService journeyService;
+        private ObservableCollection<JourneyForCard> journeys;
+        public ObservableCollection<JourneyForCard> Journeys
+        {
+            get { return journeys; }
+            set
+            {
+                journeys = value;
+                OnPropertyChanged(nameof(Journeys));
+            }
+        }
+
+        private ObservableCollection<JourneyCardViewModel> journeyCardViewModels;
+        public ObservableCollection<JourneyCardViewModel> JourneyCardViewModels
+        {
+            get { return journeyCardViewModels; }
+            set
+            {
+                journeyCardViewModels = value;
+                OnPropertyChanged(nameof(JourneyCardViewModels));
+            }
+        }
+
+        public AgentJourneysViewModel(IJourneyService _journeyService)
+        {
+            journeyService = _journeyService;
+            Journeys = new ObservableCollection<JourneyForCard>(readCards(0, 4));
+            JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
+        }
+
+        private List<JourneyForCard> readCards(int page, int pageSize)
+        {
+            List<Journey> journeys = journeyService.ReadPage(0, 4);
+            List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
+            foreach(var journey in journeys)
+                journeysForCard.Add(new JourneyForCard(journey));
+            return journeysForCard;
+        }
+
+        private List<JourneyCardViewModel> CreateJourneyCardViews()
+        {
+            List<JourneyCardViewModel> journeyCardViews = new List<JourneyCardViewModel>();
+
+            foreach (JourneyForCard journey in Journeys)
+            {
+                journeyCardViews.Add(new JourneyCardViewModel(journey));
+            }
+
+            return journeyCardViews;
+        }
     }
 }

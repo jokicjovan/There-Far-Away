@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Three_Far_Away.Exceptions;
 using Three_Far_Away.Models;
@@ -25,6 +26,11 @@ namespace Three_Far_Away.Services
         public Credential Read(Guid id)
         {
             return _credentialRepository.Read(id);
+        }
+
+        public List<Credential> ReadAll()
+        {
+            return (List<Credential>)_credentialRepository.ReadAll(); 
         }
 
         public Credential Update(Credential entity)

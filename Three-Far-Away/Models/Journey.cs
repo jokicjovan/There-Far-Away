@@ -49,5 +49,17 @@ namespace Three_Far_Away.Models
             Attractions = attractions;
             Transportation = transportation;
         }
+
+        public Journey(Journey other)
+        {
+            Name = other.Name;
+            StartDate = other.StartDate;
+            EndDate = other.EndDate;
+            StartLocation = other.StartLocation;
+            EndLocation = other.EndLocation;
+            Price = other.Price;
+            Attractions = new List<Attraction>(other.Attractions);
+            Transportation = other.Transportation;
+        }
     }
 }

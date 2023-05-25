@@ -7,11 +7,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Three_Far_Away.Services;
 using System;
+using System.Collections.Generic;
 using Three_Far_Away.Repositories;
 using Microsoft.Extensions.Configuration;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Models;
+using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
+using Credential = Three_Far_Away.Models.Credential;
 
 namespace Three_Far_Away
 {
@@ -87,21 +90,47 @@ namespace Three_Far_Away
         {
             _host.Start();
 
-<<<<<<< HEAD
             _host.Services.GetRequiredService<NavigationService<AgentJourneysViewModel>>().Navigate();
-=======
-/*            User user = new User();
-            user.Name = "Petar";
-            user.Surname = "Petrovic";
-            user.Role = Role.CLIENT;
-            Credential credential = new Credential();
-            credential.User = user;
-            credential.Username = "asd";
-            credential.Password = BCrypt.Net.BCrypt.HashPassword("asd");
-            credential = _host.Services.GetService<ICredentialService>().Create(credential);*/
+            // Location location = new Location();
+            // location.Address = "Partizanska 2";
+            // location.Latitude = 14.44;
+            // location.Longitude = 12.22;
+            //
+            // Attraction attraction = new Attraction();
+            // attraction.Name = "Atrakcija";
+            // attraction.Description = "opis";
+            // attraction.Type = AttractionType.ATTRACTION;
+            // attraction.Location = location;
+            // attraction.Image = "slika";
+            //
+            // Journey journey = new Journey();
+            // journey.Name = "ime";
+            // journey.StartLocation = location;
+            // journey.EndLocation = location;
+            // journey.Attractions = new List<Attraction>();
+            // journey.Attractions.Add(attraction);
+            // journey.Transportation = TransportationType.PLANE;
+            //
+            //
+            //
+            // Journey journey1 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            // Journey journey2 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            // Journey journey3 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            // Journey journey4 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            // Journey journey5 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            // Journey journey6 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
 
-            _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
->>>>>>> development
+            // User user = new User();
+            // user.Name = "Petar";
+            // user.Surname = "Petrovic";
+            // user.Role = Role.CLIENT;
+            // Credential credential = new Credential();
+            // credential.User = user;
+            // credential.Username = "asd";
+            // credential.Password = BCrypt.Net.BCrypt.HashPassword("asd");
+            // credential = _host.Services.GetService<ICredentialService>().Create(credential);
+
+            _host.Services.GetRequiredService<NavigationService<AgentJourneysViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 

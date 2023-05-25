@@ -11,6 +11,7 @@ namespace Three_Far_Away.Infrastructure
     {
         T Create(T entity);
         T Read(Guid id);
+        List<T> ReadAll();
         T Update(T entity);
         T Delete(Guid id);
     }

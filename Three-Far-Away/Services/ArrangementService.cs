@@ -28,6 +28,11 @@ namespace Three_Far_Away.Services
             return _arrangementRepository.Read(id);
         }
 
+        public List<Arrangement> ReadAll()
+        {
+            return (List<Arrangement>)_arrangementRepository.ReadAll();
+        }
+
         public Arrangement Update(Arrangement entity)
         {
             return _arrangementRepository.Update(entity);

@@ -43,20 +43,20 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <local:JourneyCardView Grid.Row="0" Grid.Column="0" Margin="20, 5"/>
-                <local:JourneyCardView Grid.Row="1" Grid.Column="0" Margin="20, 5"/>
-                
-                <!-- Cells in the second column -->
-                <local:JourneyCardView Grid.Row="0" Grid.Column="1" Margin="20, 5"/>
-                <local:JourneyCardView Grid.Row="1" Grid.Column="1" Margin="20, 5"/>
+                <Grid Grid.Row="1">
+                    <ItemsControl ItemsSource="{Binding Journeys}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:JourneyCardView Margin="0,0" Height="85" Width="340"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="2" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Grid>
             </Grid>
             <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0, 0, 0, -10">
                 <Grid.ColumnDefinitions>

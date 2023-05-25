@@ -30,6 +30,11 @@ namespace Three_Far_Away.Services
             return _journeyRepository.Read(id);
         }
 
+        public List<Journey> ReadAll()
+        {
+            return (List<Journey>)_journeyRepository.ReadAll();
+        }
+
         public Journey Update(Journey entity)
         {
             return _journeyRepository.Update(entity);
@@ -39,6 +44,18 @@ namespace Three_Far_Away.Services
         {
             return _journeyRepository.Delete(id);
         }
+
+        public List<Journey> ReadPage(int page, int size)
+        {
+            List<Journey> journeys = ReadAll();
+            List<Journey> newJourneys = new List<Journey>();
+            for (int i = page * size; i < (page + 1) * size; i++)
+            {
+                newJourneys.Add(journeys[i]);
+            }
+            return newJourneys;
+        }
+
         #endregion
     }
 }
