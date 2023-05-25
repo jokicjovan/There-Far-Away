@@ -9,6 +9,8 @@ using Three_Far_Away.Services;
 using System;
 using Three_Far_Away.Repositories;
 using Microsoft.Extensions.Configuration;
+using Three_Far_Away.Services.Interfaces;
+using Three_Far_Away.Repositories.Interfaces;
 
 namespace Three_Far_Away
 {
@@ -37,8 +39,12 @@ namespace Three_Far_Away
                 services.AddSingleton<NavigationService<UserMainViewModel>>();
 
                 services.AddTransient<AgentMainViewModel>();
-                services.AddSingleton<Func<UserMainViewModel>>((s) => () => s.GetRequiredService<UserMainViewModel>());
+                services.AddSingleton<Func<AgentMainViewModel>>((s) => () => s.GetRequiredService<AgentMainViewModel>());
                 services.AddSingleton<NavigationService<AgentMainViewModel>>();
+
+                services.AddTransient<CreateJourneyViewModel>();
+                services.AddSingleton<Func<CreateJourneyViewModel>>((s) => () => s.GetRequiredService<CreateJourneyViewModel>());
+                services.AddSingleton<NavigationService<CreateJourneyViewModel>>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -47,10 +53,20 @@ namespace Three_Far_Away
                 });
 
                 //services
+                services.AddSingleton<IArrangementService, ArrangementService>();
+                services.AddSingleton<IAttractionService, AttractionService>();
+                services.AddSingleton<ICredentialService, CredentialService>();
+                services.AddSingleton<IJourneyService, JourneyService>();
+                services.AddSingleton<ILocationService, LocationService>();
+                services.AddSingleton<IUserService, UserService>();
 
                 //repositories
-                services.AddSingleton<IJourneyRepository, JourneyRepository>();
                 services.AddSingleton<IArrangementRepository, ArrangementRepository>();
+                services.AddSingleton<IAttractionRepository, AttractionRepository>();
+                services.AddSingleton<ICredentialRepository, CredentialRepository>();
+                services.AddSingleton<IJourneyRepository, JourneyRepository>();
+                services.AddSingleton<ILocationRepository, LocationRepository>();
+                services.AddSingleton<IUserRepository, UserRepository>();
 
                 //stores
                 services.AddSingleton<NavigationStore>();
@@ -62,7 +78,7 @@ namespace Three_Far_Away
         {
             _host.Start();
 
-            _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
+            _host.Services.GetRequiredService<NavigationService<CreateJourneyViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 

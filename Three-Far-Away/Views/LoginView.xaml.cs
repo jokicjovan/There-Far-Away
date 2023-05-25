@@ -11,5 +11,6 @@ namespace Three_Far_Away.Views
         {
             InitializeComponent();
         }
+
     }
 }
