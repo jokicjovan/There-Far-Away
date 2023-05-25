@@ -10,5 +10,6 @@ namespace Three_Far_Away.Repositories.Interfaces
 {
     public interface ICredentialRepository : ICrudRepository<Credential>
     {
+        Task<Credential> FindCredentialByUsername(string username);
     }
 }

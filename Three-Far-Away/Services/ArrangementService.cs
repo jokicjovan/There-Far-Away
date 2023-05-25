@@ -17,7 +17,7 @@ namespace Three_Far_Away.Services
             _arrangementRepository = arrangementRepository;
         }
 
-
+        #region CRUD
         public Arrangement Create(Arrangement entity)
         {
             return _arrangementRepository.Create(entity);
@@ -37,5 +37,6 @@ namespace Three_Far_Away.Services
         {
             return _arrangementRepository.Delete(id);
         }
+        #endregion
     }
 }

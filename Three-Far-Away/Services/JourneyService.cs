@@ -19,6 +19,7 @@ namespace Three_Far_Away.Services
             _journeyRepository = journeyRepository;
         }
 
+        #region CRUD
         public Journey Create(Journey entity)
         {
             return _journeyRepository.Create(entity);
@@ -38,5 +39,6 @@ namespace Three_Far_Away.Services
         {
             return _journeyRepository.Delete(id);
         }
+        #endregion
     }
 }

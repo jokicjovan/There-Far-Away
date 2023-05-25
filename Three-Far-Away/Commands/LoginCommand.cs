@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using Three_Far_Away.Models;
+using Three_Far_Away.Services;
 using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Commands
@@ -18,9 +20,24 @@ namespace Three_Far_Away.Commands
                    base.CanExecute(parameter);
         }
 
-        public override void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
-            throw new NotImplementedException(); 
+            try
+            {
+                User user = await _loginViewModel.credentialService.Authenticate(_loginViewModel.Username, _loginViewModel.Password);
+                if (user.Role == Role.CLIENT)
+                {
+                    _loginViewModel.navigationUserMainViewModel.Navigate();
+                }
+                else 
+                {
+                    _loginViewModel.navigationAgentMainViewModel.Navigate();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e) 
