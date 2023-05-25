@@ -11,6 +11,7 @@ using Three_Far_Away.Repositories;
 using Microsoft.Extensions.Configuration;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Repositories.Interfaces;
+using Three_Far_Away.Models;
 
 namespace Three_Far_Away
 {
@@ -77,6 +78,16 @@ namespace Three_Far_Away
         protected override void OnStartup(StartupEventArgs e)
         {
             _host.Start();
+
+/*            User user = new User();
+            user.Name = "Petar";
+            user.Surname = "Petrovic";
+            user.Role = Role.CLIENT;
+            Credential credential = new Credential();
+            credential.User = user;
+            credential.Username = "asd";
+            credential.Password = BCrypt.Net.BCrypt.HashPassword("asd");
+            credential = _host.Services.GetService<ICredentialService>().Create(credential);*/
 
             _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();

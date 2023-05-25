@@ -17,6 +17,8 @@ namespace Three_Far_Away.Services
         {
             _userRepository = userRepository;
         }
+
+        #region CRUD
         public User Create(User entity)
         {
             return _userRepository.Create(entity);
@@ -36,5 +38,7 @@ namespace Three_Far_Away.Services
         {
             return _userRepository.Delete(id);
         }
+        #endregion
+
     }
 }
