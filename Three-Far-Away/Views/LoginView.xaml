@@ -5,57 +5,70 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="430" d:DesignWidth="750">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock 
-        Grid.Row="0"
-        FontSize="24"
-        Text="Login"
-        Margin="0 0 0 25"/>
-
-        <Grid Grid.Row="1" 
-                Margin="0 0 0 15">
+        <Grid Grid.Column="0" Margin="0 0 20 0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock 
-                Grid.Row="0" 
-                Text="Username"/>
-            <TextBox
-                Grid.Row="1"
-                Text = "{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+            <Image Grid.Row="0" Source="/Assets/text.png"/>
+
+            <Grid Grid.Row="1" Margin="0 0 0 50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="0" Margin="0 0 0 15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock 
+                        Grid.Row="0" 
+                        Text="Username"/>
+                    
+                    <TextBox
+                        Grid.Row="1"
+                        Text = "{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock 
+                        Grid.Row="0" 
+                        Text="Password"/>
+                        <TextBox
+                        Grid.Row="1"
+                        Text = "{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Button 
+                        Width="200" 
+                        Margin="0 20 0 0"
+                        Command="{Binding SubmitCommand}">
+                            Login
+                    </Button>
+                </Grid>
+            </Grid>
         </Grid>
 
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+        <Image Grid.Column="1" Source="/Assets/logo.png"/>
 
-            <TextBlock 
-                Grid.Row="0" 
-                Text="Password"/>
-            <TextBox
-                Grid.Row="1"
-                Text = "{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
-        </Grid>
-
-        <Grid Grid.Row="3">
-            <Button 
-                Width="200" 
-                Margin="0 20 0 0"
-                Command="{Binding SubmitCommand}">
-                Login
-            </Button>
-        </Grid>
     </Grid>
 </UserControl>

@@ -78,7 +78,7 @@ namespace Three_Far_Away
         {
             _host.Start();
 
-            _host.Services.GetRequiredService<NavigationService<CreateJourneyViewModel>>().Navigate();
+            _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
