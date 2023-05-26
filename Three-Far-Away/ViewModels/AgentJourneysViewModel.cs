@@ -52,7 +52,7 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(AgentNavigationBarViewModel));
             }
         }
-        public AgentJourneysViewModel(IJourneyService _journeyService, AccountStore accountStore, AgentNavigationBarViewModel agentNavigationBarViewModel)
+        public AgentJourneysViewModel(IJourneyService _journeyService, AgentNavigationBarViewModel agentNavigationBarViewModel)
         {
             _agentNavigationBarViewModel = agentNavigationBarViewModel;
             journeyService = _journeyService;
