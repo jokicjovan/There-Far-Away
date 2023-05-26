@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Three_Far_Away.Models;
 using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Services.Interfaces;
@@ -23,6 +24,11 @@ namespace Three_Far_Away.Services
         public Location Read(Guid id)
         {
             return _locationRepository.Read(id);
+        }
+
+        public List<Location> ReadAll()
+        {
+            return (List<Location>)_locationRepository.ReadAll();
         }
 
         public Location Update(Location entity)

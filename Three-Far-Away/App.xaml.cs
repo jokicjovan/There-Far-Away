@@ -7,11 +7,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Three_Far_Away.Services;
 using System;
+using System.Collections.Generic;
 using Three_Far_Away.Repositories;
 using Microsoft.Extensions.Configuration;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Models;
+using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
+using Credential = Three_Far_Away.Models.Credential;
 
 namespace Three_Far_Away
 {
@@ -47,6 +50,14 @@ namespace Three_Far_Away
                 services.AddSingleton<Func<CreateJourneyViewModel>>((s) => () => s.GetRequiredService<CreateJourneyViewModel>());
                 services.AddSingleton<NavigationService<CreateJourneyViewModel>>();
 
+                services.AddTransient<AgentJourneysViewModel>();
+                services.AddSingleton<Func<AgentJourneysViewModel>>((s) => () => s.GetRequiredService<AgentJourneysViewModel>());
+                services.AddSingleton<NavigationService<AgentJourneysViewModel>>();
+                
+                services.AddTransient<JourneyCardViewModel>();
+                services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
+                services.AddSingleton<NavigationService<JourneyCardViewModel>>();
+
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
                 {
@@ -80,7 +91,7 @@ namespace Three_Far_Away
             _host.Start();
 
             //loadData(_host);
-
+            //loadJourney(_host);
             _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
@@ -106,6 +117,40 @@ namespace Three_Far_Away
             credential.Username = "asdasd";
             credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasd");
             credential = _host.Services.GetService<ICredentialService>().Create(credential);
+        }
+
+        private void loadJourney(IHost host)
+        {
+            Location location = new Location();
+            location.Address = "Partizanska 2";
+            location.Latitude = 14.44;
+            location.Longitude = 12.22;
+            
+            Attraction attraction = new Attraction();
+            attraction.Name = "Atrakcija";
+            attraction.Description = "opis";
+            attraction.Type = AttractionType.ATTRACTION;
+            attraction.Location = location;
+            attraction.Image = "slika";
+            
+            Journey journey = new Journey();
+            journey.Name = "ime";
+            journey.StartLocation = location;
+            journey.EndLocation = location;
+            journey.Attractions = new List<Attraction>();
+            journey.Attractions.Add(attraction);
+            journey.Transportation = TransportationType.PLANE;
+            
+            
+            
+            Journey journey1 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            Journey journey2 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            Journey journey3 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            Journey journey4 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            Journey journey5 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+            Journey journey6 = _host.Services.GetService<IJourneyService>().Create(new Journey(journey));
+
+            
         }
     }
 }
