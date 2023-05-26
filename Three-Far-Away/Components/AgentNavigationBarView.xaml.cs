@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Three_Far_Away.Views
+namespace Three_Far_Away.Components
 {
     /// <summary>
-    /// Interaction logic for UserMainView.xaml
+    /// Interaction logic for NavigationBarView.xaml
     /// </summary>
-    public partial class UserMainView : UserControl
+    public partial class AgentNavigationBarView : UserControl
     {
-        public UserMainView()
+        public AgentNavigationBarView()
         {
             InitializeComponent();
         }

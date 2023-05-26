@@ -12,25 +12,20 @@
         Width="750"
         ResizeMode="CanMinimize"
         FontSize="14">
-    <Grid Margin="20 10">
+    <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type vms:LoginViewModel}">
                 <views:LoginView/>
-            </DataTemplate> 
-            
-            <DataTemplate DataType="{x:Type vms:AgentMainViewModel}">
-                <views:AgentMainView/>
             </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type vms:UserMainViewModel}">
-                <views:UserMainView/>
-            </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:CreateJourneyViewModel}">
                 <views:CreateJourneyView/>
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type vms:AgentJourneysViewModel}">
                 <views:AgentJourneysView/>
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
                 <views:JourneyCardView/>
             </DataTemplate>

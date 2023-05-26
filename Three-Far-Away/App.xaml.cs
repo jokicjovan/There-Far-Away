@@ -15,6 +15,7 @@ using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Models;
 using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using Credential = Three_Far_Away.Models.Credential;
+using Three_Far_Away.Components;
 
 namespace Three_Far_Away
 {
@@ -33,30 +34,24 @@ namespace Three_Far_Away
                 services.AddSingleton(new ThereFarAwayDbContextFactory(connectionString));
                 services.AddSingleton(s => s.GetRequiredService<ThereFarAwayDbContextFactory>().CreateDbContext());
 
+                services.AddTransient<AgentNavigationBarViewModel>();
+
                 //viewmodels
                 services.AddTransient<LoginViewModel>();
                 services.AddSingleton<Func<LoginViewModel>>((s) => () => s.GetRequiredService<LoginViewModel>());
-                services.AddSingleton<NavigationService<LoginViewModel>>();
-
-                services.AddTransient<UserMainViewModel>();
-                services.AddSingleton<Func<UserMainViewModel>>((s) => () => s.GetRequiredService<UserMainViewModel>());
-                services.AddSingleton<NavigationService<UserMainViewModel>>();
-
-                services.AddTransient<AgentMainViewModel>();
-                services.AddSingleton<Func<AgentMainViewModel>>((s) => () => s.GetRequiredService<AgentMainViewModel>());
-                services.AddSingleton<NavigationService<AgentMainViewModel>>();
+                services.AddSingleton<INavigationService<LoginViewModel>, NavigationService<LoginViewModel>>();
 
                 services.AddTransient<CreateJourneyViewModel>();
                 services.AddSingleton<Func<CreateJourneyViewModel>>((s) => () => s.GetRequiredService<CreateJourneyViewModel>());
-                services.AddSingleton<NavigationService<CreateJourneyViewModel>>();
+                services.AddSingleton<INavigationService<CreateJourneyViewModel>, NavigationService<CreateJourneyViewModel>>();
 
                 services.AddTransient<AgentJourneysViewModel>();
                 services.AddSingleton<Func<AgentJourneysViewModel>>((s) => () => s.GetRequiredService<AgentJourneysViewModel>());
-                services.AddSingleton<NavigationService<AgentJourneysViewModel>>();
+                services.AddSingleton<INavigationService<AgentJourneysViewModel>, NavigationService<AgentJourneysViewModel>>();
                 
                 services.AddTransient<JourneyCardViewModel>();
                 services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
-                services.AddSingleton<NavigationService<JourneyCardViewModel>>();
+                services.AddSingleton<INavigationService<JourneyCardViewModel>, NavigationService<JourneyCardViewModel>>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -82,6 +77,7 @@ namespace Three_Far_Away
 
                 //stores
                 services.AddSingleton<NavigationStore>();
+                services.AddSingleton<AccountStore>();
 
             }).Build();
         }
@@ -92,7 +88,7 @@ namespace Three_Far_Away
 
             //loadData(_host);
             //loadJourney(_host);
-            _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
+            _host.Services.GetRequiredService<INavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 

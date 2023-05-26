@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using Three_Far_Away.Models;
-using Three_Far_Away.Services;
 using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Commands
@@ -28,13 +27,14 @@ namespace Three_Far_Away.Commands
             try
             {
                 User user = await _loginViewModel.credentialService.Authenticate(_loginViewModel.Username, _loginViewModel.Password);
+                _loginViewModel.accountStore.Name = user.Name;
                 if (user.Role == Role.CLIENT)
                 {
-                    _loginViewModel.navigationUserMainViewModel.Navigate();
+                    //TODO
                 }
                 else 
                 {
-                    _loginViewModel.navigationAgentMainViewModel.Navigate();
+                    _loginViewModel.navigationAgentJourneys.Navigate();
                 }
             }
             catch (Exception ex)

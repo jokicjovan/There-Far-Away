@@ -5,8 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
-using Three_Far_Away.Services;
 using Three_Far_Away.Services.Interfaces;
+using Three_Far_Away.Stores;
 
 namespace Three_Far_Away.ViewModels
 {
@@ -16,9 +16,12 @@ namespace Three_Far_Away.ViewModels
         public readonly ICredentialService credentialService;
         #endregion
 
+        #region stores
+        public readonly AccountStore accountStore;
+        #endregion
+
         #region navigations
-        public readonly NavigationService<UserMainViewModel> navigationUserMainViewModel;
-        public readonly NavigationService<AgentMainViewModel> navigationAgentMainViewModel;
+        public readonly INavigationService<AgentJourneysViewModel> navigationAgentJourneys;
         #endregion
 
         #region properties
@@ -103,12 +106,11 @@ namespace Three_Far_Away.ViewModels
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
         #endregion
 
-        public LoginViewModel(NavigationService<UserMainViewModel> navigationUserMainViewModel, NavigationService<AgentMainViewModel> navigationAgentMainViewModel, 
-            ICredentialService credentialService)
+        public LoginViewModel(INavigationService<AgentJourneysViewModel> navigationAgentJourneys, ICredentialService credentialService, AccountStore accountStore)
         {
+            this.accountStore = accountStore;
             this.credentialService = credentialService;
-            this.navigationUserMainViewModel = navigationUserMainViewModel;
-            this.navigationAgentMainViewModel = navigationAgentMainViewModel;
+            this.navigationAgentJourneys = navigationAgentJourneys;
             SubmitCommand = new LoginCommand(this);
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
         }

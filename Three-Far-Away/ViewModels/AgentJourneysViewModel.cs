@@ -7,9 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
+using Three_Far_Away.Components;
 using Three_Far_Away.Models;
 using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Services.Interfaces;
+using Three_Far_Away.Stores;
 
 namespace Three_Far_Away.ViewModels
 {
@@ -41,8 +43,18 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        public AgentJourneysViewModel(IJourneyService _journeyService)
+        private AgentNavigationBarViewModel _agentNavigationBarViewModel;
+        public AgentNavigationBarViewModel AgentNavigationBarViewModel {
+            get { return _agentNavigationBarViewModel; }
+            set
+            {
+                _agentNavigationBarViewModel = value;
+                OnPropertyChanged(nameof(AgentNavigationBarViewModel));
+            }
+        }
+        public AgentJourneysViewModel(IJourneyService _journeyService, AccountStore accountStore, AgentNavigationBarViewModel agentNavigationBarViewModel)
         {
+            _agentNavigationBarViewModel = agentNavigationBarViewModel;
             journeyService = _journeyService;
             Journeys = new ObservableCollection<JourneyForCard>(readCards(0, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());

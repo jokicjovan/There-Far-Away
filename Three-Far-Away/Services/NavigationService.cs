@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;
 using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Services
 {
-    public class NavigationService<TViewModel> where TViewModel : ViewModelBase
+    public class NavigationService<TViewModel> : INavigationService<TViewModel> where TViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;
@@ -19,7 +16,8 @@ namespace Three_Far_Away.Services
             _createViewModel = createViewModel;
         }
 
-        public void Navigate() {
+        public void Navigate()
+        {
             _navigationStore.CurrentViewModel = _createViewModel();
         }
     }
