@@ -18,9 +18,9 @@ namespace Three_Far_Away.Views
     /// <summary>
     /// Interaction logic for JourneyPreviewView.xaml
     /// </summary>
-    public partial class JourneyPreviewView : UserControl
+    public partial class AgentJourneyPreviewView : UserControl
     {
-        public JourneyPreviewView()
+        public AgentJourneyPreviewView()
         {
             InitializeComponent();
         }

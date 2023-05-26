@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class JourneyPreviewViewModel : ViewModelBase
+    public class ClientJourneyPreviewViewModel : ViewModelBase
     {
     }
 }

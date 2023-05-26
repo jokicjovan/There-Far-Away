@@ -30,8 +30,12 @@
                 <views:JourneyCardView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:JourneyPreviewViewModel}">
-                <views:JourneyPreviewView/>
+            <DataTemplate DataType="{x:Type vms:AgentJourneyPreviewViewModel}">
+                <views:AgentJourneyPreviewView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:ClientJourneyPreviewViewModel}">
+                <views:ClientJourneyPreviewView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type vms:LocationListItemViewModel}">

@@ -16,6 +16,7 @@ using Three_Far_Away.Models;
 using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using Credential = Three_Far_Away.Models.Credential;
 using Three_Far_Away.Components;
+using Three_Far_Away.Views;
 
 namespace Three_Far_Away
 {
@@ -53,13 +54,17 @@ namespace Three_Far_Away
                 services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
                 services.AddSingleton<INavigationService<JourneyCardViewModel>, NavigationService<JourneyCardViewModel>>();
                 
-                services.AddTransient<JourneyPreviewViewModel>();
-                services.AddSingleton<Func<JourneyPreviewViewModel>>((s) => () => s.GetRequiredService<JourneyPreviewViewModel>());
-                services.AddSingleton<INavigationService<JourneyPreviewViewModel>, NavigationService<JourneyPreviewViewModel>>();
+                services.AddTransient<AgentJourneyPreviewViewModel>();
+                services.AddSingleton<Func<AgentJourneyPreviewViewModel>>((s) => () => s.GetRequiredService<AgentJourneyPreviewViewModel>());
+                services.AddSingleton<INavigationService<AgentJourneyPreviewViewModel>, NavigationService<AgentJourneyPreviewViewModel>>();
 
                 services.AddTransient<LocationListItemViewModel>();
                 services.AddSingleton<Func<LocationListItemViewModel>>((s) => () => s.GetRequiredService<LocationListItemViewModel>());
                 services.AddSingleton<INavigationService<LocationListItemViewModel>, NavigationService<LocationListItemViewModel>>();
+
+                services.AddTransient<ClientJourneyPreviewViewModel>();
+                services.AddSingleton<Func<ClientJourneyPreviewViewModel>>((s) => () => s.GetRequiredService<ClientJourneyPreviewViewModel>());
+                services.AddSingleton<INavigationService<ClientJourneyPreviewViewModel>, NavigationService<ClientJourneyPreviewViewModel>>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -96,7 +101,7 @@ namespace Three_Far_Away
 
             // loadData(_host);
             //loadJourney(_host);
-            _host.Services.GetRequiredService<INavigationService<JourneyPreviewViewModel>>().Navigate();
+            _host.Services.GetRequiredService<INavigationService<ClientJourneyPreviewViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
