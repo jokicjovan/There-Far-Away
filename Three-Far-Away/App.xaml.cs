@@ -52,6 +52,14 @@ namespace Three_Far_Away
                 services.AddTransient<JourneyCardViewModel>();
                 services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
                 services.AddSingleton<INavigationService<JourneyCardViewModel>, NavigationService<JourneyCardViewModel>>();
+                
+                services.AddTransient<JourneyPreviewViewModel>();
+                services.AddSingleton<Func<JourneyPreviewViewModel>>((s) => () => s.GetRequiredService<JourneyPreviewViewModel>());
+                services.AddSingleton<INavigationService<JourneyPreviewViewModel>, NavigationService<JourneyPreviewViewModel>>();
+
+                services.AddTransient<LocationListItemViewModel>();
+                services.AddSingleton<Func<LocationListItemViewModel>>((s) => () => s.GetRequiredService<LocationListItemViewModel>());
+                services.AddSingleton<INavigationService<LocationListItemViewModel>, NavigationService<LocationListItemViewModel>>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -86,9 +94,9 @@ namespace Three_Far_Away
         {
             _host.Start();
 
-            //loadData(_host);
+            // loadData(_host);
             //loadJourney(_host);
-            _host.Services.GetRequiredService<INavigationService<LoginViewModel>>().Navigate();
+            _host.Services.GetRequiredService<INavigationService<JourneyPreviewViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
@@ -106,7 +114,7 @@ namespace Three_Far_Away
             User user = new User();
             user.Name = "Petar";
             user.Surname = "Petrovic";
-            user.Role = Role.CLIENT;
+            user.Role = Role.AGENT;
             user = _host.Services.GetService<IUserService>().Create(user);
             Credential credential = new Credential();
             credential.User = user;

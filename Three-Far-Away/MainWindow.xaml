@@ -25,10 +25,19 @@
             <DataTemplate DataType="{x:Type vms:AgentJourneysViewModel}">
                 <views:AgentJourneysView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
                 <views:JourneyCardView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:JourneyPreviewViewModel}">
+                <views:JourneyPreviewView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:LocationListItemViewModel}">
+                <views:LocationListItemView/>
+            </DataTemplate>
+
         </Grid.Resources>
 
         <ContentControl Content="{Binding CurrentViewModel}"/>
