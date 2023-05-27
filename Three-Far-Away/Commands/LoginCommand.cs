@@ -28,6 +28,7 @@ namespace Three_Far_Away.Commands
             {
                 User user = await _loginViewModel.credentialService.Authenticate(_loginViewModel.Username, _loginViewModel.Password);
                 _loginViewModel.accountStore.Name = user.Name;
+                _loginViewModel.accountStore.Role = user.Role;
                 if (user.Role == Role.CLIENT)
                 {
                     //TODO

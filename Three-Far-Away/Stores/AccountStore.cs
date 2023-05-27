@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Stores
@@ -18,7 +19,19 @@ namespace Three_Far_Away.Stores
                 _name = value;
             }
         }
-        public AccountStore(
-            ) { }
+
+        private Role _role;
+        public Role Role 
+        {
+            get
+            {
+                return _role;
+            }
+            set
+            {
+                _role = value;
+            }
+        }
+        public AccountStore() { }
     }
 }

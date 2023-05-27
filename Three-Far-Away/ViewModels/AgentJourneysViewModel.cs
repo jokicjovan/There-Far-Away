@@ -52,10 +52,10 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(AgentNavigationBarViewModel));
             }
         }
-        public AgentJourneysViewModel(IJourneyService _journeyService, AgentNavigationBarViewModel agentNavigationBarViewModel)
+        public AgentJourneysViewModel(IJourneyService journeyService, AgentNavigationBarViewModel agentNavigationBarViewModel)
         {
             _agentNavigationBarViewModel = agentNavigationBarViewModel;
-            journeyService = _journeyService;
+            this.journeyService = journeyService;
             Journeys = new ObservableCollection<JourneyForCard>(readCards(0, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
             NextPageCommand = new NextPageJourniesCommand(this);

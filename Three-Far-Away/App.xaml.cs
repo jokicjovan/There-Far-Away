@@ -25,7 +25,7 @@ namespace Three_Far_Away
     /// </summary>
     public partial class App : Application
     {
-        private readonly IHost _host;
+        public static IHost _host;
 
         public App() {
             _host = Host.CreateDefaultBuilder().ConfigureServices((hostContext, services) =>
@@ -101,7 +101,7 @@ namespace Three_Far_Away
 
             // loadData(_host);
             //loadJourney(_host);
-            _host.Services.GetRequiredService<INavigationService<ClientJourneyPreviewViewModel>>().Navigate();
+            _host.Services.GetRequiredService<INavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
@@ -119,12 +119,12 @@ namespace Three_Far_Away
             User user = new User();
             user.Name = "Petar";
             user.Surname = "Petrovic";
-            user.Role = Role.AGENT;
+            user.Role = Role.CLIENT;
             user = _host.Services.GetService<IUserService>().Create(user);
             Credential credential = new Credential();
             credential.User = user;
-            credential.Username = "asdasd";
-            credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasd");
+            credential.Username = "asdasdasd";
+            credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasdasd");
             credential = _host.Services.GetService<ICredentialService>().Create(credential);
         }
 

@@ -34,7 +34,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBlock 
-                            Text="Kosovska Tura" 
+                            Text="{Binding Name}" 
                             HorizontalAlignment="Center" 
                             FontSize="28"
                             FontWeight="Bold"/>
@@ -46,7 +46,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" 
-                            Text="17.06.2023." 
+                            Text="{Binding StartDate}" 
                             HorizontalAlignment="Center" 
                             FontSize="20"/>
                         <TextBlock Grid.Column="1" 
@@ -54,7 +54,7 @@
                             HorizontalAlignment="Center" 
                             FontSize="20"/>
                         <TextBlock Grid.Column="2"
-                            Text="17.06.2023." 
+                            Text="{Binding EndDate}" 
                             HorizontalAlignment="Center" 
                             FontSize="20"/>
                     </Grid>
@@ -70,7 +70,7 @@
                             Foreground="#8BC34A"
                             FontWeight="Bold"/>
                         <TextBlock Grid.Column="1" 
-                            Text="199" 
+                            Text="{Binding Price}" 
                             HorizontalAlignment="Center" 
                             FontSize="28"
                             Foreground="#8BC34A"

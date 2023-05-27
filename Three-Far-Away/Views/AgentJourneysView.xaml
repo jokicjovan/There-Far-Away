@@ -54,7 +54,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid Grid.Row="1">
-                        <ItemsControl ItemsSource="{Binding Journeys}">
+                        <ItemsControl ItemsSource="{Binding JourneyCardViewModels}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <local:JourneyCardView Margin="0,10" Height="85" Width="340"/>
