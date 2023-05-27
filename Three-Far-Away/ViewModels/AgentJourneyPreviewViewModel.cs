@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Three_Far_Away.Commands;
 using Three_Far_Away.Components;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
@@ -12,10 +14,10 @@ namespace Three_Far_Away.ViewModels
     {
         #region services
         public readonly IJourneyService journeyService;
+        public readonly INavigationService<AgentJourneysViewModel> navigationAgentJourneys;
 
         #endregion
-
-
+        
         #region properties
 
         private ObservableCollection<LocationListItemViewModel> _locationListItemViewModels;
@@ -40,6 +42,20 @@ namespace Three_Far_Away.ViewModels
             {
                 _agentNavigationBarViewModel = value;
                 OnPropertyChanged(nameof(AgentNavigationBarViewModel));
+            }
+        }
+
+        private Guid _id;
+        public Guid Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
             }
         }
 
@@ -101,17 +117,21 @@ namespace Three_Far_Away.ViewModels
 
         #endregion
 
+        public ICommand DeleteJourney { get; }
+
         public AgentJourneyPreviewViewModel(Guid id)
         {
             AgentNavigationBarViewModel = App._host.Services.GetService<AgentNavigationBarViewModel>();
-            this.journeyService = App._host.Services.GetService<IJourneyService>();
+            journeyService = App._host.Services.GetService<IJourneyService>();
+            navigationAgentJourneys = App._host.Services.GetService<INavigationService<AgentJourneysViewModel>>();
             Journey journey = journeyService.GetJourneyWithAttractions(id);
+            Id = journey.Id;
             Name = journey.Name;
             StartDate = journey.StartDate.ToString().Split(" ")[0];
             EndDate = journey.EndDate.ToString().Split(" ")[0];
             Price = journey.Price.ToString();
             LocationListItemViewModels = new ObservableCollection<LocationListItemViewModel>(CreateLocationItemViews(journey));
-
+            DeleteJourney = new DeleteJourneyFromPreviewCommand(this);
         }
 
         private List<LocationListItemViewModel> CreateLocationItemViews (Journey journey)

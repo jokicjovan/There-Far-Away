@@ -1,19 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Components;
+using Three_Far_Away.Events;
 using Three_Far_Away.Models;
 using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Services.Interfaces;
+using Three_Far_Away.Views;
 
 namespace Three_Far_Away.ViewModels
 {
     public class AgentJourneysViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public readonly IJourneyService journeyService;
-        public int page = 0;
+        public int page;
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
 
@@ -51,9 +55,10 @@ namespace Three_Far_Away.ViewModels
         }
         public AgentJourneysViewModel(IJourneyService journeyService, AgentNavigationBarViewModel agentNavigationBarViewModel)
         {
+            page = 0;
             _agentNavigationBarViewModel = agentNavigationBarViewModel;
             this.journeyService = journeyService;
-            Journeys = new ObservableCollection<JourneyForCard>(readCards(0, 4));
+            Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
@@ -74,12 +79,19 @@ namespace Three_Far_Away.ViewModels
 
             foreach (JourneyForCard journey in Journeys)
             {
-                journeyCardViews.Add(new JourneyCardViewModel(journey));
+                JourneyCardViewModel journeyCardViewModel = new JourneyCardViewModel(journey);
+                journeyCardViewModel.JourneyDeletedEvent += HandleJourneyDeleted;
+                journeyCardViews.Add(journeyCardViewModel);
+
             }
 
             return journeyCardViews;
         }
 
-
+        private void HandleJourneyDeleted(object sender, EventArgs e)
+        {
+            Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
+            JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
+        }
     }
 }

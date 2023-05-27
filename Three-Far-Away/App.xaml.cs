@@ -101,8 +101,8 @@ namespace Three_Far_Away
         {
             _host.Start();
 
-            // loadData(_host);
-            // loadJourney(_host);
+            //loadUsers(_host);
+            //loadJourney(_host);
             _host.Services.GetRequiredService<INavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
@@ -117,7 +117,7 @@ namespace Three_Far_Away
             base.OnExit(e);
         }
 
-        private void loadData(IHost host) {
+        private void loadUsers(IHost host) {
             User user = new User();
             user.Name = "Petar";
             user.Surname = "Petrovic";

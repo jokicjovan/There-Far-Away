@@ -81,8 +81,12 @@
                                 HorizontalAlignment="Center"
                                 Margin="-10 -5 0 0"/>
                         </MenuItem.Icon>
-                        <MenuItem Header="Edit"/>
-                        <MenuItem Header="Delete"/>
+                        <MenuItem 
+                            Header="Edit"
+                            Command="{Binding NavigateEditJourneyCommand}"/>
+                        <MenuItem 
+                            Header="Delete"
+                            Command="{Binding DeleteJourneyFromCardCommand}"/>
                     </MenuItem>
                 </Menu>
 
