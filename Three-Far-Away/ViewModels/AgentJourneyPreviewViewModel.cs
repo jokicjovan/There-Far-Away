@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using Three_Far_Away.Components;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
@@ -20,6 +22,20 @@ namespace Three_Far_Away.ViewModels
 
 
         #region properties
+
+        private ObservableCollection<LocationListItemViewModel> _locationListItemViewModels;
+        public ObservableCollection<LocationListItemViewModel> LocationListItemViewModels
+        {
+            get
+            {
+                return _locationListItemViewModels;
+            }
+            set
+            {
+                _locationListItemViewModels = value;
+                OnPropertyChanged(nameof(LocationListItemViewModels));
+            }
+        }
 
         private AgentNavigationBarViewModel _agentNavigationBarViewModel;
         public AgentNavigationBarViewModel AgentNavigationBarViewModel
@@ -94,11 +110,25 @@ namespace Three_Far_Away.ViewModels
         {
             AgentNavigationBarViewModel = App._host.Services.GetService<AgentNavigationBarViewModel>();
             this.journeyService = App._host.Services.GetService<IJourneyService>();
-            Journey journey = journeyService.Read(id);
+            Journey journey = journeyService.GetJourneyWithAttractions(id);
             Name = journey.Name;
             StartDate = journey.StartDate.ToString().Split(" ")[0];
             EndDate = journey.EndDate.ToString().Split(" ")[0];
             Price = journey.Price.ToString();
+            LocationListItemViewModels = new ObservableCollection<LocationListItemViewModel>(CreateLocationItemViews(journey));
+
+        }
+
+        private List<LocationListItemViewModel> CreateLocationItemViews (Journey journey)
+        {
+            List<LocationListItemViewModel> locations = new List<LocationListItemViewModel>();
+            locations.Add(new LocationListItemViewModel(journey.StartLocation.Address));
+            foreach (var journeyAttraction in journey.Attractions)
+            {
+                locations.Add(new LocationListItemViewModel(journeyAttraction.Name));
+            }
+            locations.Add(new LocationListItemViewModel(journey.EndLocation.Address));
+            return locations;
         }
     }
 }

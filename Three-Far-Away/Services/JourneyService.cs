@@ -44,6 +44,7 @@ namespace Three_Far_Away.Services
         {
             return _journeyRepository.Delete(id);
         }
+        #endregion
 
         public List<Journey> ReadPage(int page, int size)
         {
@@ -57,6 +58,10 @@ namespace Three_Far_Away.Services
             return newJourneys;
         }
 
-        #endregion
+        public Journey GetJourneyWithAttractions(Guid id)
+        {
+            return _journeyRepository.GetJourneyWithAttractions(id);
+        }
+
     }
 }

@@ -11,5 +11,6 @@ namespace Three_Far_Away.Services.Interfaces
     public interface IJourneyService : ICrudService<Journey>
     {
         List<Journey> ReadPage(int page, int size);
+        public Journey GetJourneyWithAttractions(Guid id);
     }
 }

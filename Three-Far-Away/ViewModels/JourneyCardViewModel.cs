@@ -20,6 +20,7 @@ namespace Three_Far_Away.ViewModels
     {
         public readonly IJourneyService journeyService;
 		public Guid JourneyId { get; set; }
+        public Role role;
         public ICommand ViewJourneyPreviewCommand { get; }
         public readonly INavigationService<AgentJourneyPreviewViewModel> navigationAgentJourneyPreview;
         public readonly INavigationService<ClientJourneyPreviewViewModel> navigationClientJourneyPreview;
@@ -72,6 +73,7 @@ namespace Three_Far_Away.ViewModels
 			Date = journey.Date;
 			Price = journey.Price;
             AccountStore accountStore = App._host.Services.GetService<AccountStore>();
+            role = accountStore.Role;
 			if(accountStore.Role.Equals(Role.AGENT))
                 navigationAgentJourneyPreview =
                     new NavigationService<AgentJourneyPreviewViewModel>(App._host.Services.GetService<NavigationStore>(),

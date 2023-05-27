@@ -96,20 +96,13 @@
                     </Grid>
                     <Grid Grid.Row="4">
                     <!-- Dinamicki dodati lokacije -->
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Width="251"><local:LocationListItemView/></Grid>
-                        <Grid Grid.Row="1" Width="251"><local:LocationListItemView/></Grid>
-                        <Grid Grid.Row="2" Width="251"><local:LocationListItemView/></Grid>
-                        <Grid Grid.Row="3" Width="251"><local:LocationListItemView/></Grid>
-                        <Grid Grid.Row="4" Width="251"><local:LocationListItemView/></Grid>
-                        <Grid Grid.Row="5" Width="251"><local:LocationListItemView/></Grid>
+                        <ItemsControl ItemsSource="{Binding LocationListItemViewModels}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:LocationListItemView Margin="0,10" Width="251"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                     <Grid Grid.Row="5" HorizontalAlignment="Center" Margin="20">
                         <Grid.ColumnDefinitions>
