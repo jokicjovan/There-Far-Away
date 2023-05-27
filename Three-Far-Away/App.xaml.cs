@@ -16,6 +16,7 @@ using Three_Far_Away.Models;
 using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using Credential = Three_Far_Away.Models.Credential;
 using Three_Far_Away.Components;
+using Three_Far_Away.Views;
 
 namespace Three_Far_Away
 {
@@ -24,7 +25,7 @@ namespace Three_Far_Away
     /// </summary>
     public partial class App : Application
     {
-        private readonly IHost _host;
+        public static IHost _host;
 
         public App() {
             _host = Host.CreateDefaultBuilder().ConfigureServices((hostContext, services) =>
@@ -52,6 +53,18 @@ namespace Three_Far_Away
                 services.AddTransient<JourneyCardViewModel>();
                 services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
                 services.AddSingleton<INavigationService<JourneyCardViewModel>, NavigationService<JourneyCardViewModel>>();
+                
+                services.AddTransient<AgentJourneyPreviewViewModel>();
+                services.AddSingleton<Func<AgentJourneyPreviewViewModel>>((s) => () => s.GetRequiredService<AgentJourneyPreviewViewModel>());
+                services.AddSingleton<INavigationService<AgentJourneyPreviewViewModel>, NavigationService<AgentJourneyPreviewViewModel>>();
+
+                services.AddTransient<LocationListItemViewModel>();
+                services.AddSingleton<Func<LocationListItemViewModel>>((s) => () => s.GetRequiredService<LocationListItemViewModel>());
+                services.AddSingleton<INavigationService<LocationListItemViewModel>, NavigationService<LocationListItemViewModel>>();
+
+                services.AddTransient<ClientJourneyPreviewViewModel>();
+                services.AddSingleton<Func<ClientJourneyPreviewViewModel>>((s) => () => s.GetRequiredService<ClientJourneyPreviewViewModel>());
+                services.AddSingleton<INavigationService<ClientJourneyPreviewViewModel>, NavigationService<ClientJourneyPreviewViewModel>>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -86,7 +99,7 @@ namespace Three_Far_Away
         {
             _host.Start();
 
-            //loadData(_host);
+            // loadData(_host);
             //loadJourney(_host);
             _host.Services.GetRequiredService<INavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
@@ -110,8 +123,8 @@ namespace Three_Far_Away
             user = _host.Services.GetService<IUserService>().Create(user);
             Credential credential = new Credential();
             credential.User = user;
-            credential.Username = "asdasd";
-            credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasd");
+            credential.Username = "asdasdasd";
+            credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasdasd");
             credential = _host.Services.GetService<ICredentialService>().Create(credential);
         }
 

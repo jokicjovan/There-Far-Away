@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Views
 {
     /// <summary>
-    /// Interaction logic for JourneyCardView.xaml
+    /// Interaction logic for JourneyPreviewView.xaml
     /// </summary>
-    public partial class JourneyCardView : UserControl
+    public partial class AgentJourneyPreviewView : UserControl
     {
-        public JourneyCardView()
+        public AgentJourneyPreviewView()
         {
             InitializeComponent();
         }
