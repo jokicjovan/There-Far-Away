@@ -22,6 +22,7 @@ namespace Three_Far_Away.ViewModels
 
         #region navigations
         public readonly INavigationService<AgentJourneysViewModel> navigationAgentJourneys;
+        public readonly INavigationService<ClientJourneysViewModel> navigationClientJourneys;
         #endregion
 
         #region properties
@@ -42,6 +43,10 @@ namespace Three_Far_Away.ViewModels
                 {
                     AddError("Username cannot be shorter than 6 characters!", nameof(Username));
                 }
+                else if (Username.Length > 20)
+                {
+                    AddError("Username cannot be longer than 20 characters!", nameof(Username));
+                }
             }
         }
 
@@ -61,6 +66,10 @@ namespace Three_Far_Away.ViewModels
                 if (Password.Length < 6)
                 {
                     AddError("Password cannot be shorter than 6 characters!", nameof(Password));
+                }
+                else if (Username.Length > 20)
+                {
+                    AddError("Password cannot be longer than 20 characters!", nameof(Username));
                 }
             } 
         }
@@ -106,11 +115,13 @@ namespace Three_Far_Away.ViewModels
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
         #endregion
 
-        public LoginViewModel(INavigationService<AgentJourneysViewModel> navigationAgentJourneys, ICredentialService credentialService, AccountStore accountStore)
+        public LoginViewModel(INavigationService<AgentJourneysViewModel> navigationAgentJourneys, INavigationService<ClientJourneysViewModel> navigationClientJourneys, 
+            ICredentialService credentialService, AccountStore accountStore)
         {
             this.accountStore = accountStore;
             this.credentialService = credentialService;
             this.navigationAgentJourneys = navigationAgentJourneys;
+            this.navigationClientJourneys = navigationClientJourneys;
             SubmitCommand = new LoginCommand(this);
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
         }

@@ -31,7 +31,7 @@ namespace Three_Far_Away.Commands
                 _loginViewModel.accountStore.Role = user.Role;
                 if (user.Role == Role.CLIENT)
                 {
-                    //TODO
+                    _loginViewModel.navigationClientJourneys.Navigate();
                 }
                 else 
                 {

@@ -13,11 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Models;
-using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using Credential = Three_Far_Away.Models.Credential;
 using Three_Far_Away.Components;
-using Three_Far_Away.Views;
-
 namespace Three_Far_Away
 {
     /// <summary>
@@ -36,6 +33,7 @@ namespace Three_Far_Away
                 services.AddSingleton(s => s.GetRequiredService<ThereFarAwayDbContextFactory>().CreateDbContext());
 
                 services.AddTransient<AgentNavigationBarViewModel>();
+                services.AddTransient<ClientNavigationBarViewModel>();
 
                 //viewmodels
                 services.AddTransient<LoginViewModel>();
@@ -49,14 +47,14 @@ namespace Three_Far_Away
                 services.AddTransient<AgentJourneysViewModel>();
                 services.AddSingleton<Func<AgentJourneysViewModel>>((s) => () => s.GetRequiredService<AgentJourneysViewModel>());
                 services.AddSingleton<INavigationService<AgentJourneysViewModel>, NavigationService<AgentJourneysViewModel>>();
-                
-                services.AddTransient<JourneyCardViewModel>();
-                services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
-                services.AddSingleton<INavigationService<JourneyCardViewModel>, NavigationService<JourneyCardViewModel>>();
-                
+
                 services.AddTransient<AgentJourneyPreviewViewModel>();
                 services.AddSingleton<Func<AgentJourneyPreviewViewModel>>((s) => () => s.GetRequiredService<AgentJourneyPreviewViewModel>());
                 services.AddSingleton<INavigationService<AgentJourneyPreviewViewModel>, NavigationService<AgentJourneyPreviewViewModel>>();
+
+                services.AddTransient<JourneyCardViewModel>();
+                services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
+                services.AddSingleton<INavigationService<JourneyCardViewModel>, NavigationService<JourneyCardViewModel>>();
 
                 services.AddTransient<LocationListItemViewModel>();
                 services.AddSingleton<Func<LocationListItemViewModel>>((s) => () => s.GetRequiredService<LocationListItemViewModel>());
@@ -65,6 +63,10 @@ namespace Three_Far_Away
                 services.AddTransient<ClientJourneyPreviewViewModel>();
                 services.AddSingleton<Func<ClientJourneyPreviewViewModel>>((s) => () => s.GetRequiredService<ClientJourneyPreviewViewModel>());
                 services.AddSingleton<INavigationService<ClientJourneyPreviewViewModel>, NavigationService<ClientJourneyPreviewViewModel>>();
+
+                services.AddTransient<ClientJourneysViewModel>();
+                services.AddSingleton<Func<ClientJourneysViewModel>>((s) => () => s.GetRequiredService<ClientJourneysViewModel>());
+                services.AddSingleton<INavigationService<ClientJourneysViewModel>, NavigationService<ClientJourneysViewModel>>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -126,6 +128,17 @@ namespace Three_Far_Away
             credential.Username = "asdasdasd";
             credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasdasd");
             credential = _host.Services.GetService<ICredentialService>().Create(credential);
+
+            User user2 = new User();
+            user2.Name = "Marko";
+            user2.Surname = "Makrovic";
+            user2.Role = Role.CLIENT;
+            user2 = _host.Services.GetService<IUserService>().Create(user2);
+            Credential credential2 = new Credential();
+            credential2.User = user;
+            credential2.Username = "dsadsa";
+            credential2.Password = BCrypt.Net.BCrypt.HashPassword("dsadsa");
+            credential2 = _host.Services.GetService<ICredentialService>().Create(credential2);
         }
 
         private void loadJourney(IHost host)

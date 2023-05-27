@@ -2,14 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 using Three_Far_Away.Components;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
-using Three_Far_Away.Stores;
 
 namespace Three_Far_Away.ViewModels
 {

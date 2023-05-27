@@ -11,6 +11,7 @@
         Height="430" 
         Width="750"
         ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
         FontSize="14">
     <Grid>
         <Grid.Resources>
@@ -26,16 +27,20 @@
                 <views:AgentJourneysView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
-                <views:JourneyCardView/>
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type vms:AgentJourneyPreviewViewModel}">
                 <views:AgentJourneyPreviewView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
+                <views:JourneyCardView/>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type vms:ClientJourneyPreviewViewModel}">
                 <views:ClientJourneyPreviewView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:ClientJourneysViewModel}">
+                <views:ClientJourneysView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type vms:LocationListItemViewModel}">

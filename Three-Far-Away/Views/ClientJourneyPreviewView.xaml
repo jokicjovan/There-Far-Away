@@ -16,12 +16,12 @@
 
         <components:AgentNavigationBarView Grid.Row="0" DataContext="{Binding AgentNavigationBarViewModel}"/>
 
-        <Grid Grid.Row="1" Margin="20 10">
+        <Grid Grid.Row="1">
             <ScrollViewer 
                 HorizontalScrollBarVisibility="Hidden" 
-                VerticalScrollBarVisibility="Hidden" 
+                VerticalScrollBarVisibility="Auto" 
                 CanContentScroll="True">
-                <Grid>
+                <Grid Margin="20 10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />

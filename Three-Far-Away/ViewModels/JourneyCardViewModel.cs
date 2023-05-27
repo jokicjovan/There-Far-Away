@@ -66,6 +66,20 @@ namespace Three_Far_Away.ViewModels
 			}
 		}
 
+        private Visibility _menuVisibility;
+        public Visibility MenuVisibility
+        {
+            get
+            {
+                return _menuVisibility;
+            }
+            set
+            {
+                _menuVisibility = value;
+                OnPropertyChanged(nameof(MenuVisibility));
+            }
+        }
+
         public JourneyCardViewModel(JourneyForCard journey)
         {
             JourneyId = journey.Id;
@@ -74,15 +88,22 @@ namespace Three_Far_Away.ViewModels
 			Price = journey.Price;
             AccountStore accountStore = App._host.Services.GetService<AccountStore>();
             role = accountStore.Role;
-			if(accountStore.Role.Equals(Role.AGENT))
-                navigationAgentJourneyPreview =
-                    new NavigationService<AgentJourneyPreviewViewModel>(App._host.Services.GetService<NavigationStore>(),
-                        () => new AgentJourneyPreviewViewModel(JourneyId));
+			if (accountStore.Role.Equals(Role.AGENT))
+			{
+				navigationAgentJourneyPreview =
+					new NavigationService<AgentJourneyPreviewViewModel>(App._host.Services.GetService<NavigationStore>(),
+						() => new AgentJourneyPreviewViewModel(JourneyId));
+                ViewJourneyPreviewCommand = new ViewJourneyPreviewCommand(this);
+                MenuVisibility = Visibility.Visible;
+            }
 			else
-                navigationClientJourneyPreview =
-                    new NavigationService<ClientJourneyPreviewViewModel>(App._host.Services.GetService<NavigationStore>(),
-                        () => new ClientJourneyPreviewViewModel(JourneyId));
-            ViewJourneyPreviewCommand = new ViewJourneyPreviewCommand(this);
+			{
+				navigationClientJourneyPreview =
+					new NavigationService<ClientJourneyPreviewViewModel>(App._host.Services.GetService<NavigationStore>(),
+						() => new ClientJourneyPreviewViewModel(JourneyId));
+				ViewJourneyPreviewCommand = new ViewJourneyPreviewCommand(this);
+                MenuVisibility = Visibility.Hidden;
+            }
 
         }
 	}
