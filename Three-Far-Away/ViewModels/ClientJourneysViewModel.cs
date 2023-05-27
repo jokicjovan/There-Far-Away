@@ -59,7 +59,7 @@ namespace Three_Far_Away.ViewModels
 
         private List<JourneyForCard> readCards(int page, int pageSize)
         {
-            List<Journey> journeys = journeyService.ReadPage(page, 4);
+            List<Journey> journeys = journeyService.ReadPage(page, pageSize);
             List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
             foreach (var journey in journeys)
                 journeysForCard.Add(new JourneyForCard(journey));

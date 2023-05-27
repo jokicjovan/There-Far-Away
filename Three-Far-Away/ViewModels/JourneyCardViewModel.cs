@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Three_Far_Away.Commands;
+using Three_Far_Away.Events;
 using Three_Far_Away.Models;
 using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Services;
@@ -18,10 +14,14 @@ namespace Three_Far_Away.ViewModels
 {
     public class JourneyCardViewModel : ViewModelBase
     {
+        public readonly AccountStore accountStore;
         public readonly IJourneyService journeyService;
 		public Guid JourneyId { get; set; }
         public Role role;
         public ICommand ViewJourneyPreviewCommand { get; }
+        public ICommand NavigateEditJourneyCommand { get; }
+        public ICommand DeleteJourneyFromCardCommand { get; }
+
         public readonly INavigationService<AgentJourneyPreviewViewModel> navigationAgentJourneyPreview;
         public readonly INavigationService<ClientJourneyPreviewViewModel> navigationClientJourneyPreview;
 
@@ -80,14 +80,23 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        public JourneyCardViewModel(JourneyForCard journey)
+
+        public event EventHandler JourneyDeletedEvent;
+        public virtual void OnJourneyDeletedEvent()
+		{
+            JourneyDeletedEvent?.Invoke(this, EventArgs.Empty);
+		}
+
+		public JourneyCardViewModel(JourneyForCard journey)
         {
             JourneyId = journey.Id;
             Name = journey.Name;
 			Date = journey.Date;
 			Price = journey.Price;
-            AccountStore accountStore = App._host.Services.GetService<AccountStore>();
+            journeyService = App._host.Services.GetService<IJourneyService>();
+            accountStore = App._host.Services.GetService<AccountStore>();
             role = accountStore.Role;
+
 			if (accountStore.Role.Equals(Role.AGENT))
 			{
 				navigationAgentJourneyPreview =
@@ -105,6 +114,7 @@ namespace Three_Far_Away.ViewModels
                 MenuVisibility = Visibility.Hidden;
             }
 
+			DeleteJourneyFromCardCommand = new DeleteJourneyFromCardCommand(this);
         }
 	}
 }
