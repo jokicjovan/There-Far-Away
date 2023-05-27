@@ -100,7 +100,7 @@ namespace Three_Far_Away
             _host.Start();
 
             // loadData(_host);
-            //loadJourney(_host);
+            // loadJourney(_host);
             _host.Services.GetRequiredService<INavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
@@ -147,6 +147,8 @@ namespace Three_Far_Away
             journey.StartLocation = location;
             journey.EndLocation = location;
             journey.Attractions = new List<Attraction>();
+            journey.Attractions.Add(attraction);
+            journey.Attractions.Add(attraction);
             journey.Attractions.Add(attraction);
             journey.Transportation = TransportationType.PLANE;
             

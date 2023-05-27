@@ -18,10 +18,12 @@ namespace Three_Far_Away.ViewModels
     public class AgentJourneysViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public readonly IJourneyService journeyService;
-        private ObservableCollection<JourneyForCard> journeys;
         public int page = 0;
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
+
+
+        private ObservableCollection<JourneyForCard> journeys;
         public ObservableCollection<JourneyForCard> Journeys
         {
             get { return journeys; }
