@@ -13,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Models;
-using Credential = Three_Far_Away.Models.Credential;
 using Three_Far_Away.Components;
 namespace Three_Far_Away
 {
@@ -102,7 +101,7 @@ namespace Three_Far_Away
             _host.Start();
 
             //loadUsers(_host);
-            //loadJourney(_host);
+            //loadJourneys(_host);
             _host.Services.GetRequiredService<INavigationService<LoginViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
@@ -141,7 +140,7 @@ namespace Three_Far_Away
             credential2 = _host.Services.GetService<ICredentialService>().Create(credential2);
         }
 
-        private void loadJourney(IHost host)
+        private void loadJourneys(IHost host)
         {
             Location location = new Location();
             location.Address = "Partizanska 2";

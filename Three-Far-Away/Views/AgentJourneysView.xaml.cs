@@ -13,5 +13,11 @@ namespace Three_Far_Away.Views
         {
             InitializeComponent();
         }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.Focusable = true;
+            Keyboard.Focus(this);
+        }
     }
 }

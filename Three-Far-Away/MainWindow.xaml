@@ -12,6 +12,7 @@
         Width="750"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
+        Background="FloralWhite"
         FontSize="14">
     <Grid>
         <Grid.Resources>

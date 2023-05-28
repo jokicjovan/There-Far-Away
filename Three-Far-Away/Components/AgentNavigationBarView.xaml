@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:Three_Far_Away.Components" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             Background="LightYellow"
+             Background="#639B22"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="20 5" VerticalAlignment="Center">
+    <Grid Margin="20 0" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -19,7 +19,7 @@
             Grid.Column ="0" 
             Text="{Binding Path=Name, 
                  StringFormat='Hello, {0}'}"
-            FontSize="18"
+            FontSize="20"
             FontWeight="Bold"
             VerticalAlignment="Center"/>
 
@@ -28,17 +28,21 @@
             Command="{Binding NavigateJourneys}"
             Background="Transparent" 
             BorderBrush="Transparent"
-            Margin="10 0 0 0"
-            Height="40">
+            Height="50">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <materialDesign:PackIcon 
                     Kind="Home"  
                     Background="Transparent"
                     ToolTip="Home"
-                    Width="40"
-                    Height="40"
+                    Width="50"
+                    Height="50"
                     Cursor="Hand"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="FloralWhite" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
@@ -59,6 +63,11 @@
                     Cursor="Hand"
                     Width="40"
                     Height="40"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="FloralWhite" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>

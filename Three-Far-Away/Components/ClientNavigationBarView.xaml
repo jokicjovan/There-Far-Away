@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Three_Far_Away.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             Background="LightYellow"
+             Background="#639B22"
              d:DesignHeight="450" d:DesignWidth="800">
     
     <Grid Margin="20 5" VerticalAlignment="Center">
@@ -40,6 +40,11 @@
                     Width="40"
                     Height="40"
                     Cursor="Hand"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="FloralWhite" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
@@ -60,6 +65,11 @@
                     Cursor="Hand"
                     Width="40"
                     Height="40"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="FloralWhite" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>

@@ -4,9 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Three_Far_Away.Views" 
-             xmlns:converters="clr-namespace:Three_Far_Away.Converters" xmlns:spinner="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
+             xmlns:converters="clr-namespace:Three_Far_Away.Converters" 
+             xmlns:spinner="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
              mc:Ignorable="d" 
-             d:DesignHeight="430" d:DesignWidth="750">
+             d:DesignHeight="430" d:DesignWidth="750"
+             Loaded="OnLoaded" 
+             FocusVisualStyle="{x:Null}" >
+    <UserControl.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Gesture="Enter" Command="{Binding SubmitCommand}"/>
+    </UserControl.InputBindings>
+    
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
@@ -44,7 +51,8 @@
                     
                     <TextBox
                         Grid.Row="1"
-                        Text = "{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                        Text = "{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                        x:Name="usernameTextBox"/>
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="0 10 0 0">
