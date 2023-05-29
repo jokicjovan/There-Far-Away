@@ -13,15 +13,15 @@ namespace Three_Far_Away.Commands
 {
     public class HamburgerMenuCommand : CommandBase
     {
-        private AgentHamburgerNavigationBarViewModel _agentHamburgerNavigationBarViewModel;
-        public HamburgerMenuCommand(AgentHamburgerNavigationBarViewModel agentHamburgerNavigationBarViewModel)
+        private IHamburgerMenu _hamburgerNavigationBarViewModel;
+        public HamburgerMenuCommand(IHamburgerMenu hamburgerNavigationBarViewModel)
         {
-            _agentHamburgerNavigationBarViewModel = agentHamburgerNavigationBarViewModel;
+            _hamburgerNavigationBarViewModel = hamburgerNavigationBarViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _agentHamburgerNavigationBarViewModel.IsMenuOpen = !_agentHamburgerNavigationBarViewModel.IsMenuOpen;
+            _hamburgerNavigationBarViewModel.IsMenuOpen = !_hamburgerNavigationBarViewModel.IsMenuOpen;
 
             const double targetWidth = 150;
             const int animationDurationMilliseconds = 100;
@@ -33,8 +33,8 @@ namespace Three_Far_Away.Commands
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(delay);
 
-            double currentWidth = _agentHamburgerNavigationBarViewModel.MenuWidth;
-            double targetMenuWidth = _agentHamburgerNavigationBarViewModel.MenuWidth == 0 ? targetWidth : 0;
+            double currentWidth = _hamburgerNavigationBarViewModel.MenuWidth;
+            double targetMenuWidth = _hamburgerNavigationBarViewModel.MenuWidth == 0 ? targetWidth : 0;
 
             timer.Tick += (sender, e) =>
             {
@@ -58,7 +58,7 @@ namespace Three_Far_Away.Commands
                     }
                 }
 
-                _agentHamburgerNavigationBarViewModel.MenuWidth = currentWidth;
+                _hamburgerNavigationBarViewModel.MenuWidth = currentWidth;
             };
 
             timer.Start();

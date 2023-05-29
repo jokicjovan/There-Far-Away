@@ -14,17 +14,21 @@
         <KeyBinding Modifiers="Ctrl" Key="F4" Command="{Binding ClientNavigationBarViewModel.NavigateLogin}"/>
     </UserControl.InputBindings>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <components:ClientNavigationBarView
-            Grid.Row="0" DataContext="{Binding ClientNavigationBarViewModel}"/>
-
-        <ContentControl Grid.Row="1"
-                            Margin="20 10"
-                            Content="{Binding CurrentViewModel}"/>
+    <!-- <Grid> -->
+    <!--     <Grid.RowDefinitions> -->
+    <!--         <RowDefinition Height="auto"/> -->
+    <!--         <RowDefinition Height="*"/> -->
+    <!--     </Grid.RowDefinitions> -->
+    <!-- -->
+    <!--     <components:ClientNavigationBarView -->
+    <!--         Grid.Row="0" DataContext="{Binding ClientNavigationBarViewModel}"/> -->
+    <!-- -->
+    <!--     <ContentControl Grid.Row="1" -->
+    <!--                         Margin="20 10" -->
+    <!--                         Content="{Binding CurrentViewModel}"/> -->
+    <!-- </Grid> -->
+    <Grid Width="750" Height="430">
+        <ContentControl Margin="55 0 15 40" Content="{Binding CurrentViewModel}"/>
+        <components:ClientHamburgerNavigationBarView Height="430" DataContext="{Binding ClientHamburgerNavigationBarViewModel}"/>
     </Grid>
 </UserControl>

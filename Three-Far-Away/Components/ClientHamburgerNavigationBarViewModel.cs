@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Stores;
@@ -11,7 +10,7 @@ using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Components
 {
-    public class AgentHamburgerNavigationBarViewModel : ViewModelBase, IHamburgerMenu
+    public class ClientHamburgerNavigationBarViewModel : ViewModelBase, IHamburgerMenu
     {
         public ICommand NavigateJourneys { get; }
         public ICommand NavigateLogin { get; }
@@ -52,14 +51,13 @@ namespace Three_Far_Away.Components
             set { isMenuOpen = value; OnPropertyChanged(nameof(IsMenuOpen)); }
         }
 
-        public AgentHamburgerNavigationBarViewModel(AccountStore accountStore)
+        public ClientHamburgerNavigationBarViewModel(AccountStore accountStore)
         {
             _name = accountStore.Name;
-            NavigateJourneys = new FireEventCommand("AgentJourneys");
+            NavigateJourneys = new FireEventCommand("ClientJourneys");
             NavigateLogin = new FireEventCommand("BackToLogin");
             ToggleMenuCommand = new HamburgerMenuCommand(this);
             isMenuOpen = false;
         }
-
     }
 }
