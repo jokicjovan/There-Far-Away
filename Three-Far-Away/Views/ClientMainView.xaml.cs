@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace Three_Far_Away.Views
 {
     /// <summary>
-    /// Interaction logic for ClientJourneysView.xaml
+    /// Interaction logic for ClientMainView.xaml
     /// </summary>
-    public partial class ClientJourneysView : UserControl
+    public partial class ClientMainView : UserControl
     {
-        public ClientJourneysView()
+        public ClientMainView()
         {
             InitializeComponent();
+        }
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.Focusable = true;
+            Keyboard.Focus(this);
         }
     }
 }

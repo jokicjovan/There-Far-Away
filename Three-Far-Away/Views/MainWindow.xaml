@@ -20,10 +20,10 @@
                 <views:LoginView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:CreateJourneyViewModel}">
-                <views:CreateJourneyView/>
+            <DataTemplate DataType="{x:Type vms:AgentMainViewModel}">
+                <views:AgentMainView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type vms:AgentJourneysViewModel}">
                 <views:AgentJourneysView/>
             </DataTemplate>
@@ -32,10 +32,10 @@
                 <views:AgentJourneyPreviewView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
-                <views:JourneyCardView/>
+            <DataTemplate DataType="{x:Type vms:ClientMainViewModel}">
+                <views:ClientMainView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type vms:ClientJourneyPreviewViewModel}">
                 <views:ClientJourneyPreviewView/>
             </DataTemplate>
@@ -44,8 +44,16 @@
                 <views:ClientJourneysView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
+                <views:JourneyCardView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:LocationListItemViewModel}">
                 <views:LocationListItemView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:CreateJourneyViewModel}">
+                <views:CreateJourneyView/>
             </DataTemplate>
 
         </Grid.Resources>

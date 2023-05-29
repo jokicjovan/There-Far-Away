@@ -20,11 +20,6 @@ namespace Three_Far_Away.ViewModels
         public readonly AccountStore accountStore;
         #endregion
 
-        #region navigations
-        public readonly INavigationService<AgentJourneysViewModel> navigationAgentJourneys;
-        public readonly INavigationService<ClientJourneysViewModel> navigationClientJourneys;
-        #endregion
-
         #region properties
         private string _username;
         public string Username
@@ -115,13 +110,10 @@ namespace Three_Far_Away.ViewModels
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
         #endregion
 
-        public LoginViewModel(INavigationService<AgentJourneysViewModel> navigationAgentJourneys, INavigationService<ClientJourneysViewModel> navigationClientJourneys, 
-            ICredentialService credentialService, AccountStore accountStore)
+        public LoginViewModel(ICredentialService credentialService, AccountStore accountStore)
         {
             this.accountStore = accountStore;
             this.credentialService = credentialService;
-            this.navigationAgentJourneys = navigationAgentJourneys;
-            this.navigationClientJourneys = navigationClientJourneys;
             SubmitCommand = new LoginCommand(this);
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
         }

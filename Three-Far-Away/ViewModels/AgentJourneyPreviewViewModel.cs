@@ -14,7 +14,6 @@ namespace Three_Far_Away.ViewModels
     {
         #region services
         public readonly IJourneyService journeyService;
-        public readonly INavigationService<AgentJourneysViewModel> navigationAgentJourneys;
 
         #endregion
         
@@ -121,9 +120,8 @@ namespace Three_Far_Away.ViewModels
 
         public AgentJourneyPreviewViewModel(Guid id)
         {
-            AgentNavigationBarViewModel = App._host.Services.GetService<AgentNavigationBarViewModel>();
-            journeyService = App._host.Services.GetService<IJourneyService>();
-            navigationAgentJourneys = App._host.Services.GetService<INavigationService<AgentJourneysViewModel>>();
+            AgentNavigationBarViewModel = App.host.Services.GetService<AgentNavigationBarViewModel>();
+            journeyService = App.host.Services.GetService<IJourneyService>();
             Journey journey = journeyService.GetJourneyWithAttractions(id);
             Id = journey.Id;
             Name = journey.Name;

@@ -25,11 +25,11 @@ namespace Three_Far_Away.Components
             }
         }
 
-        public ClientNavigationBarViewModel(INavigationService<ClientJourneysViewModel> navigationClientJourneys, INavigationService<LoginViewModel> navigationLogin, AccountStore accountStore)
+        public ClientNavigationBarViewModel(AccountStore accountStore)
         {
             _name = accountStore.Name;
-            NavigateJourneys = new NavigateCommand<ClientJourneysViewModel>(navigationClientJourneys);
-            NavigateLogin = new NavigateCommand<LoginViewModel>(navigationLogin);
+            NavigateJourneys = new FireEventCommand("ClientJourneys");
+            NavigateLogin = new FireEventCommand("BackToLogin");
         }
     }
 }
