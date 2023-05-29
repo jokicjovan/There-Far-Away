@@ -39,9 +39,8 @@ namespace Three_Far_Away
                 services.AddTransient<LoginViewModel>();
                 services.AddTransient<AgentMainViewModel>();
                 services.AddTransient<AgentJourneyPreviewViewModel>();
-                services.AddTransient<AgentJourneysViewModel>();
+                services.AddTransient<JourneysViewModel>();
                 services.AddTransient<ClientMainViewModel>();
-                services.AddTransient<ClientJourneysViewModel>();
                 services.AddTransient<ClientJourneyPreviewViewModel>();
                 services.AddTransient<CreateJourneyViewModel>();
                 services.AddTransient<JourneyCardViewModel>();

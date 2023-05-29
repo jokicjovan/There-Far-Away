@@ -24,8 +24,8 @@
                 <views:AgentMainView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:AgentJourneysViewModel}">
-                <views:AgentJourneysView/>
+            <DataTemplate DataType="{x:Type vms:JourneysViewModel}">
+                <views:JourneysView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type vms:AgentJourneyPreviewViewModel}">
@@ -38,10 +38,6 @@
 
             <DataTemplate DataType="{x:Type vms:ClientJourneyPreviewViewModel}">
                 <views:ClientJourneyPreviewView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vms:ClientJourneysViewModel}">
-                <views:ClientJourneysView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">

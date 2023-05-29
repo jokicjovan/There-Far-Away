@@ -12,8 +12,8 @@ namespace Three_Far_Away.Commands
 {
     public class PreviousPageJourniesCommand : CommandBase
     {
-        private readonly AgentJourneysViewModel _createJourneyViewModel;
-        public PreviousPageJourniesCommand(AgentJourneysViewModel createJourneyViewModel)
+        private readonly JourneysViewModel _createJourneyViewModel;
+        public PreviousPageJourniesCommand(JourneysViewModel createJourneyViewModel)
         {
             _createJourneyViewModel = createJourneyViewModel;
 
