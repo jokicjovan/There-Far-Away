@@ -7,14 +7,14 @@ using Three_Far_Away.Commands;
 using Three_Far_Away.Components;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
+using Three_Far_Away.Stores;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class AgentJourneyPreviewViewModel : ViewModelBase
+    public class JourneyPreviewViewModel : ViewModelBase
     {
         #region services
         public readonly IJourneyService journeyService;
-
         #endregion
         
         #region properties
@@ -114,12 +114,27 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
+        private bool _isAgent;
+        public bool IsAgent
+        {
+            get
+            {
+                return _isAgent;
+            }
+            set
+            {
+                _isAgent = value;
+                OnPropertyChanged(nameof(IsAgent));
+            }
+        }
+
         #endregion
 
         public ICommand DeleteJourney { get; }
 
-        public AgentJourneyPreviewViewModel(Guid id)
+        public JourneyPreviewViewModel(Guid id)
         {
+            AccountStore accountStore = App.host.Services.GetService<AccountStore>();
             AgentNavigationBarViewModel = App.host.Services.GetService<AgentNavigationBarViewModel>();
             journeyService = App.host.Services.GetService<IJourneyService>();
             Journey journey = journeyService.GetJourneyWithAttractions(id);
@@ -129,7 +144,15 @@ namespace Three_Far_Away.ViewModels
             EndDate = journey.EndDate.ToString().Split(" ")[0];
             Price = journey.Price.ToString();
             LocationListItemViewModels = new ObservableCollection<LocationListItemViewModel>(CreateLocationItemViews(journey));
-            DeleteJourney = new DeleteJourneyFromPreviewCommand(this);
+
+            if (accountStore.Role == Role.AGENT)
+            {
+                _isAgent = true;
+                DeleteJourney = new DeleteJourneyFromPreviewCommand(this);
+            }
+            else {
+                _isAgent = false;
+            }
         }
 
         private List<LocationListItemViewModel> CreateLocationItemViews (Journey journey)

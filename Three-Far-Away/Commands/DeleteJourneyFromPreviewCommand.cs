@@ -7,8 +7,8 @@ namespace Three_Far_Away.Commands
 {
     public class DeleteJourneyFromPreviewCommand : CommandBase
     {
-        private readonly AgentJourneyPreviewViewModel _agentJourneyPreviewViewModel;
-        public DeleteJourneyFromPreviewCommand(AgentJourneyPreviewViewModel agentJourneyPreviewViewModel)
+        private readonly JourneyPreviewViewModel _agentJourneyPreviewViewModel;
+        public DeleteJourneyFromPreviewCommand(JourneyPreviewViewModel agentJourneyPreviewViewModel)
         {
             _agentJourneyPreviewViewModel = agentJourneyPreviewViewModel;
         }

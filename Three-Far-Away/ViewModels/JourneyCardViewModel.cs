@@ -102,7 +102,7 @@ namespace Three_Far_Away.ViewModels
             }
 			else
 			{
-                MenuVisibility = Visibility.Hidden;
+                MenuVisibility = Visibility.Collapsed;
             }
 
             ViewJourneyPreviewCommand = new ViewJourneyPreviewCommand(this);
