@@ -16,7 +16,9 @@ namespace Three_Far_Away.Commands
         }
         public override void Execute(object parameter)
         {
-            List<Journey> journeys = _createJourneyViewModel.journeyService.ReadPage(++_createJourneyViewModel.page, 4);
+            List<Journey> journeys = _createJourneyViewModel.journeyService.ReadPage(_createJourneyViewModel.page + 1, 4);
+            if (journeys.Count == 4)
+                _createJourneyViewModel.page++;
             List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
             foreach (var journey in journeys)
                 journeysForCard.Add(new JourneyForCard(journey));
