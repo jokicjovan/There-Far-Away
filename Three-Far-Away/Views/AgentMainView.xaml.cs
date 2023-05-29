@@ -5,16 +5,14 @@ using System.Windows.Input;
 namespace Three_Far_Away.Views
 {
     /// <summary>
-    /// Interaction logic for AgentJourneysView.xaml
+    /// Interaction logic for AgentMainView.xaml
     /// </summary>
-    public partial class AgentJourneysView : UserControl
+    public partial class AgentMainView : UserControl
     {
-        public AgentJourneysView()
+        public AgentMainView()
         {
             InitializeComponent();
         }
-
-
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.Focusable = true;

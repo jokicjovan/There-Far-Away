@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="430" d:DesignWidth="750"
              Loaded="OnLoaded" 
-             FocusVisualStyle="{x:Null}" >
+             FocusVisualStyle="{x:Null}">
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Gesture="Enter" Command="{Binding SubmitCommand}"/>
     </UserControl.InputBindings>

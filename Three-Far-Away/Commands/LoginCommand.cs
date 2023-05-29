@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
 
@@ -31,11 +32,11 @@ namespace Three_Far_Away.Commands
                 _loginViewModel.accountStore.Role = user.Role;
                 if (user.Role == Role.CLIENT)
                 {
-                    _loginViewModel.navigationClientJourneys.Navigate();
+                    EventBus.FireEvent("ClientLogin");
                 }
-                else 
+                else
                 {
-                    _loginViewModel.navigationAgentJourneys.Navigate();
+                    EventBus.FireEvent("AgentLogin");
                 }
             }
             catch (Exception ex)

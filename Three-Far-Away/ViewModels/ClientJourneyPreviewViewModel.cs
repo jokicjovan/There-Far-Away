@@ -106,8 +106,8 @@ namespace Three_Far_Away.ViewModels
 
         public ClientJourneyPreviewViewModel(Guid id)
         {
-            AgentNavigationBarViewModel = App._host.Services.GetService<AgentNavigationBarViewModel>();
-            this.journeyService = App._host.Services.GetService<IJourneyService>();
+            AgentNavigationBarViewModel = App.host.Services.GetService<AgentNavigationBarViewModel>();
+            this.journeyService = App.host.Services.GetService<IJourneyService>();
             Journey journey = journeyService.GetJourneyWithAttractions(id);
             Name = journey.Name;
             StartDate = journey.StartDate.ToString().Split(" ")[0];

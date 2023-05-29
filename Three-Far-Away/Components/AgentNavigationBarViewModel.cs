@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Navigation;
+﻿using System.Windows.Input;
 using Three_Far_Away.Commands;
-using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;
 using Three_Far_Away.ViewModels;
 
@@ -31,11 +24,11 @@ namespace Three_Far_Away.Components
             }
         }
 
-        public AgentNavigationBarViewModel(INavigationService<AgentJourneysViewModel> navigationAgentJourneys, INavigationService<LoginViewModel> navigationLogin, AccountStore accountStore)
+        public AgentNavigationBarViewModel(AccountStore accountStore)
         {
             _name = accountStore.Name;
-            NavigateJourneys = new NavigateCommand<AgentJourneysViewModel>(navigationAgentJourneys);
-            NavigateLogin = new NavigateCommand<LoginViewModel>(navigationLogin);
+            NavigateJourneys = new FireEventCommand("AgentJourneys");
+            NavigateLogin = new FireEventCommand("BackToLogin");
         }
     }
 }

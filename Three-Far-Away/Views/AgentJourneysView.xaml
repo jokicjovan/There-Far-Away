@@ -8,13 +8,11 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="430" d:DesignWidth="750"
-             Loaded="OnLoaded" 
+             Loaded="OnLoaded"
              FocusVisualStyle="{x:Null}">
     <UserControl.InputBindings>
-        <KeyBinding Modifiers="Ctrl" Key="Left" Command="{Binding PreviousPageCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="Right" Command="{Binding NextPageCommand}"/>
-        <KeyBinding Modifiers="Ctrl" Key="F1" Command="{Binding AgentNavigationBarViewModel.NavigateJourneys}"/>
-        <KeyBinding Modifiers="Ctrl" Key="F4" Command="{Binding AgentNavigationBarViewModel.NavigateLogin}"/>
+        <KeyBinding Modifiers="Ctrl" Key="Left" Command="{Binding PreviousPageCommand}"/>
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -22,69 +20,58 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <components:AgentNavigationBarView Grid.Row="0" DataContext="{Binding AgentNavigationBarViewModel}"/>
+        <!-- Title Section -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Journeys"  Margin="0,10,20, 10" FontWeight="Bold" FontSize="24" />
+        </StackPanel>
+        <Button  Margin="0,10,0, 10" HorizontalAlignment="Right" Background="#639B22">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="0"
+                            CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Plus" Margin="10,0,5,2" VerticalAlignment="Center"/>
+                <TextBlock Text="Add Journey" VerticalAlignment="Center" Margin="0,0,10,5" />
+            </StackPanel>
+        </Button>
 
-        <Grid Grid.Row="1"
-              Margin="20 10">
+        <!-- Content Section -->
+        <Grid Grid.Row="1">
+            <!-- Add your content here -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <!-- Title Section -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="Journeys"  Margin="0,10,20, 10" FontWeight="Bold" FontSize="24" />
-            </StackPanel>
-            <Button  Margin="0,10,0, 10" HorizontalAlignment="Right" Background="#639B22">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="0"
-                            CornerRadius="10">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Plus" Margin="10,0,5,2" VerticalAlignment="Center"/>
-                    <TextBlock Text="Add Journey" VerticalAlignment="Center" Margin="0,0,10,5" />
-                </StackPanel>
-            </Button>
-
-            <!-- Content Section -->
-            <Grid Grid.Row="1">
-                <!-- Add your content here -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid Grid.Row="1">
-                        <ItemsControl ItemsSource="{Binding JourneyCardViewModels, Mode=TwoWay}"  Focusable="False">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <local:JourneyCardView Margin="0,10" Height="85" Width="340"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <UniformGrid Columns="2" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </Grid>
-                </Grid>
-                <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0, 0, 0, 5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Button Content="Previous" Margin="5" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding PreviousPageCommand}"/>
-                    <Button Content="Next" Margin="5" HorizontalAlignment="Right" Grid.Column="1" Foreground="White" Command="{Binding NextPageCommand}" />
+            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid Grid.Row="1">
+                    <ItemsControl ItemsSource="{Binding JourneyCardViewModels, Mode=TwoWay}"  Focusable="False">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:JourneyCardView Margin="0,10" Height="85" Width="340"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="2" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </Grid>
             </Grid>
-
+            <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0, 0, 0, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Previous" Margin="5" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding PreviousPageCommand}"/>
+                <Button Content="Next" Margin="5" HorizontalAlignment="Right" Grid.Column="1" Foreground="White" Command="{Binding NextPageCommand}" />
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

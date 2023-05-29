@@ -44,19 +44,9 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        private AgentNavigationBarViewModel _agentNavigationBarViewModel;
-        public AgentNavigationBarViewModel AgentNavigationBarViewModel {
-            get { return _agentNavigationBarViewModel; }
-            set
-            {
-                _agentNavigationBarViewModel = value;
-                OnPropertyChanged(nameof(AgentNavigationBarViewModel));
-            }
-        }
-        public AgentJourneysViewModel(IJourneyService journeyService, AgentNavigationBarViewModel agentNavigationBarViewModel)
+        public AgentJourneysViewModel(IJourneyService journeyService)
         {
             page = 0;
-            _agentNavigationBarViewModel = agentNavigationBarViewModel;
             this.journeyService = journeyService;
             Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());

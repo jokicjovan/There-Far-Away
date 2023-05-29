@@ -8,230 +8,216 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="430" d:DesignWidth="750"
-             Loaded="OnLoaded" 
-             FocusVisualStyle="{x:Null}">
-    <UserControl.InputBindings>
-        <KeyBinding Modifiers="Ctrl" Key="F1" Command="{Binding AgentNavigationBarViewModel.NavigateJourneys}"/>
-        <KeyBinding Modifiers="Ctrl" Key="F4" Command="{Binding AgentNavigationBarViewModel.NavigateLogin}"/>
-    </UserControl.InputBindings>
+             Loaded="OnLoaded">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <components:AgentNavigationBarView Grid.Row="0" DataContext="{Binding AgentNavigationBarViewModel}"/>
-
-        <Grid Grid.Row="1">
-            <ScrollViewer 
+        <ScrollViewer 
                 HorizontalScrollBarVisibility="Hidden" 
                 VerticalScrollBarVisibility="Auto" 
                 CanContentScroll="True">
-                <Grid  Margin="20 10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <TextBlock 
+            <Grid  Margin="20 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock 
                             Text="{Binding Name}" 
                             HorizontalAlignment="Center" 
                             FontSize="28"
                             FontWeight="Bold"/>
-                    </Grid>
-                    <Grid Grid.Row="1" HorizontalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" 
+                </Grid>
+                <Grid Grid.Row="1" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" 
                             Text="{Binding StartDate}" 
                             HorizontalAlignment="Center" 
                             FontSize="20"/>
-                        <TextBlock Grid.Column="1" 
+                    <TextBlock Grid.Column="1" 
                             Text=" - " 
                             HorizontalAlignment="Center" 
                             FontSize="20"/>
-                        <TextBlock Grid.Column="2"
+                    <TextBlock Grid.Column="2"
                             Text="{Binding EndDate}" 
                             HorizontalAlignment="Center" 
                             FontSize="20"/>
-                    </Grid>
-                    <Grid Grid.Row="2" HorizontalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" 
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" 
                             Text="$" 
                             HorizontalAlignment="Center" 
                             FontSize="28"
                             Foreground="#8BC34A"
                             FontWeight="Bold"/>
-                        <TextBlock Grid.Column="1" 
+                    <TextBlock Grid.Column="1" 
                             Text="{Binding Price}" 
                             HorizontalAlignment="Center" 
                             FontSize="28"
                             Foreground="#8BC34A"
                             FontWeight="Bold"/>
-                    </Grid>
-                    <Grid Grid.Row="3" HorizontalAlignment="Center" Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <materialDesign:PackIcon 
+                </Grid>
+                <Grid Grid.Row="3" HorizontalAlignment="Center" Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon 
                             Kind="Location" 
                             HorizontalAlignment="Center" 
                             Height="30" 
                             VerticalAlignment="Center" 
                             Width="30"/>
-                        <TextBlock Grid.Column="1" 
+                    <TextBlock Grid.Column="1" 
                                    Text="Start point" 
                                    HorizontalAlignment="Center" 
                                    FontSize="25"
                                    FontWeight="Bold"
                                    Margin="10, 0, 0,0"/>
-                    </Grid>
-                    <Grid Grid.Row="4">
+                </Grid>
+                <Grid Grid.Row="4">
                     <!-- Dinamicki dodati lokacije -->
-                        <ItemsControl ItemsSource="{Binding LocationListItemViewModels}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <local:LocationListItemView Margin="0,10" Width="251"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
-                    <Grid Grid.Row="5" HorizontalAlignment="Center" Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <materialDesign:PackIcon 
+                    <ItemsControl ItemsSource="{Binding LocationListItemViewModels}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:LocationListItemView Margin="0,10" Width="251"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+                <Grid Grid.Row="5" HorizontalAlignment="Center" Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon 
                             Kind="Location"
                             HorizontalAlignment="Center" 
                             Height="30" 
                             VerticalAlignment="Center" 
                             Width="30"/>
-                        <TextBlock Grid.Column="1" 
+                    <TextBlock Grid.Column="1" 
                                    Text="End point" 
                                    HorizontalAlignment="Center" 
                                    FontSize="25"
                                    FontWeight="Bold"
                                    Margin="10, 0, 0,0"/>
 
-                    </Grid>
-                    <Grid Grid.Row="6" Width="400" Height="400" Background="#EBB9B9">
-                        <!-- Mapa -->
-                    </Grid>
-                    <Grid Grid.Row="7"
+                </Grid>
+                <Grid Grid.Row="6" Width="400" Height="400" Background="#EBB9B9">
+                    <!-- Mapa -->
+                </Grid>
+                <Grid Grid.Row="7"
                           HorizontalAlignment="Center"
                           Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <Button  
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Button  
                                 Margin="10,10,10, 10" 
                                 Background="#8AA7F0"
                                 Height="45"
                                 Width="130">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="0"
                                                 CornerRadius="20">
-                                            <ContentPresenter 
+                                        <ContentPresenter 
                                                 HorizontalAlignment="Center" 
                                                 VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon 
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon 
                                         Kind="People" 
                                         Margin="1,12,5,10"/>
-                                    <TextBlock 
+                                <TextBlock 
                                         Text="Passengers" 
                                         VerticalAlignment="Center" 
 
                                         Margin="0,10,10,15" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Column="1">
-                            <Button  
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button  
                                 Margin="0,10,10, 10" 
                                 Background="#C1F08A"
                                 Height="45"
                                 Width="130">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="0"
                                                 CornerRadius="20">
-                                            <ContentPresenter 
+                                        <ContentPresenter 
                                                 HorizontalAlignment="Center" 
                                                 VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon 
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon 
                                         Kind="Pencil" 
                                         Margin="1,12,5,10"/>
-                                    <TextBlock 
+                                <TextBlock 
                                         Text="Edit" 
                                         VerticalAlignment="Center" 
                                         Margin="0,10,10,15" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Column="2">
-                            <Button  
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button  
                                 Margin="0,10,10, 10" 
                                 Background="#EBB9B9"
                                 Height="45"
                                 Width="130"
                                 Command="{Binding DeleteJourney}">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="0"
                                                 CornerRadius="20">
-                                            <ContentPresenter 
+                                        <ContentPresenter 
                                                 HorizontalAlignment="Center" 
                                                 VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon 
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon 
                                         Kind="Trash" 
                                         Margin="1,12,5,10"/>
-                                    <TextBlock 
+                                <TextBlock 
                                         Text="Delete" 
                                         VerticalAlignment="Center" 
                                         Margin="0,10,10,15" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
+                            </StackPanel>
+                        </Button>
                     </Grid>
                 </Grid>
-            </ScrollViewer>
-        </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

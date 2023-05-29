@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
 
@@ -18,10 +19,10 @@ namespace Three_Far_Away.Commands
         }
         public override void Execute(object parameter)
         {
-            if(_journeyCardViewModel.role.Equals(Role.AGENT))
-                _journeyCardViewModel.navigationAgentJourneyPreview.Navigate();
+            if (_journeyCardViewModel.role.Equals(Role.AGENT))
+                EventBus.FireEvent("AgentJourneyPreview", _journeyCardViewModel.JourneyId);
             else
-                _journeyCardViewModel.navigationClientJourneyPreview.Navigate();
+                EventBus.FireEvent("ClientJourneyPreview", _journeyCardViewModel.JourneyId);
         }
     }
 }

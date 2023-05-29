@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.ViewModels;
 
@@ -18,7 +19,7 @@ namespace Three_Far_Away.Commands
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 _agentJourneyPreviewViewModel.journeyService.Delete(_agentJourneyPreviewViewModel.Id);
-                _agentJourneyPreviewViewModel.navigationAgentJourneys.Navigate();
+                EventBus.FireEvent("AgentJourneys");
             }
         }
     }

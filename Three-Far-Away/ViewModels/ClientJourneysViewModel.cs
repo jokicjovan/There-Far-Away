@@ -37,19 +37,8 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        private ClientNavigationBarViewModel _clientNavigationBarViewModel;
-        public ClientNavigationBarViewModel ClientNavigationBarViewModel
+        public ClientJourneysViewModel(IJourneyService journeyService)
         {
-            get { return _clientNavigationBarViewModel; }
-            set
-            {
-                _clientNavigationBarViewModel = value;
-                OnPropertyChanged(nameof(ClientNavigationBarViewModel));
-            }
-        }
-        public ClientJourneysViewModel(IJourneyService journeyService, ClientNavigationBarViewModel clientNavigationBarViewModel)
-        {
-            _clientNavigationBarViewModel = clientNavigationBarViewModel;
             this.journeyService = journeyService;
             Journeys = new ObservableCollection<JourneyForCard>(readCards(0, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());

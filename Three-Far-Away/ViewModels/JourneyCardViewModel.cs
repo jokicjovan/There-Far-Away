@@ -16,14 +16,13 @@ namespace Three_Far_Away.ViewModels
     {
         public readonly AccountStore accountStore;
         public readonly IJourneyService journeyService;
+
 		public Guid JourneyId { get; set; }
         public Role role;
         public ICommand ViewJourneyPreviewCommand { get; }
         public ICommand NavigateEditJourneyCommand { get; }
         public ICommand DeleteJourneyFromCardCommand { get; }
 
-        public readonly INavigationService<AgentJourneyPreviewViewModel> navigationAgentJourneyPreview;
-        public readonly INavigationService<ClientJourneyPreviewViewModel> navigationClientJourneyPreview;
 
         private string _name;
 		public string Name
@@ -93,28 +92,21 @@ namespace Three_Far_Away.ViewModels
             Name = journey.Name;
 			Date = journey.Date;
 			Price = journey.Price;
-            journeyService = App._host.Services.GetService<IJourneyService>();
-            accountStore = App._host.Services.GetService<AccountStore>();
+            journeyService = App.host.Services.GetService<IJourneyService>();
+            accountStore = App.host.Services.GetService<AccountStore>();
             role = accountStore.Role;
 
 			if (accountStore.Role.Equals(Role.AGENT))
 			{
-				navigationAgentJourneyPreview =
-					new NavigationService<AgentJourneyPreviewViewModel>(App._host.Services.GetService<NavigationStore>(),
-						() => new AgentJourneyPreviewViewModel(JourneyId));
-                ViewJourneyPreviewCommand = new ViewJourneyPreviewCommand(this);
                 MenuVisibility = Visibility.Visible;
             }
 			else
 			{
-				navigationClientJourneyPreview =
-					new NavigationService<ClientJourneyPreviewViewModel>(App._host.Services.GetService<NavigationStore>(),
-						() => new ClientJourneyPreviewViewModel(JourneyId));
-				ViewJourneyPreviewCommand = new ViewJourneyPreviewCommand(this);
                 MenuVisibility = Visibility.Hidden;
             }
 
-			DeleteJourneyFromCardCommand = new DeleteJourneyFromCardCommand(this);
+            ViewJourneyPreviewCommand = new ViewJourneyPreviewCommand(this);
+            DeleteJourneyFromCardCommand = new DeleteJourneyFromCardCommand(this);
         }
 	}
 }
