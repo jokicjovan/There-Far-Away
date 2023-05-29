@@ -35,8 +35,8 @@ namespace Three_Far_Away.ViewModels
 
             EventBus.RegisterHandler("AgentJourneyPreview", (object journeyId) =>
             {
-                AgentJourneyPreviewViewModel ajpvm = new AgentJourneyPreviewViewModel((Guid)journeyId);
-                SwitchCurrentViewModel(ajpvm);
+                JourneyPreviewViewModel jpvm = new JourneyPreviewViewModel((Guid)journeyId);
+                SwitchCurrentViewModel(jpvm);
             });
         }
     }

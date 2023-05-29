@@ -38,10 +38,9 @@ namespace Three_Far_Away
                 //viewmodels
                 services.AddTransient<LoginViewModel>();
                 services.AddTransient<AgentMainViewModel>();
-                services.AddTransient<AgentJourneyPreviewViewModel>();
+                services.AddTransient<JourneyPreviewViewModel>();
                 services.AddTransient<JourneysViewModel>();
                 services.AddTransient<ClientMainViewModel>();
-                services.AddTransient<ClientJourneyPreviewViewModel>();
                 services.AddTransient<CreateJourneyViewModel>();
                 services.AddTransient<JourneyCardViewModel>();
                 services.AddTransient<LocationListItemViewModel>();
@@ -78,8 +77,8 @@ namespace Three_Far_Away
         {
             host.Start();
 
-            //loadUsers(_host);
-            //loadJourneys(_host);
+            //loadUsers(host);
+            //loadJourneys(host);
             EventBus.FireEvent("Login");
             MainWindow = host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();

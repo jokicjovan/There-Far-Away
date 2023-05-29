@@ -1,14 +1,17 @@
-﻿<UserControl x:Class="Three_Far_Away.Views.AgentJourneyPreviewView"
+﻿<UserControl x:Class="Three_Far_Away.Views.JourneyPreviewView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Three_Far_Away.Views"
-             xmlns:components="clr-namespace:Three_Far_Away.Components"
+             xmlns:converters="clr-namespace:Three_Far_Away.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="430" d:DesignWidth="750"
              Loaded="OnLoaded">
+    <UserControl.Resources>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <ScrollViewer 
                 HorizontalScrollBarVisibility="Hidden" 
@@ -127,95 +130,154 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Button  
-                                Margin="10,10,10, 10" 
-                                Background="#8AA7F0"
-                                Height="45"
-                                Width="130">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
+                    <Button  
+                        Grid.Column="0"
+                        Margin="10,10,10, 10" 
+                        Background="#8AA7F0"
+                        Height="45"
+                        Width="130"
+                        Visibility="{Binding IsAgent, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="0"
                                                 CornerRadius="20">
-                                        <ContentPresenter 
+                                    <ContentPresenter 
                                                 HorizontalAlignment="Center" 
                                                 VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon 
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon 
                                         Kind="People" 
                                         Margin="1,12,5,10"/>
-                                <TextBlock 
+                            <TextBlock 
                                         Text="Passengers" 
                                         VerticalAlignment="Center" 
 
                                         Margin="0,10,10,15" />
-                            </StackPanel>
-                        </Button>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Button  
-                                Margin="0,10,10, 10" 
-                                Background="#C1F08A"
-                                Height="45"
-                                Width="130">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
+                        </StackPanel>
+                    </Button>
+                    <Button  
+                        Grid.Column="1"
+                        Margin="0,10,10, 10" 
+                        Background="#C1F08A"
+                        Height="45"
+                        Width="130"
+                        Visibility="{Binding IsAgent, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="0"
                                                 CornerRadius="20">
-                                        <ContentPresenter 
+                                    <ContentPresenter 
                                                 HorizontalAlignment="Center" 
                                                 VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon 
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon 
                                         Kind="Pencil" 
                                         Margin="1,12,5,10"/>
-                                <TextBlock 
+                            <TextBlock 
                                         Text="Edit" 
                                         VerticalAlignment="Center" 
                                         Margin="0,10,10,15" />
-                            </StackPanel>
-                        </Button>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <Button  
-                                Margin="0,10,10, 10" 
-                                Background="#EBB9B9"
-                                Height="45"
-                                Width="130"
-                                Command="{Binding DeleteJourney}">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
+                        </StackPanel>
+                    </Button>
+                    <Button 
+                        Grid.Column="2"
+                        Margin="0,10,10, 10" 
+                        Background="#EBB9B9"
+                        Height="45"
+                        Width="130"
+                        Command="{Binding DeleteJourney}"
+                        Visibility="{Binding IsAgent, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="0"
                                                 CornerRadius="20">
-                                        <ContentPresenter 
+                                    <ContentPresenter 
                                                 HorizontalAlignment="Center" 
                                                 VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon 
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon 
                                         Kind="Trash" 
                                         Margin="1,12,5,10"/>
-                                <TextBlock 
+                            <TextBlock 
                                         Text="Delete" 
                                         VerticalAlignment="Center" 
                                         Margin="0,10,10,15" />
-                            </StackPanel>
-                        </Button>
-                    </Grid>
+                        </StackPanel>
+                    </Button>
+                    <Button  
+                        Grid.Column="0"
+                        Margin="10,10,10, 10" 
+                        Background="#8AA7F0"
+                        Height="45"
+                        Width="130"
+                        Visibility="{Binding IsAgent, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="0"
+                                            CornerRadius="20">
+                                    <ContentPresenter 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon 
+                                    Kind="Dollar" 
+                                    Margin="1,12,5,10"/>
+                            <TextBlock 
+                                    Text="Buy" 
+                                    VerticalAlignment="Center" 
+
+                                    Margin="0,10,10,15" />
+                        </StackPanel>
+                    </Button>
+                    <Button   
+                        Grid.Column="1"
+                        Margin="0,10,10, 10" 
+                        Background="#C1F08A"
+                        Height="45"
+                        Width="130"
+                        Visibility="{Binding IsAgent, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="0"
+                                                CornerRadius="20">
+                                    <ContentPresenter 
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon 
+                                        Kind="CalendarPlus" 
+                                        Margin="1,12,5,10"/>
+                            <TextBlock 
+                                        Text="Reserve" 
+                                        VerticalAlignment="Center" 
+                                        Margin="0,10,10,15" />
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </Grid>
         </ScrollViewer>
