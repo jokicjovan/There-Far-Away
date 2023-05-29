@@ -15,17 +15,34 @@
         <KeyBinding Modifiers="Ctrl" Key="F4" Command="{Binding AgentNavigationBarViewModel.NavigateLogin}"/>
     </UserControl.InputBindings>
     
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <components:AgentNavigationBarView
-            Grid.Row="0" DataContext="{Binding AgentNavigationBarViewModel}"/>
+    <!-- <Grid> -->
+    <!--     <Grid.ColumnDefinitions> -->
+    <!--         <ColumnDefinition Width="auto"/> -->
+    <!--         <ColumnDefinition Width="*"/> -->
+    <!--     </Grid.ColumnDefinitions> -->
+    <!--      -->
+    <!--     ~1~ <components:AgentNavigationBarView @1@ -->
+    <!--         ~1~ Grid.Row="0" DataContext="{Binding AgentNavigationBarViewModel}"/> @1@ -->
+    <!--     <components:AgentHamburgerNavigationBarView -->
+    <!--         Grid.Column="0" -->
+    <!--         DataContext="{Binding AgentHamburgerNavigationBarViewModel}"/> -->
+    <!--     <ContentControl Grid.Column="1" -->
+    <!--                     Margin="20 10" -->
+    <!--                         Content="{Binding CurrentViewModel}"/> -->
+    <!-- </Grid> -->
 
-        <ContentControl Grid.Row="1"
-                            Margin="20 10"
-                            Content="{Binding CurrentViewModel}"/>
+    <!-- <Canvas Width="750" Height="430"> -->
+    <!--     <ContentControl Canvas.Left="50"  -->
+    <!--                     Margin="20 10" -->
+    <!--                     Content="{Binding CurrentViewModel}"/> -->
+    <!--     <components:AgentHamburgerNavigationBarView -->
+    <!--         Canvas.Left="0" -->
+    <!--         Height="430" -->
+    <!--         DataContext="{Binding AgentHamburgerNavigationBarViewModel}"/> -->
+    <!-- </Canvas> -->
+    <Grid Width="750" Height="430">
+        <ContentControl Margin="55 0 15 40" Content="{Binding CurrentViewModel}"/>
+        <components:AgentHamburgerNavigationBarView Height="430" DataContext="{Binding AgentHamburgerNavigationBarViewModel}"/>
     </Grid>
+
 </UserControl>

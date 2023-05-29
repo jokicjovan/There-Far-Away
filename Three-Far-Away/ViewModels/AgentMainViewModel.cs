@@ -18,9 +18,24 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        public AgentMainViewModel(JourneysViewModel agentJourneysViewModel, AgentNavigationBarViewModel agentNavigationBarViewModel)
+        private AgentHamburgerNavigationBarViewModel _agentHamburgerNavigationBarViewModel;
+        public AgentHamburgerNavigationBarViewModel AgentHamburgerNavigationBarViewModel
+        {
+            get
+            {
+                return _agentHamburgerNavigationBarViewModel;
+            }
+            set
+            {
+                _agentHamburgerNavigationBarViewModel = value;
+                OnPropertyChanged(nameof(AgentHamburgerNavigationBarViewModel));
+            }
+        }
+
+        public AgentMainViewModel(JourneysViewModel agentJourneysViewModel, AgentNavigationBarViewModel agentNavigationBarViewModel, AgentHamburgerNavigationBarViewModel agentHamburgerNavigationBarViewModel)
         {
             _agentNavigationBarViewModel = agentNavigationBarViewModel;
+            _agentHamburgerNavigationBarViewModel = agentHamburgerNavigationBarViewModel;
             SwitchCurrentViewModel(agentJourneysViewModel);
             RegisterHandlers();
         }

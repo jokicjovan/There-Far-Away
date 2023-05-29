@@ -34,6 +34,7 @@ namespace Three_Far_Away
 
                 services.AddTransient<AgentNavigationBarViewModel>();
                 services.AddTransient<ClientNavigationBarViewModel>();
+                services.AddTransient<AgentHamburgerNavigationBarViewModel>();
 
                 //viewmodels
                 services.AddTransient<LoginViewModel>();
