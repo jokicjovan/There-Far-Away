@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Windows;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
@@ -10,16 +12,19 @@ using Three_Far_Away.Events;
 using Three_Far_Away.Models;
 using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Services.Interfaces;
+using Three_Far_Away.Stores;
 using Three_Far_Away.Views;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class AgentJourneysViewModel : ViewModelBase, INotifyPropertyChanged
+    public class JourneysViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public readonly IJourneyService journeyService;
         public int page;
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
+        public readonly AccountStore accountStore;
+
 
 
         private ObservableCollection<JourneyForCard> journeys;
@@ -44,7 +49,21 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        public AgentJourneysViewModel(IJourneyService journeyService)
+        private Visibility _addJourneyVisibility;
+        public Visibility AddJourneyVisibility
+        {
+            get
+            {
+                return _addJourneyVisibility;
+            }
+            set
+            {
+                _addJourneyVisibility = value;
+                OnPropertyChanged(nameof(AddJourneyVisibility));
+            }
+        }
+
+        public JourneysViewModel(IJourneyService journeyService)
         {
             page = 0;
             this.journeyService = journeyService;
@@ -52,6 +71,17 @@ namespace Three_Far_Away.ViewModels
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
+            accountStore = App.host.Services.GetService<AccountStore>();
+
+            if (accountStore.Role.Equals(Role.AGENT))
+            {
+                AddJourneyVisibility = Visibility.Visible;
+            }
+            else
+            {
+                AddJourneyVisibility = Visibility.Hidden;
+            }
+
         }
 
         private List<JourneyForCard> readCards(int page, int pageSize)

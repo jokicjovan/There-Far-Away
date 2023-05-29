@@ -8,22 +8,22 @@ namespace Three_Far_Away.Commands
 {
     public class NextPageJourniesCommand : CommandBase
     {
-        private readonly AgentJourneysViewModel _createJourneyViewModel;
-        public NextPageJourniesCommand(AgentJourneysViewModel createJourneyViewModel)
+        private readonly JourneysViewModel _journeysViewModel;
+        public NextPageJourniesCommand(JourneysViewModel journeysViewModel)
         {
-            _createJourneyViewModel = createJourneyViewModel;
+            _journeysViewModel = journeysViewModel;
 
         }
         public override void Execute(object parameter)
         {
-            List<Journey> journeys = _createJourneyViewModel.journeyService.ReadPage(_createJourneyViewModel.page + 1, 4);
+            List<Journey> journeys = _journeysViewModel.journeyService.ReadPage(_journeysViewModel.page + 1, 4);
             if (journeys.Count == 4)
-                _createJourneyViewModel.page++;
+                _journeysViewModel.page++;
             List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
             foreach (var journey in journeys)
                 journeysForCard.Add(new JourneyForCard(journey));
-            this._createJourneyViewModel.Journeys = new ObservableCollection<JourneyForCard>(journeysForCard);
-            this._createJourneyViewModel.JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(this._createJourneyViewModel.CreateJourneyCardViews());
+            this._journeysViewModel.Journeys = new ObservableCollection<JourneyForCard>(journeysForCard);
+            this._journeysViewModel.JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(this._journeysViewModel.CreateJourneyCardViews());
 
         }
     }

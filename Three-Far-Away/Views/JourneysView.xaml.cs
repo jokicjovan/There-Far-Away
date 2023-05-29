@@ -7,9 +7,9 @@ namespace Three_Far_Away.Views
     /// <summary>
     /// Interaction logic for AgentJourneysView.xaml
     /// </summary>
-    public partial class AgentJourneysView : UserControl
+    public partial class JourneysView : UserControl
     {
-        public AgentJourneysView()
+        public JourneysView()
         {
             InitializeComponent();
         }

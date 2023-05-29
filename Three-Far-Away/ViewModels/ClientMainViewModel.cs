@@ -19,10 +19,10 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        public ClientMainViewModel(ClientJourneysViewModel clientJourneysViewModel, ClientNavigationBarViewModel clientNavigationBarViewModel)
+        public ClientMainViewModel(JourneysViewModel agentJourneysViewModel, ClientNavigationBarViewModel clientNavigationBarViewModel)
         {
             _clientNavigationBarViewModel = clientNavigationBarViewModel;
-            SwitchCurrentViewModel(clientJourneysViewModel);
+            SwitchCurrentViewModel(agentJourneysViewModel);
             RegisterHandlers();
         }
 
@@ -30,7 +30,7 @@ namespace Three_Far_Away.ViewModels
         {
             EventBus.RegisterHandler("ClientJourneys", () =>
             {
-                ClientJourneysViewModel Cjvm = App.host.Services.GetRequiredService<ClientJourneysViewModel>();
+                JourneysViewModel Cjvm = App.host.Services.GetRequiredService<JourneysViewModel>();
                 SwitchCurrentViewModel(Cjvm);
             });
 
