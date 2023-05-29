@@ -97,8 +97,8 @@
                     VerticalAlignment="Bottom"
                     Grid.Row="1" 
                     Foreground="White" 
-                    Width="74" Height="18" 
-                    FontSize="8" 
+                    Width="60" Height="21" 
+                    FontSize="10" 
                     Margin="10" 
                     Command="{Binding ViewJourneyPreviewCommand}"/>
             </Grid>

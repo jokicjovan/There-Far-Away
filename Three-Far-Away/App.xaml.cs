@@ -34,6 +34,8 @@ namespace Three_Far_Away
 
                 services.AddTransient<AgentNavigationBarViewModel>();
                 services.AddTransient<ClientNavigationBarViewModel>();
+                services.AddTransient<AgentHamburgerNavigationBarViewModel>();
+                services.AddTransient<ClientHamburgerNavigationBarViewModel>();
 
                 //viewmodels
                 services.AddTransient<LoginViewModel>();
@@ -97,12 +99,12 @@ namespace Three_Far_Away
             User user = new User();
             user.Name = "Petar";
             user.Surname = "Petrovic";
-            user.Role = Role.CLIENT;
+            user.Role = Role.AGENT;
             user = App.host.Services.GetService<IUserService>().Create(user);
             Credential credential = new Credential();
             credential.User = user;
-            credential.Username = "asdasdasd";
-            credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasdasd");
+            credential.Username = "asdasd";
+            credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasd");
             credential = App.host.Services.GetService<ICredentialService>().Create(credential);
 
             User user2 = new User();
@@ -111,7 +113,7 @@ namespace Three_Far_Away
             user2.Role = Role.CLIENT;
             user2 = App.host.Services.GetService<IUserService>().Create(user2);
             Credential credential2 = new Credential();
-            credential2.User = user;
+            credential2.User = user2;
             credential2.Username = "dsadsa";
             credential2.Password = BCrypt.Net.BCrypt.HashPassword("dsadsa");
             credential2 = App.host.Services.GetService<ICredentialService>().Create(credential2);

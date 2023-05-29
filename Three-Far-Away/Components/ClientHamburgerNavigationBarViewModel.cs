@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Three_Far_Away.Commands;
+using Three_Far_Away.Stores;
+using Three_Far_Away.ViewModels;
+
+namespace Three_Far_Away.Components
+{
+    public class ClientHamburgerNavigationBarViewModel : ViewModelBase, IHamburgerMenu
+    {
+        public ICommand NavigateJourneys { get; }
+        public ICommand NavigateLogin { get; }
+        public ICommand ToggleMenuCommand { get; }
+
+
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private double _menuWidth;
+        public double MenuWidth
+        {
+            get { return _menuWidth; }
+            set
+            {
+                if (_menuWidth != value)
+                {
+                    _menuWidth = value;
+                    OnPropertyChanged(nameof(MenuWidth));
+                }
+            }
+        }
+        private bool isMenuOpen;
+        public bool IsMenuOpen
+        {
+            get { return isMenuOpen; }
+            set { isMenuOpen = value; OnPropertyChanged(nameof(IsMenuOpen)); }
+        }
+
+        public ClientHamburgerNavigationBarViewModel(AccountStore accountStore)
+        {
+            _name = accountStore.Name;
+            NavigateJourneys = new FireEventCommand("ClientJourneys");
+            NavigateLogin = new FireEventCommand("BackToLogin");
+            ToggleMenuCommand = new HamburgerMenuCommand(this);
+            isMenuOpen = false;
+        }
+    }
+}
