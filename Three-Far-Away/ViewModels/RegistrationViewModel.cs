@@ -10,31 +10,28 @@ using Three_Far_Away.Stores;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class LoginViewModel : ViewModelBase, INotifyDataErrorInfo
+    public class RegistrationViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         #region services
         public readonly ICredentialService credentialService;
-        #endregion
-
-        #region stores
-        public readonly AccountStore accountStore;
+        public readonly IUserService userService;
         #endregion
 
         #region properties
         private string _username;
         public string Username
         {
-            get 
+            get
             {
                 return _username;
             }
-            set 
+            set
             {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
 
-                ClearErrors(nameof(Username));;
-                if (Username.Length < 6) 
+                ClearErrors(nameof(Username)); ;
+                if (Username.Length < 6)
                 {
                     AddError("Username cannot be shorter than 6 characters!", nameof(Username));
                 }
@@ -46,15 +43,15 @@ namespace Three_Far_Away.ViewModels
         }
 
         private string _password;
-        public string Password 
+        public string Password
         {
-            get 
+            get
             {
                 return _password;
             }
-            set 
+            set
             {
-                _password = value; 
+                _password = value;
                 OnPropertyChanged(nameof(Password));
 
                 ClearErrors(nameof(Password)); ;
@@ -66,17 +63,65 @@ namespace Three_Far_Away.ViewModels
                 {
                     AddError("Password cannot be longer than 20 characters!", nameof(Password));
                 }
-            } 
+            }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+
+                ClearErrors(nameof(Name)); ;
+                if (Name.Length < 3)
+                {
+                    AddError("Name cannot be shorter than 3 characters!", nameof(Name));
+                }
+                else if (Name.Length > 50)
+                {
+                    AddError("Name cannot be longer than 50 characters!", nameof(Name));
+                }
+            }
+        }
+
+        private string _surname;
+        public string Surname
+        {
+            get
+            {
+                return _surname;
+            }
+            set
+            {
+                _surname = value;
+                OnPropertyChanged(nameof(Surname));
+
+                ClearErrors(nameof(Surname)); ;
+                if (Surname.Length < 3)
+                {
+                    AddError("Surname cannot be shorter than 3 characters!", nameof(Surname));
+                }
+                else if (Surname.Length > 50)
+                {
+                    AddError("Surname cannot be longer than 50 characters!", nameof(Surname));
+                }
+            }
         }
 
         private bool _isLoading;
         public bool IsLoading
         {
-            get 
+            get
             {
                 return _isLoading;
             }
-            set 
+            set
             {
                 _isLoading = value;
                 OnPropertyChanged(nameof(IsLoading));
@@ -86,7 +131,7 @@ namespace Three_Far_Away.ViewModels
 
         #region commands
         public ICommand SubmitCommand { get; }
-        public ICommand RegisterCommand { get; }
+        public ICommand LoginCommand { get; }
         #endregion
 
         #region errors
@@ -95,13 +140,13 @@ namespace Three_Far_Away.ViewModels
         public bool HasErrors => _propertyNameToErrorsDictionary.Any();
 
         private string _errorMessage;
-        public string ErrorMessage 
+        public string ErrorMessage
         {
-            get 
+            get
             {
                 return _errorMessage;
             }
-            set 
+            set
             {
                 _errorMessage = value;
                 OnPropertyChanged(nameof(ErrorMessage));
@@ -111,12 +156,12 @@ namespace Three_Far_Away.ViewModels
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
         #endregion
 
-        public LoginViewModel(ICredentialService credentialService, AccountStore accountStore)
+        public RegistrationViewModel(ICredentialService credentialService, IUserService userService)
         {
-            this.accountStore = accountStore;
             this.credentialService = credentialService;
-            SubmitCommand = new LoginCommand(this);
-            RegisterCommand = new FireEventCommand("GoToRegister");
+            this.userService = userService;
+            SubmitCommand = new RegisterCommand(this);
+            LoginCommand = new FireEventCommand("GoToLogin");
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
         }
 
@@ -125,19 +170,20 @@ namespace Three_Far_Away.ViewModels
             return _propertyNameToErrorsDictionary.GetValueOrDefault(propertyName, new List<string>());
         }
 
-        private void ClearErrors(string propertyName) 
+        private void ClearErrors(string propertyName)
         {
             _propertyNameToErrorsDictionary.Remove(propertyName);
             OnErrorsChanged(propertyName);
         }
 
-        private void OnErrorsChanged(string propertyName) 
+        private void OnErrorsChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        private void AddError(string errorMessage, string propertyName) { 
-            if(!_propertyNameToErrorsDictionary.ContainsKey(propertyName))
+        private void AddError(string errorMessage, string propertyName)
+        {
+            if (!_propertyNameToErrorsDictionary.ContainsKey(propertyName))
             {
                 _propertyNameToErrorsDictionary.Add(propertyName, new List<string>());
             }

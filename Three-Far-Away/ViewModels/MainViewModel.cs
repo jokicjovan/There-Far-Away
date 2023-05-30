@@ -26,10 +26,16 @@ namespace Three_Far_Away.ViewModels
                 SwitchCurrentViewModel(amvm);
             });
 
-            EventBus.RegisterHandler("BackToLogin", () =>
+            EventBus.RegisterHandler("GoToLogin", () =>
             {
                 LoginViewModel lvm = App.host.Services.GetRequiredService<LoginViewModel>();
                 SwitchCurrentViewModel(lvm);
+            });
+
+            EventBus.RegisterHandler("GoToRegister", () =>
+            {
+                RegistrationViewModel rvm = App.host.Services.GetRequiredService<RegistrationViewModel>();
+                SwitchCurrentViewModel(rvm);
             });
         }
     }
