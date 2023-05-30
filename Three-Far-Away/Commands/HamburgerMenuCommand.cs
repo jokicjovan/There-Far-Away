@@ -14,17 +14,23 @@ namespace Three_Far_Away.Commands
     public class HamburgerMenuCommand : CommandBase
     {
         private IHamburgerMenu _hamburgerNavigationBarViewModel;
+        private bool _canExecute = true;
         public HamburgerMenuCommand(IHamburgerMenu hamburgerNavigationBarViewModel)
         {
             _hamburgerNavigationBarViewModel = hamburgerNavigationBarViewModel;
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return _canExecute;
+        }
+
         public override void Execute(object parameter)
         {
             _hamburgerNavigationBarViewModel.IsMenuOpen = !_hamburgerNavigationBarViewModel.IsMenuOpen;
-
+            _canExecute = false;
             const double targetWidth = 150;
-            const int animationDurationMilliseconds = 100;
+            const int animationDurationMilliseconds = 200;
             const int animationSteps = 20;
 
             double stepWidth = targetWidth / animationSteps;
@@ -45,7 +51,7 @@ namespace Three_Far_Away.Commands
                     {
                         currentWidth = targetMenuWidth;
                         timer.Stop();
-
+                        _canExecute = true;
                     }
                 }
                 else
@@ -55,6 +61,7 @@ namespace Three_Far_Away.Commands
                     {
                         currentWidth = targetMenuWidth;
                         timer.Stop();
+                        _canExecute = true;
                     }
                 }
 
