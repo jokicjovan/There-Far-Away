@@ -31,5 +31,11 @@ namespace Three_Far_Away.Models
             Longitude = longitude;
             Latitude = latitude;
         }
+        public Location(string address, double longitude, double latitude)
+        {
+            Address = address;
+            Longitude = longitude;
+            Latitude = latitude;
+        }
     }
 }

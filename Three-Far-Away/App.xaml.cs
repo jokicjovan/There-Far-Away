@@ -15,6 +15,8 @@ using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Models;
 using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using Credential = Three_Far_Away.Models.Credential;
+using Microsoft.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Three_Far_Away
 {
@@ -58,6 +60,14 @@ namespace Three_Far_Away
                 services.AddSingleton<Func<JourneyCardViewModel>>((s) => () => s.GetRequiredService<JourneyCardViewModel>());
                 services.AddSingleton<NavigationService<JourneyCardViewModel>>();
 
+                services.AddTransient<CreateJourneyMapViewModel>();
+                services.AddSingleton<Func<CreateJourneyMapViewModel>>((s) => () => s.GetRequiredService<CreateJourneyMapViewModel>());
+                services.AddSingleton<NavigationService<CreateJourneyMapViewModel>>();
+
+                services.AddTransient<CreateJourneyAttractionsViewModel>();
+                services.AddSingleton<Func<CreateJourneyAttractionsViewModel>>((s) => () => s.GetRequiredService<CreateJourneyAttractionsViewModel>());
+                services.AddSingleton<NavigationService<CreateJourneyAttractionsViewModel>>();
+
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
                 {
@@ -85,6 +95,10 @@ namespace Three_Far_Away
 
             }).Build();
         }
+        public void MapWithPushpins_TouchDown()
+        {
+            MessageBox.Show("1".ToString());
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -92,7 +106,7 @@ namespace Three_Far_Away
 
             //loadData(_host);
             //loadJourney(_host);
-            _host.Services.GetRequiredService<NavigationService<LoginViewModel>>().Navigate();
+            _host.Services.GetRequiredService<NavigationService<CreateJourneyMapViewModel>>().Navigate();
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
