@@ -15,6 +15,9 @@
         WindowStartupLocation="CenterScreen"
         Background="FloralWhite"
         FontSize="14">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type vms:LoginViewModel}">
