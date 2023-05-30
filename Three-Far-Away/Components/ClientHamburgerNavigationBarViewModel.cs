@@ -55,7 +55,7 @@ namespace Three_Far_Away.Components
         {
             _name = accountStore.Name;
             NavigateJourneys = new FireEventCommand("ClientJourneys");
-            NavigateLogin = new FireEventCommand("BackToLogin");
+            NavigateLogin = new FireEventCommand("GoToLogin");
             ToggleMenuCommand = new HamburgerMenuCommand(this);
             isMenuOpen = false;
         }

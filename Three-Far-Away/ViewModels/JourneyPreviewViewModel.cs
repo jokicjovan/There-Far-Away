@@ -33,17 +33,6 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        private AgentNavigationBarViewModel _agentNavigationBarViewModel;
-        public AgentNavigationBarViewModel AgentNavigationBarViewModel
-        {
-            get { return _agentNavigationBarViewModel; }
-            set
-            {
-                _agentNavigationBarViewModel = value;
-                OnPropertyChanged(nameof(AgentNavigationBarViewModel));
-            }
-        }
-
         private Guid _id;
         public Guid Id
         {
@@ -135,7 +124,6 @@ namespace Three_Far_Away.ViewModels
         public JourneyPreviewViewModel(Guid id)
         {
             AccountStore accountStore = App.host.Services.GetService<AccountStore>();
-            AgentNavigationBarViewModel = App.host.Services.GetService<AgentNavigationBarViewModel>();
             journeyService = App.host.Services.GetService<IJourneyService>();
             Journey journey = journeyService.GetJourneyWithAttractions(id);
             Id = journey.Id;

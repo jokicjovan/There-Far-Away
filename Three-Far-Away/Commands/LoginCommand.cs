@@ -17,7 +17,8 @@ namespace Three_Far_Away.Commands
         public override bool CanExecute(object parameter)
         {
             return !string.IsNullOrEmpty(_loginViewModel.Username) && !string.IsNullOrEmpty(_loginViewModel.Password) &&
-                   !(_loginViewModel.Username.Length < 6) && !(_loginViewModel.Password.Length < 6) &&
+                   !(_loginViewModel.Username.Length < 6) && !(_loginViewModel.Username.Length > 20) &&
+                   !(_loginViewModel.Password.Length < 6) && !(_loginViewModel.Password.Length > 20) &&
                    base.CanExecute(parameter);
         }
 

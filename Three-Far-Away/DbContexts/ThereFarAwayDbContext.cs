@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -26,7 +27,9 @@ namespace Three_Far_Away.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Credential>()
+                .HasIndex(c => new { c.Username })
+                .IsUnique(true);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Three_Far_Away.Components
         {
             _name = accountStore.Name;
             NavigateJourneys = new FireEventCommand("AgentJourneys");
-            NavigateLogin = new FireEventCommand("BackToLogin");
+            NavigateLogin = new FireEventCommand("GoToLogin");
         }
     }
 }
