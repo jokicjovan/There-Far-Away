@@ -67,7 +67,8 @@
                         Text="Password"/>
                     <TextBox
                         Grid.Row="1"
-                        Text = "{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                        Text = "{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                        FontFamily="{StaticResource Password}"/>
                 </Grid>
 
                 <Grid Grid.Row="2" Margin="0 30 0 0">

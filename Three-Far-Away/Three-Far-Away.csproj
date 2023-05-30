@@ -13,10 +13,14 @@
     <None Remove="Assets\Login.png" />
     <None Remove="Assets\logo.png" />
     <None Remove="Assets\Register.png" />
+    <None Remove="Fonts\password.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\logo.ico" />
+    <Content Include="Fonts\password.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

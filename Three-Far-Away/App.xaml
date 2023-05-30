@@ -10,6 +10,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.LightGreen.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Yellow.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="Password">./Fonts/password.ttf#Password</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
