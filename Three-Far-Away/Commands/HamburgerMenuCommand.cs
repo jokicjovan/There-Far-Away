@@ -30,7 +30,7 @@ namespace Three_Far_Away.Commands
             _hamburgerNavigationBarViewModel.IsMenuOpen = !_hamburgerNavigationBarViewModel.IsMenuOpen;
             _canExecute = false;
             const double targetWidth = 150;
-            const int animationDurationMilliseconds = 100;
+            const int animationDurationMilliseconds = 200;
             const int animationSteps = 20;
 
             double stepWidth = targetWidth / animationSteps;
