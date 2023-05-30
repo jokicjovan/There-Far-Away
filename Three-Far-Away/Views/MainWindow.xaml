@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Three_Far_Away" 
         xmlns:views="clr-namespace:Three_Far_Away.Views"
-        xmlns:vms="clr-namespace:Three_Far_Away.ViewModels"
+        xmlns:vms="clr-namespace:Three_Far_Away.ViewModels" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="ThereFarAway" 
         Height="430" 
@@ -44,6 +45,10 @@
                 <views:JourneyCardView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vms:JourneyPassengersViewModel}">
+                <views:JourneyPassengersView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:LocationListItemViewModel}">
                 <views:LocationListItemView/>
             </DataTemplate>
@@ -54,6 +59,8 @@
 
         </Grid.Resources>
 
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <materialDesign:DialogHost CloseOnClickAway="True">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>

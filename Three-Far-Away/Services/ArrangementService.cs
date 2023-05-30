@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Three_Far_Away.Models;
 using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Services.Interfaces;
@@ -43,5 +40,10 @@ namespace Three_Far_Away.Services
             return _arrangementRepository.Delete(id);
         }
         #endregion
+
+        public IEnumerable<Arrangement> GetJourneyArrangements(Guid journeyId)
+        {
+            return _arrangementRepository.FindJourneyArrangements(journeyId);
+        }
     }
 }
