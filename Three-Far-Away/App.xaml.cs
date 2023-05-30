@@ -14,6 +14,7 @@ using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Models;
 using Three_Far_Away.Components;
 using Three_Far_Away.Infrastructure;
+using System;
 
 namespace Three_Far_Away
 {
@@ -80,8 +81,8 @@ namespace Three_Far_Away
         {
             host.Start();
 
-            //loadUsers(host);
-            //loadJourneys(host);
+            //loadArrangements(loadUsers(), loadJourneys());
+
             EventBus.FireEvent("Login");
             MainWindow = host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
@@ -96,14 +97,14 @@ namespace Three_Far_Away
             base.OnExit(e);
         }
 
-        private void loadUsers(IHost host) {
-            User user = new User();
-            user.Name = "Petar";
-            user.Surname = "Petrovic";
-            user.Role = Role.AGENT;
-            user = App.host.Services.GetService<IUserService>().Create(user);
+        private User loadUsers() {
+            User user1 = new User();
+            user1.Name = "Petar";
+            user1.Surname = "Petrovic";
+            user1.Role = Role.AGENT;
+            user1 = App.host.Services.GetService<IUserService>().Create(user1);
             Credential credential = new Credential();
-            credential.User = user;
+            credential.User = user1;
             credential.Username = "asdasd";
             credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasd");
             credential = App.host.Services.GetService<ICredentialService>().Create(credential);
@@ -118,22 +119,24 @@ namespace Three_Far_Away
             credential2.Username = "dsadsa";
             credential2.Password = BCrypt.Net.BCrypt.HashPassword("dsadsa");
             credential2 = App.host.Services.GetService<ICredentialService>().Create(credential2);
+
+            return user1;
         }
 
-        private void loadJourneys(IHost host)
+        private Journey loadJourneys()
         {
             Location location = new Location();
             location.Address = "Partizanska 2";
             location.Latitude = 14.44;
             location.Longitude = 12.22;
-            
+
             Attraction attraction = new Attraction();
             attraction.Name = "Atrakcija";
             attraction.Description = "opis";
             attraction.Type = AttractionType.ATTRACTION;
             attraction.Location = location;
             attraction.Image = "slika";
-            
+
             Journey journey = new Journey();
             journey.Name = "ime";
             journey.StartLocation = location;
@@ -153,7 +156,17 @@ namespace Three_Far_Away
             Journey journey5 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));
             Journey journey6 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));
 
-            
+
+            return journey1;
+        }
+
+        private void loadArrangements(User user, Journey journey){
+            Arrangement arrangement = new Arrangement();
+            arrangement.User = user;
+            arrangement.Journey = journey;
+            arrangement.Status = ArrangementStatus.RESERVED;
+            arrangement.DateArranged = DateTime.Now;
+            arrangement = App.host.Services.GetService<IArrangementService>().Create(arrangement);
         }
     }
 }

@@ -17,6 +17,9 @@ namespace Three_Far_Away.Models
         [Column("status")]
         public ArrangementStatus Status { get; set; }
 
+        [Column("date_arranged")]
+        public DateTime DateArranged { get; set; }
+
         [Column("user")]
         public User User { get; set; }
 
@@ -25,10 +28,11 @@ namespace Three_Far_Away.Models
 
         public Arrangement() { }
 
-        public Arrangement(Guid id, ArrangementStatus status, User user, Journey journey)
+        public Arrangement(Guid id, ArrangementStatus status, DateTime dateArranged, User user, Journey journey)
         {
             Id = id;
             Status = status;
+            DateArranged = dateArranged;
             User = user;
             Journey = journey;
         }

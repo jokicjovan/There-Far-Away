@@ -17,7 +17,6 @@
                 HorizontalScrollBarVisibility="Hidden" 
                 VerticalScrollBarVisibility="Auto" 
                 CanContentScroll="True">
-
             <Grid  Margin="20 10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -137,6 +136,7 @@
                         Background="#8AA7F0"
                         Height="45"
                         Width="130"
+                        Command="{Binding ShowJourneyPassengers}"
                         Visibility="{Binding IsAgent, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">

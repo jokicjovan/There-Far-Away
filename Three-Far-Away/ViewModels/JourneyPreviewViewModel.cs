@@ -119,7 +119,11 @@ namespace Three_Far_Away.ViewModels
 
         #endregion
 
+
+        #region commands
         public ICommand DeleteJourney { get; }
+        public ICommand ShowJourneyPassengers { get; }
+        #endregion
 
         public JourneyPreviewViewModel(Guid id)
         {
@@ -137,6 +141,7 @@ namespace Three_Far_Away.ViewModels
             {
                 _isAgent = true;
                 DeleteJourney = new DeleteJourneyFromPreviewCommand(this);
+                ShowJourneyPassengers = new ShowJourneyPassengersCommand(this);
             }
             else {
                 _isAgent = false;
