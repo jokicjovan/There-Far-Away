@@ -120,7 +120,7 @@ namespace Three_Far_Away
             credential2.Password = BCrypt.Net.BCrypt.HashPassword("dsadsa");
             credential2 = App.host.Services.GetService<ICredentialService>().Create(credential2);
 
-            return user1;
+            return user2;
         }
 
         private Journey loadJourneys()
