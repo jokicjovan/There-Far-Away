@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Three_Far_Away.Models;
+using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Views
 {
@@ -23,6 +25,29 @@ namespace Three_Far_Away.Views
         public CreateJourneyAttractionsView()
         {
             InitializeComponent();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CreateJourneyAttractionsViewModel vm = (CreateJourneyAttractionsViewModel)this.DataContext;
+            List<Attraction> attractions= listBoxAll.SelectedItems.OfType<Attraction>().ToList();
+            vm.Locations.Clear();
+            foreach (Attraction attraction in attractions)
+            {
+                vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "",false));
+            }
+            
+        }
+
+        private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            CreateJourneyAttractionsViewModel vm = (CreateJourneyAttractionsViewModel)this.DataContext;
+            List<Attraction> attractions = listBoxSelected.SelectedItems.OfType<Attraction>().ToList();
+            vm.Locations.Clear();
+            foreach (Attraction attraction in attractions)
+            {
+                vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "", false));
+            }
         }
     }
 }

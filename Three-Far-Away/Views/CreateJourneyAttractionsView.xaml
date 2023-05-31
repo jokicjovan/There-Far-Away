@@ -25,7 +25,9 @@
                 dd:DragDrop.IsDropTarget="True"
                 dd:DragDrop.ShowAlwaysDropTargetAdorner="True"
                 dd:DragDrop.UseDefaultDragAdorner="True"
+                x:Name="listBoxAll"
                 SelectionMode="Extended"
+                SelectionChanged="ListBox_SelectionChanged"
                 BorderBrush="LightGreen"
                  BorderThickness="2">
             <ListBox.Resources>
@@ -38,7 +40,6 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <!-- Modify the control template as needed, removing or modifying the IsPressed trigger -->
                                 <Border Margin="3" Background="LightGreen" Padding="7" CornerRadius="5">
                                     <ContentPresenter HorizontalAlignment="Left"
                                               VerticalAlignment="Center" />
@@ -55,20 +56,22 @@
         <TextBox
                     Grid.Row="0"
                     Grid.Column="0"
-                    Margin="5"
-                    Text = "AAA"/>
+                    Text="{Binding Path=FilterAll, UpdateSourceTrigger=PropertyChanged}" 
+                    Margin="5"/>
 
         <TextBox
                     Grid.Row="0"
                     Grid.Column="2"
                     Margin="5"
-                    Text = "AAA"/>
+                    Text="{Binding Path=FilterSelected, UpdateSourceTrigger=PropertyChanged}" />
         <ListBox ItemsSource="{Binding SelectedAttractions}"
+                x:Name="listBoxSelected"
                 Grid.Column="2" 
                 Grid.Row="1"
                 dd:DragDrop.IsDragSource="True"
                 dd:DragDrop.IsDropTarget="True"
                 SelectionMode="Extended"
+                SelectionChanged="ListBox_SelectionChanged_1"
                 dd:DragDrop.ShowAlwaysDropTargetAdorner="True"
                 dd:DragDrop.UseDefaultDragAdorner="True"
                 BorderBrush="LightGreen"
@@ -98,7 +101,16 @@
         <Border Grid.Column="3" Background="Transparent" Margin="10,0">
             <!-- Empty element used for spacing -->
         </Border>
-        <m:Map Grid.Column="4" Grid.Row="1"  x:Name="myMap" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr"/>
+        <m:Map Grid.Column="4" Grid.Row="1"  x:Name="myMap" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
+            <m:MapItemsControl ItemsSource="{Binding Locations}">
+                <m:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <m:Pushpin  Location="{Binding Location}"  Content="{Binding Name}">
+                        </m:Pushpin>
+                    </DataTemplate>
+                </m:MapItemsControl.ItemTemplate>
+            </m:MapItemsControl>
+        </m:Map>
         <Grid Grid.Row="2" Grid.ColumnSpan="5" VerticalAlignment="Center" Height="60" RenderTransformOrigin="0.496,0.595">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="187*" />
