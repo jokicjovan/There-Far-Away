@@ -8,7 +8,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="430" d:DesignWidth="750"
-             Loaded="OnLoaded">
+             Loaded="OnLoaded"
+             FocusVisualStyle="{x:Null}">
     <UserControl.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
     </UserControl.Resources>
@@ -19,6 +20,7 @@
                 CanContentScroll="True">
             <Grid  Margin="20 10">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -124,7 +126,7 @@
                 </Grid>
                 <Grid Grid.Row="7"
                           HorizontalAlignment="Center"
-                          Margin="20">
+                          Margin="20 20 20 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -225,7 +227,7 @@
                         Margin="10,10,10, 10" 
                         Background="#8AA7F0"
                         Height="45"
-                        Width="130"
+                        Width="150"
                         Content="Buy"
                         IsEnabled="{Binding IsBuyEnabled}"
                         Command="{Binding BuyCommand}"
@@ -260,7 +262,7 @@
                         Margin="0,10,10, 10" 
                         Background="#C1F08A"
                         Height="45"
-                        Width="130"
+                        Width="150"
                         Content="{Binding ReserveButtonText}"
                         IsEnabled="{Binding IsReserveEnabled}"
                         Command="{Binding ReserveCommand}"
@@ -290,6 +292,14 @@
                         -->
                     </Button>
                 </Grid>
+                <TextBlock 
+                    Grid.Row="8"
+                    Margin="0 0 0 20"
+                    FontSize="16"
+                    FontWeight="DemiBold"
+                    HorizontalAlignment="Center"
+                    Text="{Binding InfoMessage}"
+                    Foreground="CornflowerBlue"/>
             </Grid>
         </ScrollViewer>
     </Grid>

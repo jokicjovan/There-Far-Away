@@ -178,6 +178,20 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(ReserveButtonText));
             }
         }
+
+        private string _infoMessage;
+        public string InfoMessage
+        {
+            get
+            {
+                return _infoMessage;
+            }
+            set
+            {
+                _infoMessage = value;
+                OnPropertyChanged(nameof(InfoMessage));
+            }
+        }
         #endregion
 
         public JourneyPreviewViewModel(Guid id)
@@ -206,9 +220,10 @@ namespace Three_Far_Away.ViewModels
                 ReserveCommand = new ToggleJourneyReservationCommand(this);
                 BuyCommand = new BuyJourneyCommand(this);
 
-                _reserveButtonText = "Reserve";
                 _isReserveEnabled = true;
                 _isBuyEnabled = true;
+                _reserveButtonText = "Reserve";
+                _infoMessage = "Journey is not reserved or bought.";
 
                 Arrangement userArrangement = arrangementService.GetJourneyArrangementForUser(Id, accountStore.Id);
                 if (userArrangement != null)
@@ -217,12 +232,14 @@ namespace Three_Far_Away.ViewModels
                     {
                         _isReserveEnabled = false;
                         _isBuyEnabled = false;
+                        _infoMessage = "Journey is bought.";
                     }
                     else if (userArrangement.Status == ArrangementStatus.RESERVED)
                     {
                         _isReserveEnabled = true;
                         _isBuyEnabled = true;
-                        _reserveButtonText = "Unreserve";
+                        _reserveButtonText = "Cancel reservation";
+                        _infoMessage = "Journey is reserved, but not bought.";
                     }
                 }
             }

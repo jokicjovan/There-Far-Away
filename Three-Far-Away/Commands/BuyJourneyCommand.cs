@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
 
@@ -26,6 +27,12 @@ namespace Three_Far_Away.Commands
 
         public override async void Execute(object parameter)
         {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to buy this journey?", "Buying Confirmation", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.No)
+            {
+                return;
+            }
+
             Arrangement userArrangement = _journeyPreviewViewModel.arrangementService.GetJourneyArrangementForUser(_journeyPreviewViewModel.Id, _journeyPreviewViewModel.accountStore.Id);
             if (userArrangement == null)
             {
@@ -42,6 +49,7 @@ namespace Three_Far_Away.Commands
                 _journeyPreviewViewModel.arrangementService.Update(userArrangement);
             }
 
+            _journeyPreviewViewModel.InfoMessage = "Journey is bought.";
             _journeyPreviewViewModel.ReserveButtonText = "Reserve";
             _journeyPreviewViewModel.IsReserveEnabled = false;
             _journeyPreviewViewModel.IsBuyEnabled = false;

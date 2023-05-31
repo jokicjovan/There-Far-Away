@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
 
@@ -25,6 +26,14 @@ namespace Three_Far_Away.Commands
         public override async void Execute(object parameter)
         {
             Arrangement userArrangement = _journeyPreviewViewModel.arrangementService.GetJourneyArrangementForUser(_journeyPreviewViewModel.Id, _journeyPreviewViewModel.accountStore.Id);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to " + 
+                ((userArrangement == null) ? "reserve this journey?" : "cancel reservation for this journey?"), 
+                "Reservation Confirmation", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.No)
+            {
+                return;
+            }
+
             if (userArrangement == null)
             {
                 Arrangement arrangement = new Arrangement();
@@ -34,12 +43,14 @@ namespace Three_Far_Away.Commands
                 arrangement.DateArranged = DateTime.Now;
                 _journeyPreviewViewModel.arrangementService.Create(arrangement);
 
-                _journeyPreviewViewModel.ReserveButtonText = "Unreserve";
+                _journeyPreviewViewModel.ReserveButtonText = "Cancel reservation";
+                _journeyPreviewViewModel.InfoMessage = "Journey is reserved, but not bought.";
             }
             else {
                 _journeyPreviewViewModel.arrangementService.Delete(userArrangement.Id);
 
                 _journeyPreviewViewModel.ReserveButtonText = "Reserve";
+                _journeyPreviewViewModel.InfoMessage = "Journey is not reserved or bought.";
             }
 
             _journeyPreviewViewModel.IsReserveEnabled = true;
