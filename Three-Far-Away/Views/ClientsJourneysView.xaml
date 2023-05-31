@@ -29,7 +29,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
                         <ItemsControl ItemsSource="{Binding ReservedJourneyCardViewModels, Mode=TwoWay}"  Focusable="False">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -43,7 +43,7 @@
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
                     </Grid>
-                    <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0, 0, 0, 5">
+                    <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0, 0, 0, 5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
