@@ -8,6 +8,6 @@ namespace Three_Far_Away.Models
 {
     public enum TransportationType
     {
-        CAR,BUS,PLANE
+        CAR,BUS,AIRPLANE
     }
 }

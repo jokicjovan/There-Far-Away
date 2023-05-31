@@ -52,14 +52,8 @@ namespace Three_Far_Away
                 services.AddTransient<CreateJourneyViewModel>();
                 services.AddTransient<JourneyCardViewModel>();
                 services.AddTransient<LocationListItemViewModel>();
-
                 services.AddTransient<CreateJourneyMapViewModel>();
-                services.AddSingleton<Func<CreateJourneyMapViewModel>>((s) => () => s.GetRequiredService<CreateJourneyMapViewModel>());
-                services.AddSingleton<NavigationService<CreateJourneyMapViewModel>>();
-
                 services.AddTransient<CreateJourneyAttractionsViewModel>();
-                services.AddSingleton<Func<CreateJourneyAttractionsViewModel>>((s) => () => s.GetRequiredService<CreateJourneyAttractionsViewModel>());
-                services.AddSingleton<NavigationService<CreateJourneyAttractionsViewModel>>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -161,7 +155,7 @@ namespace Three_Far_Away
             journey.Attractions.Add(attraction);
             journey.Attractions.Add(attraction);
             journey.Attractions.Add(attraction);
-            journey.Transportation = TransportationType.PLANE;
+            journey.Transportation = TransportationType.AIRPLANE;
 
 
 

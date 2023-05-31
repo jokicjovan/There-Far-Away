@@ -48,7 +48,7 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Text = "{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                Text = "{Binding Journey.Name ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Border Grid.Column="2" Background="Transparent" Margin="40,0">
                 <!-- Empty element used for spacing -->
             </Border>
@@ -59,7 +59,7 @@
             <DatePicker
                 Grid.Row="1"
                 Grid.Column="3"
-                Text = "{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"/>
+                Text = "{Binding Journey.StartDate ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Border Grid.Column="4" Background="Transparent" Margin="20,0">
                 <!-- Empty element used for spacing -->
             </Border>
@@ -95,11 +95,11 @@
                 <TextBlock 
                 Grid.Row="0" 
                 Grid.Column="0"
-                Text="Name"/>
+                Text="Price"/>
                 <TextBox
                 Grid.Row="1"
                 Grid.Column="0"
-                Text = "{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                Text = "{Binding Journey.Price ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Border Grid.Column="1" Background="Transparent" Margin="10,0">
                     <!-- Empty element used for spacing -->
                 </Border>
@@ -107,26 +107,8 @@
                 Grid.Row="0" 
                 Grid.Column="2"
                 Text="Transport"/>
-                <ComboBox Grid.Row="1" Grid.Column="2">
-                    <ComboBoxItem>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/WpfTutorialSamples;component/Images/bullet_red.png" />
-                            <TextBlock Foreground="Red">Red</TextBlock>
-                        </StackPanel>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/WpfTutorialSamples;component/Images/bullet_green.png" />
-                            <TextBlock Foreground="Green">Green</TextBlock>
-                        </StackPanel>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/WpfTutorialSamples;component/Images/bullet_blue.png" />
-                            <TextBlock Foreground="Blue">Blue</TextBlock>
-                        </StackPanel>
-                    </ComboBoxItem>
-                </ComboBox>
+                <ComboBox Grid.Row="1" Grid.Column="2" x:Name="trasportationsCB"
+                  SelectedValue="{Binding Path=Journey.Trasportation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
 
             <Border Grid.Column="2" Background="Transparent" Margin="40,0">
@@ -139,7 +121,7 @@
             <DatePicker
                 Grid.Row="1"
                 Grid.Column="3"
-                Text = "{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"/>
+                Text = "{Binding Journey.EndDate ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Border Grid.Column="4" Background="Transparent" Margin="20,0">
                 <!-- Empty element used for spacing -->
@@ -152,9 +134,7 @@
                 <ColumnDefinition Width="152*"/>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Content="Previous" Margin="5,14,0,15" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding PreviousPageCommand}"/>
-            <Button Content="Next" Margin="0,14,0,15" HorizontalAlignment="Center" Grid.Column="2" Foreground="White"  Command="NavigationCommands.GoToPage"
-    CommandParameter="/LoginView.xaml"/>
+            <Button Content="Next" Margin="0,14,0,15" HorizontalAlignment="Center" Grid.Column="2" Foreground="White"  Command="{Binding NavigateToCreateJourneyMapCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

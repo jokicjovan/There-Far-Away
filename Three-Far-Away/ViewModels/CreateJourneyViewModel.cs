@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
+using Three_Far_Away.Services;
 using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
@@ -26,7 +29,22 @@ namespace Three_Far_Away.ViewModels
 				OnPropertyChanged(nameof(Name));
 			}
 		}
-		private DateTime _startDate;
+
+        private Journey _journey;
+        public Journey Journey
+        {
+            get
+            {
+                return _journey;
+            }
+            set
+            {
+                _journey = value;
+                OnPropertyChanged(nameof(Journey));
+            }
+        }
+
+        private DateTime _startDate;
 		public DateTime StartDate
         {
 			get
@@ -123,12 +141,20 @@ namespace Three_Far_Away.ViewModels
 			}
 		}
 
-		public ICommand CreateJourneyCommand { get; }
+        public ObservableCollection<TransportationType> Transporations { get; private set; }
 
-        public CreateJourneyViewModel(IJourneyService journeyService)
+        public ICommand CreateJourneyCommand { get; }
+        public ICommand NavigateToCreateJourneyMapCommand { get; }
+
+        public CreateJourneyViewModel(Journey journey)
         {
-            _journeyService = journeyService;
+            _journeyService = App.host.Services.GetService<IJourneyService>();
             CreateJourneyCommand = new CreateJourneyCommand(this);
+            NavigateToCreateJourneyMapCommand = new NavigateToCreateJourneyCommand(this,"Home","Map");
+			Journey = journey;
+			Transporations=new ObservableCollection<TransportationType>();
+			Transporations.Add(TransportationType.CAR);
+
         }
 
 		

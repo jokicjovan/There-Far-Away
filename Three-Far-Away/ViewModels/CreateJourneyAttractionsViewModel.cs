@@ -1,6 +1,7 @@
 ﻿using GongSolutions.Wpf.DragDrop;
 using MaterialDesignThemes.Wpf;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
 
@@ -27,7 +29,25 @@ namespace Three_Far_Away.ViewModels
         public ObservableCollection<Attraction> SelectedAttractions { get; private set; }
 
         public ICollectionView AllAttractionsView;
+        
         public ICollectionView SelectedAttractionsView;
+
+        private Journey _journey;
+        public Journey Journey
+        {
+            get
+            {
+                return _journey;
+            }
+            set
+            {
+                _journey = value;
+                OnPropertyChanged(nameof(Journey));
+            }
+        }
+
+        public ICommand NavigateToCreateJourneyMapCommand { get; }
+
         private string _filterAll;
         public string FilterAll
         {
@@ -56,21 +76,21 @@ namespace Three_Far_Away.ViewModels
                 ApplyFilterSelected();
             }
         }
-        public CreateJourneyAttractionsViewModel(IJourneyService journeyService)
+        public CreateJourneyAttractionsViewModel(Journey journey)
         {
-            _journeyService = journeyService;
+            _journeyService = App.host.Services.GetService<IJourneyService>();
             AllAttractions = new ObservableCollection<Attraction>();
             SelectedAttractions = new ObservableCollection<Attraction>();
             AllAttractions.Add(new Attraction("Žičа","Najbolji manastir ikad",AttractionType.ATTRACTION,"",new Location("Nepoznata Adresa",48,49)));
             AllAttractions.Add(new Attraction("Studenica", "Najbolji manastir ikad", AttractionType.ATTRACTION, "", new Location("Nepoznata Adresa", 49, 49)));
             AllAttractions.Add(new Attraction("Decani", "Najbolji manastir ikad", AttractionType.ATTRACTION, "", new Location("Nepoznata Adresa", 20, 49)));
             Locations = new ObservableCollection<MapLocation>();
+            NavigateToCreateJourneyMapCommand = new NavigateToCreateJourneyCommand(this,"Attractions","Map");
             AllAttractionsView = CollectionViewSource.GetDefaultView(AllAttractions);
             AllAttractionsView.Filter = o => String.IsNullOrEmpty(FilterAll) ? true : ((Attraction)o).Name.ToLower().Contains(FilterAll.ToLower());
-
             SelectedAttractionsView = CollectionViewSource.GetDefaultView(SelectedAttractions);
             SelectedAttractionsView.Filter = o => String.IsNullOrEmpty(FilterSelected) ? true : ((Attraction)o).Name.ToLower().Contains(FilterSelected.ToLower());
-
+            Journey = journey;
 
         }
         void ApplyFilterAll()

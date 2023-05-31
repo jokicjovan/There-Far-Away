@@ -128,9 +128,8 @@
                 <ColumnDefinition Width="152*"/>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Content="Previous" Margin="5,14,0,15" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding PreviousPageCommand}"/>
-            <Button Content="Next" Margin="0,14,0,15" HorizontalAlignment="Center" Grid.Column="2" Foreground="White"  Command="NavigationCommands.GoToPage"
-    CommandParameter="/LoginView.xaml"/>
+            <Button Content="Previous" Margin="5,14,0,15" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding NavigateToCreateJourneyCommand}"/>
+            <Button Content="Next" Margin="0,14,0,15" HorizontalAlignment="Center" Grid.Column="2" Foreground="White"  Command="{Binding NavigateToCreateJourneyAttractionsCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

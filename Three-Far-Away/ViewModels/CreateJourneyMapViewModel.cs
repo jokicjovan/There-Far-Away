@@ -1,4 +1,5 @@
-﻿using Microsoft.Maps.MapControl.WPF;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maps.MapControl.WPF;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,6 +10,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
+using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
@@ -26,9 +28,11 @@ namespace Three_Far_Away.ViewModels
         public ICommand TurnOnEndLocationCommand { get; }
         public ICommand SearchStartLocationCommand { get; }
         public ICommand SearchEndLocationCommand { get; }
+        public ICommand NavigateToCreateJourneyCommand { get; }
+        public ICommand NavigateToCreateJourneyAttractionsCommand { get; }
 
-        private Location _coordinates;
-        public Location Coordinates
+        private Microsoft.Maps.MapControl.WPF.Location _coordinates;
+        public Microsoft.Maps.MapControl.WPF.Location Coordinates
         {
             get
             {
@@ -66,6 +70,20 @@ namespace Three_Far_Away.ViewModels
             {
                 _endLocationModel = value;
                 OnPropertyChanged(nameof(EndLocationModel));
+            }
+        }
+
+        private Journey _journey;
+        public Journey Journey
+        {
+            get
+            {
+                return _journey;
+            }
+            set
+            {
+                _journey = value;
+                OnPropertyChanged(nameof(Journey));
             }
         }
 
@@ -126,16 +144,19 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        public CreateJourneyMapViewModel(IJourneyService journeyService)
+        public CreateJourneyMapViewModel(Journey journey)
         {
-            _journeyService = journeyService;
+            _journeyService = App.host.Services.GetService<IJourneyService>();
             Locations = new ObservableCollection<MapLocation>();
             MapClickCommand= new AddStartLocationPinCommand(this);
             TurnOnStartLocationCommand = new TurnOnStartLocationPin(this);
             TurnOnEndLocationCommand = new TurnOnEndLocationPin(this);
             SearchStartLocationCommand = new SearchStartLocationCommand(this);
             SearchEndLocationCommand = new SearchEndLocationCommand(this);
+            NavigateToCreateJourneyAttractionsCommand = new NavigateToCreateJourneyCommand(this,"Map","Attractions");
+            NavigateToCreateJourneyCommand = new NavigateToCreateJourneyCommand(this,"Map","Home");
             httpClient = new HttpClient();
+            Journey = journey;
         }
         private Map _map;
         public Map MapControl
@@ -149,7 +170,7 @@ namespace Three_Far_Away.ViewModels
         }
 
 
-        public async Task UpdateStartLocationAsync(Location location)
+        public async Task UpdateStartLocationAsync(Microsoft.Maps.MapControl.WPF.Location location)
         {
             string apiUrl = "http://dev.virtualearth.net/REST/v1/Locations/"+location.Latitude+","+ location.Longitude+ "?key=AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr";
     
@@ -163,7 +184,7 @@ namespace Three_Far_Away.ViewModels
             StartCity = StartLocationModel.Address;
         }
 
-        public async Task UpdateEndLocationAsync(Location location)
+        public async Task UpdateEndLocationAsync(Microsoft.Maps.MapControl.WPF.Location location)
         {
             string apiUrl = "http://dev.virtualearth.net/REST/v1/Locations/" + location.Latitude + "," + location.Longitude + "?key=AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr";
 
@@ -179,11 +200,11 @@ namespace Three_Far_Away.ViewModels
     }
     public class MapLocation
     {
-        public Location Location { get; set; }
+        public Microsoft.Maps.MapControl.WPF.Location Location { get; set; }
         public string Name { get; set; }
         public bool IsStart { get; set; }
 
-        public MapLocation(Location location, string name, bool isStart)
+        public MapLocation(Microsoft.Maps.MapControl.WPF.Location location, string name, bool isStart)
         {
             Location = location;
             Name = name;

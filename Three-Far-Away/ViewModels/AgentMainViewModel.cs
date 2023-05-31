@@ -2,6 +2,7 @@
 using System;
 using Three_Far_Away.Components;
 using Three_Far_Away.Infrastructure;
+using Three_Far_Away.Models;
 
 namespace Three_Far_Away.ViewModels
 {
@@ -52,6 +53,23 @@ namespace Three_Far_Away.ViewModels
             {
                 JourneyPreviewViewModel jpvm = new JourneyPreviewViewModel((Guid)journeyId);
                 SwitchCurrentViewModel(jpvm);
+            });
+
+            EventBus.RegisterHandler("CreateJourney", (object journey) =>
+            {
+                CreateJourneyViewModel cjvm = new CreateJourneyViewModel((Journey)journey);
+                SwitchCurrentViewModel(cjvm);
+            });
+
+            EventBus.RegisterHandler("CreateJourneyMap", (object journey) =>
+            {
+                CreateJourneyMapViewModel cjmvm = new CreateJourneyMapViewModel((Journey)journey);
+                SwitchCurrentViewModel(cjmvm);
+            });
+            EventBus.RegisterHandler("CreateJourneyAttractions", (object journey) =>
+            {
+                CreateJourneyAttractionsViewModel cjmvm = new CreateJourneyAttractionsViewModel((Journey)journey);
+                SwitchCurrentViewModel(cjmvm);
             });
         }
     }
