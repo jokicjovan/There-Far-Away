@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             Loaded="OnLoaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Right" Command="{Binding NextPageCommand}"/>
