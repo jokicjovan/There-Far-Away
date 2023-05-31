@@ -45,5 +45,11 @@ namespace Three_Far_Away.Services
         {
             return _arrangementRepository.FindJourneyArrangements(journeyId);
         }
+
+
+        public Arrangement GetJourneyArrangementForUser(Guid journeyId, Guid userId)
+        {
+            return _arrangementRepository.FindJourneyArrangementForUser(journeyId, userId);
+        }
     }
 }

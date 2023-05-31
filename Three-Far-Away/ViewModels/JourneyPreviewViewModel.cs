@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Components;
 using Three_Far_Away.Models;
+using Three_Far_Away.Services;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;
 
@@ -15,8 +16,14 @@ namespace Three_Far_Away.ViewModels
     {
         #region services
         public readonly IJourneyService journeyService;
+        public readonly IArrangementService arrangementService;
+        public readonly IUserService userService;
         #endregion
-        
+
+        #region stores
+        public readonly AccountStore accountStore;
+        #endregion
+
         #region properties
 
         private ObservableCollection<LocationListItemViewModel> _locationListItemViewModels;
@@ -121,14 +128,64 @@ namespace Three_Far_Away.ViewModels
 
 
         #region commands
-        public ICommand DeleteJourney { get; }
-        public ICommand ShowJourneyPassengers { get; }
+        public ICommand ShowJourneyPassengersCommand { get; }
+        public ICommand EditJourneyCommand { get; }
+        public ICommand DeleteJourneyCommand { get; }
+        public ICommand ReserveCommand { get; }
+        public ICommand BuyCommand { get; }
+        #endregion
+
+        #region command properties
+
+        private bool _isBuyEnabled;
+        public bool IsBuyEnabled
+        {
+            get
+            {
+                return _isBuyEnabled;
+            }
+            set
+            {
+                _isBuyEnabled = value;
+                OnPropertyChanged(nameof(IsBuyEnabled));
+            }
+        }
+
+        private bool _isReserveEnabled;
+        public bool IsReserveEnabled
+        {
+            get
+            {
+                return _isReserveEnabled;
+            }
+            set
+            {
+                _isReserveEnabled = value;
+                OnPropertyChanged(nameof(IsReserveEnabled));
+            }
+        }
+
+        private string _reserveButtonText;
+        public string ReserveButtonText
+        {
+            get
+            {
+                return _reserveButtonText;
+            }
+            set
+            {
+                _reserveButtonText = value;
+                OnPropertyChanged(nameof(ReserveButtonText));
+            }
+        }
         #endregion
 
         public JourneyPreviewViewModel(Guid id)
         {
-            AccountStore accountStore = App.host.Services.GetService<AccountStore>();
+            accountStore = App.host.Services.GetService<AccountStore>();
             journeyService = App.host.Services.GetService<IJourneyService>();
+            arrangementService = App.host.Services.GetRequiredService<IArrangementService>();
+            userService = App.host.Services.GetRequiredService<IUserService>();
             Journey journey = journeyService.GetJourneyWithAttractions(id);
             Id = journey.Id;
             Name = journey.Name;
@@ -140,11 +197,34 @@ namespace Three_Far_Away.ViewModels
             if (accountStore.Role == Role.AGENT)
             {
                 _isAgent = true;
-                DeleteJourney = new DeleteJourneyFromPreviewCommand(this);
-                ShowJourneyPassengers = new ShowJourneyPassengersCommand(this);
+                ShowJourneyPassengersCommand = new ShowJourneyPassengersCommand(this);
+                //EditJourney = new 
+                DeleteJourneyCommand = new DeleteJourneyFromPreviewCommand(this);
             }
             else {
                 _isAgent = false;
+                ReserveCommand = new ToggleJourneyReservationCommand(this);
+                BuyCommand = new BuyJourneyCommand(this);
+
+                _reserveButtonText = "Reserve";
+                _isReserveEnabled = true;
+                _isBuyEnabled = true;
+
+                Arrangement userArrangement = arrangementService.GetJourneyArrangementForUser(Id, accountStore.Id);
+                if (userArrangement != null)
+                {
+                    if (userArrangement.Status == ArrangementStatus.BOUGHT)
+                    {
+                        _isReserveEnabled = false;
+                        _isBuyEnabled = false;
+                    }
+                    else if (userArrangement.Status == ArrangementStatus.RESERVED)
+                    {
+                        _isReserveEnabled = true;
+                        _isBuyEnabled = true;
+                        _reserveButtonText = "Unreserve";
+                    }
+                }
             }
         }
 
