@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
+using System.Windows;
 
 namespace Three_Far_Away.Commands
 {
@@ -26,6 +27,9 @@ namespace Three_Far_Away.Commands
                 List<Arrangement> arrangements = _clientsJourneysViewModel.arrangementService.ReadPage(_clientsJourneysViewModel.userId, _clientsJourneysViewModel.reservatedPage + 1, 4, ArrangementStatus.RESERVED);
                 if (arrangements.Count == 4)
                     _clientsJourneysViewModel.reservatedPage++;
+                else
+                    _clientsJourneysViewModel.NextPageReservedVisibility= Visibility.Hidden;
+                if (_clientsJourneysViewModel.reservatedPage >= 0) _clientsJourneysViewModel.PreviousPageReservedVisibility= Visibility.Visible;
                 List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
                 foreach (var arrangement in arrangements)
                     journeysForCard.Add(new JourneyForCard(arrangement.Journey));
@@ -38,6 +42,9 @@ namespace Three_Far_Away.Commands
                 List<Arrangement> arrangements = _clientsJourneysViewModel.arrangementService.ReadPage(_clientsJourneysViewModel.userId, _clientsJourneysViewModel.boughtPage + 1, 4, ArrangementStatus.BOUGHT);
                 if (arrangements.Count == 4)
                     _clientsJourneysViewModel.boughtPage++;
+                else
+                    _clientsJourneysViewModel.NextPageVisibility = Visibility.Hidden;
+                if (_clientsJourneysViewModel.boughtPage >= 0) _clientsJourneysViewModel.PreviousPageVisibility = Visibility.Visible;
                 List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
                 foreach (var arrangement in arrangements)
                     journeysForCard.Add(new JourneyForCard(arrangement.Journey));
