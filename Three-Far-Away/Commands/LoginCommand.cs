@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Models;
-using Three_Far_Away.Services;
 using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Commands
@@ -17,7 +17,8 @@ namespace Three_Far_Away.Commands
         public override bool CanExecute(object parameter)
         {
             return !string.IsNullOrEmpty(_loginViewModel.Username) && !string.IsNullOrEmpty(_loginViewModel.Password) &&
-                   !(_loginViewModel.Username.Length < 6) && !(_loginViewModel.Password.Length < 6) &&
+                   !(_loginViewModel.Username.Length < 6) && !(_loginViewModel.Username.Length > 20) &&
+                   !(_loginViewModel.Password.Length < 6) && !(_loginViewModel.Password.Length > 20) &&
                    base.CanExecute(parameter);
         }
 
@@ -28,13 +29,15 @@ namespace Three_Far_Away.Commands
             try
             {
                 User user = await _loginViewModel.credentialService.Authenticate(_loginViewModel.Username, _loginViewModel.Password);
+                _loginViewModel.accountStore.Name = user.Name;
+                _loginViewModel.accountStore.Role = user.Role;
                 if (user.Role == Role.CLIENT)
                 {
-                    _loginViewModel.navigationUserMainViewModel.Navigate();
+                    EventBus.FireEvent("ClientLogin");
                 }
-                else 
+                else
                 {
-                    _loginViewModel.navigationAgentMainViewModel.Navigate();
+                    EventBus.FireEvent("AgentLogin");
                 }
             }
             catch (Exception ex)

@@ -1,26 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Three_Far_Away.Stores;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using Three_Far_Away.Infrastructure;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : NavigableViewModel
     {
-        private readonly NavigationStore _navigationStore;
-        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
-
-        public MainViewModel(NavigationStore navigationStore)
+        public MainViewModel(LoginViewModel lvm)
         {
-            _navigationStore = navigationStore;
-            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+            SwitchCurrentViewModel(lvm);
+            RegisterHandlers();
         }
 
-        public void OnCurrentViewModelChanged() 
+        private void RegisterHandlers()
         {
-            OnPropertyChanged(nameof(CurrentViewModel));
+            EventBus.RegisterHandler("ClientLogin", () =>
+            {
+                ClientMainViewModel cmvm = App.host.Services.GetRequiredService<ClientMainViewModel>();
+                SwitchCurrentViewModel(cmvm);
+            });
+
+            EventBus.RegisterHandler("AgentLogin", () =>
+            {
+                AgentMainViewModel amvm = App.host.Services.GetRequiredService<AgentMainViewModel>();
+                SwitchCurrentViewModel(amvm);
+            });
+
+            EventBus.RegisterHandler("GoToLogin", () =>
+            {
+                LoginViewModel lvm = App.host.Services.GetRequiredService<LoginViewModel>();
+                SwitchCurrentViewModel(lvm);
+            });
+
+            EventBus.RegisterHandler("GoToRegister", () =>
+            {
+                RegistrationViewModel rvm = App.host.Services.GetRequiredService<RegistrationViewModel>();
+                SwitchCurrentViewModel(rvm);
+            });
         }
     }
 }

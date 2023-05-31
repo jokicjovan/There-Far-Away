@@ -1,25 +1,33 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Windows;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
+using Three_Far_Away.Components;
+using Three_Far_Away.Events;
 using Three_Far_Away.Models;
 using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Services.Interfaces;
+using Three_Far_Away.Stores;
+using Three_Far_Away.Views;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class AgentJourneysViewModel : ViewModelBase, INotifyPropertyChanged
+    public class JourneysViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public readonly IJourneyService journeyService;
-        private ObservableCollection<JourneyForCard> journeys;
-        public int page = 0;
+        public int page;
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
+        public readonly AccountStore accountStore;
+
+
+
+        private ObservableCollection<JourneyForCard> journeys;
         public ObservableCollection<JourneyForCard> Journeys
         {
             get { return journeys; }
@@ -41,13 +49,39 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        public AgentJourneysViewModel(IJourneyService _journeyService)
+        private Visibility _addJourneyVisibility;
+        public Visibility AddJourneyVisibility
         {
-            journeyService = _journeyService;
-            Journeys = new ObservableCollection<JourneyForCard>(readCards(0, 4));
+            get
+            {
+                return _addJourneyVisibility;
+            }
+            set
+            {
+                _addJourneyVisibility = value;
+                OnPropertyChanged(nameof(AddJourneyVisibility));
+            }
+        }
+
+        public JourneysViewModel(IJourneyService journeyService)
+        {
+            page = 0;
+            this.journeyService = journeyService;
+            Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
+            accountStore = App.host.Services.GetService<AccountStore>();
+
+            if (accountStore.Role.Equals(Role.AGENT))
+            {
+                AddJourneyVisibility = Visibility.Visible;
+            }
+            else
+            {
+                AddJourneyVisibility = Visibility.Hidden;
+            }
+
         }
 
         private List<JourneyForCard> readCards(int page, int pageSize)
@@ -65,12 +99,19 @@ namespace Three_Far_Away.ViewModels
 
             foreach (JourneyForCard journey in Journeys)
             {
-                journeyCardViews.Add(new JourneyCardViewModel(journey));
+                JourneyCardViewModel journeyCardViewModel = new JourneyCardViewModel(journey);
+                journeyCardViewModel.JourneyDeletedEvent += HandleJourneyDeleted;
+                journeyCardViews.Add(journeyCardViewModel);
+
             }
 
             return journeyCardViews;
         }
 
-
+        private void HandleJourneyDeleted(object sender, EventArgs e)
+        {
+            Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
+            JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
+        }
     }
 }

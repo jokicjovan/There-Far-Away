@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Three_Far_Away.Views
 {
     /// <summary>
-    /// Interaction logic for UserMainView.xaml
+    /// Interaction logic for LocationListItemView.xaml
     /// </summary>
-    public partial class UserMainView : UserControl
+    public partial class LocationListItemView : UserControl
     {
-        public UserMainView()
+        public LocationListItemView()
         {
             InitializeComponent();
         }

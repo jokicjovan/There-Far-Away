@@ -3,10 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Three_Far_Away.Views"
+             xmlns:local="clr-namespace:Three_Far_Away.Views" 
+             xmlns:components="clr-namespace:Three_Far_Away.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock>Agent</TextBlock>        
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="OnLoaded"
+             FocusVisualStyle="{x:Null}">
+    
+    <UserControl.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="F1" Command="{Binding AgentNavigationBarViewModel.NavigateJourneys}"/>
+        <KeyBinding Modifiers="Ctrl" Key="F4" Command="{Binding AgentNavigationBarViewModel.NavigateLogin}"/>
+    </UserControl.InputBindings>
+    
+    <!-- <Grid> -->
+    <!--     <Grid.ColumnDefinitions> -->
+    <!--         <ColumnDefinition Width="auto"/> -->
+    <!--         <ColumnDefinition Width="*"/> -->
+    <!--     </Grid.ColumnDefinitions> -->
+    <!--      -->
+    <!--     ~1~ <components:AgentNavigationBarView @1@ -->
+    <!--         ~1~ Grid.Row="0" DataContext="{Binding AgentNavigationBarViewModel}"/> @1@ -->
+    <!--     <components:AgentHamburgerNavigationBarView -->
+    <!--         Grid.Column="0" -->
+    <!--         DataContext="{Binding AgentHamburgerNavigationBarViewModel}"/> -->
+    <!--     <ContentControl Grid.Column="1" -->
+    <!--                     Margin="20 10" -->
+    <!--                         Content="{Binding CurrentViewModel}"/> -->
+    <!-- </Grid> -->
+
+    <!-- <Canvas Width="750" Height="430"> -->
+    <!--     <ContentControl Canvas.Left="50"  -->
+    <!--                     Margin="20 10" -->
+    <!--                     Content="{Binding CurrentViewModel}"/> -->
+    <!--     <components:AgentHamburgerNavigationBarView -->
+    <!--         Canvas.Left="0" -->
+    <!--         Height="430" -->
+    <!--         DataContext="{Binding AgentHamburgerNavigationBarViewModel}"/> -->
+    <!-- </Canvas> -->
+    <Grid Width="750" Height="430">
+        <ContentControl Margin="55 0 15 40" Content="{Binding CurrentViewModel}"/>
+        <components:AgentHamburgerNavigationBarView Height="430" DataContext="{Binding AgentHamburgerNavigationBarViewModel}"/>
     </Grid>
+
 </UserControl>

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Three_Far_Away.Views
 {
     /// <summary>
-    /// Interaction logic for AgentJourneysView.xaml
+    /// Interaction logic for JourneyPassengersView.xaml
     /// </summary>
-    public partial class AgentJourneysView : UserControl
+    public partial class JourneyPassengersView : UserControl
     {
-        public AgentJourneysView()
+        public JourneyPassengersView()
         {
             InitializeComponent();
         }

@@ -5,8 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
-using Three_Far_Away.Services;
 using Three_Far_Away.Services.Interfaces;
+using Three_Far_Away.Stores;
 
 namespace Three_Far_Away.ViewModels
 {
@@ -16,9 +16,8 @@ namespace Three_Far_Away.ViewModels
         public readonly ICredentialService credentialService;
         #endregion
 
-        #region navigations
-        public readonly NavigationService<UserMainViewModel> navigationUserMainViewModel;
-        public readonly NavigationService<AgentMainViewModel> navigationAgentMainViewModel;
+        #region stores
+        public readonly AccountStore accountStore;
         #endregion
 
         #region properties
@@ -38,6 +37,10 @@ namespace Three_Far_Away.ViewModels
                 if (Username.Length < 6) 
                 {
                     AddError("Username cannot be shorter than 6 characters!", nameof(Username));
+                }
+                else if (Username.Length > 20)
+                {
+                    AddError("Username cannot be longer than 20 characters!", nameof(Username));
                 }
             }
         }
@@ -59,6 +62,10 @@ namespace Three_Far_Away.ViewModels
                 {
                     AddError("Password cannot be shorter than 6 characters!", nameof(Password));
                 }
+                else if (Password.Length > 20)
+                {
+                    AddError("Password cannot be longer than 20 characters!", nameof(Password));
+                }
             } 
         }
 
@@ -79,6 +86,7 @@ namespace Three_Far_Away.ViewModels
 
         #region commands
         public ICommand SubmitCommand { get; }
+        public ICommand RegisterCommand { get; }
         #endregion
 
         #region errors
@@ -103,13 +111,12 @@ namespace Three_Far_Away.ViewModels
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
         #endregion
 
-        public LoginViewModel(NavigationService<UserMainViewModel> navigationUserMainViewModel, NavigationService<AgentMainViewModel> navigationAgentMainViewModel, 
-            ICredentialService credentialService)
+        public LoginViewModel(ICredentialService credentialService, AccountStore accountStore)
         {
+            this.accountStore = accountStore;
             this.credentialService = credentialService;
-            this.navigationUserMainViewModel = navigationUserMainViewModel;
-            this.navigationAgentMainViewModel = navigationAgentMainViewModel;
             SubmitCommand = new LoginCommand(this);
+            RegisterCommand = new FireEventCommand("GoToRegister");
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
         }
 

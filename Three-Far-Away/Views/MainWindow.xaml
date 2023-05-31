@@ -5,21 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Three_Far_Away" 
         xmlns:views="clr-namespace:Three_Far_Away.Views"
-        xmlns:vms="clr-namespace:Three_Far_Away.ViewModels"
+        xmlns:vms="clr-namespace:Three_Far_Away.ViewModels" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="ThereFarAway" 
         Height="430" 
         Width="750"
         ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Background="FloralWhite"
         FontSize="14">
-    <Grid Margin="20 10">
+    <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type vms:LoginViewModel}">
                 <views:LoginView/>
-            </DataTemplate> 
+            </DataTemplate>
             
+            <DataTemplate DataType="{x:Type vms:RegistrationViewModel}">
+                <views:RegistrationView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:AgentMainViewModel}">
                 <views:AgentMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:ClientMainViewModel}">
+                <views:ClientMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:JourneysViewModel}">
+                <views:JourneysView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:JourneyPreviewViewModel}">
+                <views:JourneyPreviewView/>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type vms:UserMainViewModel}">
@@ -31,17 +50,29 @@
             <DataTemplate DataType="{x:Type vms:CreateJourneyMapViewModel}">
                 <views:CreateJourneyMapView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:AgentJourneysViewModel}">
-                <views:AgentJourneysView/>
-            </DataTemplate>
             <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
                 <views:JourneyCardView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vms:CreateJourneyAttractionsViewModel}">
                 <views:CreateJourneyAttractionsView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:JourneyPassengersViewModel}">
+                <views:JourneyPassengersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:LocationListItemViewModel}">
+                <views:LocationListItemView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:CreateJourneyViewModel}">
+                <views:CreateJourneyView/>
+            </DataTemplate>
+
         </Grid.Resources>
 
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <materialDesign:DialogHost CloseOnClickAway="True">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>
