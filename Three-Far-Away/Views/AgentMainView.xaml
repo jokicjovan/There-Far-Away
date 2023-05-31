@@ -11,8 +11,8 @@
              FocusVisualStyle="{x:Null}">
     
     <UserControl.InputBindings>
-        <KeyBinding Modifiers="Ctrl" Key="F1" Command="{Binding AgentNavigationBarViewModel.NavigateJourneys}"/>
-        <KeyBinding Modifiers="Ctrl" Key="F4" Command="{Binding AgentNavigationBarViewModel.NavigateLogin}"/>
+        <KeyBinding Modifiers="Ctrl" Key="D1" Command="{Binding AgentNavigationBarViewModel.NavigateJourneys}"/>
+        <KeyBinding Modifiers="Ctrl" Key="D4" Command="{Binding AgentNavigationBarViewModel.NavigateLogin}"/>
     </UserControl.InputBindings>
     
     <!-- <Grid> -->

@@ -20,6 +20,16 @@ namespace Three_Far_Away.Stores
             }
         }
 
+        private Guid _id;
+        public Guid Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+            }
+        }
+
         private Role _role;
         public Role Role 
         {

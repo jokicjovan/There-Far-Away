@@ -9,5 +9,6 @@ namespace Three_Far_Away.Repositories.Interfaces
     public interface IArrangementRepository : ICrudRepository<Arrangement>
     {
         public IEnumerable<Arrangement> FindJourneyArrangements(Guid journeyId);
+        public Arrangement FindJourneyArrangementForUser(Guid journeyId, Guid userId);
     }
 }
