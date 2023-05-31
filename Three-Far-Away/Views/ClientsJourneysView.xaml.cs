@@ -13,16 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Three_Far_Away.Components
+namespace Three_Far_Away.Views
 {
     /// <summary>
-    /// Interaction logic for NavigationBarView.xaml
+    /// Interaction logic for ClientsJourneysView.xaml
     /// </summary>
-    public partial class AgentNavigationBarView : UserControl
+    public partial class ClientsJourneysView : UserControl
     {
-        public AgentNavigationBarView()
+        public ClientsJourneysView()
         {
             InitializeComponent();
         }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.Focusable = true;
+            this.FocusVisualStyle = null;
+            Keyboard.Focus(this);
+        }
+
     }
 }

@@ -9,5 +9,6 @@ namespace Three_Far_Away.Services.Interfaces
     {
         public IEnumerable<Arrangement> GetJourneyArrangements(Guid journeyId);
         public Arrangement GetJourneyArrangementForUser(Guid journeyId, Guid userId);
+        List<Arrangement> ReadPage(Guid userId, int page, int size, ArrangementStatus status);
     }
 }

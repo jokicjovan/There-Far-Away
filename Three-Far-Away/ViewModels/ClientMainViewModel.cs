@@ -8,16 +8,6 @@ namespace Three_Far_Away.ViewModels
 {
     public class ClientMainViewModel : NavigableViewModel
     {
-        private ClientNavigationBarViewModel _clientNavigationBarViewModel;
-        public ClientNavigationBarViewModel ClientNavigationBarViewModel
-        {
-            get { return _clientNavigationBarViewModel; }
-            set
-            {
-                _clientNavigationBarViewModel = value;
-                OnPropertyChanged(nameof(ClientNavigationBarViewModel));
-            }
-        }
 
         private ClientHamburgerNavigationBarViewModel _clientHamburgerNavigationBarViewModel;
         public ClientHamburgerNavigationBarViewModel ClientHamburgerNavigationBarViewModel
@@ -33,9 +23,8 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        public ClientMainViewModel(JourneysViewModel agentJourneysViewModel, ClientNavigationBarViewModel clientNavigationBarViewModel, ClientHamburgerNavigationBarViewModel clientHamburgerNavigationBarViewModel)
+        public ClientMainViewModel(JourneysViewModel agentJourneysViewModel, ClientHamburgerNavigationBarViewModel clientHamburgerNavigationBarViewModel)
         {
-            _clientNavigationBarViewModel = clientNavigationBarViewModel;
             _clientHamburgerNavigationBarViewModel = clientHamburgerNavigationBarViewModel;
             SwitchCurrentViewModel(agentJourneysViewModel);
             RegisterHandlers();
@@ -46,6 +35,12 @@ namespace Three_Far_Away.ViewModels
             EventBus.RegisterHandler("ClientJourneys", () =>
             {
                 JourneysViewModel Cjvm = App.host.Services.GetRequiredService<JourneysViewModel>();
+                SwitchCurrentViewModel(Cjvm);
+            });
+            
+            EventBus.RegisterHandler("MyJourneys", () =>
+            {
+                ClientsJourneysViewModel Cjvm = App.host.Services.GetRequiredService<ClientsJourneysViewModel>();
                 SwitchCurrentViewModel(Cjvm);
             });
 

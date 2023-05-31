@@ -33,8 +33,6 @@ namespace Three_Far_Away
                 services.AddSingleton(new ThereFarAwayDbContextFactory(connectionString));
                 services.AddSingleton(s => s.GetRequiredService<ThereFarAwayDbContextFactory>().CreateDbContext());
 
-                services.AddTransient<AgentNavigationBarViewModel>();
-                services.AddTransient<ClientNavigationBarViewModel>();
                 services.AddTransient<AgentHamburgerNavigationBarViewModel>();
                 services.AddTransient<ClientHamburgerNavigationBarViewModel>();
 
@@ -48,6 +46,7 @@ namespace Three_Far_Away
                 services.AddTransient<CreateJourneyViewModel>();
                 services.AddTransient<JourneyCardViewModel>();
                 services.AddTransient<LocationListItemViewModel>();
+                services.AddTransient<ClientsJourneysViewModel>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()

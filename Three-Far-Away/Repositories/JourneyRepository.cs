@@ -23,5 +23,6 @@ namespace Three_Far_Away.Repositories
                 .Include(e => e.EndLocation)
                 .FirstOrDefault(e => e.Id == id);
         }
+
     }
 }
