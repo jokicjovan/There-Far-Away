@@ -48,6 +48,12 @@ namespace Three_Far_Away.ViewModels
                 JourneysViewModel Cjvm = App.host.Services.GetRequiredService<JourneysViewModel>();
                 SwitchCurrentViewModel(Cjvm);
             });
+            
+            EventBus.RegisterHandler("MyJourneys", () =>
+            {
+                ClientsJourneysViewModel Cjvm = App.host.Services.GetRequiredService<ClientsJourneysViewModel>();
+                SwitchCurrentViewModel(Cjvm);
+            });
 
             EventBus.RegisterHandler("ClientJourneyPreview", (object journeyId) =>
             {

@@ -10,5 +10,6 @@ namespace Three_Far_Away.Repositories.Interfaces
     {
         public IEnumerable<Arrangement> FindJourneyArrangements(Guid journeyId);
         public Arrangement FindJourneyArrangementForUser(Guid journeyId, Guid userId);
+        public IEnumerable<Arrangement> FindArrangementsForUser(Guid userId, ArrangementStatus status);
     }
 }

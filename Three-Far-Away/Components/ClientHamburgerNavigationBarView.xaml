@@ -13,6 +13,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -52,9 +53,33 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            <Button 
+                Grid.Row="2" 
+                Command="{Binding NavigateMyJourneys}"
+                Background="Transparent" 
+                BorderBrush="Transparent"
+                Height="50">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <materialDesign:PackIcon 
+                            Kind="Calendar"  
+                            Background="Transparent"
+                            ToolTip="My journeys"
+                            Foreground="#C1F08A"
+                            Width="50"
+                            Height="50"
+                            Cursor="Hand"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="FloralWhite" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
             <Button 
-                Grid.Row="3"
+                Grid.Row="4"
                 Command="{Binding NavigateLogin}"
                 Background="Transparent" 
                 BorderBrush="Transparent"
@@ -83,6 +108,7 @@
             <Grid Width="{Binding MenuWidth}" Height="400"  Background="#C1F08A">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -131,9 +157,40 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+                    <Button
+                        Grid.Row="2"
+                        Command="{Binding NavigateMyJourneys}"
+                        Background="Transparent" 
+                        BorderBrush="Transparent"
+                        Height="50">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon 
+                                        Kind="Calendar"  
+                                        Background="Transparent"
+                                        ToolTip="My journeys"
+                                        Foreground="#639B22"
+                                        Width="50"
+                                        Height="50"
+                                        Cursor="Hand"/>
+                                    <TextBlock Text="My journeys"
+                                               Margin="5 0 0 0"
+                                               VerticalAlignment="Center"
+                                               Foreground="#639B22"
+                                               Cursor="Hand"/>
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="FloralWhite" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
 
                     <Button
-                        Grid.Row="3"
+                        Grid.Row="4"
                         Command="{Binding NavigateLogin}"
                         Background="Transparent" 
                         BorderBrush="Transparent"

@@ -51,5 +51,17 @@ namespace Three_Far_Away.Services
         {
             return _arrangementRepository.FindJourneyArrangementForUser(journeyId, userId);
         }
+
+        public List<Arrangement> ReadPage(Guid userId, int page, int size, ArrangementStatus status)
+        {
+            List<Arrangement> arrangements =(List<Arrangement>) _arrangementRepository.FindArrangementsForUser(userId, status);
+            List<Arrangement> newArrangements = new List<Arrangement>();
+            for (int i = page * size; i < (page + 1) * size; i++)
+            {
+                if (i > arrangements.Count - 1 || i < 0) break;
+                newArrangements.Add(arrangements[i]);
+            }
+            return newArrangements;
+        }
     }
 }
