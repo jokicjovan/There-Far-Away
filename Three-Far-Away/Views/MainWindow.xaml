@@ -48,6 +48,14 @@
                 <views:JourneyCardView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vms:ReportsViewModel}">
+                <views:ReportsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:ReportCardViewModel}">
+                <views:ReportCardView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:JourneyPassengersViewModel}">
                 <views:JourneyPassengersView/>
             </DataTemplate>

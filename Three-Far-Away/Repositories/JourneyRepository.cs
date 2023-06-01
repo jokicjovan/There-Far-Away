@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Three_Far_Away.DbContexts;
@@ -24,5 +26,8 @@ namespace Three_Far_Away.Repositories
                 .FirstOrDefault(e => e.Id == id);
         }
 
+        public List<Journey> FindJourneysInsideDate(DateTime fromTime, DateTime toTime) {
+            return _entities.Where(j => j.StartDate >= fromTime && j.EndDate <= toTime).ToList();
+        }
     }
 }

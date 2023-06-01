@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.ViewModels;
@@ -16,6 +17,12 @@ namespace Three_Far_Away.Commands
         public override void Execute(object parameter)
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to delete this journey?", "Delete Confirmation", MessageBoxButton.YesNo);
+
+            if (_agentJourneyPreviewViewModel.journeyService.Read(_agentJourneyPreviewViewModel.Id).StartDate <= DateTime.Now) {
+                MessageBox.Show("Journey has already passed", "Error");
+                return;
+            }
+
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 _agentJourneyPreviewViewModel.journeyService.Delete(_agentJourneyPreviewViewModel.Id);

@@ -41,6 +41,12 @@ namespace Three_Far_Away.ViewModels
                 JourneyPreviewViewModel jpvm = new JourneyPreviewViewModel((Guid)journeyId);
                 SwitchCurrentViewModel(jpvm);
             });
+
+            EventBus.RegisterHandler("Reports", () =>
+            {
+                ReportsViewModel rvm = App.host.Services.GetRequiredService<ReportsViewModel>();
+                SwitchCurrentViewModel(rvm);
+            });
         }
     }
 }

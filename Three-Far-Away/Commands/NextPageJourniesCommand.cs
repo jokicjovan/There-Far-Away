@@ -24,7 +24,6 @@ namespace Three_Far_Away.Commands
                 journeysForCard.Add(new JourneyForCard(journey));
             this._journeysViewModel.Journeys = new ObservableCollection<JourneyForCard>(journeysForCard);
             this._journeysViewModel.JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(this._journeysViewModel.CreateJourneyCardViews());
-
         }
     }
 }
