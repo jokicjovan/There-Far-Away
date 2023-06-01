@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
@@ -21,6 +22,8 @@ namespace Three_Far_Away.Commands
         public override void Execute(object parameter)
         {
             List<Journey> journeys = _createJourneyViewModel.journeyService.ReadPage(_createJourneyViewModel.page > 0 ? --_createJourneyViewModel.page : 0, 4);
+            if (_createJourneyViewModel.page == 0) _createJourneyViewModel.PreviousPageVisibility = Visibility.Hidden;
+            _createJourneyViewModel.NextPageVisibility = Visibility.Visible;
             List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
             foreach (var journey in journeys)
                 journeysForCard.Add(new JourneyForCard(journey));

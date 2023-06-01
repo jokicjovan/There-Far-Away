@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
@@ -96,6 +97,62 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(SelectedTabIndex));
             }
         }
+
+        private Visibility _nextPageVisibility;
+        public Visibility NextPageVisibility
+        {
+            get
+            {
+                return _nextPageVisibility;
+            }
+            set
+            {
+                _nextPageVisibility = value;
+                OnPropertyChanged(nameof(NextPageVisibility));
+            }
+        }
+
+        private Visibility _previousPageVisibility;
+        public Visibility PreviousPageVisibility
+        {
+            get
+            {
+                return _previousPageVisibility;
+            }
+            set
+            {
+                _previousPageVisibility = value;
+                OnPropertyChanged(nameof(PreviousPageVisibility));
+            }
+        }
+
+        private Visibility _nextPageReservedVisibility;
+        public Visibility NextPageReservedVisibility
+        {
+            get
+            {
+                return _nextPageReservedVisibility;
+            }
+            set
+            {
+                _nextPageReservedVisibility = value;
+                OnPropertyChanged(nameof(NextPageReservedVisibility));
+            }
+        }
+
+        private Visibility _previousPageReservedVisibility;
+        public Visibility PreviousPageReservedVisibility
+        {
+            get
+            {
+                return _previousPageReservedVisibility;
+            }
+            set
+            {
+                _previousPageReservedVisibility = value;
+                OnPropertyChanged(nameof(PreviousPageReservedVisibility));
+            }
+        }
         #endregion
 
 
@@ -117,6 +174,10 @@ namespace Three_Far_Away.ViewModels
                 new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews(ReservedJourneys));
             BoughtJourneyCardViewModels =
                 new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews(BoughtJourneys));
+            PreviousPageVisibility = Visibility.Hidden;
+            PreviousPageReservedVisibility = Visibility.Hidden;
+            NextPageVisibility = Visibility.Visible;
+            NextPageReservedVisibility = Visibility.Visible;
         }
 
         private List<JourneyForCard> readCards(Guid userId, int page, int pageSize, ArrangementStatus status)

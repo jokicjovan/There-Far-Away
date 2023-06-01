@@ -16,7 +16,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -25,46 +24,98 @@
 
         <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedTabIndex}">
             <TabItem Header="Reserved journeys">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ItemsControl ItemsSource="{Binding ReservedJourneyCardViewModels, Mode=TwoWay}"  Focusable="False">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:JourneyCardView Margin="0 10 10,10" Height="85" Width="310"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="2" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <ItemsControl ItemsSource="{Binding ReservedJourneyCardViewModels, Mode=TwoWay}"  Focusable="False">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:JourneyCardView Margin="0 10 10,10" Height="85" Width="310"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Grid>
+                    <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0, 0, 0, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button 
+                            Content="Previous" 
+                            Margin="5" 
+                            HorizontalAlignment="Left" 
+                            Foreground="White" 
+                            BorderBrush="#7A7A7A" 
+                            Background="#7A7A7A" 
+                            Visibility="{Binding PreviousPageReservedVisibility}"
+                            Command="{Binding PreviousPageCommand}"/>
+                        <Button 
+                            Content="Next" 
+                            Margin="5 5 10 5" 
+                            HorizontalAlignment="Right" 
+                            Grid.Column="1" 
+                            Foreground="White" 
+                            Visibility="{Binding NextPageReservedVisibility}"
+                            Command="{Binding NextPageCommand}" />
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Bought journeys">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ItemsControl ItemsSource="{Binding BoughtJourneyCardViewModels, Mode=TwoWay}"  Focusable="False">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:JourneyCardView Margin="0 10 10,10" Height="85" Width="310"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="2" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ItemsControl ItemsSource="{Binding BoughtJourneyCardViewModels, Mode=TwoWay}"  Focusable="False">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:JourneyCardView Margin="0 10 10,10" Height="85" Width="310"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Grid>
+                    <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0, 0, 0, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button 
+                            Content="Previous" 
+                            Margin="5" 
+                            HorizontalAlignment="Left" 
+                            Foreground="White" 
+                            BorderBrush="#7A7A7A" 
+                            Background="#7A7A7A" 
+                            Visibility="{Binding PreviousPageVisibility}"
+                            Command="{Binding PreviousPageCommand}"/>
+                        <Button 
+                            Content="Next" 
+                            Margin="5 5 10 5" 
+                            HorizontalAlignment="Right" 
+                            Grid.Column="1" 
+                            Foreground="White" 
+                            Visibility="{Binding NextPageVisibility}"
+                            Command="{Binding NextPageCommand}" />
+                    </Grid>
                 </Grid>
+                
             </TabItem>
         </TabControl>
-        <Grid Grid.Row="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0, 0, 0, 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Button Content="Previous" Margin="5" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding PreviousPageCommand}"/>
-            <Button Content="Next" Margin="5 5 10 5" HorizontalAlignment="Right" Grid.Column="1" Foreground="White" Command="{Binding NextPageCommand}" />
-        </Grid>
+        
 
     </Grid>
 </UserControl>
