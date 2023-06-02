@@ -13,44 +13,104 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Text="Reports"  Margin="0,10,20, 10" FontWeight="Bold" FontSize="24" />
+            <TextBlock Text="Reports"  Margin="0,5,0,0" FontWeight="Bold" FontSize="24" />
         </StackPanel>
 
-        <ScrollViewer 
-                HorizontalScrollBarVisibility="Hidden" 
-                VerticalScrollBarVisibility="Auto" 
-                CanContentScroll="True"
-                Grid.Row="1">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0 0 0 0">
-                    <Grid Grid.Row="1">
-                        <ItemsControl ItemsSource="{Binding ReportCardViewModels, Mode=TwoWay}"  Focusable="False">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <local:ReportCardView Margin="10"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <UniformGrid Columns="2" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </Grid>
-                </Grid>
-                <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid
+                    Grid.Column="1"
+                    Margin="10 5 10 10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <Button Content="Previous" Margin="15" HorizontalAlignment="Left"  Grid.Column="0" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding PreviousPageCommand}"/>
-                    <Button Content="Next" Margin="15" HorizontalAlignment="Right" Grid.Column="1" Foreground="White" Command="{Binding NextPageCommand}" />
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Text="Month: "
+                        FontSize="14"
+                        VerticalAlignment="Center"/>
+
+                    <ComboBox  
+                        Grid.Column="1"
+                        Width="150"
+                        ItemsSource="{Binding Months}"  
+                        SelectedIndex="0"/>
+                </Grid>
+
+                <Grid
+                    Margin="10 5 25 10"
+                    Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Text="Year: "
+                        FontSize="14"
+                        VerticalAlignment="Center"/>
+
+                    <ComboBox 
+                        Grid.Column="1"
+                        Width="150"
+                        ItemsSource="{Binding Years}"
+                        SelectedIndex="0"/>
                 </Grid>
             </Grid>
-        </ScrollViewer>
+            <Grid 
+                Grid.Row="1" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Stretch" 
+                Margin="0 0 0 0">
+                <Grid Grid.Row="1">
+                    <ItemsControl ItemsSource="{Binding ReportCardViewModels, Mode=TwoWay}"  Focusable="False">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:ReportCardView Margin="10"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="2" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="25 0 25 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Previous" 
+                        HorizontalAlignment="Left"  
+                        Grid.Column="0"
+                        Foreground="White" 
+                        BorderBrush="#7A7A7A" 
+                        Background="#7A7A7A" 
+                        Command="{Binding PreviousPageCommand}"
+                        Visibility="{Binding PreviousPageVisibility}"/>
+                <Button Content="Next"  
+                        HorizontalAlignment="Right"
+                        Grid.Column="1" Foreground="White"
+                        Command="{Binding NextPageCommand}"
+                        Visibility="{Binding NextPageVisibility}" />
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

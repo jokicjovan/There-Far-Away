@@ -9,6 +9,7 @@ namespace Three_Far_Away.Services.Interfaces
     {
         public List<Journey> ReadPage(int page, int size);
         public List<Journey> ReadPageWithDate(int page, int size, DateTime fromTime, DateTime toTime);
+        public List<Journey> GetJourneysInsideDate(DateTime fromTime, DateTime toTime);
         public Journey GetJourneyWithAttractions(Guid id);
     }
 }

@@ -11,13 +11,14 @@ namespace Three_Far_Away.ViewModels
 {
     public class ReportCardViewModel : ViewModelBase
     {
+        #region services
         public readonly IJourneyService journeyService;
         public readonly IArrangementService arrangementService;
+        #endregion
 
-        public ICommand ViewJourneyPreviewCommand { get; }
-
+        #region properties
         private Guid _journeyId;
-        public Guid Journey
+        public Guid JourneyId
         {
             get
             {
@@ -26,7 +27,7 @@ namespace Three_Far_Away.ViewModels
             set
             {
                 _journeyId = value;
-                OnPropertyChanged(nameof(Journey));
+                OnPropertyChanged(nameof(JourneyId));
             }
         }
 
@@ -71,19 +72,24 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(Date));
             }
         }
+        #endregion
+
+        #region commands
+        public ICommand ViewJourneyPreviewCommand { get; }
+        #endregion
 
         public ReportCardViewModel(Journey journey)
         {
             journeyService = App.host.Services.GetService<IJourneyService>();
             arrangementService = App.host.Services.GetService<IArrangementService>();
 
-            Journey = journey.Id;
+            JourneyId = journey.Id;
             Name = journey.Name;
             Date = journey.StartDate.ToString().Split(" ")[0] + " - " + journey.EndDate.ToString().Split(" ")[0];
 
             IEnumerable<Arrangement> arrangements = arrangementService.GetJourneyArrangements(journey.Id);
             NumberSold = arrangements.Count();
-            ViewJourneyPreviewCommand = new FireEventCommand("AgentJourneyPreview");
+            ViewJourneyPreviewCommand = new ViewJourneyPreviewFromReportCardCommand(this);
         }
     }
 }

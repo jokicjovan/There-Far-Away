@@ -65,7 +65,7 @@ namespace Three_Far_Away.Services
 
         public List<Journey> ReadPageWithDate(int page, int size, DateTime fromTime, DateTime toTime)
         {
-            List<Journey> journeys = _journeyRepository.FindJourneysInsideDate(fromTime, toTime);
+            List<Journey> journeys = GetJourneysInsideDate(fromTime, toTime);
             List<Journey> newJourneys = new List<Journey>();
             for (int i = page * size; i < (page + 1) * size; i++)
             {
@@ -73,6 +73,11 @@ namespace Three_Far_Away.Services
                 newJourneys.Add(journeys[i]);
             }
             return newJourneys;
+        }
+
+
+        public List<Journey> GetJourneysInsideDate(DateTime fromTime, DateTime toTime) {
+            return _journeyRepository.FindJourneysInsideDate(fromTime, toTime);
         }
     }
 }
