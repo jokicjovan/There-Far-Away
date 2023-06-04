@@ -141,6 +141,11 @@ namespace Three_Far_Away.ViewModels
 
         private void HandleJourneyDeleted(object sender, EventArgs e)
         {
+            if (journeys.Count == 1)
+            {
+                PreviousPageCommand.Execute(null);
+                return;
+            }
             Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
         }

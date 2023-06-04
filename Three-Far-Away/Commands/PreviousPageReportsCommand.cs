@@ -23,8 +23,10 @@ namespace Three_Far_Away.Commands
                 _reportsViewModel.PreviousPageVisibility = Visibility.Collapsed;
             else
                 _reportsViewModel.PreviousPageVisibility = Visibility.Visible;
-            
+
             if (journeys.Count < 4)
+                _reportsViewModel.NextPageVisibility = Visibility.Collapsed;
+            else if (journeys.Count == 4 && _reportsViewModel.journeyService.ReadPageWithDate(_reportsViewModel.page + 1, 4, DateTime.MinValue, DateTime.Now).Count == 0)
                 _reportsViewModel.NextPageVisibility = Visibility.Collapsed;
             else
                 _reportsViewModel.NextPageVisibility = Visibility.Visible;
