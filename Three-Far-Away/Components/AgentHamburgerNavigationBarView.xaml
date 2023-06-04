@@ -64,7 +64,7 @@
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <materialDesign:PackIcon 
-                            Kind="ReportBar"  
+                            Kind="FileReport"  
                             Background="Transparent"
                             ToolTip="Home"
                             Foreground="#C1F08A"
@@ -172,7 +172,7 @@
                             <ControlTemplate TargetType="Button">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon 
-                                        Kind="ReportBar"  
+                                        Kind="FileReport"  
                                         Background="Transparent"
                                         ToolTip="My journeys"
                                         Foreground="#639B22"
