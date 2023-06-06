@@ -182,7 +182,7 @@ namespace Three_Far_Away.ViewModels
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        private void AddError(string errorMessage, string propertyName)
+        public void AddError(string errorMessage, string propertyName)
         {
             if (!_propertyNameToErrorsDictionary.ContainsKey(propertyName))
             {

@@ -35,7 +35,9 @@
                             Text="{Binding Name}" 
                             HorizontalAlignment="Center" 
                             FontSize="28"
-                            FontWeight="Bold"/>
+                            FontWeight="Bold"
+                            TextWrapping="Wrap"
+                            MaxWidth="400"/>
                 </Grid>
                 <Grid Grid.Row="1" HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>

@@ -17,21 +17,10 @@ namespace Three_Far_Away.Commands
 
         public override void Execute(object parameter)
         {
-            List<Journey> journeys = _reportsViewModel.journeyService.ReadPage(++_reportsViewModel.page, 4);
+            _reportsViewModel.page++;
+            _reportsViewModel.LoadReports();
 
-            if (_reportsViewModel.page == 0)
-                _reportsViewModel.PreviousPageVisibility = Visibility.Collapsed;
-            else
-                _reportsViewModel.PreviousPageVisibility = Visibility.Visible;
-
-            if (journeys.Count < 4)
-                _reportsViewModel.NextPageVisibility = Visibility.Collapsed;
-            else if (journeys.Count == 4 && _reportsViewModel.journeyService.ReadPageWithDate(_reportsViewModel.page + 1, 4, DateTime.MinValue, DateTime.Now).Count == 0)
-                _reportsViewModel.NextPageVisibility = Visibility.Collapsed;
-            else
-                _reportsViewModel.NextPageVisibility = Visibility.Visible;
-
-            _reportsViewModel.ReportCardViewModels = new ObservableCollection<ReportCardViewModel>(_reportsViewModel.CreateReportCardViewModels(journeys));
+        
         }
     }
 }

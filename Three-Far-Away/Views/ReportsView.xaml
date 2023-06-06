@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Text="Reports"  Margin="0,5,0,0" FontWeight="Bold" FontSize="24" />
+            <TextBlock Text="Reports"  Margin="0,5,0,5" FontWeight="Bold" FontSize="24" />
         </StackPanel>
 
         <Grid Grid.Row="1">
@@ -48,12 +48,14 @@
                         Grid.Column="0"
                         Text="Month: "
                         FontSize="14"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center"
+                        Margin="0 0 5 0"/>
 
                     <ComboBox  
                         Grid.Column="1"
                         Width="150"
                         ItemsSource="{Binding Months}"  
+                        SelectedItem="{Binding SelectedMonth}"
                         SelectedIndex="0"/>
                 </Grid>
 
@@ -69,12 +71,14 @@
                         Grid.Column="0"
                         Text="Year: "
                         FontSize="14"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center"
+                        Margin="0 0 5 0"/>
 
                     <ComboBox 
                         Grid.Column="1"
                         Width="150"
                         ItemsSource="{Binding Years}"
+                        SelectedItem="{Binding SelectedYear}"
                         SelectedIndex="0"/>
                 </Grid>
             </Grid>

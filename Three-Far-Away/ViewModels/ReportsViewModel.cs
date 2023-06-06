@@ -80,6 +80,40 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
+        private string _selectedMonth;
+        public string SelectedMonth
+        {
+            get
+            {
+                return _selectedMonth;
+            }
+            set
+            {
+                if (value == "All") _selectedMonth = "0";
+                else _selectedMonth = DateTime.ParseExact(value, "MMMM", CultureInfo.CurrentCulture).Month.ToString();
+                OnPropertyChanged(nameof(SelectedMonth));
+                InitPager();
+                LoadReports();
+            }
+        }
+
+        private string _selectedYear;
+        public string SelectedYear
+        {
+            get
+            {
+                return _selectedYear;
+            }
+            set
+            {
+                if (value == "All") _selectedYear = "0";
+                else _selectedYear = value;
+                OnPropertyChanged(nameof(SelectedYear));
+                InitPager();
+                LoadReports();
+            }
+        }
+
         #endregion
 
         #region commands
@@ -89,31 +123,56 @@ namespace Three_Far_Away.ViewModels
 
         public ReportsViewModel(IJourneyService journeyService)
         {
-            page = 0;
             this.journeyService = journeyService;
             Years = new ObservableCollection<string>();
             Months = new ObservableCollection<string>();
             Years.Add("All");
             Months.Add("All");
+            _selectedMonth = "0";
+            _selectedYear = "0";
 
-            var yearsEnumrator = journeyService.GetJourneysInsideDate(DateTime.MinValue, DateTime.Now).Select(j => j.StartDate.Year).Distinct().GetEnumerator();
+            var journeysUntilNow = journeyService.GetJourneysInsideDate(DateTime.MinValue, DateTime.Now);
+
+            var yearsEnumrator = journeysUntilNow.Select(j => j.StartDate.Year).Distinct().GetEnumerator();
             while (yearsEnumrator.MoveNext()) { 
                 Years.Add(yearsEnumrator.Current.ToString());
             }
 
-            var monthsEnumerator = journeyService.GetJourneysInsideDate(DateTime.MinValue, DateTime.Now).Select(j => j.StartDate.Month).Distinct().GetEnumerator();
+            var monthsEnumerator = journeysUntilNow.Select(j => j.StartDate.Month).Distinct().GetEnumerator();
             while (monthsEnumerator.MoveNext())
             {
                 Months.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthsEnumerator.Current));
             }
 
-            var journeys = new List<Journey>(journeyService.ReadPageWithDate(page, 4, DateTime.MinValue, DateTime.Now));
+            NextPageCommand = new NextPageReportsCommand(this);
+            PreviousPageCommand = new PreviousPageReportsCommand(this);
+            InitPager();
+            LoadReports();
+        }
+
+        public void InitPager() 
+        {
+            page = 0;
+            PreviousPageVisibility = Visibility.Collapsed;
+            NextPageVisibility = Visibility.Collapsed;
+        }
+
+        public void LoadReports() {
+            var journeys = new List<Journey>(journeyService.ReadPageWithDateByMonthAndYear(page, 4, DateTime.MinValue, DateTime.Now, int.Parse(SelectedMonth), int.Parse(SelectedYear)));
             ReportCardViewModels = new ObservableCollection<ReportCardViewModel>(CreateReportCardViewModels(journeys));
 
-            NextPageCommand = new NextPageReportsCommand(this);
-            PreviousPageCommand = new PreviousPageReportsCommand(this); 
-            PreviousPageVisibility = Visibility.Collapsed;
-            NextPageVisibility = Visibility.Visible;
+            if (page == 0)
+                PreviousPageVisibility = Visibility.Collapsed;
+            else
+                PreviousPageVisibility = Visibility.Visible;
+
+            if (ReportCardViewModels.Count < 4)
+                NextPageVisibility = Visibility.Collapsed;
+            else if (ReportCardViewModels.Count == 4 && journeyService.ReadPageWithDateByMonthAndYear(page + 1, 4, DateTime.MinValue, DateTime.Now,
+                int.Parse(SelectedMonth), int.Parse(SelectedYear)).Count == 0)
+                NextPageVisibility = Visibility.Collapsed;
+            else
+                NextPageVisibility = Visibility.Visible;
         }
 
 
