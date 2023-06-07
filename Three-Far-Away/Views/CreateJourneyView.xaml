@@ -3,10 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:converters="clr-namespace:Three_Far_Away.Converters" 
       xmlns:local="clr-namespace:Three_Far_Away.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
       d:DesignHeight="430" d:DesignWidth="750">
-
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" MinHeight="116.923"/>
@@ -48,7 +51,7 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Text = "{Binding Journey.Name ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text = "{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
             <Border Grid.Column="2" Background="Transparent" Margin="40,0">
                 <!-- Empty element used for spacing -->
             </Border>
@@ -59,7 +62,7 @@
             <DatePicker
                 Grid.Row="1"
                 Grid.Column="3"
-                Text = "{Binding Journey.StartDate ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text = "{Binding StartDate ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Border Grid.Column="4" Background="Transparent" Margin="20,0">
                 <!-- Empty element used for spacing -->
             </Border>
@@ -99,7 +102,7 @@
                 <TextBox
                 Grid.Row="1"
                 Grid.Column="0"
-                Text = "{Binding Journey.Price ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text = "{Binding Price ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Border Grid.Column="1" Background="Transparent" Margin="10,0">
                     <!-- Empty element used for spacing -->
                 </Border>
@@ -108,7 +111,7 @@
                 Grid.Column="2"
                 Text="Transport"/>
                 <ComboBox Grid.Row="1" Grid.Column="2" x:Name="trasportationsCB"
-                  SelectedValue="{Binding Path=Journey.Trasportation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                  SelectedValue="{Binding Path=Transportation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
 
             <Border Grid.Column="2" Background="Transparent" Margin="40,0">
@@ -121,7 +124,7 @@
             <DatePicker
                 Grid.Row="1"
                 Grid.Column="3"
-                Text = "{Binding Journey.EndDate ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text = "{Binding EndDate ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Border Grid.Column="4" Background="Transparent" Margin="20,0">
                 <!-- Empty element used for spacing -->

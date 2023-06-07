@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GongSolutions.Wpf.DragDrop.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,23 +32,31 @@ namespace Three_Far_Away.Views
         {
             CreateJourneyAttractionsViewModel vm = (CreateJourneyAttractionsViewModel)this.DataContext;
             List<Attraction> attractions= listBoxAll.SelectedItems.OfType<Attraction>().ToList();
-            vm.Locations.Clear();
-            foreach (Attraction attraction in attractions)
+            if (vm != null)
             {
-                vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "",false));
+                vm.Locations.Clear();
+                foreach (Attraction attraction in attractions)
+                {
+                    vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "", false));
+                }
             }
-            
+
         }
 
         private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             CreateJourneyAttractionsViewModel vm = (CreateJourneyAttractionsViewModel)this.DataContext;
             List<Attraction> attractions = listBoxSelected.SelectedItems.OfType<Attraction>().ToList();
-            vm.Locations.Clear();
-            foreach (Attraction attraction in attractions)
+            if (vm != null)
             {
-                vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "", false));
+                vm.Locations.Clear();
+                foreach (Attraction attraction in attractions)
+                {
+                    vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "", false));
+                }
             }
         }
+
+
     }
 }

@@ -32,8 +32,10 @@ namespace Three_Far_Away.Services
 
         public List<Attraction> ReadAll()
         {
-            return (List<Attraction>)_attractionRepository.ReadAll();
+            return (List<Attraction>)_attractionRepository.GetAttractionsWithLocations();
         }
+
+
 
         public Attraction Update(Attraction entity)
         {

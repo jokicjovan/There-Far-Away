@@ -155,7 +155,7 @@ namespace Three_Far_Away
             journey.Attractions.Add(attraction);
             journey.Attractions.Add(attraction);
             journey.Attractions.Add(attraction);
-            journey.Transportation = TransportationType.AIRPLANE;
+            journey.Transportation = TransportationType.Airplane;
 
 
 

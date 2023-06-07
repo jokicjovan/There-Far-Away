@@ -6,8 +6,11 @@ using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,14 +22,28 @@ using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
 {
-    class CreateJourneyAttractionsViewModel : ViewModelBase,IDropTarget
+    public class CreateJourneyAttractionsViewModel : ViewModelBase,IDropTarget
     {
         public readonly IJourneyService _journeyService;
+        public readonly IAttractionService _attractionService;
 
         public ObservableCollection<MapLocation> Locations { get; private set; }
 
         public ObservableCollection<Attraction> AllAttractions { get; private set; }
-        public ObservableCollection<Attraction> SelectedAttractions { get; private set; }
+        private ObservableCollection<Attraction> _selectedAttractions;
+
+        public ObservableCollection<Attraction> SelectedAttractions
+        {
+            get { return _selectedAttractions; }
+            set
+            {
+                if (_selectedAttractions != value)
+                {
+                    _selectedAttractions = value;
+                    OnPropertyChanged(nameof(SelectedAttractions));
+                }
+            }
+        }
 
         public ICollectionView AllAttractionsView;
         
@@ -47,6 +64,8 @@ namespace Three_Far_Away.ViewModels
         }
 
         public ICommand NavigateToCreateJourneyMapCommand { get; }
+        
+        public ICommand CreateJourneyCommand { get; }
 
         private string _filterAll;
         public string FilterAll
@@ -78,21 +97,33 @@ namespace Three_Far_Away.ViewModels
         }
         public CreateJourneyAttractionsViewModel(Journey journey)
         {
+            Journey = journey;
             _journeyService = App.host.Services.GetService<IJourneyService>();
-            AllAttractions = new ObservableCollection<Attraction>();
+            _attractionService = App.host.Services.GetService<IAttractionService>();
+            AllAttractions = new ObservableCollection<Attraction>(_attractionService.ReadAll());
             SelectedAttractions = new ObservableCollection<Attraction>();
-            AllAttractions.Add(new Attraction("Žičа","Najbolji manastir ikad",AttractionType.ATTRACTION,"",new Location("Nepoznata Adresa",48,49)));
-            AllAttractions.Add(new Attraction("Studenica", "Najbolji manastir ikad", AttractionType.ATTRACTION, "", new Location("Nepoznata Adresa", 49, 49)));
-            AllAttractions.Add(new Attraction("Decani", "Najbolji manastir ikad", AttractionType.ATTRACTION, "", new Location("Nepoznata Adresa", 20, 49)));
             Locations = new ObservableCollection<MapLocation>();
-            NavigateToCreateJourneyMapCommand = new NavigateToCreateJourneyCommand(this,"Attractions","Map");
             AllAttractionsView = CollectionViewSource.GetDefaultView(AllAttractions);
             AllAttractionsView.Filter = o => String.IsNullOrEmpty(FilterAll) ? true : ((Attraction)o).Name.ToLower().Contains(FilterAll.ToLower());
             SelectedAttractionsView = CollectionViewSource.GetDefaultView(SelectedAttractions);
             SelectedAttractionsView.Filter = o => String.IsNullOrEmpty(FilterSelected) ? true : ((Attraction)o).Name.ToLower().Contains(FilterSelected.ToLower());
-            Journey = journey;
+            SelectedAttractionsView.CollectionChanged += AttractionsViewChanged;
+            foreach (Attraction attraction in journey.Attractions)
+            {
+                SelectedAttractions.Add(attraction);
+                AllAttractions.Remove(attraction);
+            }
+            CreateJourneyCommand = new CreateJourneyCommand(this);
+            NavigateToCreateJourneyMapCommand = new NavigateToCreateJourneyCommand(this, "Attractions", "Map");
+
 
         }
+
+        private void AttractionsViewChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            Journey.Attractions= SelectedAttractionsView.OfType<Attraction>().ToList();
+        }
+
         void ApplyFilterAll()
         {
             AllAttractions = new ObservableCollection<Attraction>(AllAttractions.Where(item => item.Name.ToLower().Contains(FilterAll.ToLower())));
@@ -103,6 +134,7 @@ namespace Three_Far_Away.ViewModels
         {
             SelectedAttractions = new ObservableCollection<Attraction>(SelectedAttractions.Where(item => item.Name.ToLower().Contains(FilterSelected.ToLower())));
             SelectedAttractionsView.Refresh();
+            
         }
 
 
@@ -116,6 +148,7 @@ namespace Three_Far_Away.ViewModels
                 dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;
                 dropInfo.Effects = DragDropEffects.Copy;
             }
+            
             
         }
 

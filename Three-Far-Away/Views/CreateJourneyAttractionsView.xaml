@@ -118,7 +118,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Button Content="Previous" Margin="5,14,0,15" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding NavigateToCreateJourneyMapCommand}"/>
-            <Button Content="Finish" Margin="0,14,0,15" HorizontalAlignment="Center" Grid.Column="2" Foreground="White" />
+            <Button Content="Finish" Margin="0,14,0,15" HorizontalAlignment="Center" Grid.Column="2" Foreground="White" Command="{Binding CreateJourneyCommand}" />
         </Grid>
     </Grid>
 </UserControl>

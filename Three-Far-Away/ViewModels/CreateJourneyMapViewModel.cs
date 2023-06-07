@@ -3,8 +3,11 @@ using Microsoft.Maps.MapControl.WPF;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,7 +18,7 @@ using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
 {
-    class CreateJourneyMapViewModel : ViewModelBase
+    class CreateJourneyMapViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         public readonly IJourneyService _journeyService;
         private HttpClient httpClient;
@@ -45,30 +48,29 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        private Models.Location _startLocationModel;
         public Models.Location StartLocationModel
         {
             get
             {
-                return _startLocationModel;
+                return Journey.StartLocation;
             }
             set
             {
-                _startLocationModel = value;
+                Journey.StartLocation = value;
                 OnPropertyChanged(nameof(StartLocationModel));
+                
             }
         }
 
-        private Models.Location _endLocationModel;
         public Models.Location EndLocationModel
         {
             get
             {
-                return _endLocationModel;
+                return Journey.EndLocation;
             }
             set
             {
-                _endLocationModel = value;
+                Journey.EndLocation = value;
                 OnPropertyChanged(nameof(EndLocationModel));
             }
         }
@@ -98,6 +100,11 @@ namespace Three_Far_Away.ViewModels
             {
                 _startCity = value;
                 OnPropertyChanged(nameof(StartCity));
+                ClearErrors(nameof(StartCity));
+                if (StartLocationModel == null)
+                {
+                    AddError("Location Is Not Selected", nameof(StartCity));
+                }
             }
         }
 
@@ -141,11 +148,40 @@ namespace Three_Far_Away.ViewModels
             {
                 _endCity = value;
                 OnPropertyChanged(nameof(EndCity));
+                ClearErrors(nameof(EndCity));
+                if (EndLocationModel == null)
+                {
+                    AddError("Location Is Not Selected", nameof(EndCity));
+                }
             }
         }
 
+        #region errors
+        private readonly Dictionary<string, List<string>> _propertyNameToErrorsDictionary;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+        public bool HasErrors => _propertyNameToErrorsDictionary.Any();
+
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged(nameof(HasErrorMessage));
+            }
+        }
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+        #endregion
+
+
         public CreateJourneyMapViewModel(Journey journey)
         {
+            Journey = journey;
             _journeyService = App.host.Services.GetService<IJourneyService>();
             Locations = new ObservableCollection<MapLocation>();
             MapClickCommand= new AddStartLocationPinCommand(this);
@@ -156,7 +192,18 @@ namespace Three_Far_Away.ViewModels
             NavigateToCreateJourneyAttractionsCommand = new NavigateToCreateJourneyCommand(this,"Map","Attractions");
             NavigateToCreateJourneyCommand = new NavigateToCreateJourneyCommand(this,"Map","Home");
             httpClient = new HttpClient();
-            Journey = journey;
+            _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
+            if (Journey.StartLocation != null)
+            {
+                Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(Journey.StartLocation.Longitude,Journey.StartLocation.Latitude),"S",true));
+                StartCity = Journey.StartLocation.Address;
+            }
+            if (Journey.EndLocation != null)
+            {
+                Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(Journey.EndLocation.Longitude, Journey.EndLocation.Latitude), "F", false));
+                EndCity = Journey.EndLocation.Address;
+            }
+
         }
         private Map _map;
         public Map MapControl
@@ -182,6 +229,7 @@ namespace Three_Far_Away.ViewModels
             var data = (JObject)JsonConvert.DeserializeObject(responseBody);
             StartLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
             StartCity = StartLocationModel.Address;
+            Journey.StartLocation= StartLocationModel;
         }
 
         public async Task UpdateEndLocationAsync(Microsoft.Maps.MapControl.WPF.Location location)
@@ -196,6 +244,33 @@ namespace Three_Far_Away.ViewModels
             var data = (JObject)JsonConvert.DeserializeObject(responseBody);
             EndLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
             EndCity = EndLocationModel.Address;
+            Journey.EndLocation = EndLocationModel;
+        }
+
+        public IEnumerable GetErrors(string? propertyName)
+        {
+            return _propertyNameToErrorsDictionary.GetValueOrDefault(propertyName, new List<string>());
+        }
+
+        private void ClearErrors(string propertyName)
+        {
+            _propertyNameToErrorsDictionary.Remove(propertyName);
+            OnErrorsChanged(propertyName);
+        }
+
+        private void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        private void AddError(string errorMessage, string propertyName)
+        {
+            if (!_propertyNameToErrorsDictionary.ContainsKey(propertyName))
+            {
+                _propertyNameToErrorsDictionary.Add(propertyName, new List<string>());
+            }
+            _propertyNameToErrorsDictionary[propertyName].Add(errorMessage);
+            OnErrorsChanged(propertyName);
         }
     }
     public class MapLocation
