@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Three-Far-Away", "Three-Far-Away.csproj", "{D3490B14-D82D-4E7F-8AF8-BE9C52EA950C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CBEAEE12-10F7-471D-B0C6-7C4A0BC05494}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Three-Far-Away", "Three-Far-Away.csproj", "{D3490B14-D82D-4E7F-8AF8-BE9C52EA950C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

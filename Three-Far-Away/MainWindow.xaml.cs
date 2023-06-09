@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Three_Far_Away.Views
+namespace Three_Far_Away
 {
     /// <summary>
-    /// Interaction logic for LocationListItemView.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LocationListItemView : UserControl
+    public partial class MainWindow : Window
     {
-        public LocationListItemView()
+        public MainWindow()
         {
             InitializeComponent();
         }
