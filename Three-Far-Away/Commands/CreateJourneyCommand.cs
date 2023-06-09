@@ -30,8 +30,15 @@ namespace Three_Far_Away.Commands
 
         public override void Execute(object parameter)
         {
-            
-            Journey created = _createJourneyAttractionsViewModel._journeyService.Create(_createJourneyAttractionsViewModel.Journey);
+            if (_createJourneyAttractionsViewModel._journeyService.Read(_createJourneyAttractionsViewModel.Journey.Id) != null)
+            {
+                _createJourneyAttractionsViewModel._journeyService.Update(_createJourneyAttractionsViewModel.Journey);
+            }
+            else
+            {
+                Journey created = _createJourneyAttractionsViewModel._journeyService.Create(_createJourneyAttractionsViewModel.Journey);
+            }
+
             EventBus.FireEvent("AgentJourneys");
         }
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

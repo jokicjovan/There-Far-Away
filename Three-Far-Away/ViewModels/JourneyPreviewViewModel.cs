@@ -133,6 +133,7 @@ namespace Three_Far_Away.ViewModels
         public ICommand DeleteJourneyCommand { get; }
         public ICommand ReserveCommand { get; }
         public ICommand BuyCommand { get; }
+        public ICommand NavigateToEditJourneyCommand { get; }
         #endregion
 
         #region command properties
@@ -206,6 +207,7 @@ namespace Three_Far_Away.ViewModels
             StartDate = journey.StartDate.ToString().Split(" ")[0];
             EndDate = journey.EndDate.ToString().Split(" ")[0];
             Price = journey.Price.ToString();
+            NavigateToEditJourneyCommand = new NavigateToCreateJourneyCommand(journey);
             LocationListItemViewModels = new ObservableCollection<LocationListItemViewModel>(CreateLocationItemViews(journey));
 
             if (accountStore.Role == Role.AGENT)

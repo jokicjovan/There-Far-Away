@@ -73,14 +73,6 @@
                 <views:LocationListItemView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:CreateJourneyViewModel}">
-                <views:CreateJourneyView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vms:ClientsJourneysViewModel}">
-                <views:ClientsJourneysView/>
-            </DataTemplate>
-
         </Grid.Resources>
 
         <materialDesign:DialogHost CloseOnClickAway="True">

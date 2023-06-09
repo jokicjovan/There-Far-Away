@@ -58,6 +58,7 @@ namespace Three_Far_Away.ViewModels
             {
                 CreateJourneyAttractionsViewModel cjmvm = new CreateJourneyAttractionsViewModel((Journey)journey);
                 SwitchCurrentViewModel(cjmvm);
+            });
             EventBus.RegisterHandler("Reports", () =>
             {
                 ReportsViewModel rvm = App.host.Services.GetRequiredService<ReportsViewModel>();
