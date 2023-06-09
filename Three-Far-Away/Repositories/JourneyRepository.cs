@@ -19,7 +19,7 @@ namespace Three_Far_Away.Repositories
         public Journey GetJourneyWithAttractions(Guid id)
         {
             return _entities
-                .Include(e => e.Attractions)
+                .Include(e => e.Attractions).ThenInclude(a => a.Location)
                 .Include(e => e.StartLocation)
                 .Include(e => e.EndLocation)
                 .FirstOrDefault(e => e.Id == id);

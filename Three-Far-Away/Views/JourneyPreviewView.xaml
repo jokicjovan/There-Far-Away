@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              xmlns:converters="clr-namespace:Three_Far_Away.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="430" d:DesignWidth="750"
              Loaded="OnLoaded"
@@ -14,8 +15,8 @@
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid Margin="50 0 0 0">
-        <ScrollViewer 
-                HorizontalScrollBarVisibility="Hidden" 
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Hidden" 
                 VerticalScrollBarVisibility="Auto" 
                 CanContentScroll="True">
             <Grid  Margin="20 10">
@@ -64,13 +65,13 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
-                            Text="$" 
+                            Text="{Binding Price}" 
                             HorizontalAlignment="Center" 
                             FontSize="28"
                             Foreground="#8BC34A"
                             FontWeight="Bold"/>
                     <TextBlock Grid.Column="1" 
-                            Text="{Binding Price}" 
+                            Text=" RSD" 
                             HorizontalAlignment="Center" 
                             FontSize="28"
                             Foreground="#8BC34A"
@@ -95,7 +96,6 @@
                                    Margin="10, 0, 0,0"/>
                 </Grid>
                 <Grid Grid.Row="4">
-                    <!-- Dinamicki dodati lokacije -->
                     <ItemsControl ItemsSource="{Binding LocationListItemViewModels}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -123,8 +123,27 @@
                                    Margin="10, 0, 0,0"/>
 
                 </Grid>
-                <Grid Grid.Row="6" Width="400" Height="400" Background="#EBB9B9">
-                    <!-- Mapa -->
+                <Grid Grid.Row="6" Width="400" Height="350" Background="#EBB9B9">
+                    <wpf:Map MouseRightButtonDown="myMap_MouseDown"
+                             PreviewMouseWheel="myMap_PreviewMouseWheel"
+                             x:Name="myMap" 
+                             ZoomLevel="6.3"
+                             Center="44.01667, 20.91667"
+                             CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
+                        <wpf:MapItemsControl ItemsSource="{Binding Locations}">
+                            <wpf:MapItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <wpf:Pushpin  Location="{Binding Location}"  Content="{Binding Name}">
+                                    </wpf:Pushpin>
+                                </DataTemplate>
+                            </wpf:MapItemsControl.ItemTemplate>
+                        </wpf:MapItemsControl>
+                        
+
+                        <wpf:MapPolyline Stroke="#8BC34A" StrokeThickness="2" 
+                                         Locations="{Binding LocationCollection}">
+                        </wpf:MapPolyline>
+                    </wpf:Map>
                 </Grid>
                 <Grid Grid.Row="7"
                           HorizontalAlignment="Center"

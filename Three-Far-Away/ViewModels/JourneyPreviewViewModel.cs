@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Windows.Data;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Components;
@@ -25,6 +28,9 @@ namespace Three_Far_Away.ViewModels
         #endregion
 
         #region properties
+
+        public ObservableCollection<MapLocation> Locations { get; private set; }
+
 
         private ObservableCollection<LocationListItemViewModel> _locationListItemViewModels;
         public ObservableCollection<LocationListItemViewModel> LocationListItemViewModels
@@ -124,6 +130,20 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
+        private LocationCollection _locationCollection;
+        public LocationCollection LocationCollection
+        {
+            get
+            {
+                return _locationCollection;
+            }
+            set
+            {
+                _locationCollection = value;
+                OnPropertyChanged(nameof(LocationCollection));
+            }
+        }
+
         #endregion
 
 
@@ -197,6 +217,7 @@ namespace Three_Far_Away.ViewModels
 
         public JourneyPreviewViewModel(Guid id)
         {
+            Locations = new ObservableCollection<MapLocation>();
             accountStore = App.host.Services.GetService<AccountStore>();
             journeyService = App.host.Services.GetService<IJourneyService>();
             arrangementService = App.host.Services.GetRequiredService<IArrangementService>();
@@ -245,6 +266,22 @@ namespace Three_Far_Away.ViewModels
                     }
                 }
             }
+            
+            Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(journey.StartLocation.Longitude, journey.StartLocation.Latitude), "S", true));
+
+            foreach (Attraction attraction in journey.Attractions)
+            {
+                Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "A", false));
+            }
+
+            Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(journey.EndLocation.Longitude, journey.EndLocation.Latitude), "F", false));
+
+
+            LocationCollection = new LocationCollection();
+            foreach (var mapLocation in Locations)
+            {
+                LocationCollection.Add(mapLocation.Location);
+            }
         }
 
         private List<LocationListItemViewModel> CreateLocationItemViews (Journey journey)
@@ -258,5 +295,9 @@ namespace Three_Far_Away.ViewModels
             locations.Add(new LocationListItemViewModel(journey.EndLocation.Address));
             return locations;
         }
+
+        
     }
+
+
 }
