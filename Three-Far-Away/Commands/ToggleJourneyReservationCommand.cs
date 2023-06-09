@@ -20,7 +20,8 @@ namespace Three_Far_Away.Commands
         public override bool CanExecute(object parameter)
         {
             Arrangement userArrangement = _journeyPreviewViewModel.arrangementService.GetJourneyArrangementForUser(_journeyPreviewViewModel.Id, _journeyPreviewViewModel.accountStore.Id);
-            return base.CanExecute(parameter) && !(userArrangement != null && userArrangement.Status == ArrangementStatus.BOUGHT);
+            return base.CanExecute(parameter) && !(userArrangement != null && userArrangement.Status == ArrangementStatus.BOUGHT) &&
+                !(_journeyPreviewViewModel.journeyService.Read(_journeyPreviewViewModel.Id).StartDate < DateTime.UtcNow);
         }
 
         public override async void Execute(object parameter)

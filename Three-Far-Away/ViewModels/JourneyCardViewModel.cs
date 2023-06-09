@@ -105,7 +105,7 @@ namespace Three_Far_Away.ViewModels
                 MenuVisibility = Visibility.Collapsed;
             }
 
-            ViewJourneyPreviewCommand = new ViewJourneyPreviewCommand(this);
+            ViewJourneyPreviewCommand = new ViewJourneyPreviewFromJourneyCardCommand(this);
             DeleteJourneyFromCardCommand = new DeleteJourneyFromCardCommand(this);
         }
 	}

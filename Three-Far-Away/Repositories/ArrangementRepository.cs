@@ -22,7 +22,7 @@ namespace Three_Far_Away.Repositories
 
         public Arrangement FindJourneyArrangementForUser(Guid journeyId, Guid userId)
         {
-            return _entities.Include(u => u.User).FirstOrDefault(a => a.Journey.Id == journeyId && a.User.Id == userId);
+            return _entities.Include(u => u.User).Include(j => j.Journey).FirstOrDefault(a => a.Journey.Id == journeyId && a.User.Id == userId);
         }
 
         public IEnumerable<Arrangement> FindArrangementsForUser(Guid userId, ArrangementStatus status)

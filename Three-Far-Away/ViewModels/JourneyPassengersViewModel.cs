@@ -31,12 +31,27 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(Arragements));
             }
         }
+
+        private bool _isEmpty;
+        public bool IsEmpty
+        {
+            get
+            {
+                return _isEmpty;
+            }
+            set
+            {
+                _isEmpty = value;
+                OnPropertyChanged(nameof(IsEmpty));
+            }
+        }
         #endregion
 
         public JourneyPassengersViewModel(Guid journeyId)
         {
             arrangementService = App.host.Services.GetService<IArrangementService>();
             _arragements = new ObservableCollection<Arrangement>(arrangementService.GetJourneyArrangements(journeyId));
+            IsEmpty = _arragements.Count() <= 0 ? true : false;
         }
     }
 }
