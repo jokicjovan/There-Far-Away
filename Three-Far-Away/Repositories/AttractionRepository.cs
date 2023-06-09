@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace Three_Far_Away.Repositories
         public AttractionRepository(ThereFarAwayDbContext context) : base(context)
         {
 
+        }
+        public List<Attraction> GetAttractionsWithLocations()
+        {
+            return _entities
+                .Include(e => e.Location).ToList();
         }
     }
 }

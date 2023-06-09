@@ -20,6 +20,7 @@ namespace Three_Far_Away.ViewModels
     public class JourneysViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public int page;
+        
         public readonly AccountStore accountStore;
         
         #region services
@@ -29,6 +30,7 @@ namespace Three_Far_Away.ViewModels
         #region commands
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
+        public ICommand NavigateToCreateJourneyCommand { get; }
         #endregion
 
         #region properties
@@ -104,6 +106,8 @@ namespace Three_Far_Away.ViewModels
             
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
+            Journey j = journeyService.ReadAll()[0];
+            NavigateToCreateJourneyCommand = new NavigateToCreateJourneyCommand(new Journey());
             accountStore = App.host.Services.GetService<AccountStore>();
 
             if (accountStore.Role.Equals(Role.AGENT))

@@ -12,6 +12,10 @@ using Microsoft.Extensions.Configuration;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Repositories.Interfaces;
 using Three_Far_Away.Models;
+using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
+using Credential = Three_Far_Away.Models.Credential;
+using Microsoft.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Three_Far_Away.Components;
 using Three_Far_Away.Infrastructure;
 using System;
@@ -48,6 +52,8 @@ namespace Three_Far_Away
                 services.AddTransient<CreateJourneyViewModel>();
                 services.AddTransient<JourneyCardViewModel>();
                 services.AddTransient<LocationListItemViewModel>();
+                services.AddTransient<CreateJourneyMapViewModel>();
+                services.AddTransient<CreateJourneyAttractionsViewModel>();
                 services.AddTransient<ClientsJourneysViewModel>();
 
                 services.AddSingleton<MainViewModel>();
@@ -76,6 +82,10 @@ namespace Three_Far_Away
                 services.AddSingleton<AccountStore>();
 
             }).Build();
+        }
+        public void MapWithPushpins_TouchDown()
+        {
+            MessageBox.Show("1".ToString());
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -146,7 +156,7 @@ namespace Three_Far_Away
             journey.Attractions.Add(attraction);
             journey.Attractions.Add(attraction);
             journey.Attractions.Add(attraction);
-            journey.Transportation = TransportationType.PLANE;
+            journey.Transportation = TransportationType.Airplane;
 
             Journey journey1 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));
             Journey journey2 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));

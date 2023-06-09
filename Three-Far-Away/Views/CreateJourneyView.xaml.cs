@@ -24,6 +24,8 @@ namespace Three_Far_Away.Views
         public CreateJourneyView()
         {
             InitializeComponent();
+            trasportationsCB.ItemsSource = Enum.GetValues(typeof (TransportationType));
+
         }
     }
 }

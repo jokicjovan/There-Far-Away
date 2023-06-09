@@ -222,7 +222,7 @@ namespace Three_Far_Away.ViewModels
 
             if (BoughtJourneyCardViewModels.Count < 4)
                 NextPageVisibility = Visibility.Collapsed;
-            else if (ReservedJourneyCardViewModels.Count == 4 && readCards(userId, boughtPage + 1, 4, ArrangementStatus.BOUGHT).Count == 0)
+            else if (BoughtJourneyCardViewModels.Count == 4 && readCards(userId, boughtPage + 1, 4, ArrangementStatus.BOUGHT).Count == 0)
                 NextPageVisibility = Visibility.Collapsed;
             else
                 NextPageVisibility = Visibility.Visible;

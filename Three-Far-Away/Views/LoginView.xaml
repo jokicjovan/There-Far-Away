@@ -52,7 +52,7 @@
                     <TextBlock 
                         Grid.Row="0" 
                         Text="Username"/>
-                    
+
                     <TextBox
                         Grid.Row="1"
                         Text = "{Binding Username, UpdateSourceTrigger=PropertyChanged}"

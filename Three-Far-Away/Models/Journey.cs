@@ -35,7 +35,13 @@ namespace Three_Far_Away.Models
         [Column("transportation")]
         public TransportationType Transportation { get; set; }
 
-        public Journey() { }
+        public Journey() {
+            Name = "";
+            StartDate = DateTime.Now.AddDays(1);
+            EndDate = DateTime.Now.AddDays(1);
+            Attractions= new List<Attraction>();
+
+        }
 
         public Journey(Guid id, string name, DateTime startDate, DateTime endDate, Location startLocation, Location endLocation, double price, List<Attraction> attractions, TransportationType transportation)
         {

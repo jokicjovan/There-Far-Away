@@ -44,7 +44,7 @@
 
                 <Grid Grid.Row="2" >
                     <Button 
-                    Content="View journey" 
+                    Content="View" 
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Grid.Column="0" 
