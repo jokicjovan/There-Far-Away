@@ -26,7 +26,7 @@ namespace Three_Far_Away.Models.DTOs
             Id = journey.Id;
             Name = journey.Name;
             Date = journey.StartDate.ToString().Split(" ")[0] + " - " + journey.EndDate.ToString().Split(" ")[0];
-            Price = journey.Price + "RSD";
+            Price = journey.Price + " RSD";
         }
 
     }
