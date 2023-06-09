@@ -45,6 +45,7 @@ namespace Three_Far_Away.Commands
                 Journey.Transportation = TransportationType.Car;
                 Journey.Attractions = new List<Attraction>();
             }
+
             else
             {
                 CreateJourneyViewModel jvm = (CreateJourneyViewModel)vm;
@@ -68,14 +69,25 @@ namespace Three_Far_Away.Commands
             if (ViewModelBase!=null)
                 ViewModelBase.PropertyChanged += OnViewModelPropertyChanged;
         }
+
+        public NavigateToCreateJourneyCommand(Journey journey)
+        {
+            
+            CreateJourneyViewModel jvm = new CreateJourneyViewModel(journey);
+            Journey = journey;
+            ViewModelBase = jvm;
+            eventName = "CreateJourney";
+            
+            if (ViewModelBase != null)
+                ViewModelBase.PropertyChanged += OnViewModelPropertyChanged;
+        }
         public override bool CanExecute(object parameter)
         {
-            return true;
-            /*if (Journey == null)
+            if (from == null)
                 return true;
             if (from == "Home")
             {
-                return Journey.Name.Length > 2 && Journey.Name.Length <= 30 && Journey.Price >= 0 && Journey.StartDate >= DateTime.Now && Journey.StartDate < Journey.EndDate && base.CanExecute(parameter);
+                return Journey.Name.Length > 2 && Journey.Name.Length <= 30 && Journey.Price > 0 && Journey.StartDate >= DateTime.Now && Journey.StartDate < Journey.EndDate && base.CanExecute(parameter);
             }
             else if (from == "None")
             {
@@ -83,13 +95,13 @@ namespace Three_Far_Away.Commands
             }
             else if (from == "Map")
             {
-                return true;
+                return Journey.StartLocation != null && Journey.EndLocation != null;
             }
             else if (from == "Attractions")
             {
-                return true;
+                return Journey.Attractions.Count>0;
             }
-            return false;*/
+            return false;
 
         }
 
@@ -118,15 +130,15 @@ namespace Three_Far_Away.Commands
             }
             else if (from == "Map")
             {
-                if (e.PropertyName == nameof(CreateJourneyViewModel.Journey.StartLocation) ||
-                e.PropertyName == nameof(CreateJourneyViewModel.Journey.EndLocation))
+                if (e.PropertyName == "StartLocationModel"||
+                e.PropertyName == "EndLocationModel")
                 {
                     OnCanExecuteChanged();
                 }
             }
             else if (from == "Attractions")
             {
-                if (e.PropertyName == nameof(CreateJourneyViewModel.Journey.Attractions))
+                if (e.PropertyName == "Attractions")
                 {
                     OnCanExecuteChanged();
                 }

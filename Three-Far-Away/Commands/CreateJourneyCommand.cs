@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,14 @@ namespace Three_Far_Away.Commands
         {
             _createJourneyAttractionsViewModel = createJourneyAttractionsViewModel;
 
+            if (_createJourneyAttractionsViewModel != null)
+                _createJourneyAttractionsViewModel.PropertyChanged += OnViewModelPropertyChanged;
+
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return _createJourneyAttractionsViewModel.Journey.Attractions.Count > 0;
         }
 
         public override void Execute(object parameter)
@@ -24,6 +33,13 @@ namespace Three_Far_Away.Commands
             
             Journey created = _createJourneyAttractionsViewModel._journeyService.Create(_createJourneyAttractionsViewModel.Journey);
             EventBus.FireEvent("AgentJourneys");
+        }
+        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Attractions")
+            {
+                OnCanExecuteChanged();
+            }
         }
     }
 }

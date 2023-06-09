@@ -66,7 +66,7 @@ namespace Three_Far_Away.ViewModels
 				Journey.StartDate = value;
 				OnPropertyChanged(nameof(StartDate));
                 ClearErrors(nameof(StartDate)); ;
-                if (StartDate<=DateTime.Now)
+                if (StartDate<DateTime.Now)
                 {
                     AddError("Start Time Cannot Be In Past", nameof(StartDate));
                 }
@@ -83,7 +83,7 @@ namespace Three_Far_Away.ViewModels
 				Journey.EndDate = value;
 				OnPropertyChanged(nameof(EndDate));
                 ClearErrors(nameof(EndDate)); ;
-                if (EndDate <= StartDate)
+                if (EndDate < StartDate)
                 {
                     AddError("End Time Cannot Be Before Start Time", nameof(EndDate));
                 }
@@ -100,7 +100,7 @@ namespace Three_Far_Away.ViewModels
 				Journey.Price = value;
 				OnPropertyChanged(nameof(Price));
                 ClearErrors(nameof(Price));
-                if (Price<0)
+                if (Price<=0)
                 {
                     AddError("Price Cannot Be Lower Than 0", nameof(Price));
                 }

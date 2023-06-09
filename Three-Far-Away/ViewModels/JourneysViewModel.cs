@@ -72,8 +72,8 @@ namespace Three_Far_Away.ViewModels
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
-
-            NavigateToCreateJourneyCommand = new NavigateToCreateJourneyCommand(null,"None","Home");
+            Journey j = journeyService.ReadAll()[0];
+            NavigateToCreateJourneyCommand = new NavigateToCreateJourneyCommand(new Journey());
             accountStore = App.host.Services.GetService<AccountStore>();
 
             if (accountStore.Role.Equals(Role.AGENT))

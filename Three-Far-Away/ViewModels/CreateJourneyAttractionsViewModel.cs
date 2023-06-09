@@ -108,10 +108,14 @@ namespace Three_Far_Away.ViewModels
             SelectedAttractionsView = CollectionViewSource.GetDefaultView(SelectedAttractions);
             SelectedAttractionsView.Filter = o => String.IsNullOrEmpty(FilterSelected) ? true : ((Attraction)o).Name.ToLower().Contains(FilterSelected.ToLower());
             SelectedAttractionsView.CollectionChanged += AttractionsViewChanged;
-            foreach (Attraction attraction in journey.Attractions)
+            if (journey.Attractions != null)
             {
-                SelectedAttractions.Add(attraction);
-                AllAttractions.Remove(attraction);
+                foreach (Attraction attraction in journey.Attractions)
+                {
+                    SelectedAttractions.Add(attraction);
+                    AllAttractions.Remove(attraction);
+                }
+
             }
             CreateJourneyCommand = new CreateJourneyCommand(this);
             NavigateToCreateJourneyMapCommand = new NavigateToCreateJourneyCommand(this, "Attractions", "Map");
@@ -122,6 +126,7 @@ namespace Three_Far_Away.ViewModels
         private void AttractionsViewChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             Journey.Attractions= SelectedAttractionsView.OfType<Attraction>().ToList();
+            OnPropertyChanged("Attractions");
         }
 
         void ApplyFilterAll()
