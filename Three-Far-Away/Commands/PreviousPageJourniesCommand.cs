@@ -14,7 +14,6 @@ namespace Three_Far_Away.Commands
 {
     public class PreviousPageJourniesCommand : CommandBase
     {
-        public event EventHandler CanExecuteChanged;
         private readonly JourneysViewModel _createJourneyViewModel;
         public PreviousPageJourniesCommand(JourneysViewModel createJourneyViewModel)
         {
@@ -37,7 +36,7 @@ namespace Three_Far_Away.Commands
         {
             if (e.PropertyName == nameof(_createJourneyViewModel.PreviousPageVisibility))
             {
-                CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+                OnCanExecuteChanged();
             }
         }
     }
