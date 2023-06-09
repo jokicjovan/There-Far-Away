@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
-using Three_Far_Away.Models;
-using Three_Far_Away.ViewModels;
+﻿using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Commands
 {
@@ -19,8 +14,6 @@ namespace Three_Far_Away.Commands
         {
             _reportsViewModel.page++;
             _reportsViewModel.LoadReports();
-
-        
         }
     }
 }
