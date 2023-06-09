@@ -5,12 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
-using Three_Far_Away.Services;
 using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
@@ -18,7 +15,20 @@ namespace Three_Far_Away.ViewModels
     public class CreateJourneyViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         public readonly IJourneyService _journeyService;
-		
+
+        public string JourneyImage
+        {
+            get
+            {
+                return _journey.Image;
+            }
+            set
+            {
+                _journey.Image = value;
+                OnPropertyChanged(nameof(JourneyImage));
+            }
+        }
+
         private Journey _journey;
         public Journey Journey
         {
@@ -120,11 +130,25 @@ namespace Three_Far_Away.ViewModels
 			}
 		}
 
+        private string _uploadedImageName;
+        public string UploadedImageName
+        {
+            get
+            {
+                return _uploadedImageName;
+            }
+            set
+            {
+                _uploadedImageName = value;
+                OnPropertyChanged(nameof(UploadedImageName));
+            }
+        }
 
         public ObservableCollection<TransportationType> Transporations { get; private set; }
 
         public ICommand CreateJourneyCommand { get; }
         public ICommand NavigateToCreateJourneyMapCommand { get; }
+        public ICommand UploadImageCommand { get; }
 
         #region errors
         private readonly Dictionary<string, List<string>> _propertyNameToErrorsDictionary;
@@ -156,6 +180,7 @@ namespace Three_Far_Away.ViewModels
 
 			Transporations=new ObservableCollection<TransportationType>();
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
+            UploadImageCommand = new UploadJourneyImageCommand(this);
         }
         public IEnumerable GetErrors(string? propertyName)
         {

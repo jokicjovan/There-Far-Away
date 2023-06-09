@@ -4,8 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:converters="clr-namespace:Three_Far_Away.Converters" 
-      xmlns:local="clr-namespace:Three_Far_Away.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
+      xmlns:local="clr-namespace:Three_Far_Away.Views" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
       d:DesignHeight="430" d:DesignWidth="750">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -15,6 +16,7 @@
             <RowDefinition Height="auto" MinHeight="116.923"/>
             <RowDefinition Height="auto" MinHeight="55.92"/>
             <RowDefinition Height="auto" MinHeight="86.88"/>
+            <RowDefinition Height="auto" MinHeight="0"/>
             <RowDefinition Height="auto" MinHeight="0"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
@@ -131,7 +133,15 @@
             </Border>
         </Grid>
 
-        <Grid Grid.Row="4" VerticalAlignment="Top" Height="61" RenderTransformOrigin="0.496,0.595" Margin="0,35,0,0">
+        <Grid Grid.Row="4">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="80" Content="Choose" 
+                        Command="{Binding Path=UploadImageCommand}"></Button>
+                <TextBox Width="150" Text="{Binding UploadedImageName}"></TextBox>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="5" VerticalAlignment="Top" Height="61" RenderTransformOrigin="0.496,0.595" Margin="0,35,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="187*" />
                 <ColumnDefinition Width="152*"/>
