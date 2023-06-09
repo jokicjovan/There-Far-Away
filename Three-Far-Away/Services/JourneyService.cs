@@ -48,7 +48,7 @@ namespace Three_Far_Away.Services
 
         public List<Journey> ReadPage(int page, int size)
         {
-            List<Journey> journeys = ReadAll();
+            List<Journey> journeys = _journeyRepository.FindFutureJourneys();
             List<Journey> newJourneys = new List<Journey>();
             for (int i = page * size; i < (page + 1) * size; i++)
             {

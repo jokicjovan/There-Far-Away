@@ -17,17 +17,8 @@ namespace Three_Far_Away.Commands
         }
         public override void Execute(object parameter)
         {
-            List<Journey> journeys = _journeysViewModel.journeyService.ReadPage(_journeysViewModel.page + 1, 4);
-            if (journeys.Count == 4)
-                _journeysViewModel.page++;
-            else
-                _journeysViewModel.NextPageVisibility = Visibility.Hidden;
-            if (_journeysViewModel.page > 0) _journeysViewModel.PreviousPageVisibility = Visibility.Visible;
-            List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
-            foreach (var journey in journeys)
-                journeysForCard.Add(new JourneyForCard(journey));
-            this._journeysViewModel.Journeys = new ObservableCollection<JourneyForCard>(journeysForCard);
-            this._journeysViewModel.JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(this._journeysViewModel.CreateJourneyCardViews());
+            _journeysViewModel.page++;
+            _journeysViewModel.LoadJourneys();
         }
     }
 }

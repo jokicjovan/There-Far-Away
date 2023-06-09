@@ -19,14 +19,19 @@ namespace Three_Far_Away.ViewModels
 {
     public class JourneysViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        public readonly IJourneyService journeyService;
         public int page;
+        public readonly AccountStore accountStore;
+        
+        #region services
+        public readonly IJourneyService journeyService;
+        #endregion
+
+        #region commands
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
-        public readonly AccountStore accountStore;
+        #endregion
 
-
-
+        #region properties
         private ObservableCollection<JourneyForCard> journeys;
         public ObservableCollection<JourneyForCard> Journeys
         {
@@ -90,13 +95,13 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(PreviousPageVisibility));
             }
         }
+        #endregion
 
         public JourneysViewModel(IJourneyService journeyService)
         {
             page = 0;
             this.journeyService = journeyService;
-            Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
-            JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
+            
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
             accountStore = App.host.Services.GetService<AccountStore>();
@@ -112,7 +117,32 @@ namespace Three_Far_Away.ViewModels
 
             PreviousPageVisibility = Visibility.Hidden;
             NextPageVisibility = Visibility.Visible;
+            InitPager();
+            LoadJourneys();
+        }
 
+        public void InitPager()
+        {
+            page = 0;
+            PreviousPageVisibility = Visibility.Collapsed;
+            NextPageVisibility = Visibility.Collapsed;
+        }
+
+        public void LoadJourneys()
+        {
+            Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
+            JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
+            if (page == 0)
+                PreviousPageVisibility = Visibility.Collapsed;
+            else
+                PreviousPageVisibility = Visibility.Visible;
+
+            if(JourneyCardViewModels.Count < 4)
+                NextPageVisibility = Visibility.Collapsed;
+            else if (JourneyCardViewModels.Count == 4 && readCards(page + 1, 4).Count == 0)
+                NextPageVisibility = Visibility.Collapsed;
+            else
+                NextPageVisibility = Visibility.Visible;
         }
 
         private List<JourneyForCard> readCards(int page, int pageSize)

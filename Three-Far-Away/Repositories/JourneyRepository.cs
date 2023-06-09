@@ -29,5 +29,10 @@ namespace Three_Far_Away.Repositories
         {
             return _entities.Where(j => j.StartDate >= fromTime && j.EndDate <= toTime).ToList();
         }
+
+        public List<Journey> FindFutureJourneys()
+        {
+            return _entities.Where(j => j.StartDate >= DateTime.Now).ToList();
+        }
     }
 }
