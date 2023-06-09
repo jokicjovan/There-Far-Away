@@ -166,18 +166,66 @@ namespace Three_Far_Away.ViewModels
             PreviousPageCommand = new PreviousPageClientsJourneysCommand(this);
             this.arrangementService = arrangementService;
             userId = accountStore.Id;
+            PreviousPageVisibility = Visibility.Hidden;
+            NextPageVisibility = Visibility.Visible;
+            PreviousPageReservedVisibility = Visibility.Hidden;
+            NextPageReservedVisibility = Visibility.Visible;
+            InitBoughtPager();
+            InitReservedPager();
+            LoadBoughtJourneys();
+            LoadReservedJourneys();
+        }
+
+        public void InitReservedPager()
+        {
+            reservatedPage = 0;
+            PreviousPageReservedVisibility = Visibility.Collapsed;
+            NextPageReservedVisibility = Visibility.Collapsed;
+        }
+
+        public void InitBoughtPager()
+        {
+            boughtPage = 0;
+            PreviousPageVisibility = Visibility.Collapsed;
+            NextPageVisibility = Visibility.Collapsed;
+        }
+
+        public void LoadReservedJourneys()
+        {
             ReservedJourneys =
                 new ObservableCollection<JourneyForCard>(readCards(userId, reservatedPage, 4, ArrangementStatus.RESERVED));
-            BoughtJourneys =
-                new ObservableCollection<JourneyForCard>(readCards(userId, boughtPage, 4, ArrangementStatus.BOUGHT));
             ReservedJourneyCardViewModels =
                 new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews(ReservedJourneys));
+            if (reservatedPage == 0)
+                PreviousPageReservedVisibility = Visibility.Collapsed;
+            else
+                PreviousPageReservedVisibility = Visibility.Visible;
+
+            if (ReservedJourneyCardViewModels.Count < 4)
+                NextPageReservedVisibility = Visibility.Collapsed;
+            else if (ReservedJourneyCardViewModels.Count == 4 && readCards(userId, reservatedPage + 1, 4, ArrangementStatus.RESERVED).Count == 0)
+                NextPageReservedVisibility = Visibility.Collapsed;
+            else
+                NextPageReservedVisibility = Visibility.Visible;
+        }
+
+        public void LoadBoughtJourneys()
+        {
+            BoughtJourneys =
+                new ObservableCollection<JourneyForCard>(readCards(userId, boughtPage, 4, ArrangementStatus.BOUGHT));
             BoughtJourneyCardViewModels =
                 new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews(BoughtJourneys));
-            PreviousPageVisibility = Visibility.Hidden;
-            PreviousPageReservedVisibility = Visibility.Hidden;
-            NextPageVisibility = Visibility.Visible;
-            NextPageReservedVisibility = Visibility.Visible;
+            if (boughtPage == 0)
+                PreviousPageVisibility = Visibility.Collapsed;
+            else
+                PreviousPageVisibility = Visibility.Visible;
+
+            if (BoughtJourneyCardViewModels.Count < 4)
+                NextPageVisibility = Visibility.Collapsed;
+            else if (BoughtJourneyCardViewModels.Count == 4 && readCards(userId, boughtPage + 1, 4, ArrangementStatus.BOUGHT).Count == 0)
+                NextPageVisibility = Visibility.Collapsed;
+            else
+                NextPageVisibility = Visibility.Visible;
         }
 
         private List<JourneyForCard> readCards(Guid userId, int page, int pageSize, ArrangementStatus status)

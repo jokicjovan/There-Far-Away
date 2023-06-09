@@ -43,6 +43,10 @@
             <DataTemplate DataType="{x:Type vms:JourneyPreviewViewModel}">
                 <views:JourneyPreviewView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:ClientsJourneysViewModel}">
+                <views:ClientsJourneysView/>
+            </DataTemplate>
             
             <DataTemplate DataType="{x:Type vms:CreateJourneyViewModel}">
                 <views:CreateJourneyView/>
