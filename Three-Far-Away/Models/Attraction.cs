@@ -39,5 +39,19 @@ namespace Three_Far_Away.Models
             Image = image;
             Location = location;
         }
+
+        public Attraction(string name, string description, AttractionType type, string image, Location location)
+        {
+            Name = name;
+            Description = description;
+            Type = type;
+            Image = image;
+            Location = location;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

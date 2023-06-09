@@ -23,6 +23,7 @@ namespace Three_Far_Away.ViewModels
         public int page;
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
+        public ICommand NavigateToCreateJourneyCommand { get; }
         public readonly AccountStore accountStore;
 
 
@@ -99,6 +100,8 @@ namespace Three_Far_Away.ViewModels
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
+            Journey j = journeyService.ReadAll()[0];
+            NavigateToCreateJourneyCommand = new NavigateToCreateJourneyCommand(new Journey());
             accountStore = App.host.Services.GetService<AccountStore>();
 
             if (accountStore.Role.Equals(Role.AGENT))

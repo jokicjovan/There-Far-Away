@@ -1,136 +1,188 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
+using Three_Far_Away.Services;
 using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class CreateJourneyViewModel : ViewModelBase
+    public class CreateJourneyViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         public readonly IJourneyService _journeyService;
-        private string _name;
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				OnPropertyChanged(nameof(Name));
-			}
-		}
-		private DateTime _startDate;
+		
+        private Journey _journey;
+        public Journey Journey
+        {
+            get
+            {
+                return _journey;
+            }
+            set
+            {
+                _journey = value;
+                OnPropertyChanged(nameof(Journey));
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return Journey.Name;
+            }
+            set
+            {
+                Journey.Name = value;
+                OnPropertyChanged(nameof(Name));
+
+                ClearErrors(nameof(Name)); ;
+                if (Name.Length <= 2)
+                {
+                    AddError("Name cannot be shorter than 2 characters!", nameof(Name));
+                }
+                else if (Name.Length > 30)
+                {
+                    AddError("Name cannot be longer than 30 characters!", nameof(Name));
+                }
+            }
+        }
+
 		public DateTime StartDate
         {
 			get
 			{
-				return _startDate;
+				return Journey.StartDate;
 			}
 			set
 			{
-				_startDate = value;
+				Journey.StartDate = value;
 				OnPropertyChanged(nameof(StartDate));
-			}
+                ClearErrors(nameof(StartDate)); ;
+                if (StartDate<DateTime.Now)
+                {
+                    AddError("Start Time Cannot Be In Past", nameof(StartDate));
+                }
+            }
 		}
-
-		private DateTime _endDate;
 		public DateTime EndDate
 		{
 			get
 			{
-				return _endDate;
+				return Journey.EndDate;
 			}
 			set
 			{
-				_endDate = value;
+				Journey.EndDate = value;
 				OnPropertyChanged(nameof(EndDate));
-			}
+                ClearErrors(nameof(EndDate)); ;
+                if (EndDate < StartDate)
+                {
+                    AddError("End Time Cannot Be Before Start Time", nameof(EndDate));
+                }
+            }
 		}
-
-		private Location _startLocation;
-		public Location StartLocation
-		{
-			get
-			{
-				return _startLocation;
-			}
-			set
-			{
-				_startLocation = value;
-				OnPropertyChanged(nameof(StartLocation));
-			}
-		}
-
-		private Location _endLocation;
-		public Location EndLocation
-		{
-			get
-			{
-				return _endLocation;
-			}
-			set
-			{
-				_endLocation = value;
-				OnPropertyChanged(nameof(EndLocation));
-			}
-		}
-		private Double _price;
 		public Double Price
 		{
 			get
 			{
-				return _price;
+				return Journey.Price;
 			}
 			set
 			{
-				_price = value;
+				Journey.Price = value;
 				OnPropertyChanged(nameof(Price));
-			}
+                ClearErrors(nameof(Price));
+                if (Price<=0)
+                {
+                    AddError("Price Cannot Be Lower Than 0", nameof(Price));
+                }
+            }
 		}
 
-		private List<Attraction> _attractions;
-		public List<Attraction> Attractions
-		{
-			get
-			{
-				return _attractions;
-			}
-			set
-			{
-				_attractions = value;
-				OnPropertyChanged(nameof(Attractions));
-			}
-		}
-
-		private TransportationType _transportation;
 		public TransportationType Transportation
 		{
 			get
 			{
-				return _transportation;
+				return Journey.Transportation;
 			}
 			set
 			{
-				_transportation = value;
+				Journey.Transportation = value;
 				OnPropertyChanged(nameof(Transportation));
 			}
 		}
 
-		public ICommand CreateJourneyCommand { get; }
 
-        public CreateJourneyViewModel(IJourneyService journeyService)
+        public ObservableCollection<TransportationType> Transporations { get; private set; }
+
+        public ICommand CreateJourneyCommand { get; }
+        public ICommand NavigateToCreateJourneyMapCommand { get; }
+
+        #region errors
+        private readonly Dictionary<string, List<string>> _propertyNameToErrorsDictionary;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+        public bool HasErrors => _propertyNameToErrorsDictionary.Any();
+
+        private string _errorMessage;
+        public string ErrorMessage
         {
-            _journeyService = journeyService;
-            CreateJourneyCommand = new CreateJourneyCommand(this);
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged(nameof(HasErrorMessage));
+            }
+        }
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+        #endregion
+
+        public CreateJourneyViewModel(Journey journey)
+        {
+            Journey = journey;
+            _journeyService = App.host.Services.GetService<IJourneyService>();
+            NavigateToCreateJourneyMapCommand = new NavigateToCreateJourneyCommand(this,"Home","Map");
+
+			Transporations=new ObservableCollection<TransportationType>();
+            _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
+        }
+        public IEnumerable GetErrors(string? propertyName)
+        {
+            return _propertyNameToErrorsDictionary.GetValueOrDefault(propertyName, new List<string>());
         }
 
-		
-	}
+        private void ClearErrors(string propertyName)
+        {
+            _propertyNameToErrorsDictionary.Remove(propertyName);
+            OnErrorsChanged(propertyName);
+        }
+
+        private void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        private void AddError(string errorMessage, string propertyName)
+        {
+            if (!_propertyNameToErrorsDictionary.ContainsKey(propertyName))
+            {
+                _propertyNameToErrorsDictionary.Add(propertyName, new List<string>());
+            }
+            _propertyNameToErrorsDictionary[propertyName].Add(errorMessage);
+            OnErrorsChanged(propertyName);
+        }
+
+
+    }
 }
