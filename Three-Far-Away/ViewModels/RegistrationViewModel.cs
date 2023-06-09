@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Services.Interfaces;
@@ -181,7 +182,7 @@ namespace Three_Far_Away.ViewModels
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        private void AddError(string errorMessage, string propertyName)
+        public void AddError(string errorMessage, string propertyName)
         {
             if (!_propertyNameToErrorsDictionary.ContainsKey(propertyName))
             {
@@ -190,5 +191,6 @@ namespace Three_Far_Away.ViewModels
             _propertyNameToErrorsDictionary[propertyName].Add(errorMessage);
             OnErrorsChanged(propertyName);
         }
+        
     }
 }

@@ -19,5 +19,16 @@ namespace Three_Far_Away.Repositories
         {
             return _entities.Include(u => u.User).Where(a => a.Journey.Id == journeyId).ToList();
         }
+
+        public Arrangement FindJourneyArrangementForUser(Guid journeyId, Guid userId)
+        {
+            return _entities.Include(u => u.User).Include(j => j.Journey).FirstOrDefault(a => a.Journey.Id == journeyId && a.User.Id == userId);
+        }
+
+        public IEnumerable<Arrangement> FindArrangementsForUser(Guid userId, ArrangementStatus status)
+        {
+            return _entities.Include(e => e.Journey).Where(a => a.User.Id == userId)
+                .Where(a => a.Status == status).ToList();
+        }
     }
 }

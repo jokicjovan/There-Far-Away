@@ -63,5 +63,31 @@ namespace Three_Far_Away.Services
             return _journeyRepository.GetJourneyWithAttractions(id);
         }
 
+        public List<Journey> ReadPageWithDateByMonthAndYear(int page, int size, DateTime fromTime, DateTime toTime, int month=0, int year=0)
+        {
+            List<Journey> journeys = GetJourneysInsideDate(fromTime, toTime);
+
+            if (month  > 0)
+            {
+                journeys = journeys.Where(j => j.StartDate.Month == month || j.EndDate.Month == month).ToList();
+            }
+            if (year > 0)
+            {
+                journeys = journeys.Where(j => j.StartDate.Year == year || j.EndDate.Year == year).ToList();
+            }
+
+            List<Journey> newJourneys = new List<Journey>();
+            for (int i = page * size; i < (page + 1) * size; i++)
+            {
+                if (i > journeys.Count - 1 || i < 0) break;
+                newJourneys.Add(journeys[i]);
+            }
+            return newJourneys;
+        }
+
+
+        public List<Journey> GetJourneysInsideDate(DateTime fromTime, DateTime toTime) {
+            return _journeyRepository.FindJourneysInsideDate(fromTime, toTime);
+        }
     }
 }

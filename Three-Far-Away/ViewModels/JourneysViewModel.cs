@@ -64,6 +64,34 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
+        private Visibility _nextPageVisibility;
+        public Visibility NextPageVisibility
+        {
+            get
+            {
+                return _nextPageVisibility;
+            }
+            set
+            {
+                _nextPageVisibility = value;
+                OnPropertyChanged(nameof(NextPageVisibility));
+            }
+        }
+
+        private Visibility _previousPageVisibility;
+        public Visibility PreviousPageVisibility
+        {
+            get
+            {
+                return _previousPageVisibility;
+            }
+            set
+            {
+                _previousPageVisibility = value;
+                OnPropertyChanged(nameof(PreviousPageVisibility));
+            }
+        }
+
         public JourneysViewModel(IJourneyService journeyService)
         {
             page = 0;
@@ -84,6 +112,9 @@ namespace Three_Far_Away.ViewModels
             {
                 AddJourneyVisibility = Visibility.Hidden;
             }
+
+            PreviousPageVisibility = Visibility.Hidden;
+            NextPageVisibility = Visibility.Visible;
 
         }
 
@@ -113,6 +144,11 @@ namespace Three_Far_Away.ViewModels
 
         private void HandleJourneyDeleted(object sender, EventArgs e)
         {
+            if (journeys.Count == 1)
+            {
+                PreviousPageCommand.Execute(null);
+                return;
+            }
             Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
         }

@@ -4,10 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Three_Far_Away.Views" xmlns:spinner="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
+             xmlns:threeFarAway="clr-namespace:Three_Far_Away"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Loaded="OnLoaded" 
-             FocusVisualStyle="{x:Null}">
+             Loaded="OnLoaded"
+             threeFarAway:HelpProvider.HelpKey="register"
+             FocusVisualStyle="{x:Null}"
+             GotFocus="SetHelpKey">
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Gesture="Enter" Command="{Binding SubmitCommand}"/>
     </UserControl.InputBindings>

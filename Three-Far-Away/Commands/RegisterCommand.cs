@@ -55,16 +55,17 @@ namespace Three_Far_Away.Commands
                 credential.Username = _registrationViewModel.Username;
                 credential.Password = BCrypt.Net.BCrypt.HashPassword(_registrationViewModel.Password);
                 credential = _registrationViewModel.credentialService.Create(credential);
+
+                MessageBoxResult messageBoxResult = MessageBox.Show("You registered successfully, continue to login", "Success", MessageBoxButton.OK);
+                EventBus.FireEvent("GoToLogin");
             }
             catch (Exception ex)
             {
                _registrationViewModel.userService.Delete(user.Id);
+               _registrationViewModel.AddError("User with this username already exists!", nameof(_registrationViewModel.Username));
             }
 
             _registrationViewModel.IsLoading = false;
-
-            MessageBoxResult messageBoxResult = MessageBox.Show("You registered successfully, continue to login", "Success", MessageBoxButton.OK);
-            EventBus.FireEvent("GoToLogin");
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

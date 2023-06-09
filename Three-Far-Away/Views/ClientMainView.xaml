@@ -10,8 +10,9 @@
              Loaded="OnLoaded">
 
     <UserControl.InputBindings>
-        <KeyBinding Modifiers="Ctrl" Key="F1" Command="{Binding ClientNavigationBarViewModel.NavigateJourneys}"/>
-        <KeyBinding Modifiers="Ctrl" Key="F4" Command="{Binding ClientNavigationBarViewModel.NavigateLogin}"/>
+        <KeyBinding Modifiers="Ctrl" Key="D1" Command="{Binding ClientHamburgerNavigationBarViewModel.NavigateJourneys}"/>
+        <KeyBinding Modifiers="Ctrl" Key="D2" Command="{Binding ClientHamburgerNavigationBarViewModel.NavigateMyJourneys}"/>
+        <KeyBinding Modifiers="Ctrl" Key="D4" Command="{Binding ClientHamburgerNavigationBarViewModel.NavigateLogin}"/>
     </UserControl.InputBindings>
 
     <!-- <Grid> -->
