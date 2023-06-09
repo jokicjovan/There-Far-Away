@@ -113,7 +113,7 @@ namespace Three_Far_Away
             user1 = App.host.Services.GetService<IUserService>().Create(user1);
             Credential credential = new Credential();
             credential.User = user1;
-            credential.Username = "aaaaaa";
+            credential.Username = "asdasd";
             credential.Password = BCrypt.Net.BCrypt.HashPassword("asdasd");
             credential = App.host.Services.GetService<ICredentialService>().Create(credential);
 
@@ -124,7 +124,7 @@ namespace Three_Far_Away
             user2 = App.host.Services.GetService<IUserService>().Create(user2);
             Credential credential2 = new Credential();
             credential2.User = user2;
-            credential2.Username = "bbbbbb";
+            credential2.Username = "dsadsa";
             credential2.Password = BCrypt.Net.BCrypt.HashPassword("dsadsa");
             credential2 = App.host.Services.GetService<ICredentialService>().Create(credential2);
 
@@ -144,6 +144,7 @@ namespace Three_Far_Away
             attraction.Type = AttractionType.ATTRACTION;
             attraction.Location = location;
             attraction.Image = "slika";
+            attraction = App.host.Services.GetService<IAttractionService>().Create(attraction);
 
             Journey journey = new Journey();
             journey.Name = "ime";
@@ -151,9 +152,8 @@ namespace Three_Far_Away
             journey.EndLocation = location;
             journey.Attractions = new List<Attraction>();
             journey.Attractions.Add(attraction);
-            journey.Attractions.Add(attraction);
-            journey.Attractions.Add(attraction);
             journey.Transportation = TransportationType.Airplane;
+            journey.Image = "slika";
 
             Journey journey1 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));
             Journey journey2 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));

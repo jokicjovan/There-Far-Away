@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
@@ -87,7 +83,7 @@ namespace Three_Far_Away.Commands
                 return true;
             if (from == "Home")
             {
-                return Journey.Name.Length > 2 && Journey.Name.Length <= 30 && Journey.Price > 0 && Journey.StartDate >= DateTime.Now && Journey.StartDate < Journey.EndDate && base.CanExecute(parameter);
+                return Journey.Name.Length > 2 && Journey.Name.Length <= 30 && Journey.Price > 0 && Journey.StartDate >= DateTime.Now && Journey.StartDate < Journey.EndDate &&  Journey.Image != "" && base.CanExecute(parameter);
             }
             else if (from == "None")
             {
@@ -119,7 +115,8 @@ namespace Three_Far_Away.Commands
                 e.PropertyName == nameof(CreateJourneyViewModel.Journey.Price) ||
                 e.PropertyName == nameof(CreateJourneyViewModel.Journey.StartDate)||
                 e.PropertyName == nameof(CreateJourneyViewModel.Journey.EndDate) ||
-                e.PropertyName == nameof(CreateJourneyViewModel.Journey.Transportation))
+                e.PropertyName == nameof(CreateJourneyViewModel.Journey.Transportation) ||
+                e.PropertyName == nameof(CreateJourneyViewModel.JourneyImage))
                 {
                     OnCanExecuteChanged();
                 }

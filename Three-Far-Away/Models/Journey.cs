@@ -29,6 +29,9 @@ namespace Three_Far_Away.Models
         [Column("price")]
         public Double Price { get; set; }
 
+        [Column("image")]
+        public String Image { get; set; }
+
         [Column("attractions")]
         public List<Attraction> Attractions{ get; set; }
 
@@ -37,13 +40,14 @@ namespace Three_Far_Away.Models
 
         public Journey() {
             Name = "";
+            Image = "";
             StartDate = DateTime.Now.AddDays(1);
             EndDate = DateTime.Now.AddDays(1);
             Attractions= new List<Attraction>();
 
         }
 
-        public Journey(Guid id, string name, DateTime startDate, DateTime endDate, Location startLocation, Location endLocation, double price, List<Attraction> attractions, TransportationType transportation)
+        public Journey(Guid id, string name, DateTime startDate, DateTime endDate, Location? startLocation, Location? endLocation, double price, string image, List<Attraction> attractions, TransportationType transportation)
         {
             Id = id;
             Name = name;
@@ -52,6 +56,7 @@ namespace Three_Far_Away.Models
             StartLocation = startLocation;
             EndLocation = endLocation;
             Price = price;
+            Image = image;
             Attractions = attractions;
             Transportation = transportation;
         }
@@ -64,6 +69,7 @@ namespace Three_Far_Away.Models
             StartLocation = other.StartLocation;
             EndLocation = other.EndLocation;
             Price = other.Price;
+            Image = other.Image;
             Attractions = new List<Attraction>(other.Attractions);
             Transportation = other.Transportation;
         }
