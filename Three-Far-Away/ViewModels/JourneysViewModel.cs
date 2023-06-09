@@ -149,7 +149,7 @@ namespace Three_Far_Away.ViewModels
                 NextPageVisibility = Visibility.Visible;
         }
 
-        private List<JourneyForCard> readCards(int page, int pageSize)
+        public List<JourneyForCard> readCards(int page, int pageSize)
         {
             List<Journey> journeys = journeyService.ReadPage(page, 4);
             List<JourneyForCard> journeysForCard = new List<JourneyForCard>();

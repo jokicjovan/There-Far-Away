@@ -20,5 +20,10 @@ namespace Three_Far_Away.Commands
             _journeysViewModel.page++;
             _journeysViewModel.LoadJourneys();
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return _journeysViewModel.NextPageVisibility == Visibility.Visible;
+        }
     }
 }
