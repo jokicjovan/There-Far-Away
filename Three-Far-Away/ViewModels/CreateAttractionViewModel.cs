@@ -2,15 +2,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
-using Three_Far_Away.Services;
 using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
@@ -119,6 +115,7 @@ namespace Three_Far_Away.ViewModels
         }
         public ICommand NavigateToCreateAttractionMapCommand { get; }
         public ICommand UploadImageCommand { get; }
+        public ICommand OpenImagePreviewCommand { get; }
 
         #region errors
         private readonly Dictionary<string, List<string>> _propertyNameToErrorsDictionary;
@@ -183,6 +180,8 @@ namespace Three_Far_Away.ViewModels
             {
                 _uploadedImageName = "No file chosen";
             }
+
+            OpenImagePreviewCommand = new OpenAttractionImagePreviewCommand(this);
         }
 
 

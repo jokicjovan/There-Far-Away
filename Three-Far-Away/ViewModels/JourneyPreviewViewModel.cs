@@ -234,7 +234,7 @@ namespace Three_Far_Away.ViewModels
             if (accountStore.Role == Role.AGENT)
             {
                 _isAgent = true;
-                ShowJourneyPassengersCommand = new ShowJourneyPassengersCommand(this);
+                ShowJourneyPassengersCommand = new OpenJourneyPassengersCommand(this);
                 //EditJourney = new 
                 DeleteJourneyCommand = new DeleteJourneyFromPreviewCommand(this);
             }

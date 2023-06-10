@@ -232,7 +232,7 @@ namespace Three_Far_Away.ViewModels
             List<Arrangement> arrangements = arrangementService.ReadPage(userId, page, 4, status);
             List<Journey> journeysForCard = new List<Journey>();
             foreach (var arrangement in arrangements)
-                journeysForCard.Add(new Journey(arrangement.Journey));
+                journeysForCard.Add(arrangement.Journey);
             return journeysForCard;
         }
 

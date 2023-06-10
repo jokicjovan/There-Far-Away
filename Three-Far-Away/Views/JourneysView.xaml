@@ -29,7 +29,8 @@
             HorizontalAlignment="Right" 
             Visibility="{Binding AddJourneyVisibility}"
             Command="{Binding NavigateToCreateJourneyCommand}"
-            Background="#639B22">
+            Background="#639B22"
+            Foreground="White" >
             
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Plus" Margin="10,0,5,2" VerticalAlignment="Center"/>

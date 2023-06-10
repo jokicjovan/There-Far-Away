@@ -50,15 +50,24 @@
         </Border>
         <Grid Grid.Row="6" Width="300">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Content="Choose" 
-                        Command="{Binding Path=UploadImageCommand}" ToolTip="Choose cover image for attraction">
+                <Button 
+                    Width="100" 
+                    Content="Choose" 
+                    Foreground="Black" 
+                    Background="#C1F08A"
+                    Command="{Binding Path=UploadImageCommand}"
+                    ToolTip="Choose cover image for attraction">
                    
                 </Button>
                 <TextBlock 
                     Width="180"
                     Margin="20,0,0,0"
-                    VerticalAlignment="Center"
-                    Text="{Binding UploadedImageName}"/>
+                    VerticalAlignment="Center">
+                    <Hyperlink
+                        Command="{Binding OpenImagePreviewCommand}">
+                        <TextBlock Text="{Binding UploadedImageName}"/>
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
         </Grid>
         <Border Grid.Row="7" Background="Transparent" Margin="0,10">
