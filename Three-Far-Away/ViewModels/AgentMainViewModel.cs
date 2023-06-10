@@ -64,6 +64,11 @@ namespace Three_Far_Away.ViewModels
                 ReportsViewModel rvm = App.host.Services.GetRequiredService<ReportsViewModel>();
                 SwitchCurrentViewModel(rvm);
             });
+            EventBus.RegisterHandler("Attractions", () =>
+            {
+                AttractionViewModel avm = App.host.Services.GetRequiredService<AttractionViewModel>();
+                SwitchCurrentViewModel(avm);
+            });
         }
     }
 }

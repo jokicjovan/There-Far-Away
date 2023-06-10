@@ -16,6 +16,9 @@ using Credential = Three_Far_Away.Models.Credential;
 using Three_Far_Away.Components;
 using Three_Far_Away.Infrastructure;
 using System;
+using Three_Far_Away.Views;
+using Microsoft.Maps.MapControl.WPF;
+using Location = Three_Far_Away.Models.Location;
 
 namespace Three_Far_Away
 {
@@ -48,10 +51,12 @@ namespace Three_Far_Away
                 services.AddTransient<ClientMainViewModel>();
                 services.AddTransient<CreateJourneyViewModel>();
                 services.AddTransient<JourneyCardViewModel>();
+                services.AddTransient<AttractionCardViewModel>();
                 services.AddTransient<LocationListItemViewModel>();
                 services.AddTransient<CreateJourneyMapViewModel>();
                 services.AddTransient<CreateJourneyAttractionsViewModel>();
                 services.AddTransient<ClientsJourneysViewModel>();
+                services.AddTransient<AttractionViewModel>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -90,6 +95,7 @@ namespace Three_Far_Away
             host.Start();
 
             //loadArrangements(loadUsers(), loadJourneys());
+            // loadAttraction();
 
             EventBus.FireEvent("Login");
             MainWindow = host.Services.GetRequiredService<MainWindow>();
@@ -129,6 +135,21 @@ namespace Three_Far_Away
             credential2 = App.host.Services.GetService<ICredentialService>().Create(credential2);
 
             return user2;
+        }
+
+        private void loadAttraction()
+        {
+            Models.Location location = new Models.Location();
+            location.Address = "Nikole Pasica 36";
+            location.Latitude = 43.318578;
+            location.Longitude = 21.893254;
+            Attraction attraction = new Attraction();
+            attraction.Name = "Restoran u Nisu";
+            attraction.Description = "Ovo je najbolji restoran u Nisu";
+            attraction.Type = AttractionType.RESTAURANT;
+            attraction.Location = location;
+            attraction.Image = "slika";
+            attraction = App.host.Services.GetService<IAttractionService>().Create(attraction);
         }
 
         private Journey loadJourneys()

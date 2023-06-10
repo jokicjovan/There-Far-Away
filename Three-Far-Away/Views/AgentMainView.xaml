@@ -12,7 +12,8 @@
     
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="D1" Command="{Binding AgentHamburgerNavigationBarViewModel.NavigateJourneys}"/>
-        <KeyBinding Modifiers="Ctrl" Key="D2" Command="{Binding AgentHamburgerNavigationBarViewModel.NavigateReports}"/>
+        <KeyBinding Modifiers="Ctrl" Key="D2" Command="{Binding AgentHamburgerNavigationBarViewModel.NavigateAttractions}"/>
+        <KeyBinding Modifiers="Ctrl" Key="D3" Command="{Binding AgentHamburgerNavigationBarViewModel.NavigateReports}"/>
         <KeyBinding Modifiers="Ctrl" Key="D4" Command="{Binding AgentHamburgerNavigationBarViewModel.NavigateLogin}"/>
     </UserControl.InputBindings>
     
