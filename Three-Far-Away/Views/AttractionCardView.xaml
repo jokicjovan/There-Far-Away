@@ -70,10 +70,10 @@
                         </MenuItem.Icon>
                         <MenuItem 
                             Header="Edit"
-                            Command="{Binding NavigateEditJourneyCommand}"/>
+                            Command="{Binding NavigateEditAttractionCommand}"/>
                         <MenuItem 
                             Header="Delete"
-                            Command="{Binding DeleteJourneyFromCardCommand}"/>
+                            Command="{Binding DeleteAttractionFromCardCommand}"/>
                     </MenuItem>
                 </Menu>
 

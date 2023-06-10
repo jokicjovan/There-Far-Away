@@ -85,7 +85,6 @@ namespace Three_Far_Away.Services
             return newJourneys;
         }
 
-
         public List<Journey> GetJourneysInsideDate(DateTime fromTime, DateTime toTime) {
             return _journeyRepository.FindJourneysInsideDate(fromTime, toTime);
         }

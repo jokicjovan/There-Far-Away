@@ -147,7 +147,6 @@ namespace Three_Far_Away.ViewModels
             };
             NextPageCommand = new NextPageAttractionsCommand(this);
             PreviousPageCommand = new PreviousPageAttractionsCommand(this);
-            Attraction j = attractionService.ReadAll()[0];
             // NavigateToCreateAttractionCommand= new NavigateToCreateJourneyCommand(new Journey());
             accountStore = App.host.Services.GetService<AccountStore>();
 
@@ -176,7 +175,7 @@ namespace Three_Far_Away.ViewModels
         public void LoadAttractions()
         {
             Attractions = new ObservableCollection<Attraction>(ReadPage(page, 4));
-            AttractionCardViewModels = new ObservableCollection<AttractionCardViewModel>(CreateJourneyCardViews());
+            AttractionCardViewModels = new ObservableCollection<AttractionCardViewModel>(CreateAttractionCardViews());
             if (page == 0)
                 PreviousPageVisibility = Visibility.Collapsed;
             else
@@ -203,7 +202,7 @@ namespace Three_Far_Away.ViewModels
         }
 
 
-        public List<AttractionCardViewModel> CreateJourneyCardViews()
+        public List<AttractionCardViewModel> CreateAttractionCardViews()
         {
             List<AttractionCardViewModel> attractionCardViews = new List<AttractionCardViewModel>();
 
@@ -226,7 +225,7 @@ namespace Three_Far_Away.ViewModels
                 return;
             }
             Attractions = new ObservableCollection<Attraction>(attractionService.ReadPage(page, 4));
-            AttractionCardViewModels = new ObservableCollection<AttractionCardViewModel>(CreateJourneyCardViews());
+            AttractionCardViewModels = new ObservableCollection<AttractionCardViewModel>(CreateAttractionCardViews());
         }
     }
 }

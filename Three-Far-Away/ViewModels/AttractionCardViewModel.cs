@@ -1,13 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using Three_Far_Away.Commands;
-using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;
@@ -84,7 +79,7 @@ namespace Three_Far_Away.Views
 
 
         public event EventHandler AttractionDeletedEvent;
-        public virtual void OnJourneyDeletedEvent()
+        public virtual void OnAttractionDeletedEvent()
         {
             AttractionDeletedEvent?.Invoke(this, EventArgs.Empty);
         }
@@ -109,7 +104,7 @@ namespace Three_Far_Away.Views
             }
 
             // ViewAttractionPreviewCommand= new ViewJourneyPreviewFromJourneyCardCommand(this);
-            // DeleteAttractionFromCardCommand = new DeleteJourneyFromCardCommand(this);
+            DeleteAttractionFromCardCommand = new DeleteAttractionFromCardCommand(this);
             // NavigateEditAttractionCommand = new NavigateToCreateJourneyCommand(journeyService.Read(journey.Id));
         }
     }
