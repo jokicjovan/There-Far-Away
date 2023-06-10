@@ -6,10 +6,10 @@ using Three_Far_Away.Views;
 
 namespace Three_Far_Away.Commands
 {
-    public class ShowJourneyPassengersCommand : CommandBase
+    public class OpenJourneyPassengersCommand : CommandBase
     {
         private readonly JourneyPreviewViewModel _journeyPreviewViewModel;
-        public ShowJourneyPassengersCommand(JourneyPreviewViewModel journeyPreviewViewModel)
+        public OpenJourneyPassengersCommand(JourneyPreviewViewModel journeyPreviewViewModel)
         {
             _journeyPreviewViewModel = journeyPreviewViewModel;
 

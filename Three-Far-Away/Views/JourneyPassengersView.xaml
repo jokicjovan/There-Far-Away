@@ -4,17 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Three_Far_Away.Views" 
-             xmlns:converters="clr-namespace:Three_Far_Away.Converters"
+             xmlns:converters="clr-namespace:Three_Far_Away.Converters" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
     </UserControl.Resources>
-
+    <UserControl.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding CloseDialogCommand}"/>
+    </UserControl.InputBindings>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" 
+                Command="{Binding CloseDialogCommand}"
+                Background="Transparent" 
+                BorderBrush="Transparent"
+                HorizontalAlignment="Right"
+                Height="40">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon 
+                                        Kind="Close"  
+                                        ToolTip="Close dialog"
+                                        Background="Transparent"
+                                        Foreground="#639B22"
+                                        Cursor="Hand"
+                                        Width="40"
+                                        Height="40"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="FloralWhite" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
         <DataGrid 
+            Grid.Row="1"
             x:Name="passengersGrid" 
-            AutoGenerateColumns="False" 
+            AutoGenerateColumns="False"
+            ScrollViewer.CanContentScroll="True" 
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
             ItemsSource="{Binding Arragements}" 
             IsReadOnly="True"
             Visibility="{Binding IsEmpty, Converter={StaticResource InverseBooleanToVisibilityConverter}}" >
@@ -27,6 +64,7 @@
         </DataGrid>
 
         <TextBlock
+            Grid.Row="1"
             Text="There is no passengers for this journey!"
             FontSize="20"
             Margin="20"

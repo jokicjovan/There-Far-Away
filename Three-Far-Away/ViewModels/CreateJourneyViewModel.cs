@@ -149,6 +149,7 @@ namespace Three_Far_Away.ViewModels
         public ICommand CreateJourneyCommand { get; }
         public ICommand NavigateToCreateJourneyMapCommand { get; }
         public ICommand UploadImageCommand { get; }
+        public ICommand OpenImagePreviewCommand { get; }
 
         #region errors
         private readonly Dictionary<string, List<string>> _propertyNameToErrorsDictionary;
@@ -178,9 +179,19 @@ namespace Three_Far_Away.ViewModels
             _journeyService = App.host.Services.GetService<IJourneyService>();
             NavigateToCreateJourneyMapCommand = new NavigateToCreateJourneyCommand(this,"Home","Map");
 
-			Transporations=new ObservableCollection<TransportationType>();
+            if (journey.Image != "")
+            {
+                _uploadedImageName = "image.jpg";
+            }
+            else
+            {
+                _uploadedImageName = "No file chosen";
+            }
+
+            Transporations =new ObservableCollection<TransportationType>();
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
             UploadImageCommand = new UploadJourneyImageCommand(this);
+            OpenImagePreviewCommand = new OpenJourneyImagePreviewCommand(this);
         }
         public IEnumerable GetErrors(string? propertyName)
         {

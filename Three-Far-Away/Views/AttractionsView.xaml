@@ -51,8 +51,13 @@
             Command="{Binding NavigateToCreateAttractionCommand}"
             Background="#639B22">
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Plus" Margin="10,0,5,2" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon 
+                    Foreground="White" 
+                    Kind="Plus"
+                    Margin="10,0,5,2" 
+                    VerticalAlignment="Center"/>
                 <TextBlock 
+                    Foreground="White" 
                     Text="Add Attraction" 
                     VerticalAlignment="Center"
                     Margin="0,0,10,5" />

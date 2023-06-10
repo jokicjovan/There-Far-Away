@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
@@ -233,7 +227,7 @@ namespace Three_Far_Away.ViewModels
                 new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude),
                 "S", true));
 
-            NavigateToEditAttractionCommand = new NavigateToCreateAttractionCommand(attraction)
+            NavigateToEditAttractionCommand = new NavigateToCreateAttractionCommand(attraction);
             DeleteAttractionCommand = new DeleteAttractionFromPreviewCommand(this);
         }
     }

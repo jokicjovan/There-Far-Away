@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Services;
+using System.Windows.Input;
+using Three_Far_Away.Commands;
 
 namespace Three_Far_Away.ViewModels
 {
@@ -47,11 +49,15 @@ namespace Three_Far_Away.ViewModels
         }
         #endregion
 
+
+        public ICommand CloseDialogCommand { get; }
         public JourneyPassengersViewModel(Guid journeyId)
         {
             arrangementService = App.host.Services.GetService<IArrangementService>();
             _arragements = new ObservableCollection<Arrangement>(arrangementService.GetJourneyArrangements(journeyId));
             IsEmpty = _arragements.Count() <= 0 ? true : false;
+
+            CloseDialogCommand = new CloseDialogCommand();
         }
     }
 }
