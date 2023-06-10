@@ -27,14 +27,22 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Width="370"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock
                     Grid.Row="0" 
                     Text="Start Location"/>
                 <TextBox
+                    materialDesign:HintAssist.Hint="LocationLOL"
                     Grid.Row="1"
                     Width="350"
                     HorizontalAlignment="Left"
                     Text = "{Binding StartCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.ToolTip>
+                        "EnterToolTip"
+                    </TextBox.ToolTip>
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding SearchStartLocationCommand}" Key="Return" />
                     </TextBox.InputBindings>
@@ -50,7 +58,7 @@
                     VerticalContentAlignment="Bottom"
                     Background="Transparent"
                     BorderThickness="0"
-                    Command="{Binding TurnOnStartLocationCommand}"
+                    Command="{Binding TurnOnLocationCommand}"
                     Foreground="Red">
                     <materialDesign:PackIcon
                         Width="25"
@@ -59,16 +67,13 @@
                         Foreground="Black"
                         Kind="LocationOn" />
                 </Button>
-                <Border Grid.Row="2" Background="Transparent" Margin="0,20">
-                    <!-- Empty element used for spacing -->
-                </Border>
 
             </Grid>
-            <Border Grid.Row="1" Background="Transparent" Margin="0,15">
+            <Border Grid.Row="1" Background="Transparent" Margin="0,10">
                 <!-- Empty element used for spacing -->
             </Border>
             <Grid Grid.Row="2">
-                <m:Map Width="400"  x:Name="myMap" Margin="0,0,0,0" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
+                <m:Map Width="400" MouseRightButtonDown="myMap_MouseDown"  x:Name="myMap" Margin="0,0,0,0" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
                     <m:MapItemsControl ItemsSource="{Binding Locations}">
                         <m:MapItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -82,7 +87,7 @@
         </Grid>
         
         <Button Grid.Column="0" Content="Previous" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding NavigateToCreateJourneyCommand}"/>
-        <Button Grid.Column="2" Content="Next" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="White"  Command="{Binding NavigateToCreateJourneyAttractionsCommand}"/>
+        <Button Grid.Column="2" Content="Finish" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="White"  Command="{Binding CreateAttractionCommand}"/>
 
             
     </Grid>

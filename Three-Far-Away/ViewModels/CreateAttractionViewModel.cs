@@ -15,7 +15,7 @@ using Three_Far_Away.Services.Interfaces;
 
 namespace Three_Far_Away.ViewModels
 {
-    public class CreateAttractionViewModel: ViewModelBase
+    public class CreateAttractionViewModel: ViewModelBase,INotifyDataErrorInfo
     {
         public Attraction _attraction { get; set; }
         public Attraction Attraction
@@ -64,6 +64,29 @@ namespace Three_Far_Away.ViewModels
                 else if (Name.Length > 30)
                 {
                     AddError("Name cannot be longer than 30 characters!", nameof(Name));
+                }
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return _attraction.Description;
+            }
+            set
+            {
+                _attraction.Description = value;
+                OnPropertyChanged(nameof(Description));
+
+                ClearErrors(nameof(Description)); ;
+                if (Description.Length <= 10)
+                {
+                    AddError("Description cannot be shorter than 10 characters!", nameof(Description));
+                }
+                else if (Description.Length > 250)
+                {
+                    AddError("Description cannot be longer than 250 characters!", nameof(Description));
                 }
             }
         }
@@ -152,6 +175,14 @@ namespace Three_Far_Away.ViewModels
 
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
             UploadImageCommand = new UploadAttractionImageCommand(this);
+            if (attraction.Image != "")
+            {
+                _uploadedImageName = "image.jpg";
+            }
+            else
+            {
+                _uploadedImageName = "No file chosen";
+            }
         }
 
 

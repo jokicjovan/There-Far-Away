@@ -1,8 +1,10 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +28,7 @@ namespace Three_Far_Away.Views
         {
             InitializeComponent();
             myMap.Mode = new AerialMode(true);
+            
         }
 
         private void myMap_MouseDown(object sender, MouseEventArgs e)

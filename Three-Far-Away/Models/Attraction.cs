@@ -29,7 +29,13 @@ namespace Three_Far_Away.Models
         [Column("location")]
         public Location Location { get; set; }
 
-        public Attraction() { }
+        public Attraction() 
+        {
+            Name = "";
+            Image = "";
+            Description = "";
+            Type = AttractionType.ATTRACTION;
+        }
         public Attraction(Guid id, string name, string description, AttractionType type, string image, Location location)
         {
             Id = id;

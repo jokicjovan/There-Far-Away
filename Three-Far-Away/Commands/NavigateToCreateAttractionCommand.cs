@@ -62,28 +62,18 @@ namespace Three_Far_Away.Commands
         }
         public override bool CanExecute(object parameter)
         {
+            if (from == "Map" && to == "Home")
+                return true;
             if (from == null)
                 return true;
             if (from == "Home")
             {
-                return true;
-            }
-            /*else if (from == "None")
-            {
-                return true;
+                return Attraction.Name.Length > 2 && Attraction.Name.Length < 30 && Attraction.Description.Length > 10 && Attraction.Description.Length < 250 && Attraction.Image != "" && base.CanExecute(parameter);
             }
             else if (from == "Map")
             {
-                return Journey.StartLocation != null && Journey.EndLocation != null;
+                return Attraction.Location!= null;
             }
-            else if (from == "Attractions")
-            {
-                return Journey.Attractions.Count > 0;
-            }
-            else if (from == "edit")
-            {
-                return !(Journey.StartDate <= DateTime.Now);
-            }*/
             return true;
 
         }
@@ -94,16 +84,14 @@ namespace Three_Far_Away.Commands
         }
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            /*if (Journey == null)
+            if (Attraction == null)
                 return;
             if (from == "Home")
             {
-                if (e.PropertyName == nameof(CreateJourneyViewModel.Journey.Name) ||
-                e.PropertyName == nameof(CreateJourneyViewModel.Journey.Price) ||
-                e.PropertyName == nameof(CreateJourneyViewModel.Journey.StartDate) ||
-                e.PropertyName == nameof(CreateJourneyViewModel.Journey.EndDate) ||
-                e.PropertyName == nameof(CreateJourneyViewModel.Journey.Transportation) ||
-                e.PropertyName == nameof(CreateJourneyViewModel.JourneyImage))
+                if (e.PropertyName == nameof(CreateAttractionViewModel.Attraction.Name) ||
+                e.PropertyName == nameof(CreateAttractionViewModel.Attraction.Description) ||
+                e.PropertyName == nameof(CreateAttractionViewModel.Attraction.Type) ||
+                e.PropertyName == nameof(CreateAttractionViewModel.Attraction.Image))
                 {
                     OnCanExecuteChanged();
                 }
@@ -114,8 +102,7 @@ namespace Three_Far_Away.Commands
             }
             else if (from == "Map")
             {
-                if (e.PropertyName == "StartLocationModel" ||
-                e.PropertyName == "EndLocationModel")
+                if (e.PropertyName == "StartLocationModel")
                 {
                     OnCanExecuteChanged();
                 }
@@ -126,7 +113,7 @@ namespace Three_Far_Away.Commands
                 {
                     OnCanExecuteChanged();
                 }
-            }*/
+            }
         }
     }
 }
