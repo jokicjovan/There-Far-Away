@@ -1,9 +1,13 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.Maps.MapControl.WPF;
+using Microsoft.Extensions.DependencyInjection;
+using Three_Far_Away.Models;
+using Three_Far_Away.Stores;
 using Three_Far_Away.ViewModels;
+using Location = Microsoft.Maps.MapControl.WPF.Location;
 
 namespace Three_Far_Away.Views
 {
@@ -22,6 +26,22 @@ namespace Three_Far_Away.Views
         {
             this.Focusable = true;
             Keyboard.Focus(this);
+            name.Focus();
+            SetHelpKey(null, null);
+        }
+
+        public void SetHelpKey(object sender, EventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+
+            AccountStore accountStore = App.host.Services.GetRequiredService<AccountStore>();
+            if (focusedControl is DependencyObject)
+            {
+                if (accountStore.Role == Role.CLIENT)
+                    HelpProvider.SetHelpKey((DependencyObject)focusedControl, "clientJourneysPreview");
+                else
+                    HelpProvider.SetHelpKey((DependencyObject)focusedControl, "agentJourneysPreview");
+            }
         }
 
         private void myMap_MouseDown(object sender, MouseEventArgs e)

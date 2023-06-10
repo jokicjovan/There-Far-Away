@@ -8,6 +8,7 @@
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="430" d:DesignWidth="700"
+             GotFocus="SetHelpKey"
              mc:Ignorable="d" >
     <Grid Margin="10,10,10,5">
         <Grid.ColumnDefinitions>

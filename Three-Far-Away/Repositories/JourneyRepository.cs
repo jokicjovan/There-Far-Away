@@ -34,7 +34,7 @@ namespace Three_Far_Away.Repositories
 
         public List<Journey> FindFutureJourneys()
         {
-            return _entities.Where(j => j.StartDate >= DateTime.Now).ToList();
+            return _entities.Where(j => j.StartDate >= DateTime.Now).OrderBy(e => e.StartDate).ToList();
         }
     }
 }

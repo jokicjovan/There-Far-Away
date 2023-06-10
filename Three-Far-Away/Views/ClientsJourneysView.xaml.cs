@@ -25,11 +25,23 @@ namespace Three_Far_Away.Views
             InitializeComponent();
         }
 
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.Focusable = true;
             this.FocusVisualStyle = null;
             Keyboard.Focus(this);
+            name.Focus();
+            SetHelpKey(null, null);
+        }
+
+        public void SetHelpKey(object sender, EventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                HelpProvider.SetHelpKey((DependencyObject)focusedControl, "clientsRBJourneys");
+            }
         }
 
     }

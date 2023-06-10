@@ -27,13 +27,10 @@ namespace Three_Far_Away.Views
 
         public void SetHelpKey(object sender, EventArgs e)
         {
-            var windows = Application.Current.Windows.OfType<Window>();
-            foreach (var window in windows)
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
             {
-                if (window is DependencyObject)
-                {
-                    HelpProvider.SetHelpKey(window, "register");
-                }
+                HelpProvider.SetHelpKey((DependencyObject)focusedControl, "register");
             }
         }
     }

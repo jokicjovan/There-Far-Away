@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             GotFocus="SetHelpKey"
              d:DesignHeight="430" d:DesignWidth="700">
     <Grid>
         <Grid.RowDefinitions>
@@ -26,6 +27,7 @@
                 Margin="0,30,0,0"
                 Grid.Row="0" 
                 Width="300"
+                x:Name="name"
                 Text="Name"/>
         <TextBox
                 Grid.Row="1"

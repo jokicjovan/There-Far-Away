@@ -8,7 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Loaded="OnLoaded"
-             threeFarAway:HelpProvider.HelpKey="register"
              FocusVisualStyle="{x:Null}"
              GotFocus="SetHelpKey">
     <UserControl.InputBindings>

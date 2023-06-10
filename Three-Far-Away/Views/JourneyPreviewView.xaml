@@ -7,8 +7,10 @@
              xmlns:converters="clr-namespace:Three_Far_Away.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:threeFarAway="clr-namespace:Three_Far_Away"
              mc:Ignorable="d" 
              d:DesignHeight="430" d:DesignWidth="750"
+             GotFocus="SetHelpKey"
              Loaded="OnLoaded"
              FocusVisualStyle="{x:Null}">
     <UserControl.Resources>
@@ -37,6 +39,7 @@
                             HorizontalAlignment="Center" 
                             FontSize="28"
                             FontWeight="Bold"
+                            x:Name="name"
                             TextWrapping="Wrap"
                             MaxWidth="400"/>
                 </Grid>

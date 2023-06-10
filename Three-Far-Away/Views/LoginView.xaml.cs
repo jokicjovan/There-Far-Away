@@ -29,7 +29,6 @@ namespace Three_Far_Away.Views
             if (focusedControl is DependencyObject)
             {
                 HelpProvider.SetHelpKey((DependencyObject)focusedControl, "login");
-
             }
         }
     }

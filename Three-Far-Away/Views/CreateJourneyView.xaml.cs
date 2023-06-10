@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Threading;
 using System.Windows.Controls;
 using Three_Far_Away.Models;
+using System.Windows.Input;
 
 namespace Three_Far_Away.Views
 {
@@ -26,6 +27,23 @@ namespace Three_Far_Away.Views
             ci.DateTimeFormat.ShortDatePattern = "MM/dd/yyyy";
             Thread.CurrentThread.CurrentCulture = ci;
             trasportationsCB.ItemsSource = Enum.GetValues(typeof (TransportationType));
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.Focusable = true;
+            Keyboard.Focus(this);
+            name.Focus();
+            SetHelpKey(null, null);
+        }
+
+        public void SetHelpKey(object sender, EventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                HelpProvider.SetHelpKey((DependencyObject)focusedControl, "agentAddJourney1");
+            }
         }
     }
 }
