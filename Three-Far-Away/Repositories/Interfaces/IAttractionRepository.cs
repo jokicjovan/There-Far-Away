@@ -12,5 +12,6 @@ namespace Three_Far_Away.Repositories.Interfaces
     {
         List<Attraction> GetAttractionsWithLocations();
         List<Attraction> FindByType(AttractionType type);
+        Attraction FindById(Guid id);
     }
 }

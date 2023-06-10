@@ -12,5 +12,6 @@ namespace Three_Far_Away.Services.Interfaces
     {
         public List<Attraction> ReadPage(int page, int size, AttractionType type);
         public List<Attraction> ReadPage(int page, int size);
+        public Attraction FindWithLocation(Guid id);
     }
 }
