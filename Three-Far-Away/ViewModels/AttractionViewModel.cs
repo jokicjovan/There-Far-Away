@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using Three_Far_Away.Commands;
-using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;

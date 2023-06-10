@@ -29,19 +29,21 @@
 
             <Grid Grid.Column="1" Margin="10 5" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="35" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <!-- Content for left column -->
                     <TextBlock 
-                        Grid.Column="0" 
+                        Grid.Column="0"
+                        Width="150"
+                        TextWrapping="Wrap"
                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                         FontWeight="Bold" FontSize="15" />
 

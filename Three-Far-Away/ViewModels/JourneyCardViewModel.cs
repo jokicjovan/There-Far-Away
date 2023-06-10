@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Events;
 using Three_Far_Away.Models;
-using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Services;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;
@@ -106,7 +105,7 @@ namespace Three_Far_Away.ViewModels
             Name = journey.Name;
             Image = journey.Image;
 			Date = journey.StartDate.ToString().Split("T")[0].Split(" ")[0] + " - " + journey.EndDate.ToString().Split("T")[0].Split(" ")[0];
-			Price = journey.Price + "RSD";
+			Price = journey.Price + " RSD";
             journeyService = App.host.Services.GetService<IJourneyService>();
             accountStore = App.host.Services.GetService<AccountStore>();
             role = accountStore.Role;

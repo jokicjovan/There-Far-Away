@@ -36,12 +36,14 @@
 
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     
                     <!-- Content for left column -->
                     <TextBlock 
                         Grid.Column="0" 
+                        Width="150"
+                        TextWrapping="Wrap"
                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                         FontWeight="Bold" FontSize="15" />
 

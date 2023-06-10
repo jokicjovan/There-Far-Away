@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
 using System.ComponentModel;

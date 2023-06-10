@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Three_Far_Away.Commands;
@@ -161,6 +166,20 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
+        private string _smallAddress;
+        public string SmallAddress
+        {
+            get
+            {
+                return _smallAddress;
+            }
+            set
+            {
+                _smallAddress = value;
+                OnPropertyChanged(nameof(SmallAddress));
+            }
+        }
+
         private string _image;
         public string Image
         {
@@ -197,6 +216,14 @@ namespace Three_Far_Away.ViewModels
             Type = char.ToUpper(Type[0]) + Type.Substring(1);
             Description = attraction.Description;
             Address = attraction.Location.Address;
+            if (Address.Length > 20)
+            {
+                SmallAddress = attraction.Location.Address.Substring(0, 20) + "...";
+            }
+            else
+            {
+                SmallAddress = attraction.Location.Address.Substring(0, Address.Length);
+            }
             Latitude = attraction.Location.Latitude;
             Longitude = attraction.Location.Longitude;
             Locations = new ObservableCollection<MapLocation>();
