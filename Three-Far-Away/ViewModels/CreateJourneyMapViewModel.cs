@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
@@ -229,9 +230,19 @@ namespace Three_Far_Away.ViewModels
 
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var data = (JObject)JsonConvert.DeserializeObject(responseBody);
+                if (data["resourceSets"][0]["resources"][0]["address"]["countryRegion"].Value<string>() != "Serbia" && data["resourceSets"][0]["resources"][0]["address"]["countryRegion"].Value<string>() != "Kosovo")
+                {
+                    MessageBox.Show("We only operate in Serbia, please select location in Serbia.");
+                    StartCity = "";
+                    StartLocationModel = null;
+
+                    return;
+                }
                 StartLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
                 StartCity = StartLocationModel.Address;
                 Journey.StartLocation = StartLocationModel;
+                Locations.Add(new MapLocation(location, "S", true));
+
             }
             else
             {
@@ -252,9 +263,18 @@ namespace Three_Far_Away.ViewModels
 
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var data = (JObject)JsonConvert.DeserializeObject(responseBody);
+                if (data["resourceSets"][0]["resources"][0]["address"]["countryRegion"].Value<string>() != "Serbia" && data["resourceSets"][0]["resources"][0]["address"]["countryRegion"].Value<string>() != "Kosovo")
+                {
+                    MessageBox.Show("We only operate in Serbia, please select location in Serbia.");
+                    EndCity = "";
+                    EndLocationModel = null;
+
+                    return;
+                }
                 EndLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
                 EndCity = EndLocationModel.Address;
                 Journey.EndLocation = EndLocationModel;
+                Locations.Add(new MapLocation(location, "F", false));
             }
             else
             {

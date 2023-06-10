@@ -6,8 +6,10 @@
              xmlns:dd="urn:gong-wpf-dragdrop"
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="430" d:DesignWidth="700"
              mc:Ignorable="d" >
-    <Grid>
+    <Grid Margin="10,10,10,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="0"/>
             <ColumnDefinition Width="auto" MinWidth="0"/>
@@ -17,10 +19,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding AllAttractions}"
+        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding AllAttractions}"
                 dd:DragDrop.IsDragSource="True"
                 dd:DragDrop.IsDropTarget="True"
                 dd:DragDrop.ShowAlwaysDropTargetAdorner="True"
@@ -28,8 +32,8 @@
                 x:Name="listBoxAll"
                 SelectionMode="Extended"
                 SelectionChanged="ListBox_SelectionChanged"
-                BorderBrush="LightGreen"
-                 BorderThickness="2">
+                BorderBrush="#8BC34A"
+                BorderThickness="2">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -40,7 +44,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border Margin="3" Background="LightGreen" Padding="7" CornerRadius="5">
+                                <Border Margin="3" Background="#8BC34A" Padding="7" CornerRadius="5">
                                     <ContentPresenter HorizontalAlignment="Left"
                                               VerticalAlignment="Center" />
                                 </Border>
@@ -53,28 +57,42 @@
         <Border Grid.Column="1" Background="Transparent" Margin="10,0">
             <!-- Empty element used for spacing -->
         </Border>
-        <TextBox
-                    Grid.Row="0"
+        <TextBlock 
+                    Grid.Row="0" 
                     Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Text="All Attractions"/>
+        <TextBlock 
+                    Grid.Row="0" 
+                    HorizontalAlignment="Center"
+                    Grid.Column="2"
+                    Text="Selected Attractions"/>
+        <TextBox
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    materialDesign:HintAssist.Hint="Search All Attractions"
+                    ToolTip="Enter name of desired journey"
                     Text="{Binding Path=FilterAll, UpdateSourceTrigger=PropertyChanged}" 
                     Margin="5"/>
 
         <TextBox
-                    Grid.Row="0"
+                    Grid.Row="2"
                     Grid.Column="2"
+                    materialDesign:HintAssist.Hint="Search Selected Attractions"
+                    ToolTip="Enter name of desired journey"
                     Margin="5"
                     Text="{Binding Path=FilterSelected, UpdateSourceTrigger=PropertyChanged}" />
         <ListBox ItemsSource="{Binding SelectedAttractions}"
                 x:Name="listBoxSelected"
                 Grid.Column="2" 
-                Grid.Row="1"
+                Grid.Row="3"
                 dd:DragDrop.IsDragSource="True"
                 dd:DragDrop.IsDropTarget="True"
                 SelectionMode="Extended"
                 SelectionChanged="ListBox_SelectionChanged_1"
                 dd:DragDrop.ShowAlwaysDropTargetAdorner="True"
                 dd:DragDrop.UseDefaultDragAdorner="True"
-                BorderBrush="LightGreen"
+                BorderBrush="#8BC34A"
                  BorderThickness="2">
             <ListBox.Resources>
                 <Style TargetType="Border">
@@ -87,7 +105,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <!-- Modify the control template as needed, removing or modifying the IsPressed trigger -->
-                                <Border Margin="3" Background="LightGreen" Padding="7" CornerRadius="5">
+                                <Border Margin="3" Background="#8BC34A" Padding="7" CornerRadius="5">
                                     <ContentPresenter HorizontalAlignment="Left"
                                               VerticalAlignment="Center" />
                                 </Border>
@@ -101,7 +119,8 @@
         <Border Grid.Column="3" Background="Transparent" Margin="10,0">
             <!-- Empty element used for spacing -->
         </Border>
-        <m:Map Grid.Column="4" Grid.Row="1"  x:Name="myMap" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
+        <m:Map Grid.Column="4" Grid.Row="3" ZoomLevel="6.0"
+                        Center="44.01667, 20.91667" Margin="0,0,6,0" x:Name="myMap" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
             <m:MapItemsControl ItemsSource="{Binding Locations}">
                 <m:MapItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -111,14 +130,14 @@
                 </m:MapItemsControl.ItemTemplate>
             </m:MapItemsControl>
         </m:Map>
-        <Grid Grid.Row="2" Grid.ColumnSpan="5" VerticalAlignment="Center" Height="60" RenderTransformOrigin="0.496,0.595">
+        <Grid Grid.Row="4" Margin="15,0,5,0" Grid.ColumnSpan="5" VerticalAlignment="Center" Height="60" RenderTransformOrigin="0.496,0.595">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="187*" />
                 <ColumnDefinition Width="152*"/>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Content="Previous" Margin="5,14,0,15" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding NavigateToCreateJourneyMapCommand}"/>
-            <Button Content="Finish" Margin="0,14,0,15" HorizontalAlignment="Center" Grid.Column="2" Foreground="White" Command="{Binding CreateJourneyCommand}" />
+            <Button Content="Previous" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding NavigateToCreateJourneyMapCommand}"/>
+            <Button Content="Finish" Margin="0,5,0,0"  HorizontalAlignment="Center" Grid.Column="2" Foreground="White" Command="{Binding CreateJourneyCommand}" />
         </Grid>
     </Grid>
 </UserControl>

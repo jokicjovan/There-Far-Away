@@ -42,6 +42,8 @@
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="0"
+                    ToolTip="Enter start address of your journey"
+                    materialDesign:HintAssist.Hint="Example address"
                     Text = "{Binding StartCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding SearchStartLocationCommand}" Key="Return" />
@@ -50,8 +52,8 @@
                 <Button
                     Grid.Row="1"
                     Grid.Column="1"
-                    Width="15"
-                    Height="15"
+                    Width="20"
+                    Height="20"
                     Padding="0"
                     HorizontalAlignment="Center"
                     HorizontalContentAlignment="Center"
@@ -59,10 +61,12 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Command="{Binding TurnOnStartLocationCommand}"
-                    Foreground="Red">
+                    Foreground="Red"
+                    ToolTip="Click button to select location on map (using right click)">
+                    
                     <materialDesign:PackIcon
-                        Width="15"
-                        Height="15"
+                        Width="20"
+                        Height="20"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Foreground="Black"
@@ -78,6 +82,8 @@
                 <TextBox
                     Grid.Row="4"
                     Grid.Column="0"
+                    ToolTip="Enter end address of your journey"
+                    materialDesign:HintAssist.Hint="Example address"
                     Text = "{Binding EndCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding SearchEndLocationCommand}" Key="Return" />
@@ -86,8 +92,8 @@
                 <Button
                     Grid.Row="4"
                     Grid.Column="1"
-                    Width="15"
-                    Height="15"
+                    Width="20"
+                    Height="20"
                     Padding="0"
                     HorizontalAlignment="Center"
                     HorizontalContentAlignment="Center"
@@ -95,10 +101,12 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Command="{Binding TurnOnEndLocationCommand}"
-                    Foreground="Red">
+                    Foreground="Red"
+                    ToolTip="Click button to select end location on map (using right click)">
+
                     <materialDesign:PackIcon
-                        Width="15"
-                        Height="15"
+                        Width="20"
+                        Height="20"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Foreground="Black"
@@ -110,7 +118,8 @@
                 <!-- Empty element used for spacing -->
             </Border>
             <Grid Grid.Column="3" Grid.ColumnSpan="1">
-                <m:Map MouseRightButtonDown="myMap_MouseDown"  x:Name="myMap" Margin="0,20,30,0" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
+                <m:Map MouseRightButtonDown="myMap_MouseDown" ZoomLevel="6.1"
+                        Center="44.01667, 20.91667" x:Name="myMap" Margin="0,20,22,0" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
                     <m:MapItemsControl ItemsSource="{Binding Locations}">
                         <m:MapItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -122,14 +131,14 @@
                 </m:Map>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" Margin="20,15,20,0" RenderTransformOrigin="0.496,0.595" Height="61" VerticalAlignment="Top">
+        <Grid Grid.Row="1" Margin="20,5,20,0" RenderTransformOrigin="0.496,0.595" Height="61" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="187*" />
                 <ColumnDefinition Width="152*"/>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Button Content="Previous" Margin="5,14,0,15" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding NavigateToCreateJourneyCommand}"/>
-            <Button Content="Next" Margin="0,14,0,15" HorizontalAlignment="Center" Grid.Column="2" Foreground="White"  Command="{Binding NavigateToCreateJourneyAttractionsCommand}"/>
+            <Button Content="Next" Margin="0,14,0,10" HorizontalAlignment="Center" Grid.Column="2" Foreground="White"  Command="{Binding NavigateToCreateJourneyAttractionsCommand}"/>
         </Grid>
     </Grid>
 </UserControl>
