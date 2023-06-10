@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
@@ -208,7 +209,7 @@ namespace Three_Far_Away.ViewModels
             {
                 IsAgent = false;
             }
-            Attraction attraction = attractionService.FindWithLocation(id);
+            Attraction attraction = attractionService.FindWithLocation(id);;
             AttractionId = attraction.Id;
             Name = attraction.Name;
             Image = attraction.Image;
@@ -232,6 +233,7 @@ namespace Three_Far_Away.ViewModels
                 new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude),
                 "S", true));
 
+            NavigateToEditAttractionCommand = new NavigateToCreateAttractionCommand(attraction)
             DeleteAttractionCommand = new DeleteAttractionFromPreviewCommand(this);
         }
     }

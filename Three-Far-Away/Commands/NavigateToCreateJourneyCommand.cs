@@ -20,6 +20,7 @@ namespace Three_Far_Away.Commands
         {
             this.from = from;
             this.to = to;
+            
             if (from == "Map")
             {
                 CreateJourneyMapViewModel mvm= (CreateJourneyMapViewModel)vm;
@@ -80,6 +81,8 @@ namespace Three_Far_Away.Commands
         }
         public override bool CanExecute(object parameter)
         {
+            if ((from == "Map" && to == "Home") || (from == "Attractions" && to == "Map"))
+                return true;
             if (from == null)
                 return true;
             if (from == "Home")

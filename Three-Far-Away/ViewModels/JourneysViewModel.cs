@@ -101,8 +101,7 @@ namespace Three_Far_Away.ViewModels
         public JourneysViewModel(IJourneyService journeyService)
         {
             page = 0;
-            this.journeyService = journeyService;
-            
+            this.journeyService = journeyService;            
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
             Journey j = journeyService.ReadAll()[0];

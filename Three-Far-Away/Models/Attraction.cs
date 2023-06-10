@@ -31,7 +31,12 @@ namespace Three_Far_Away.Models
 
         public List<Journey> Journeys { get; set; }
 
-        public Attraction() { }
+        public Attraction() { 
+            Name = "";
+            Image = "";
+            Description = "";
+            Type = AttractionType.ATTRACTION;
+        }
 
         public Attraction(Guid id, string name, string description, AttractionType type, string image, Location location, List<Journey> journeys)
         {

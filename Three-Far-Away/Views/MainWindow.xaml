@@ -79,6 +79,12 @@
             <DataTemplate DataType="{x:Type vms:LocationListItemViewModel}">
                 <views:LocationListItemView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:CreateAttractionViewModel}">
+                <views:CreateAttractionView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:CreateAttractionMapViewModel}">
+                <views:CreateAttractioonMapView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type views:AttractionCardViewModel}">
                 <views:AttractionCardView/>

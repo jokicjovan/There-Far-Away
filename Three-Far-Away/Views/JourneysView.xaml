@@ -30,16 +30,7 @@
             Visibility="{Binding AddJourneyVisibility}"
             Command="{Binding NavigateToCreateJourneyCommand}"
             Background="#639B22">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="0"
-                            CornerRadius="10">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
+            
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Plus" Margin="10,0,5,2" VerticalAlignment="Center"/>
                 <TextBlock 

@@ -70,6 +70,17 @@ namespace Three_Far_Away.ViewModels
                 ReportsViewModel rvm = App.host.Services.GetRequiredService<ReportsViewModel>();
                 SwitchCurrentViewModel(rvm);
             });
+
+            EventBus.RegisterHandler("CreateAttraction", (object attraction) =>
+            {
+                CreateAttractionViewModel cavm = new CreateAttractionViewModel((Attraction)attraction);
+                SwitchCurrentViewModel(cavm);
+            });
+            EventBus.RegisterHandler("CreateAttractionMap", (object attraction) =>
+            {
+                CreateAttractionMapViewModel cavm = new CreateAttractionMapViewModel((Attraction)attraction);
+                SwitchCurrentViewModel(cavm);
+            });
             EventBus.RegisterHandler("Attractions", () =>
             {
                 AttractionViewModel avm = App.host.Services.GetRequiredService<AttractionViewModel>();

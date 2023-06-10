@@ -146,7 +146,7 @@ namespace Three_Far_Away.ViewModels
             };
             NextPageCommand = new NextPageAttractionsCommand(this);
             PreviousPageCommand = new PreviousPageAttractionsCommand(this);
-            // NavigateToCreateAttractionCommand= new NavigateToCreateJourneyCommand(new Journey());
+            NavigateToCreateAttractionCommand = new NavigateToCreateAttractionCommand(new Attraction());
             accountStore = App.host.Services.GetService<AccountStore>();
 
             if (accountStore.Role.Equals(Role.AGENT))
