@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,8 +30,7 @@ namespace Three_Far_Away.ViewModels
         #endregion
 
         #region commands
-
-        public ICommand DeleteAttractionCommand;
+        public ICommand DeleteAttractionCommand { get; }
         public ICommand NavigateToEditAttractionCommand { get; }
 
         #endregion
@@ -39,6 +38,19 @@ namespace Three_Far_Away.ViewModels
         #region properties
         public ObservableCollection<MapLocation> Locations { get; private set; }
 
+        private Guid _attractionId;
+        public Guid AttractionId
+        {
+            get
+            {
+                return _attractionId;
+            }
+            set
+            {
+                _attractionId = value;
+                OnPropertyChanged(nameof(AttractionId));
+            }
+        }
 
         private double _latitude;
         public double Latitude
@@ -155,6 +167,20 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
+        private string _smallAddress;
+        public string SmallAddress
+        {
+            get
+            {
+                return _smallAddress;
+            }
+            set
+            {
+                _smallAddress = value;
+                OnPropertyChanged(nameof(SmallAddress));
+            }
+        }
+
         private string _image;
         public string Image
         {
@@ -183,14 +209,22 @@ namespace Three_Far_Away.ViewModels
             {
                 IsAgent = false;
             }
-            Attraction attraction = attractionService.FindWithLocation(id);
-            NavigateToEditAttractionCommand = new NavigateToCreateAttractionCommand(attraction);
+            Attraction attraction = attractionService.FindWithLocation(id);;
+            AttractionId = attraction.Id;
             Name = attraction.Name;
             Image = attraction.Image;
             Type = attraction.Type.ToString().ToLower();
             Type = char.ToUpper(Type[0]) + Type.Substring(1);
             Description = attraction.Description;
             Address = attraction.Location.Address;
+            if (Address.Length > 20)
+            {
+                SmallAddress = attraction.Location.Address.Substring(0, 20) + "...";
+            }
+            else
+            {
+                SmallAddress = attraction.Location.Address.Substring(0, Address.Length);
+            }
             Latitude = attraction.Location.Latitude;
             Longitude = attraction.Location.Longitude;
             Locations = new ObservableCollection<MapLocation>();
@@ -198,7 +232,9 @@ namespace Three_Far_Away.ViewModels
             Locations.Add(new MapLocation(
                 new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude),
                 "S", true));
-            
+
+            NavigateToEditAttractionCommand = new NavigateToCreateAttractionCommand(attraction)
+            DeleteAttractionCommand = new DeleteAttractionFromPreviewCommand(this);
         }
     }
 }

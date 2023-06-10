@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Models;
 using Three_Far_Away.ViewModels;
 using System.Collections.ObjectModel;

@@ -124,8 +124,12 @@
                         Margin="1,10,5,10" Height="30" Width="30"/>
                     <TextBlock
                         FontSize="20"
-                        Text="{Binding Address}"
-                        Margin="1,10,5,10"/>
+                        Text="{Binding SmallAddress}"
+                        Margin="1,10,5,10">
+                        <TextBlock.ToolTip>
+                            <ToolTip Content="{Binding Address}" />
+                        </TextBlock.ToolTip>
+                    </TextBlock>
                 </StackPanel>
             </StackPanel>
         </Grid>
