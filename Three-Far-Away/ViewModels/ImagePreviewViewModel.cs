@@ -1,4 +1,7 @@
-﻿namespace Three_Far_Away.ViewModels
+﻿using System.Windows.Input;
+using Three_Far_Away.Commands;
+
+namespace Three_Far_Away.ViewModels
 {
     public class ImagePreviewViewModel : ViewModelBase
     {
@@ -17,9 +20,13 @@
             }
         }
 
+
+        public ICommand CloseDialogCommand { get; }
+
         public ImagePreviewViewModel(string base64ImageRepresentation)
         {
             Image = base64ImageRepresentation;
+            CloseDialogCommand = new CloseDialogCommand();
         }
     }
 }

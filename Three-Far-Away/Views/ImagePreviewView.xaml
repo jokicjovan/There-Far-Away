@@ -9,11 +9,9 @@
     <UserControl.Resources>
         <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
     </UserControl.Resources>
-    <!--
     <UserControl.InputBindings>
-        <KeyBinding Key="Esc"/>
+        <KeyBinding Key="Esc" Command="{Binding CloseDialogCommand}"/>
     </UserControl.InputBindings>
-    -->
     <Grid>
         <Image 
             Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" 
