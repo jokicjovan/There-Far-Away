@@ -108,7 +108,7 @@ namespace Three_Far_Away.Views
                 MenuVisibility = Visibility.Collapsed;
             }
 
-            // ViewAttractionPreviewCommand= new ViewJourneyPreviewFromJourneyCardCommand(this);
+            ViewAttractionPreviewCommand = new ViewAttractionPreviewCommandFromAttractionCardCommand(this);
             // DeleteAttractionFromCardCommand = new DeleteJourneyFromCardCommand(this);
             // NavigateEditAttractionCommand = new NavigateToCreateJourneyCommand(journeyService.Read(journey.Id));
         }

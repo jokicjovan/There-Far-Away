@@ -21,6 +21,7 @@ namespace Three_Far_Away.Services
         }
 
         #region CRUD
+
         public Attraction Create(Attraction entity)
         {
             return _attractionRepository.Create(entity);
@@ -47,6 +48,7 @@ namespace Three_Far_Away.Services
         }
 
         #endregion
+
         public List<Attraction> ReadPage(int page, int size, AttractionType type)
         {
             List<Attraction> attractions = _attractionRepository.FindByType(type);
@@ -56,8 +58,10 @@ namespace Three_Far_Away.Services
                 if (i > attractions.Count - 1 || i < 0) break;
                 newAttractions.Add(attractions[i]);
             }
+
             return newAttractions;
         }
+
         public List<Attraction> ReadPage(int page, int size)
         {
             List<Attraction> attractions = (List<Attraction>)_attractionRepository.ReadAll();
@@ -67,7 +71,13 @@ namespace Three_Far_Away.Services
                 if (i > attractions.Count - 1 || i < 0) break;
                 newAttractions.Add(attractions[i]);
             }
+
             return newAttractions;
+        }
+
+        public Attraction FindWithLocation(Guid id)
+        {
+            return _attractionRepository.FindById(id);
         }
     }
 }

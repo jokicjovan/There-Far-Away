@@ -26,7 +26,9 @@
                     Background="#8bc34a"
                     Foreground="White"
                     Height="25"
-                    Width="25">
+                    Width="25"
+                    Command="{Binding ShowAttractionCommand}"
+                    Visibility="{Binding Visibility}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}"

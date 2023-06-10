@@ -287,12 +287,12 @@ namespace Three_Far_Away.ViewModels
         private List<LocationListItemViewModel> CreateLocationItemViews (Journey journey)
         {
             List<LocationListItemViewModel> locations = new List<LocationListItemViewModel>();
-            locations.Add(new LocationListItemViewModel(journey.StartLocation.Address));
+            locations.Add(new LocationListItemViewModel(journey.StartLocation.Address, null));
             foreach (var journeyAttraction in journey.Attractions)
             {
-                locations.Add(new LocationListItemViewModel(journeyAttraction.Name));
+                locations.Add(new LocationListItemViewModel(journeyAttraction.Name, journeyAttraction.Id));
             }
-            locations.Add(new LocationListItemViewModel(journey.EndLocation.Address));
+            locations.Add(new LocationListItemViewModel(journey.EndLocation.Address, null));
             return locations;
         }
 

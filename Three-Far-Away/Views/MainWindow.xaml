@@ -88,6 +88,10 @@
                 <views:AttractionsView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vms:AttractionPreviewViewModel}">
+                <views:AttractionPreviewView/>
+            </DataTemplate>
+
         </Grid.Resources>
 
         <materialDesign:DialogHost CloseOnClickAway="True">

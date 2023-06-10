@@ -43,6 +43,12 @@ namespace Three_Far_Away.ViewModels
                 SwitchCurrentViewModel(jpvm);
             });
 
+            EventBus.RegisterHandler("AgentAttractionPreview", (object attractionId) =>
+            {
+                AttractionPreviewViewModel apvm = new AttractionPreviewViewModel((Guid)attractionId);
+                SwitchCurrentViewModel(apvm);
+            });
+
             EventBus.RegisterHandler("CreateJourney", (object journey) =>
             {
                 CreateJourneyViewModel cjvm = new CreateJourneyViewModel((Journey)journey);

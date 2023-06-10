@@ -56,6 +56,7 @@ namespace Three_Far_Away
                 services.AddTransient<CreateJourneyMapViewModel>();
                 services.AddTransient<CreateJourneyAttractionsViewModel>();
                 services.AddTransient<ClientsJourneysViewModel>();
+                services.AddTransient<AttractionPreviewView>();
                 services.AddTransient<AttractionViewModel>();
 
                 services.AddSingleton<MainViewModel>();

@@ -27,5 +27,10 @@ namespace Three_Far_Away.Repositories
         {
             return _entities.Include(e => e.Location).Where(e => e.Type == type).ToList();
         }
+
+        public Attraction FindById(Guid id)
+        {
+            return _entities.Include(e => e.Location).Where(e => e.Id == id).FirstOrDefault();
+        }
     }
 }
