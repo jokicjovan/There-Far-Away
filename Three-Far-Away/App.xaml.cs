@@ -17,7 +17,6 @@ using Three_Far_Away.Components;
 using Three_Far_Away.Infrastructure;
 using System;
 using Three_Far_Away.Views;
-using Microsoft.Maps.MapControl.WPF;
 using Location = Three_Far_Away.Models.Location;
 
 namespace Three_Far_Away

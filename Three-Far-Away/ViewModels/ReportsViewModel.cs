@@ -14,6 +14,7 @@ namespace Three_Far_Away.ViewModels
     public class ReportsViewModel : ViewModelBase
     {
         public int page;
+
         #region services
         public readonly IJourneyService journeyService;
         #endregion
@@ -26,6 +27,7 @@ namespace Three_Far_Away.ViewModels
             set
             {
                 _reportCardViewModels = value;
+                IsEmpty = (value.Count > 0) ? false : true;
                 OnPropertyChanged(nameof(ReportCardViewModels));
             }
         }
@@ -114,6 +116,19 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
+        private bool _isEmpty;
+        public bool IsEmpty
+        {
+            get
+            {
+                return _isEmpty;
+            }
+            set
+            {
+                _isEmpty = value;
+                OnPropertyChanged(nameof(IsEmpty));
+            }
+        }
         #endregion
 
         #region commands

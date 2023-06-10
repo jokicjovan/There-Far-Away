@@ -40,6 +40,7 @@ namespace Three_Far_Away.ViewModels
             set
             {
                 journeys = value;
+                IsEmpty = (value.Count > 0) ? false : true;
                 OnPropertyChanged(nameof(Journeys));
             }
         }
@@ -94,6 +95,20 @@ namespace Three_Far_Away.ViewModels
             {
                 _previousPageVisibility = value;
                 OnPropertyChanged(nameof(PreviousPageVisibility));
+            }
+        }
+
+        private bool _isEmpty;
+        public bool IsEmpty
+        {
+            get
+            {
+                return _isEmpty;
+            }
+            set
+            {
+                _isEmpty = value;
+                OnPropertyChanged(nameof(IsEmpty));
             }
         }
         #endregion

@@ -45,6 +45,7 @@ namespace Three_Far_Away.ViewModels
             set
             {
                 _boughtJourneyCardViewModels = value;
+                IsEmpty = (value.Count > 0) ? false : true;
                 OnPropertyChanged(nameof(BoughtJourneyCardViewModels));
             }
         }
@@ -71,6 +72,7 @@ namespace Three_Far_Away.ViewModels
             set
             {
                 _reservedJourneyCardViewModels = value;
+                IsEmpty = (value.Count > 0) ? false : true;
                 OnPropertyChanged(nameof(ReservedJourneyCardViewModels));
             }
         }
@@ -152,9 +154,21 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(PreviousPageReservedVisibility));
             }
         }
+
+        private bool _isEmpty;
+        public bool IsEmpty
+        {
+            get
+            {
+                return _isEmpty;
+            }
+            set
+            {
+                _isEmpty = value;
+                OnPropertyChanged(nameof(IsEmpty));
+            }
+        }
         #endregion
-
-
 
         public ClientsJourneysViewModel(IArrangementService arrangementService)
         {

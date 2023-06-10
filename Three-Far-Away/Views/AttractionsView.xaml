@@ -6,14 +6,16 @@
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="OnLoaded"
+             FocusVisualStyle="{x:Null}">
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Right" Command="{Binding NextPageCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="Left" Command="{Binding PreviousPageCommand}"/>
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -71,6 +73,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            
             <Grid Grid.Row="0" Margin="0 20 0 0">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ItemsControl ItemsSource="{Binding AttractionCardViewModels, Mode=TwoWay}"  Focusable="False">
@@ -87,6 +90,16 @@
                     </ItemsControl>
                 </Grid>
             </Grid>
+
+            <TextBlock
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Text="There is no available attractions!"
+                FontSize="20"
+                Margin="20"
+                Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
             <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0, 0, 0, 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

@@ -50,6 +50,7 @@ namespace Three_Far_Away.ViewModels
             set
             {
                 attractionCardViewModels = value;
+                IsEmpty = (value.Count > 0) ? false : true;
                 OnPropertyChanged(nameof(AttractionCardViewModels));
             }
         }
@@ -125,6 +126,20 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(SelectedType));
                 InitPager();
                 LoadAttractions();
+            }
+        }
+
+        private bool _isEmpty;
+        public bool IsEmpty
+        {
+            get
+            {
+                return _isEmpty;
+            }
+            set
+            {
+                _isEmpty = value;
+                OnPropertyChanged(nameof(IsEmpty));
             }
         }
         #endregion

@@ -90,7 +90,8 @@
                         <Button
                         Grid.Column="0"
                         Width="200" 
-                        Command="{Binding SubmitCommand}">
+                        Command="{Binding SubmitCommand}"
+                        Foreground="White">
                             Login
                         </Button>
 

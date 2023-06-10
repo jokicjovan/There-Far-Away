@@ -32,7 +32,7 @@
             <Grid Grid.Column="1" 
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Center"
-                  Margin="5 5">
+                  Margin="5 8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

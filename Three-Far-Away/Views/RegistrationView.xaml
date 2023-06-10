@@ -130,7 +130,8 @@
                         <Button
                         Grid.Column="0"
                         Width="200" 
-                        Command="{Binding SubmitCommand}">
+                        Command="{Binding SubmitCommand}" 
+                        Foreground="White">
                             Register
                         </Button>
 
@@ -139,7 +140,8 @@
                         Thickness="5"
                         Diameter="30"
                         Color="Black"
-                        IsLoading="{Binding IsLoading}">
+                        IsLoading="{Binding IsLoading}"
+                        Foreground="White">
                         </spinner:LoadingSpinner>
                     </Grid>
 
