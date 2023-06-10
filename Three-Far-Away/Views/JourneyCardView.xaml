@@ -20,12 +20,15 @@
                 <!-- <ColumnDefinition Width="*"/> -->
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0"
-                   HorizontalAlignment="Left" 
-                   Width="90"
-                   Margin="5"
-                   Stretch="UniformToFill"
-                   Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" />
+            <Border 
+                Grid.Column="0"
+                CornerRadius="10 0 0 10"
+                Width="100">
+                <Border.Background>
+                    <ImageBrush 
+                       ImageSource="{Binding Image, Converter={StaticResource Base64ImageConverter}}"/>
+                </Border.Background>
+            </Border>
 
             <Grid Grid.Column="1" Margin="10 5" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>

@@ -162,28 +162,13 @@
                         Width="130"
                         Command="{Binding ShowJourneyPassengersCommand}"
                         Visibility="{Binding IsAgent, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <!--
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="0"
-                                                CornerRadius="20">
-                                    <ContentPresenter 
-                                                HorizontalAlignment="Center" 
-                                                VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                        -->
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon 
-                                        Kind="People" 
-                                        Margin="1,10,5,10"/>
+                                Kind="People"
+                                Margin="0 3 5 0"/>
                             <TextBlock 
-                                        Text="Passengers" 
-                                        VerticalAlignment="Center" 
-                                        Margin="0,10,10,15" />
+                                Text="Passengers" 
+                                VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                     <Button  
@@ -195,28 +180,13 @@
                         Width="130"
                         Command="{Binding NavigateToEditJourneyCommand}"
                         Visibility="{Binding IsAgent, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <!--
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="0"
-                                                CornerRadius="20">
-                                    <ContentPresenter 
-                                                HorizontalAlignment="Center" 
-                                                VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                        -->
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon 
-                                        Kind="Pencil" 
-                                        Margin="1,10,5,10"/>
+                                Kind="Pencil" 
+                                Margin="0 3 5 0"/>
                             <TextBlock 
-                                        Text="Edit" 
-                                        VerticalAlignment="Center" 
-                                        Margin="0,10,10,15" />
+                                Text="Edit" 
+                                VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                     <Button 
@@ -229,29 +199,14 @@
                         Command="{Binding DeleteJourneyCommand}"
                         Visibility="{Binding IsAgent, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon 
-                                        Kind="Trash" 
-                                        Margin="1,10,5,10"/>
+                                Kind="Trash" 
+                                Margin="0 3 5 0"/>
                             <TextBlock 
-                                        Text="Delete" 
-                                        VerticalAlignment="Center" 
-                                        Margin="0,10,10,15"/>
+                                Text="Delete" 
+                                VerticalAlignment="Center"/>
                         </StackPanel>
-                        <!--
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="0"
-                                                CornerRadius="20">
-                                    <ContentPresenter 
-                                                HorizontalAlignment="Center" 
-                                                VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                        -->
                     </Button>
                     <Button  
                         Grid.Column="0"
@@ -263,29 +218,13 @@
                         IsEnabled="{Binding IsBuyEnabled}"
                         Command="{Binding BuyCommand}"
                         Visibility="{Binding IsAgent, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
-                        <!--
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="0"
-                                            CornerRadius="20">
-                                    <ContentPresenter 
-                                            HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                        -->
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon 
-                                    Kind="Dollar" 
-                                    Margin="1,10,5,10"/>
+                                Kind="Dollar" 
+                                Margin="0 3 5 0"/>
                             <TextBlock 
-                                    Text="Buy" 
-                                    VerticalAlignment="Center" 
-
-                                    Margin="0,10,10,15" />
+                                Text="Buy" 
+                                VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                     <Button   
@@ -298,28 +237,13 @@
                         IsEnabled="{Binding IsReserveEnabled}"
                         Command="{Binding ReserveCommand}"
                         Visibility="{Binding IsAgent, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
-                        <!--
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="0"
-                                                CornerRadius="20">
-                                    <ContentPresenter 
-                                                HorizontalAlignment="Center" 
-                                                VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                        -->
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon 
-                                        Kind="CalendarPlus" 
-                                        Margin="1,10,5,10"/>
+                                Kind="CalendarPlus"
+                                Margin="0 3 5 0"/>
                             <TextBlock 
-                                        Text="{Binding ReserveButtonText}" 
-                                        VerticalAlignment="Center" 
-                                        Margin="0,10,10,15" />
+                                Text="{Binding ReserveButtonText}" 
+                                VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </Grid>
