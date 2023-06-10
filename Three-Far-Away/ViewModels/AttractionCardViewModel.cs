@@ -120,7 +120,7 @@ namespace Three_Far_Away.Views
 
             ViewAttractionPreviewCommand = new ViewAttractionPreviewCommandFromAttractionCardCommand(this);
             DeleteAttractionFromCardCommand = new DeleteAttractionFromCardCommand(this);
-            // NavigateEditAttractionCommand = new NavigateToCreateJourneyCommand(journeyService.Read(journey.Id));
+            NavigateEditAttractionCommand = new NavigateToCreateAttractionCommand(attraction);
         }
     }
 }
