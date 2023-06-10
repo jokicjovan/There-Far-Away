@@ -8,7 +8,7 @@ using Three_Far_Away.ViewModels;
 
 namespace Three_Far_Away.Commands
 {
-    internal class UploadAttractionImageCommand:CommandBase
+    public class UploadAttractionImageCommand:CommandBase
     {
         private readonly CreateAttractionViewModel _createAttractionViewModel;
         public UploadAttractionImageCommand(CreateAttractionViewModel createAttractionViewModel)
@@ -33,8 +33,8 @@ namespace Three_Far_Away.Commands
             {
                 byte[] imageArray = System.IO.File.ReadAllBytes(fileDialog.FileName);
                 string base64ImageRepresentation = Convert.ToBase64String(imageArray);
-                _createAttractionViewModel.UploadedImageName = fileDialog.SafeFileName;
                 _createAttractionViewModel.AttractionImage = base64ImageRepresentation;
+                _createAttractionViewModel.UploadedImageName = fileDialog.SafeFileName;
             }
         }
     }

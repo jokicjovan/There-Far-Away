@@ -164,6 +164,7 @@ namespace Three_Far_Away.ViewModels
 
 
             HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 response.EnsureSuccessStatusCode();

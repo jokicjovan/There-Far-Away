@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="430" d:DesignWidth="700">
     <Grid
-        Margin="0,20,0,20">
+        Margin="20,20,20,20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
@@ -35,13 +35,13 @@
                     Grid.Row="0" 
                     Text="Start Location"/>
                 <TextBox
-                    materialDesign:HintAssist.Hint="LocationLOL"
+                    materialDesign:HintAssist.Hint="Example address"
                     Grid.Row="1"
-                    Width="350"
+                    Width="310"
                     HorizontalAlignment="Left"
                     Text = "{Binding StartCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.ToolTip>
-                        "EnterToolTip"
+                        Enter address of your attraction 
                     </TextBox.ToolTip>
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding SearchStartLocationCommand}" Key="Return" />
@@ -59,7 +59,8 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Command="{Binding TurnOnLocationCommand}"
-                    Foreground="Red">
+                    Foreground="Red"
+                    ToolTip="Click button to select location on map (using right click)">
                     <materialDesign:PackIcon
                         Width="25"
                         Height="25"
@@ -73,7 +74,11 @@
                 <!-- Empty element used for spacing -->
             </Border>
             <Grid Grid.Row="2">
-                <m:Map Width="400" MouseRightButtonDown="myMap_MouseDown"  x:Name="myMap" Margin="0,0,0,0" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
+                <m:Map  Width="400" 
+                        MouseRightButtonDown="myMap_MouseDown"  x:Name="myMap" Margin="0,0,0,0"
+                        ZoomLevel="6.1"
+                        Center="44.01667, 20.91667"
+                        CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
                     <m:MapItemsControl ItemsSource="{Binding Locations}">
                         <m:MapItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -86,8 +91,8 @@
             </Grid>
         </Grid>
         
-        <Button Grid.Column="0" Content="Previous" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding NavigateToCreateJourneyCommand}"/>
-        <Button Grid.Column="2" Content="Finish" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="White"  Command="{Binding CreateAttractionCommand}"/>
+        <Button Grid.Column="0" Margin="0,0,20,0" Content="Previous" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White" BorderBrush="#7A7A7A" Background="#7A7A7A" Command="{Binding NavigateToCreateJourneyCommand}"/>
+        <Button Grid.Column="2" Margin="20,0,0,0" Content="Finish" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="White"  Command="{Binding CreateAttractionCommand}"/>
 
             
     </Grid>

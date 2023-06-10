@@ -91,7 +91,7 @@ namespace Three_Far_Away.Commands
                 if (e.PropertyName == nameof(CreateAttractionViewModel.Attraction.Name) ||
                 e.PropertyName == nameof(CreateAttractionViewModel.Attraction.Description) ||
                 e.PropertyName == nameof(CreateAttractionViewModel.Attraction.Type) ||
-                e.PropertyName == nameof(CreateAttractionViewModel.Attraction.Image))
+                e.PropertyName == nameof(CreateAttractionViewModel.UploadedImageName))
                 {
                     OnCanExecuteChanged();
                 }
