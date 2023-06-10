@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
+using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;
@@ -29,15 +24,27 @@ namespace Three_Far_Away.ViewModels
         #endregion
 
         #region commands
-
-        public ICommand DeleteAttractionCommand;
-        public ICommand NavigateToEditAttractionCommand;
+        public ICommand DeleteAttractionCommand { get; }
+        public ICommand NavigateToEditAttractionCommand { get; }
 
         #endregion
 
         #region properties
         public ObservableCollection<MapLocation> Locations { get; private set; }
 
+        private Guid _attractionId;
+        public Guid AttractionId
+        {
+            get
+            {
+                return _attractionId;
+            }
+            set
+            {
+                _attractionId = value;
+                OnPropertyChanged(nameof(AttractionId));
+            }
+        }
 
         private double _latitude;
         public double Latitude
@@ -183,6 +190,7 @@ namespace Three_Far_Away.ViewModels
                 IsAgent = false;
             }
             Attraction attraction = attractionService.FindWithLocation(id);
+            AttractionId = attraction.Id;
             Name = attraction.Name;
             Image = attraction.Image;
             Type = attraction.Type.ToString().ToLower();
@@ -196,7 +204,8 @@ namespace Three_Far_Away.ViewModels
             Locations.Add(new MapLocation(
                 new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude),
                 "S", true));
-            
+
+            DeleteAttractionCommand = new DeleteAttractionFromPreviewCommand(this);
         }
     }
 }

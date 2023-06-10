@@ -42,7 +42,7 @@
                     TextWrapping="NoWrap"
                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                     HorizontalAlignment="Center"
-                    ></TextBlock>
+                    />
 
                 <TextBlock Grid.Row="1" 
                     Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
@@ -68,7 +68,7 @@
 
 
             <Grid Grid.Column="2"
-                  Margin="20"
+                  Margin="15"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center">
                 <Grid.RowDefinitions>

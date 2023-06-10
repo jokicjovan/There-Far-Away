@@ -67,7 +67,7 @@
                         <materialDesign:PackIcon 
                             Kind="Location"  
                             Background="Transparent"
-                            ToolTip="Home"
+                            ToolTip="Attractions"
                             Foreground="#C1F08A"
                             Width="50"
                             Height="50"
@@ -93,7 +93,7 @@
                         <materialDesign:PackIcon 
                             Kind="FileReport"  
                             Background="Transparent"
-                            ToolTip="Home"
+                            ToolTip="Reports"
                             Foreground="#C1F08A"
                             Width="50"
                             Height="50"
