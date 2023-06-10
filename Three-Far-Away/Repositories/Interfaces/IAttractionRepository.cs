@@ -11,5 +11,6 @@ namespace Three_Far_Away.Repositories.Interfaces
     public interface IAttractionRepository : ICrudRepository<Attraction>
     {
         List<Attraction> GetAttractionsWithLocations();
+        List<Attraction> FindByType(AttractionType type);
     }
 }

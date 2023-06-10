@@ -14,6 +14,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -56,6 +57,32 @@
             </Button>
             <Button 
                 Grid.Row="2" 
+                Command="{Binding NavigateAttractions}"
+                Background="Transparent" 
+                BorderBrush="Transparent"
+                Margin="0 10 0 5"
+                Height="50">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <materialDesign:PackIcon 
+                            Kind="Location"  
+                            Background="Transparent"
+                            ToolTip="Home"
+                            Foreground="#C1F08A"
+                            Width="50"
+                            Height="50"
+                            Cursor="Hand"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="FloralWhite" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button 
+                Grid.Row="3" 
                 Command="{Binding NavigateReports}"
                 Background="Transparent" 
                 BorderBrush="Transparent"
@@ -81,7 +108,7 @@
             </Button>
 
             <Button 
-                Grid.Row="4"
+                Grid.Row="5"
                 Command="{Binding NavigateLogin}"
                 Background="Transparent" 
                 BorderBrush="Transparent"
@@ -110,6 +137,7 @@
             <Grid Width="{Binding MenuWidth}" Height="400"  Background="#C1F08A">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -160,9 +188,42 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    
-                     <Button
+
+                    <Button
                         Grid.Row="2"
+                        Margin="0 5"
+                        Command="{Binding NavigateAttractions}"
+                        Background="Transparent" 
+                        BorderBrush="Transparent"
+                        Height="50">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon 
+                                        Kind="Location"  
+                                        Background="Transparent"
+                                        ToolTip="Attractions"
+                                        Foreground="#639B22"
+                                        Width="50"
+                                        Height="50"
+                                        Cursor="Hand"/>
+                                    <TextBlock Text="Attractions"
+                                               Margin="5 0 0 0"
+                                               VerticalAlignment="Center"
+                                               Foreground="#639B22"
+                                               Cursor="Hand"/>
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="FloralWhite" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button
+                        Grid.Row="3"
                         Margin="0 5"
                         Command="{Binding NavigateReports}"
                         Background="Transparent" 
@@ -174,7 +235,7 @@
                                     <materialDesign:PackIcon 
                                         Kind="FileReport"  
                                         Background="Transparent"
-                                        ToolTip="My journeys"
+                                        ToolTip="Reports"
                                         Foreground="#639B22"
                                         Width="50"
                                         Height="50"
@@ -194,7 +255,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Grid.Row="4" 
+                    <Button Grid.Row="5" 
                         Command="{Binding NavigateLogin}"
                         Background="Transparent" 
                         BorderBrush="Transparent"
