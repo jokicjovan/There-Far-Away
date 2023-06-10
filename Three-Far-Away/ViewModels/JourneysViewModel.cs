@@ -106,8 +106,7 @@ namespace Three_Far_Away.ViewModels
             NextPageCommand = new NextPageJourniesCommand(this);
             PreviousPageCommand = new PreviousPageJourniesCommand(this);
             Journey j = journeyService.ReadAll()[0];
-            NavigateToCreateJourneyCommand = new NavigateToCreateAttractionCommand(new Attraction());
-            //NavigateToCreateJourneyCommand = new NavigateToCreateJourneyCommand(new Journey());
+            NavigateToCreateJourneyCommand = new NavigateToCreateJourneyCommand(new Journey());
             accountStore = App.host.Services.GetService<AccountStore>();
 
             if (accountStore.Role.Equals(Role.AGENT))

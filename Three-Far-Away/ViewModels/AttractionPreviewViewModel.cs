@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;
@@ -31,7 +32,7 @@ namespace Three_Far_Away.ViewModels
         #region commands
 
         public ICommand DeleteAttractionCommand;
-        public ICommand NavigateToEditAttractionCommand;
+        public ICommand NavigateToEditAttractionCommand { get; }
 
         #endregion
 
@@ -183,6 +184,7 @@ namespace Three_Far_Away.ViewModels
                 IsAgent = false;
             }
             Attraction attraction = attractionService.FindWithLocation(id);
+            NavigateToEditAttractionCommand = new NavigateToCreateAttractionCommand(attraction);
             Name = attraction.Name;
             Image = attraction.Image;
             Type = attraction.Type.ToString().ToLower();

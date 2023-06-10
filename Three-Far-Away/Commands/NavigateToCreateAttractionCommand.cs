@@ -13,7 +13,7 @@ namespace Three_Far_Away.Commands
     internal class NavigateToCreateAttractionCommand:CommandBase
     {
         string eventName;
-        public Attraction Attraction { get; set; }
+        Attraction Attraction { get; set; }
         ViewModelBase ViewModelBase { get; set; }
 
         private string from;

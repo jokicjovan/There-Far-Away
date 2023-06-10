@@ -80,6 +80,7 @@ namespace Three_Far_Away.ViewModels
             {
                 CreateAttractionMapViewModel cavm = new CreateAttractionMapViewModel((Attraction)attraction);
                 SwitchCurrentViewModel(cavm);
+            });
             EventBus.RegisterHandler("Attractions", () =>
             {
                 AttractionViewModel avm = App.host.Services.GetRequiredService<AttractionViewModel>();
