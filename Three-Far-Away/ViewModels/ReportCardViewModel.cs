@@ -45,6 +45,20 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
+        private string _image;
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                OnPropertyChanged(nameof(Image));
+            }
+        }
+
         private int _numberSold;
         public int NumberSold
         {
@@ -86,6 +100,7 @@ namespace Three_Far_Away.ViewModels
             JourneyId = journey.Id;
             Name = journey.Name;
             Date = journey.StartDate.ToString().Split(" ")[0] + " - " + journey.EndDate.ToString().Split(" ")[0];
+            Image = journey.Image;
 
             IEnumerable<Arrangement> arrangements = arrangementService.GetJourneyArrangements(journey.Id);
             NumberSold = arrangements.Count();

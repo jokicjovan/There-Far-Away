@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="340">
+             d:DesignHeight="100" d:DesignWidth="340"
+             xmlns:converters="clr-namespace:Three_Far_Away.Converters">
+    <UserControl.Resources>
+        <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
+    </UserControl.Resources>
     <Border BorderBrush="#C1F08A" BorderThickness="1" CornerRadius="10">
         <!-- Content of your user control -->
         <Grid>
@@ -16,7 +20,12 @@
                 <!-- <ColumnDefinition Width="*"/> -->
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" Source="/Assets/logo.png" HorizontalAlignment="Left" Width="85"/>
+            <Image Grid.Column="0" 
+                   Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" 
+                   HorizontalAlignment="Left" 
+                   Width="90"
+                   Margin="5"
+                   Stretch="UniformToFill"/>
 
             <Grid Grid.Column="1" Margin="10 5" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>

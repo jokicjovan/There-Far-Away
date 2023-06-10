@@ -38,7 +38,21 @@ namespace Three_Far_Away.ViewModels
 			}
 		}
 
-		private string _date;
+        private string _image;
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                OnPropertyChanged(nameof(Image));
+            }
+        }
+
+        private string _date;
 		public string Date
 		{
 			get
@@ -90,6 +104,8 @@ namespace Three_Far_Away.ViewModels
         {
             JourneyId = journey.Id;
             Name = journey.Name;
+            //Image = journey.Image; //<- stavi ovo
+            Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="; // <- obrisi ovo
 			Date = journey.Date;
 			Price = journey.Price;
             journeyService = App.host.Services.GetService<IJourneyService>();

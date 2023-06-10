@@ -149,7 +149,7 @@ namespace Three_Far_Away
             attraction.Description = "Ovo je najbolji restoran u Nisu";
             attraction.Type = AttractionType.RESTAURANT;
             attraction.Location = location;
-            attraction.Image = "slika";
+            attraction.Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
             attraction = App.host.Services.GetService<IAttractionService>().Create(attraction);
         }
 
@@ -165,7 +165,7 @@ namespace Three_Far_Away
             attraction.Description = "opis";
             attraction.Type = AttractionType.ATTRACTION;
             attraction.Location = location;
-            attraction.Image = "slika";
+            attraction.Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
             attraction = App.host.Services.GetService<IAttractionService>().Create(attraction);
 
             Journey journey = new Journey();
@@ -175,7 +175,7 @@ namespace Three_Far_Away
             journey.Attractions = new List<Attraction>();
             journey.Attractions.Add(attraction);
             journey.Transportation = TransportationType.Airplane;
-            journey.Image = "slika";
+            journey.Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
 
             Journey journey1 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));
             Journey journey2 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));

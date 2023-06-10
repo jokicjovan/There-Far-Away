@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json.Linq;
 using Three_Far_Away.DbContexts;
 using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Models;
@@ -13,7 +16,6 @@ namespace Three_Far_Away.Repositories
     {
         public JourneyRepository(ThereFarAwayDbContext context) : base(context)
         {
-            Console.WriteLine("POZ");
         }
 
         public Journey GetJourneyWithAttractions(Guid id)

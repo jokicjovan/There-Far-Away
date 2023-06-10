@@ -1,13 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using Three_Far_Away.Commands;
-using Three_Far_Away.Models.DTOs;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
 using Three_Far_Away.Stores;
@@ -38,6 +33,20 @@ namespace Three_Far_Away.Views
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _image;
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                OnPropertyChanged(nameof(Image));
             }
         }
 
@@ -84,7 +93,7 @@ namespace Three_Far_Away.Views
 
 
         public event EventHandler AttractionDeletedEvent;
-        public virtual void OnJourneyDeletedEvent()
+        public virtual void OnAttractionDeletedEvent()
         {
             AttractionDeletedEvent?.Invoke(this, EventArgs.Empty);
         }
@@ -93,6 +102,7 @@ namespace Three_Far_Away.Views
         {
             AttractionId = attraction.Id;
             Name = attraction.Name;
+            Image = attraction.Image;
             Type = attraction.Type.ToString().ToLower();
             Type = char.ToUpper(Type[0]) + Type.Substring(1);
             attractionService = App.host.Services.GetService<IAttractionService>();
@@ -109,7 +119,7 @@ namespace Three_Far_Away.Views
             }
 
             ViewAttractionPreviewCommand = new ViewAttractionPreviewCommandFromAttractionCardCommand(this);
-            // DeleteAttractionFromCardCommand = new DeleteJourneyFromCardCommand(this);
+            DeleteAttractionFromCardCommand = new DeleteAttractionFromCardCommand(this);
             // NavigateEditAttractionCommand = new NavigateToCreateJourneyCommand(journeyService.Read(journey.Id));
         }
     }
