@@ -15,6 +15,7 @@ using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
+using System.Windows;
 
 namespace Three_Far_Away.ViewModels
 {
@@ -171,9 +172,19 @@ namespace Three_Far_Away.ViewModels
 
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var data = (JObject)JsonConvert.DeserializeObject(responseBody);
+                if (data["resourceSets"][0]["resources"][0]["address"]["countryRegion"].Value<string>()!="Serbia" && data["resourceSets"][0]["resources"][0]["address"]["countryRegion"].Value<string>()!="Kosovo")
+                {
+                    MessageBox.Show("We only operate in Serbia, please select location in Serbia.");
+                    StartCity = "";
+                    StartLocationModel = null;
+                    
+
+                    return;
+                }
                 StartLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
                 StartCity = StartLocationModel.Address;
                 _attraction.Location = StartLocationModel;
+                Locations.Add(new MapLocation(location, "S", true));
             }
             else
             {
