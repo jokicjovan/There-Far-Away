@@ -153,6 +153,20 @@ namespace Three_Far_Away.ViewModels
                 OnPropertyChanged(nameof(Address));
             }
         }
+
+        private string _image;
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                OnPropertyChanged(nameof(Image));
+            }
+        }
         #endregion
 
 
@@ -170,6 +184,7 @@ namespace Three_Far_Away.ViewModels
             }
             Attraction attraction = attractionService.FindWithLocation(id);
             Name = attraction.Name;
+            Image = attraction.Image;
             Type = attraction.Type.ToString().ToLower();
             Type = char.ToUpper(Type[0]) + Type.Substring(1);
             Description = attraction.Description;

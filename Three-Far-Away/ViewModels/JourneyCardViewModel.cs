@@ -100,14 +100,13 @@ namespace Three_Far_Away.ViewModels
             JourneyDeletedEvent?.Invoke(this, EventArgs.Empty);
 		}
 
-		public JourneyCardViewModel(JourneyForCard journey)
+		public JourneyCardViewModel(Journey journey)
         {
             JourneyId = journey.Id;
             Name = journey.Name;
-            //Image = journey.Image; //<- stavi ovo
-            Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="; // <- obrisi ovo
-			Date = journey.Date;
-			Price = journey.Price;
+            Image = journey.Image;
+			Date = journey.StartDate.ToString().Split("T")[0].Split(" ")[0] + " - " + journey.EndDate.ToString().Split("T")[0].Split(" ")[0];
+			Price = journey.Price + "RSD";
             journeyService = App.host.Services.GetService<IJourneyService>();
             accountStore = App.host.Services.GetService<AccountStore>();
             role = accountStore.Role;

@@ -6,8 +6,12 @@
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:converters="clr-namespace:Three_Far_Away.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
+    </UserControl.Resources>
     <Grid>
          <Grid.RowDefinitions>
              <RowDefinition Height="Auto"/>
@@ -91,9 +95,9 @@
                         Text="{Binding Description}"/>
                 </Grid>
 
-                <Image Grid.Row="1"
-                       Margin="20"
-                    Source="/Assets/logo.png"/>
+                <Image Grid.Row="1" 
+                       Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" 
+                       Margin="20"/>
             </Grid>
 
             <StackPanel Grid.Column="1">

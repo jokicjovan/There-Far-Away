@@ -50,8 +50,8 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        private ObservableCollection<JourneyForCard> _boughtJourneys;
-        public ObservableCollection<JourneyForCard> BoughtJourneys
+        private ObservableCollection<Journey> _boughtJourneys;
+        public ObservableCollection<Journey> BoughtJourneys
         {
             get { return _boughtJourneys; }
             set
@@ -76,8 +76,8 @@ namespace Three_Far_Away.ViewModels
             }
         }
 
-        private ObservableCollection<JourneyForCard> _reservedJourneys;
-        public ObservableCollection<JourneyForCard> ReservedJourneys
+        private ObservableCollection<Journey> _reservedJourneys;
+        public ObservableCollection<Journey> ReservedJourneys
         {
             get { return _reservedJourneys; }
             set
@@ -193,7 +193,7 @@ namespace Three_Far_Away.ViewModels
         public void LoadReservedJourneys()
         {
             ReservedJourneys =
-                new ObservableCollection<JourneyForCard>(readCards(userId, reservatedPage, 4, ArrangementStatus.RESERVED));
+                new ObservableCollection<Journey>(readCards(userId, reservatedPage, 4, ArrangementStatus.RESERVED));
             ReservedJourneyCardViewModels =
                 new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews(ReservedJourneys));
             if (reservatedPage == 0)
@@ -212,7 +212,7 @@ namespace Three_Far_Away.ViewModels
         public void LoadBoughtJourneys()
         {
             BoughtJourneys =
-                new ObservableCollection<JourneyForCard>(readCards(userId, boughtPage, 4, ArrangementStatus.BOUGHT));
+                new ObservableCollection<Journey>(readCards(userId, boughtPage, 4, ArrangementStatus.BOUGHT));
             BoughtJourneyCardViewModels =
                 new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews(BoughtJourneys));
             if (boughtPage == 0)
@@ -228,20 +228,20 @@ namespace Three_Far_Away.ViewModels
                 NextPageVisibility = Visibility.Visible;
         }
 
-        private List<JourneyForCard> readCards(Guid userId, int page, int pageSize, ArrangementStatus status)
+        private List<Journey> readCards(Guid userId, int page, int pageSize, ArrangementStatus status)
         {
             List<Arrangement> arrangements = arrangementService.ReadPage(userId, page, 4, status);
-            List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
+            List<Journey> journeysForCard = new List<Journey>();
             foreach (var arrangement in arrangements)
-                journeysForCard.Add(new JourneyForCard(arrangement.Journey));
+                journeysForCard.Add(new Journey(arrangement.Journey));
             return journeysForCard;
         }
 
-        public List<JourneyCardViewModel> CreateJourneyCardViews(ObservableCollection<JourneyForCard> journeys)
+        public List<JourneyCardViewModel> CreateJourneyCardViews(ObservableCollection<Journey> journeys)
         {
             List<JourneyCardViewModel> journeyCardViews = new List<JourneyCardViewModel>();
 
-            foreach (JourneyForCard journey in journeys)
+            foreach (Journey journey in journeys)
             {
                 JourneyCardViewModel journeyCardViewModel = new JourneyCardViewModel(journey);
                 journeyCardViews.Add(journeyCardViewModel);
