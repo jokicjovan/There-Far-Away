@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Three_Far_Away.Models
@@ -30,9 +31,9 @@ namespace Three_Far_Away.Models
         public Double Price { get; set; }
 
         [Column("image")]
+        [MaxLength]
         public String Image { get; set; }
 
-        [Column("attractions")]
         public List<Attraction> Attractions{ get; set; }
 
         [Column("transportation")]

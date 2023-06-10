@@ -51,12 +51,15 @@
             <DataTemplate DataType="{x:Type vms:CreateJourneyViewModel}">
                 <views:CreateJourneyView/>
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:CreateJourneyMapViewModel}">
                 <views:CreateJourneyMapView/>
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:JourneyCardViewModel}">
                 <views:JourneyCardView/>
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:CreateJourneyAttractionsViewModel}">
                 <views:CreateJourneyAttractionsView/>
             </DataTemplate>
@@ -81,6 +84,18 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type vms:CreateAttractionMapViewModel}">
                 <views:CreateAttractioonMapView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type views:AttractionCardViewModel}">
+                <views:AttractionCardView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:AttractionViewModel}">
+                <views:AttractionsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:AttractionPreviewViewModel}">
+                <views:AttractionPreviewView/>
             </DataTemplate>
 
         </Grid.Resources>

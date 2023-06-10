@@ -10,5 +10,8 @@ namespace Three_Far_Away.Services.Interfaces
 {
     public interface IAttractionService : ICrudService<Attraction>
     {
+        public List<Attraction> ReadPage(int page, int size, AttractionType type);
+        public List<Attraction> ReadPage(int page, int size);
+        public Attraction FindWithLocation(Guid id);
     }
 }

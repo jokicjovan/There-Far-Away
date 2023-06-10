@@ -29,14 +29,16 @@ namespace Three_Far_Away.Models
         [Column("location")]
         public Location Location { get; set; }
 
-        public Attraction() 
-        {
+        public List<Journey> Journeys { get; set; }
+
+        public Attraction() { 
             Name = "";
             Image = "";
             Description = "";
             Type = AttractionType.ATTRACTION;
         }
-        public Attraction(Guid id, string name, string description, AttractionType type, string image, Location location)
+
+        public Attraction(Guid id, string name, string description, AttractionType type, string image, Location location, List<Journey> journeys)
         {
             Id = id;
             Name = name;
@@ -44,15 +46,17 @@ namespace Three_Far_Away.Models
             Type = type;
             Image = image;
             Location = location;
+            Journeys = journeys;
         }
 
-        public Attraction(string name, string description, AttractionType type, string image, Location location)
+        public Attraction(string name, string description, AttractionType type, string image, Location location, List<Journey> journeys)
         {
             Name = name;
             Description = description;
             Type = type;
             Image = image;
             Location = location;
+            Journeys = journeys;
         }
 
         public override string ToString()

@@ -16,6 +16,9 @@ using Credential = Three_Far_Away.Models.Credential;
 using Three_Far_Away.Components;
 using Three_Far_Away.Infrastructure;
 using System;
+using Three_Far_Away.Views;
+using Microsoft.Maps.MapControl.WPF;
+using Location = Three_Far_Away.Models.Location;
 
 namespace Three_Far_Away
 {
@@ -48,10 +51,13 @@ namespace Three_Far_Away
                 services.AddTransient<ClientMainViewModel>();
                 services.AddTransient<CreateJourneyViewModel>();
                 services.AddTransient<JourneyCardViewModel>();
+                services.AddTransient<AttractionCardViewModel>();
                 services.AddTransient<LocationListItemViewModel>();
                 services.AddTransient<CreateJourneyMapViewModel>();
                 services.AddTransient<CreateJourneyAttractionsViewModel>();
                 services.AddTransient<ClientsJourneysViewModel>();
+                services.AddTransient<AttractionPreviewView>();
+                services.AddTransient<AttractionViewModel>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -90,6 +96,7 @@ namespace Three_Far_Away
             host.Start();
 
             //loadArrangements(loadUsers(), loadJourneys());
+            // loadAttraction();
 
             EventBus.FireEvent("Login");
             MainWindow = host.Services.GetRequiredService<MainWindow>();
@@ -131,6 +138,21 @@ namespace Three_Far_Away
             return user2;
         }
 
+        private void loadAttraction()
+        {
+            Models.Location location = new Models.Location();
+            location.Address = "Nikole Pasica 36";
+            location.Latitude = 43.318578;
+            location.Longitude = 21.893254;
+            Attraction attraction = new Attraction();
+            attraction.Name = "Restoran u Nisu";
+            attraction.Description = "Ovo je najbolji restoran u Nisu";
+            attraction.Type = AttractionType.RESTAURANT;
+            attraction.Location = location;
+            attraction.Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
+            attraction = App.host.Services.GetService<IAttractionService>().Create(attraction);
+        }
+
         private Journey loadJourneys()
         {
             Location location = new Location();
@@ -143,7 +165,7 @@ namespace Three_Far_Away
             attraction.Description = "opis";
             attraction.Type = AttractionType.ATTRACTION;
             attraction.Location = location;
-            attraction.Image = "slika";
+            attraction.Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
             attraction = App.host.Services.GetService<IAttractionService>().Create(attraction);
 
             Journey journey = new Journey();
@@ -153,7 +175,7 @@ namespace Three_Far_Away
             journey.Attractions = new List<Attraction>();
             journey.Attractions.Add(attraction);
             journey.Transportation = TransportationType.Airplane;
-            journey.Image = "slika";
+            journey.Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
 
             Journey journey1 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));
             Journey journey2 = App.host.Services.GetService<IJourneyService>().Create(new Journey(journey));

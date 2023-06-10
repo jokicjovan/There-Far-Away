@@ -16,6 +16,7 @@ namespace Three_Far_Away.Components
         public ICommand NavigateJourneys { get; }
         public ICommand NavigateLogin { get; }
         public ICommand NavigateReports { get; }
+        public ICommand NavigateAttractions { get; }
         public ICommand ToggleMenuCommand { get; }
 
 
@@ -59,6 +60,7 @@ namespace Three_Far_Away.Components
             NavigateJourneys = new FireEventCommand("AgentJourneys");
             NavigateLogin = new FireEventCommand("GoToLogin");
             NavigateReports = new FireEventCommand("Reports");
+            NavigateAttractions = new FireEventCommand("Attractions");
             ToggleMenuCommand = new HamburgerMenuCommand(this);
             isMenuOpen = false;
         }

@@ -1,12 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using Three_Far_Away.Models;
 
 namespace Three_Far_Away.DbContexts
@@ -29,7 +21,12 @@ namespace Three_Far_Away.DbContexts
         {
             modelBuilder.Entity<Credential>()
                 .HasIndex(c => new { c.Username })
-                .IsUnique(true);
+            .IsUnique(true);
+
+            modelBuilder.Entity<Journey>()
+                .HasMany(e => e.Attractions)
+                .WithMany(e => e.Journeys)
+                .UsingEntity("JourneysToAttractionsJoinTable");
         }
     }
 }

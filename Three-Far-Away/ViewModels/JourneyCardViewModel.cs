@@ -38,7 +38,21 @@ namespace Three_Far_Away.ViewModels
 			}
 		}
 
-		private string _date;
+        private string _image;
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                OnPropertyChanged(nameof(Image));
+            }
+        }
+
+        private string _date;
 		public string Date
 		{
 			get
@@ -86,12 +100,13 @@ namespace Three_Far_Away.ViewModels
             JourneyDeletedEvent?.Invoke(this, EventArgs.Empty);
 		}
 
-		public JourneyCardViewModel(JourneyForCard journey)
+		public JourneyCardViewModel(Journey journey)
         {
             JourneyId = journey.Id;
             Name = journey.Name;
-			Date = journey.Date;
-			Price = journey.Price;
+            Image = journey.Image;
+			Date = journey.StartDate.ToString().Split("T")[0].Split(" ")[0] + " - " + journey.EndDate.ToString().Split("T")[0].Split(" ")[0];
+			Price = journey.Price + "RSD";
             journeyService = App.host.Services.GetService<IJourneyService>();
             accountStore = App.host.Services.GetService<AccountStore>();
             role = accountStore.Role;

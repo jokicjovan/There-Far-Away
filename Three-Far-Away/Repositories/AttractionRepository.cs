@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Three_Far_Away.DbContexts;
 using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Models;
@@ -21,6 +19,16 @@ namespace Three_Far_Away.Repositories
         {
             return _entities
                 .Include(e => e.Location).ToList();
+        }
+
+        public List<Attraction> FindByType(AttractionType type)
+        {
+            return _entities.Include(e => e.Location).Where(e => e.Type == type).ToList();
+        }
+
+        public Attraction FindById(Guid id)
+        {
+            return _entities.Include(e => e.Location).Where(e => e.Id == id).FirstOrDefault();
         }
     }
 }

@@ -34,8 +34,8 @@ namespace Three_Far_Away.ViewModels
         #endregion
 
         #region properties
-        private ObservableCollection<JourneyForCard> journeys;
-        public ObservableCollection<JourneyForCard> Journeys
+        private ObservableCollection<Journey> journeys;
+        public ObservableCollection<Journey> Journeys
         {
             get { return journeys; }
             set
@@ -134,7 +134,7 @@ namespace Three_Far_Away.ViewModels
 
         public void LoadJourneys()
         {
-            Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
+            Journeys = new ObservableCollection<Journey>(readCards(page, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
             if (page == 0)
                 PreviousPageVisibility = Visibility.Collapsed;
@@ -149,25 +149,21 @@ namespace Three_Far_Away.ViewModels
                 NextPageVisibility = Visibility.Visible;
         }
 
-        public List<JourneyForCard> readCards(int page, int pageSize)
+        public List<Journey> readCards(int page, int pageSize)
         {
             List<Journey> journeys = journeyService.ReadPage(page, 4);
-            List<JourneyForCard> journeysForCard = new List<JourneyForCard>();
-            foreach(var journey in journeys)
-                journeysForCard.Add(new JourneyForCard(journey));
-            return journeysForCard;
+            return journeys;
         }
 
         public List<JourneyCardViewModel> CreateJourneyCardViews()
         {
             List<JourneyCardViewModel> journeyCardViews = new List<JourneyCardViewModel>();
 
-            foreach (JourneyForCard journey in Journeys)
+            foreach (Journey journey in Journeys)
             {
                 JourneyCardViewModel journeyCardViewModel = new JourneyCardViewModel(journey);
                 journeyCardViewModel.JourneyDeletedEvent += HandleJourneyDeleted;
                 journeyCardViews.Add(journeyCardViewModel);
-
             }
 
             return journeyCardViews;
@@ -180,7 +176,7 @@ namespace Three_Far_Away.ViewModels
                 PreviousPageCommand.Execute(null);
                 return;
             }
-            Journeys = new ObservableCollection<JourneyForCard>(readCards(page, 4));
+            Journeys = new ObservableCollection<Journey>(readCards(page, 4));
             JourneyCardViewModels = new ObservableCollection<JourneyCardViewModel>(CreateJourneyCardViews());
         }
     }
