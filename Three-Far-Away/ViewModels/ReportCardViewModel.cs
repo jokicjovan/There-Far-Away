@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using Three_Far_Away.Commands;
 using Three_Far_Away.Models;
@@ -43,6 +42,20 @@ namespace Three_Far_Away.ViewModels
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _image;
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                OnPropertyChanged(nameof(Image));
             }
         }
 
@@ -87,6 +100,7 @@ namespace Three_Far_Away.ViewModels
             JourneyId = journey.Id;
             Name = journey.Name;
             Date = journey.StartDate.ToString().Split(" ")[0] + " - " + journey.EndDate.ToString().Split(" ")[0];
+            Image = journey.Image;
 
             IEnumerable<Arrangement> arrangements = arrangementService.GetJourneyArrangements(journey.Id);
             NumberSold = arrangements.Count();

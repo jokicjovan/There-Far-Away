@@ -36,6 +36,20 @@ namespace Three_Far_Away.Views
             }
         }
 
+        private string _image;
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                OnPropertyChanged(nameof(Image));
+            }
+        }
+
         private string _type;
         public string Type
         {
@@ -88,6 +102,7 @@ namespace Three_Far_Away.Views
         {
             AttractionId = attraction.Id;
             Name = attraction.Name;
+            Image = attraction.Image;
             Type = attraction.Type.ToString().ToLower();
             Type = char.ToUpper(Type[0]) + Type.Substring(1);
             attractionService = App.host.Services.GetService<IAttractionService>();
