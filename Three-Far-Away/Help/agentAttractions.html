@@ -1,36 +1,75 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Attractions Help</title>
-    <style type="text/css">
-        body {
-            max-width: 650px;
-            line-height: 1.6;
-            font-size: 18px;
-            color: #333;
-            padding: 0 10px
-        }
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Attractions Help</title>
+        <style type="text/css">
+            body {
+                max-width: 650px;
+                line-height: 1.6;
+                font-size: 18px;
+                color: #333;
+                padding: 0 10px
+            }
 
-        h1, h2, h3 {
-            line-height: 1.2
-        }
+            h1, h2, h3 {
+                line-height: 1.2
+            }
 
-        a {
-            color: #8BC34A;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-<h1>All atractions</h1>
+            a {
+                color: #8BC34A;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>All atractions</h1>
+        <p>
+            The attractions preview page has the following layout:
+        </p>
 
+        <div>
+            <img src="../Assets/agentsAttractions.png" width="100%" />
+        </div>
+        <ol>
+            <li>Button for opening the hamburger menu</li>
+            <li>Button for journeys</li>
+            <li>Button for reports</li>
+            <li>Button for navigating to the login page</li>
+            <li>Dropdown list for filtering attraction type</li>
+            <li>Card with basic information of one journey</li>
+            <li>Button for fast operations with journey</li>
+            <li>Edit button</li>
+            <li>Delete button</li>
+            <li>Button for detailed preview of the selected journey</li>
+            <li>Button for previewing the next page</li>
+            <li>Button for creating new attraction</li>
+        </ol>
 
-<div style="border: 1px solid black; padding-left: 5%; padding-top: 10px; padding-bottom: 10px;">
-    <h2>Shortcut List</h2>
-    <ul>
-    </ul>
-</div>
-</body>
+        <p>
+            Here, the first 4 attractions in our assortment are listed.
+            Each card presents one attraction and contains basic information such as the attraction's name and type.
+            To view more detailed information and edit or delete attraction, you click the button labeled "View".
+            If there are more than 4 attractions available, you will also see a "Next" button on the screen, which fetches the next 4 attractions.
+        </p>
+        <p>
+            On the side, there is a menu that allows you to switch to all journeys, reports or log out of the system.
+        </p>
+        <p>
+            As an agent, you have quick shortcuts for editing and deleting individual attractions.
+            You can access them by clicking on the button marked with three dots.
+            Additionally, in the top right corner, there is a button that takes you to the process of creating a new attraction.
+        </p>
+
+        <div style="border: 1px solid black; padding-left: 5%; padding-top: 10px; padding-bottom: 10px;">
+            <h2>Shortcut List</h2>
+            <ul>
+                <li>Preview all journeys: CTRL + 1</li>
+                <li>Preview all reports: CTRL + 3</li>
+                <li>Log out: CTRL + 4</li>
+                <li>Create new attraction: CTRL + N</li>
+            </ul>
+        </div>
+    </body>
 </html>

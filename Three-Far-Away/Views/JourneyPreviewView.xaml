@@ -16,6 +16,13 @@
     <UserControl.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
     </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="B" Command="{Binding BuyCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="R" Command="{Binding ReserveCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="E" Command="{Binding NavigateToEditJourneyCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="D" Command="{Binding DeleteJourneyCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="P" Command="{Binding ShowJourneyPassengersCommand}"/>
+    </UserControl.InputBindings>
     <Grid Margin="50 0 0 0">
         <ScrollViewer
             HorizontalScrollBarVisibility="Hidden" 

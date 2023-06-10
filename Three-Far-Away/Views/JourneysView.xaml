@@ -15,6 +15,7 @@
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Right" Command="{Binding NextPageCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="Left" Command="{Binding PreviousPageCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding NavigateToCreateJourneyCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>

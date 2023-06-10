@@ -13,6 +13,7 @@
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Right" Command="{Binding NextPageCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="Left" Command="{Binding PreviousPageCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding NavigateToCreateAttractionCommand}"/>
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>

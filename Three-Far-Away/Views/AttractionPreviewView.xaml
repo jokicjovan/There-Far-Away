@@ -10,6 +10,10 @@
              mc:Ignorable="d" 
              GotFocus="SetHelpKey"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="D" Command="{Binding DeleteAttractionCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="E" Command="{Binding NavigateToEditAttractionCommand}"/>
+    </UserControl.InputBindings>
     <UserControl.Resources>
         <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
     </UserControl.Resources>
