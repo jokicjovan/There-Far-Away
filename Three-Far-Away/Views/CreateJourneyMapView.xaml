@@ -7,11 +7,11 @@
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="430" d:DesignWidth="700">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" MinHeight="320"/>
-            <RowDefinition/>
+            <RowDefinition Height="320" MinHeight="0"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -66,7 +66,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Foreground="Black"
-                        Kind="LocationOn" /> 
+                        Kind="LocationOn" />
                 </Button>
                 <Border Grid.Row="2" Background="Transparent" Margin="0,20">
                     <!-- Empty element used for spacing -->
@@ -110,7 +110,7 @@
                 <!-- Empty element used for spacing -->
             </Border>
             <Grid Grid.Column="3" Grid.ColumnSpan="1">
-                <m:Map MouseRightButtonDown="myMap_MouseDown"  x:Name="myMap" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
+                <m:Map MouseRightButtonDown="myMap_MouseDown"  x:Name="myMap" Margin="0,20,30,0" CredentialsProvider="AnlBf0cuDvauQWCdsCnr3pZRaTRoYRRuPmabScrTtje7XUhhHmDDEz6aKfpX6wFr">
                     <m:MapItemsControl ItemsSource="{Binding Locations}">
                         <m:MapItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -122,7 +122,7 @@
                 </m:Map>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" VerticalAlignment="Center" Height="60" RenderTransformOrigin="0.496,0.595">
+        <Grid Grid.Row="1" Margin="20,15,20,0" RenderTransformOrigin="0.496,0.595" Height="61" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="187*" />
                 <ColumnDefinition Width="152*"/>

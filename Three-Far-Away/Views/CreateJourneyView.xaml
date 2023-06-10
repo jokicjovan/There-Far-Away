@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Three_Far_Away.Views" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="430" d:DesignWidth="750">
+      d:DesignHeight="430" d:DesignWidth="700">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
@@ -142,6 +142,7 @@
         </Grid>
 
         <Grid Grid.Row="5" VerticalAlignment="Top" Height="61" RenderTransformOrigin="0.496,0.595" Margin="0,35,0,0">
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="187*" />
                 <ColumnDefinition Width="152*"/>

@@ -73,6 +73,7 @@ namespace Three_Far_Away.Commands
             Journey = journey;
             ViewModelBase = jvm;
             eventName = "CreateJourney";
+            from = to = "edit";
             
             if (ViewModelBase != null)
                 ViewModelBase.PropertyChanged += OnViewModelPropertyChanged;
@@ -96,6 +97,10 @@ namespace Three_Far_Away.Commands
             else if (from == "Attractions")
             {
                 return Journey.Attractions.Count>0;
+            }
+            else if (from == "edit")
+            {
+                return !(Journey.StartDate <= DateTime.Now);
             }
             return false;
 

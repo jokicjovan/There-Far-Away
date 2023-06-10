@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Three_Far_Away.ViewModels;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Microsoft.Maps.MapControl.WPF;
+using System.Net;
 
 namespace Three_Far_Away.Commands
 {
@@ -44,33 +45,45 @@ namespace Three_Far_Away.Commands
             apiUrl = $"{apiUrl}?{queryString}";
 
             HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
-            response.EnsureSuccessStatusCode();
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            var data = (JObject)JsonConvert.DeserializeObject(responseBody);
-            _createJourneyMapViewModel.StartLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), data["resourceSets"][0]["resources"][0]["point"]["coordinates"][0].Value<Double>(), data["resourceSets"][0]["resources"][0]["point"]["coordinates"][1].Value<Double>());
-
-            bool hasStart = false;
-            foreach (MapLocation item in _createJourneyMapViewModel.Locations)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                if (item.IsStart)
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                var data = (JObject)JsonConvert.DeserializeObject(responseBody);
+                if (data["resourceSets"][0]["estimatedTotal"].Value<int>() == 0)
                 {
-                    _createJourneyMapViewModel.Locations.Remove(item);
-                    Location location = new Location(_createJourneyMapViewModel.StartLocationModel.Longitude,_createJourneyMapViewModel.StartLocationModel.Latitude);
+                    _createJourneyMapViewModel.AddError("No results", nameof(_createJourneyMapViewModel.StartCity));
+                    return;
+                }
+                _createJourneyMapViewModel.StartLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), data["resourceSets"][0]["resources"][0]["point"]["coordinates"][0].Value<Double>(), data["resourceSets"][0]["resources"][0]["point"]["coordinates"][1].Value<Double>());
+
+                bool hasStart = false;
+                foreach (MapLocation item in _createJourneyMapViewModel.Locations)
+                {
+                    if (item.IsStart)
+                    {
+                        _createJourneyMapViewModel.Locations.Remove(item);
+                        Location location = new Location(_createJourneyMapViewModel.StartLocationModel.Longitude, _createJourneyMapViewModel.StartLocationModel.Latitude);
+                        _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "S", true));
+                        _createJourneyMapViewModel.UpdateStartLocationAsync(location);
+                        hasStart = true;
+                        break;
+                    }
+                }
+                if (!hasStart)
+                {
+                    Location location = new Location(_createJourneyMapViewModel.StartLocationModel.Longitude, _createJourneyMapViewModel.StartLocationModel.Latitude);
                     _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "S", true));
                     _createJourneyMapViewModel.UpdateStartLocationAsync(location);
-                    hasStart = true;
-                    break;
                 }
+                _createJourneyMapViewModel.StartCity = _createJourneyMapViewModel.StartLocationModel.Address;
             }
-            if (!hasStart)
+            else
             {
-                Location location = new Location(_createJourneyMapViewModel.StartLocationModel.Longitude, _createJourneyMapViewModel.StartLocationModel.Latitude);
-                _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "S", true));
-                _createJourneyMapViewModel.UpdateStartLocationAsync(location);
+                _createJourneyMapViewModel.AddError("Query is not valid", nameof(_createJourneyMapViewModel.StartCity));
             }
-            _createJourneyMapViewModel.StartCity = _createJourneyMapViewModel.StartLocationModel.Address;
 
         }
     }

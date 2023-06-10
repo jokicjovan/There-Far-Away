@@ -43,34 +43,45 @@ namespace Three_Far_Away.Commands
             apiUrl = $"{apiUrl}?{queryString}";
 
             HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
-            response.EnsureSuccessStatusCode();
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            var data = (JObject)JsonConvert.DeserializeObject(responseBody);
-            _createJourneyMapViewModel.EndLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), data["resourceSets"][0]["resources"][0]["point"]["coordinates"][0].Value<Double>(), data["resourceSets"][0]["resources"][0]["point"]["coordinates"][1].Value<Double>());
-
-            bool hasStart = false;
-            foreach (MapLocation item in _createJourneyMapViewModel.Locations)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                if (!item.IsStart)
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                var data = (JObject)JsonConvert.DeserializeObject(responseBody);
+                if (data["resourceSets"][0]["estimatedTotal"].Value<int>() == 0)
                 {
-                    _createJourneyMapViewModel.Locations.Remove(item);
+                    _createJourneyMapViewModel.AddError("No results", nameof(_createJourneyMapViewModel.EndCity));
+                    return;
+                }
+                _createJourneyMapViewModel.EndLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), data["resourceSets"][0]["resources"][0]["point"]["coordinates"][0].Value<Double>(), data["resourceSets"][0]["resources"][0]["point"]["coordinates"][1].Value<Double>());
+
+                bool hasStart = false;
+                foreach (MapLocation item in _createJourneyMapViewModel.Locations)
+                {
+                    if (!item.IsStart)
+                    {
+                        _createJourneyMapViewModel.Locations.Remove(item);
+                        Location location = new Location(_createJourneyMapViewModel.EndLocationModel.Longitude, _createJourneyMapViewModel.EndLocationModel.Latitude);
+                        _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "F", false));
+                        _createJourneyMapViewModel.UpdateEndLocationAsync(location);
+                        hasStart = true;
+                        break;
+                    }
+                }
+                if (!hasStart)
+                {
                     Location location = new Location(_createJourneyMapViewModel.EndLocationModel.Longitude, _createJourneyMapViewModel.EndLocationModel.Latitude);
                     _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "F", false));
                     _createJourneyMapViewModel.UpdateEndLocationAsync(location);
-                    hasStart = true;
-                    break;
                 }
+                _createJourneyMapViewModel.EndCity = _createJourneyMapViewModel.EndLocationModel.Address;
             }
-            if (!hasStart)
+            else
             {
-                Location location = new Location(_createJourneyMapViewModel.EndLocationModel.Longitude, _createJourneyMapViewModel.EndLocationModel.Latitude);
-                _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "F", false));
-                _createJourneyMapViewModel.UpdateEndLocationAsync(location);
+                _createJourneyMapViewModel.AddError("Query is not valid", nameof(_createJourneyMapViewModel.EndCity));
             }
-            _createJourneyMapViewModel.EndCity = _createJourneyMapViewModel.EndLocationModel.Address;
-
         }
     }
 }

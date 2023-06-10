@@ -107,6 +107,7 @@ namespace Three_Far_Away.ViewModels
 
             ViewJourneyPreviewCommand = new ViewJourneyPreviewFromJourneyCardCommand(this);
             DeleteJourneyFromCardCommand = new DeleteJourneyFromCardCommand(this);
+			NavigateEditJourneyCommand = new NavigateToCreateJourneyCommand(journeyService.Read(journey.Id));
         }
 	}
 }

@@ -223,13 +223,21 @@ namespace Three_Far_Away.ViewModels
     
 
             HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
-            response.EnsureSuccessStatusCode();
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                response.EnsureSuccessStatusCode();
 
-            string responseBody = await response.Content.ReadAsStringAsync();
-            var data = (JObject)JsonConvert.DeserializeObject(responseBody);
-            StartLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
-            StartCity = StartLocationModel.Address;
-            Journey.StartLocation= StartLocationModel;
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var data = (JObject)JsonConvert.DeserializeObject(responseBody);
+                StartLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
+                StartCity = StartLocationModel.Address;
+                Journey.StartLocation = StartLocationModel;
+            }
+            else
+            {
+                AddError("Query is not valid", nameof(StartCity));
+            }
+            
         }
 
         public async Task UpdateEndLocationAsync(Microsoft.Maps.MapControl.WPF.Location location)
@@ -238,13 +246,22 @@ namespace Three_Far_Away.ViewModels
 
 
             HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
-            response.EnsureSuccessStatusCode();
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                response.EnsureSuccessStatusCode();
 
-            string responseBody = await response.Content.ReadAsStringAsync();
-            var data = (JObject)JsonConvert.DeserializeObject(responseBody);
-            EndLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
-            EndCity = EndLocationModel.Address;
-            Journey.EndLocation = EndLocationModel;
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var data = (JObject)JsonConvert.DeserializeObject(responseBody);
+                EndLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
+                EndCity = EndLocationModel.Address;
+                Journey.EndLocation = EndLocationModel;
+            }
+            else
+            {
+                AddError("Query is not valid", nameof(StartCity));
+            }
+
+
         }
 
         public IEnumerable GetErrors(string? propertyName)
@@ -263,7 +280,7 @@ namespace Three_Far_Away.ViewModels
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        private void AddError(string errorMessage, string propertyName)
+        internal void AddError(string errorMessage, string propertyName)
         {
             if (!_propertyNameToErrorsDictionary.ContainsKey(propertyName))
             {
@@ -272,6 +289,7 @@ namespace Three_Far_Away.ViewModels
             _propertyNameToErrorsDictionary[propertyName].Add(errorMessage);
             OnErrorsChanged(propertyName);
         }
+
     }
     public class MapLocation
     {
