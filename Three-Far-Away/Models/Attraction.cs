@@ -35,7 +35,7 @@ namespace Three_Far_Away.Models
             Name = "";
             Image = "";
             Description = "";
-            Type = AttractionType.ATTRACTION;
+            Type = AttractionType.Attraction;
         }
 
         public Attraction(Guid id, string name, string description, AttractionType type, string image, Location location, List<Journey> journeys)

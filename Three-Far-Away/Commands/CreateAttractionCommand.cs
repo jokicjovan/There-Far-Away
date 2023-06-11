@@ -38,7 +38,7 @@ namespace Three_Far_Away.Commands
                 Attraction created = _createAttractionMapViewModel._attractionService.Create(_createAttractionMapViewModel.Attraction);
             }
 
-            EventBus.FireEvent("AgentJourneys");
+            EventBus.FireEvent("AgentAttractions");
         }
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

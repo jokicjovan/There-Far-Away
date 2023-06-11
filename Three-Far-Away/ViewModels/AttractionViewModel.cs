@@ -149,9 +149,9 @@ namespace Three_Far_Away.ViewModels
             page = 0;
             this.attractionService = attractionService;
             SelectedType = "ALL";
-            String option1 = char.ToUpper(AttractionType.ACCOMODATION.ToString()[0]) + AttractionType.ACCOMODATION.ToString().ToLower().Substring(1);
-            String option2 = char.ToUpper(AttractionType.ATTRACTION.ToString()[0]) + AttractionType.ATTRACTION.ToString().ToLower().Substring(1);
-            String option3 = char.ToUpper(AttractionType.RESTAURANT.ToString()[0]) + AttractionType.RESTAURANT.ToString().ToLower().Substring(1);
+            String option1 = char.ToUpper(AttractionType.Accomodation.ToString()[0]) + AttractionType.Accomodation.ToString().ToLower().Substring(1);
+            String option2 = char.ToUpper(AttractionType.Attraction.ToString()[0]) + AttractionType.Attraction.ToString().ToLower().Substring(1);
+            String option3 = char.ToUpper(AttractionType.Restaurant.ToString()[0]) + AttractionType.Restaurant.ToString().ToLower().Substring(1);
             Types = new ObservableCollection<string>
             {
                 "All",
@@ -205,12 +205,12 @@ namespace Three_Far_Away.ViewModels
 
         public List<Attraction> ReadPage(int page, int size)
         {
-            if (SelectedType.ToLower() == AttractionType.ACCOMODATION.ToString().ToLower())
-                return attractionService.ReadPage(page, size, AttractionType.ACCOMODATION);
-            if (SelectedType.ToLower() == AttractionType.ATTRACTION.ToString().ToLower())
-                return attractionService.ReadPage(page, size, AttractionType.ATTRACTION);
-            if (SelectedType.ToLower() == AttractionType.RESTAURANT.ToString().ToLower())
-                return attractionService.ReadPage(page, size, AttractionType.RESTAURANT);
+            if (SelectedType.ToLower() == AttractionType.Accomodation.ToString().ToLower())
+                return attractionService.ReadPage(page, size, AttractionType.Accomodation);
+            if (SelectedType.ToLower() == AttractionType.Attraction.ToString().ToLower())
+                return attractionService.ReadPage(page, size, AttractionType.Attraction);
+            if (SelectedType.ToLower() == AttractionType.Restaurant.ToString().ToLower())
+                return attractionService.ReadPage(page, size, AttractionType.Restaurant);
             return attractionService.ReadPage(page, size);
 
         }

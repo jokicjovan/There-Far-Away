@@ -146,7 +146,7 @@ namespace Three_Far_Away
             Attraction attraction = new Attraction();
             attraction.Name = "Restoran u Nisu";
             attraction.Description = "Ovo je najbolji restoran u Nisu";
-            attraction.Type = AttractionType.RESTAURANT;
+            attraction.Type = AttractionType.Restaurant;
             attraction.Location = location;
             attraction.Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
             attraction = App.host.Services.GetService<IAttractionService>().Create(attraction);
@@ -162,7 +162,7 @@ namespace Three_Far_Away
             Attraction attraction = new Attraction();
             attraction.Name = "Atrakcija";
             attraction.Description = "opis";
-            attraction.Type = AttractionType.ATTRACTION;
+            attraction.Type = AttractionType.Attraction;
             attraction.Location = location;
             attraction.Image = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
             attraction = App.host.Services.GetService<IAttractionService>().Create(attraction);

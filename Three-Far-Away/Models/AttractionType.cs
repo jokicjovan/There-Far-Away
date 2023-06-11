@@ -8,6 +8,6 @@ namespace Three_Far_Away.Models
 {
     public enum AttractionType
     {
-        ATTRACTION,ACCOMODATION,RESTAURANT
+        Attraction,Accomodation,Restaurant
     }
 }
