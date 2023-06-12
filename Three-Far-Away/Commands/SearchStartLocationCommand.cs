@@ -66,7 +66,7 @@ namespace Three_Far_Away.Commands
                     {
                         _createJourneyMapViewModel.Locations.Remove(item);
                         Location location = new Location(_createJourneyMapViewModel.StartLocationModel.Longitude, _createJourneyMapViewModel.StartLocationModel.Latitude);
-                        _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "S", true));
+                        _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "S", true, ""));
                         _createJourneyMapViewModel.UpdateStartLocationAsync(location);
                         hasStart = true;
                         break;
@@ -75,7 +75,7 @@ namespace Three_Far_Away.Commands
                 if (!hasStart)
                 {
                     Location location = new Location(_createJourneyMapViewModel.StartLocationModel.Longitude, _createJourneyMapViewModel.StartLocationModel.Latitude);
-                    _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "S", true));
+                    _createJourneyMapViewModel.Locations.Add(new MapLocation(location, "S", true, ""));
                     _createJourneyMapViewModel.UpdateStartLocationAsync(location);
                 }
                 _createJourneyMapViewModel.StartCity = _createJourneyMapViewModel.StartLocationModel.Address;

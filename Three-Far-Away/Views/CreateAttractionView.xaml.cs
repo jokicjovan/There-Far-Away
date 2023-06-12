@@ -26,13 +26,15 @@ namespace Three_Far_Away.Views
             InitializeComponent();
             typeAttractionCB.ItemsSource = Enum.GetValues(typeof(AttractionType));
 
+
+
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.Focusable = true;
             Keyboard.Focus(this);
-            name.Focus();
+            firstTextBox.Focus();
             SetHelpKey(null, null);
         }
 

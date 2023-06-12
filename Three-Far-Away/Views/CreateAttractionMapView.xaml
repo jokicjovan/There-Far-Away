@@ -7,8 +7,14 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Three_Far_Away.Views"
              mc:Ignorable="d" 
-             GotFocus="SetHelpKey"
-             d:DesignHeight="430" d:DesignWidth="700">
+             GotFocus="SetHelpKey" 
+             Loaded="OnLoaded"
+             FocusVisualStyle="{x:Null}"
+             d:DesignHeight="430" d:DesignWidth="700"
+             xmlns:converters="clr-namespace:Three_Far_Away.Converters">
+    <UserControl.Resources>
+        <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
+    </UserControl.Resources>
     <Grid
         Margin="20,20,20,20">
         <Grid.ColumnDefinitions>
@@ -34,11 +40,11 @@
                 </Grid.RowDefinitions>
                 <TextBlock
                     Grid.Row="0" 
-                    x:Name="name"
                     Text="Start Location"/>
                 <TextBox
                     materialDesign:HintAssist.Hint="Example address"
                     Grid.Row="1"
+                    x:Name="name"
                     Width="310"
                     HorizontalAlignment="Left"
                     Text = "{Binding StartCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -84,7 +90,9 @@
                     <m:MapItemsControl ItemsSource="{Binding Locations}">
                         <m:MapItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <m:Pushpin  Location="{Binding Location}"  Content="{Binding Name}">
+                                <m:Pushpin Background="White"  Location="{Binding Location}">
+                                    <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}"/>
+
                                 </m:Pushpin>
                             </DataTemplate>
                         </m:MapItemsControl.ItemTemplate>

@@ -7,6 +7,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              GotFocus="SetHelpKey"
+             Loaded="OnLoaded"
+             FocusVisualStyle="{x:Null}"
              d:DesignHeight="430" d:DesignWidth="700">
     <Grid>
         <Grid.RowDefinitions>
@@ -28,9 +30,9 @@
                 Margin="0,30,0,0"
                 Grid.Row="0" 
                 Width="300"
-                x:Name="name"
                 Text="Name"/>
         <TextBox
+                x:Name="firstTextBox"
                 Grid.Row="1"
                 Width="300"
                 materialDesign:HintAssist.Hint="Example Attraction Name"

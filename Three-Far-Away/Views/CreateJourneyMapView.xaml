@@ -8,7 +8,13 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              GotFocus="SetHelpKey"
-             d:DesignHeight="430" d:DesignWidth="700">
+             Loaded="OnLoaded"
+             FocusVisualStyle="{x:Null}"
+             d:DesignHeight="430" d:DesignWidth="700"
+             xmlns:converters="clr-namespace:Three_Far_Away.Converters">
+    <UserControl.Resources>
+        <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="320" MinHeight="0"/>
@@ -39,12 +45,12 @@
                 <TextBlock 
                     Grid.Row="0" 
                     Grid.Column="0"
-                    x:Name="name"
 
                     Text="Start Location"/>
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="0"
+                    x:Name="name"
                     ToolTip="Enter start address of your journey"
                     materialDesign:HintAssist.Hint="Example address"
                     Text = "{Binding StartCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -126,7 +132,10 @@
                     <m:MapItemsControl ItemsSource="{Binding Locations}">
                         <m:MapItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <m:Pushpin  Location="{Binding Location}"  Content="{Binding Name}">
+                                <m:Pushpin Background="White"  Location="{Binding Location}"  >
+                                    <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" >
+                                    </Image>
+
                                 </m:Pushpin>
                             </DataTemplate>
                         </m:MapItemsControl.ItemTemplate>
@@ -134,7 +143,7 @@
                 </m:Map>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" Margin="20,5,20,0" RenderTransformOrigin="0.496,0.595" Height="61" VerticalAlignment="Top">
+        <Grid Grid.Row="1" Margin="10,5,20,0" RenderTransformOrigin="0.496,0.595" Height="61" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="187*" />
                 <ColumnDefinition Width="152*"/>

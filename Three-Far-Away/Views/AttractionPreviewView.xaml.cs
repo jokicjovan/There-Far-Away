@@ -62,7 +62,7 @@ namespace Three_Far_Away.Views
                     {
                         vm.Locations.Remove(item);
                         Location location = myMap.ViewportPointToLocation(mousePosition);
-                        vm.Locations.Add(new MapLocation(location, "S", true));
+                        vm.Locations.Add(new MapLocation(location, "S", true,""));
                         vm.UpdateStartLocationAsync(location);
                         hasStart = true;
                         break;
@@ -71,7 +71,7 @@ namespace Three_Far_Away.Views
                 if (!hasStart)
                 {
                     Location location = myMap.ViewportPointToLocation(mousePosition);
-                    vm.Locations.Add(new MapLocation(location, "S", true));
+                    vm.Locations.Add(new MapLocation(location, "S", true, ""));
                     vm.UpdateStartLocationAsync(location);
                 }
 
@@ -85,7 +85,7 @@ namespace Three_Far_Away.Views
                     {
                         vm.Locations.Remove(item);
                         Location location = myMap.ViewportPointToLocation(mousePosition);
-                        vm.Locations.Add(new MapLocation(location, "F", false));
+                        vm.Locations.Add(new MapLocation(location, "F", false, ""));
                         vm.UpdateEndLocationAsync(location);
                         hasStart = true;
                         break;
@@ -94,7 +94,7 @@ namespace Three_Far_Away.Views
                 if (!hasStart)
                 {
                     Location location = myMap.ViewportPointToLocation(mousePosition);
-                    vm.Locations.Add(new MapLocation(location, "F", false));
+                    vm.Locations.Add(new MapLocation(location, "F", false, ""));
                     vm.UpdateEndLocationAsync(location);
                 }
             }

@@ -27,7 +27,7 @@ namespace Three_Far_Away.Commands
 
         public override async void Execute(object parameter)
         {
-            _createJourneyMapViewModel.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(10, 10), "AAA",true));
+            _createJourneyMapViewModel.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(10, 10), "AAA",true,""));
             
         }
     }

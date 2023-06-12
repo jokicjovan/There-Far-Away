@@ -15,6 +15,7 @@
              FocusVisualStyle="{x:Null}">
     <UserControl.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+        <converters:Base64ImageConverter x:Key="Base64ImageConverter"/>
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="B" Command="{Binding BuyCommand}"/>
@@ -143,7 +144,10 @@
                         <wpf:MapItemsControl ItemsSource="{Binding Locations}">
                             <wpf:MapItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <wpf:Pushpin  Location="{Binding Location}"  Content="{Binding Name}">
+                                    <wpf:Pushpin Background="White"  Location="{Binding Location}"  >
+                                        <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" >
+                                        </Image>
+
                                     </wpf:Pushpin>
                                 </DataTemplate>
                             </wpf:MapItemsControl.ItemTemplate>

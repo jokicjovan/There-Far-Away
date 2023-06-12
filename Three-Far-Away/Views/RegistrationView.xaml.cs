@@ -21,7 +21,7 @@ namespace Three_Far_Away.Views
         {
             this.Focusable = true;
             Keyboard.Focus(this);
-            usernameTextBox.Focus();
+            nameTextBox.Focus();
             SetHelpKey(null, null);
         }
 

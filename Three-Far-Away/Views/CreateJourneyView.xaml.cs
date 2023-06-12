@@ -27,14 +27,15 @@ namespace Three_Far_Away.Views
             ci.DateTimeFormat.ShortDatePattern = "MM/dd/yyyy";
             Thread.CurrentThread.CurrentCulture = ci;
             trasportationsCB.ItemsSource = Enum.GetValues(typeof (TransportationType));
+            
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.Focusable = true;
             Keyboard.Focus(this);
-            name.Focus();
             SetHelpKey(null, null);
+            name.Focus();
         }
 
         public void SetHelpKey(object sender, EventArgs e)

@@ -129,7 +129,11 @@ namespace Three_Far_Away.ViewModels
 
         void ApplyFilterSelected()
         {
-            SelectedAttractions = new ObservableCollection<Attraction>(SelectedAttractions.Where(item => item.Name.ToLower().Contains(FilterSelected.ToLower())));
+            SelectedAttractionsView.Refresh();
+            if (FilterSelected.Length==0)
+                SelectedAttractions = new ObservableCollection<Attraction>(_journey.Attractions);
+            else
+                SelectedAttractions = new ObservableCollection<Attraction>(_journey.Attractions.Where(item => item.Name.ToLower().Contains(FilterSelected.ToLower())));
             SelectedAttractionsView.Refresh();
             
         }

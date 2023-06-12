@@ -55,7 +55,7 @@
 
                     <ComboBox  
                         Grid.Column="1"
-                        Width="150"
+                        Width="90"
                         ItemsSource="{Binding Months}"  
                         SelectedItem="{Binding SelectedMonth}"
                         SelectedIndex="0"/>
@@ -78,7 +78,7 @@
 
                     <ComboBox 
                         Grid.Column="1"
-                        Width="150"
+                        Width="60"
                         ItemsSource="{Binding Years}"
                         SelectedItem="{Binding SelectedYear}"
                         SelectedIndex="0"/>

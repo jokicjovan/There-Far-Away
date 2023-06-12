@@ -99,21 +99,41 @@ namespace Three_Far_Away.ViewModels
                 }
             }
 		}
-		public Double Price
+		public string Price
 		{
 			get
 			{
-				return Journey.Price;
+				return Journey.Price.ToString();
 			}
 			set
 			{
-				Journey.Price = value;
-				OnPropertyChanged(nameof(Price));
-                ClearErrors(nameof(Price));
-                if (Price<=0)
+                if (value == "")
                 {
-                    AddError("Price Cannot Be Lower Than 0", nameof(Price));
+                    Journey.Price = 0;
+                    AddError("Price Cannot Be Empty", nameof(Price));
                 }
+                else
+                {
+                    try
+                    {
+                        Journey.Price = Convert.ToDouble(value);
+                    }
+                    catch (Exception ex)
+                    {
+                        AddError("Price Is Not Numeric Value", nameof(Price));
+                    }
+                    
+                    if (Convert.ToDouble(Price) <= 0)
+                    {
+                        AddError("Price Cannot Be Lower Than 0", nameof(Price));
+                    }
+                    else if (Convert.ToDouble(Price) >= 1000000)
+                    {
+                        AddError("Price Cannot Be Greater Than 1 Million", nameof(Price));
+                    }
+                }
+                OnPropertyChanged(nameof(Price));
+                ClearErrors(nameof(Price));
             }
 		}
 

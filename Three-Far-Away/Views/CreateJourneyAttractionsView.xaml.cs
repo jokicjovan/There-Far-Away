@@ -53,7 +53,7 @@ namespace Three_Far_Away.Views
                 vm.Locations.Clear();
                 foreach (Attraction attraction in attractions)
                 {
-                    vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "", false));
+                    vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "", false,attraction.Type.ToString()));
                 }
             }
 
@@ -68,7 +68,7 @@ namespace Three_Far_Away.Views
                 vm.Locations.Clear();
                 foreach (Attraction attraction in attractions)
                 {
-                    vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "", false));
+                    vm.Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "", false, attraction.Type.ToString()));
                 }
             }
         }

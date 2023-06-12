@@ -267,14 +267,14 @@ namespace Three_Far_Away.ViewModels
                 }
             }
             
-            Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(journey.StartLocation.Longitude, journey.StartLocation.Latitude), "S", true));
+            Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(journey.StartLocation.Longitude, journey.StartLocation.Latitude), "S", true, ""));
 
             foreach (Attraction attraction in journey.Attractions)
             {
-                Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "A", false));
+                Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude), "A", false, attraction.Type.ToString()));
             }
 
-            Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(journey.EndLocation.Longitude, journey.EndLocation.Latitude), "F", false));
+            Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(journey.EndLocation.Longitude, journey.EndLocation.Latitude), "F", false,""));
 
 
             LocationCollection = new LocationCollection();

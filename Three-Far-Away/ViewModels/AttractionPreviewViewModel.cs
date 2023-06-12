@@ -225,7 +225,7 @@ namespace Three_Far_Away.ViewModels
             Center = attraction.Location.Longitude.ToString().Replace(",", ".") + ", " + attraction.Location.Latitude.ToString().Replace(",", ".");
             Locations.Add(new MapLocation(
                 new Microsoft.Maps.MapControl.WPF.Location(attraction.Location.Longitude, attraction.Location.Latitude),
-                "S", true));
+                "S", true, attraction.Type.ToString()));
 
             NavigateToEditAttractionCommand = new NavigateToCreateAttractionCommand(attraction);
             DeleteAttractionCommand = new DeleteAttractionFromPreviewCommand(this);

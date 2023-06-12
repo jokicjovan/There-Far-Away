@@ -142,7 +142,7 @@ namespace Three_Far_Away.ViewModels
             _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
             if (_attraction.Location != null)
             {
-                Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(_attraction.Location.Longitude, _attraction.Location.Latitude), "S", true));
+                Locations.Add(new MapLocation(new Microsoft.Maps.MapControl.WPF.Location(_attraction.Location.Longitude, _attraction.Location.Latitude), "S", true,attraction.Type.ToString()));
                 StartCity = _attraction.Location.Address;
             }
 
@@ -184,7 +184,7 @@ namespace Three_Far_Away.ViewModels
                 StartLocationModel = new Models.Location(data["resourceSets"][0]["resources"][0]["address"]["formattedAddress"].Value<string>(), location.Latitude, location.Longitude);
                 StartCity = StartLocationModel.Address;
                 _attraction.Location = StartLocationModel;
-                Locations.Add(new MapLocation(location, "S", true));
+                Locations.Add(new MapLocation(location, "S", true,_attraction.Type.ToString()));
             }
             else
             {

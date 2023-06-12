@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Three_Far_Away.Infrastructure;
 using Three_Far_Away.Models;
 using Three_Far_Away.Services.Interfaces;
@@ -33,11 +34,23 @@ namespace Three_Far_Away.Commands
         {
             if (_createJourneyAttractionsViewModel._journeyService.Read(_createJourneyAttractionsViewModel.Journey.Id) != null)
             {
-                _createJourneyAttractionsViewModel._journeyService.Update(_createJourneyAttractionsViewModel.Journey);
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to save changes?", "Edit Confirmation", MessageBoxButton.YesNo);
+
+
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    _createJourneyAttractionsViewModel._journeyService.Update(_createJourneyAttractionsViewModel.Journey);
+                }
             }
             else
             {
-                Journey created = _createJourneyAttractionsViewModel._journeyService.Create(_createJourneyAttractionsViewModel.Journey);
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you certain you wish to submit the new attraction?", "Add Confirmation", MessageBoxButton.YesNo);
+
+
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Journey created = _createJourneyAttractionsViewModel._journeyService.Create(_createJourneyAttractionsViewModel.Journey);
+                }
             }
 
             EventBus.FireEvent("AgentJourneys");
