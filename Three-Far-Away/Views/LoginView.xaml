@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
 
             <Image Grid.Row="0" Source="/Assets/Login.png"/>
-
+            
             <Grid Grid.Row="1" Margin="0 0 0 40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>

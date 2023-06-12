@@ -6,7 +6,7 @@ namespace Three_Far_Away.ViewModels
 {
     public class MainViewModel : NavigableViewModel
     {
-        public MainViewModel(LoginViewModel lvm)
+        public MainViewModel(SplashScreenViewModel lvm)
         {
             SwitchCurrentViewModel(lvm);
             RegisterHandlers();
@@ -36,6 +36,11 @@ namespace Three_Far_Away.ViewModels
             {
                 RegistrationViewModel rvm = App.host.Services.GetRequiredService<RegistrationViewModel>();
                 SwitchCurrentViewModel(rvm);
+            });
+            EventBus.RegisterHandler("SplashScreen", () =>
+            {
+                SplashScreenViewModel ssvm = App.host.Services.GetRequiredService<SplashScreenViewModel>();
+                SwitchCurrentViewModel(ssvm);
             });
         }
     }

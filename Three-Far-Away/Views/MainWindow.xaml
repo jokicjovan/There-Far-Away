@@ -98,6 +98,10 @@
                 <views:AttractionPreviewView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vms:SplashScreenViewModel}">
+                <views:SplashScreenView/>
+            </DataTemplate>
+
         </Grid.Resources>
 
         <materialDesign:DialogHost CloseOnClickAway="True">

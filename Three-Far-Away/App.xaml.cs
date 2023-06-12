@@ -54,9 +54,12 @@ namespace Three_Far_Away
                 services.AddTransient<LocationListItemViewModel>();
                 services.AddTransient<CreateJourneyMapViewModel>();
                 services.AddTransient<CreateJourneyAttractionsViewModel>();
+                services.AddTransient<CreateAttractionViewModel>();
+                services.AddTransient<CreateAttractionMapViewModel>();
                 services.AddTransient<ClientsJourneysViewModel>();
                 services.AddTransient<AttractionPreviewView>();
                 services.AddTransient<AttractionViewModel>();
+                services.AddTransient<SplashScreenViewModel>();
 
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton(s => new MainWindow()
@@ -97,7 +100,6 @@ namespace Three_Far_Away
             //loadArrangements(loadUsers(), loadJourneys());
             // loadAttraction();
 
-            EventBus.FireEvent("Login");
             MainWindow = host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 

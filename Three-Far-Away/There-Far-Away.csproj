@@ -13,11 +13,15 @@
     <None Remove="Assets\Login.png" />
     <None Remove="Assets\logo.png" />
     <None Remove="Assets\Register.png" />
+    <None Remove="Assets\song.mp3" />
     <None Remove="Fonts\password.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\logo.ico" />
+    <Content Include="Assets\song.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fonts\password.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
