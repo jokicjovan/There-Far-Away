@@ -34,8 +34,9 @@ namespace Three_Far_Away.Views
         public SplashScreenView()
         {
             InitializeComponent();
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(0.15);
+            timer = new DispatcherTimer(DispatcherPriority.Normal);
+            
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
             mediaElement.MediaOpened += MediaElement_MediaOpened;
         }
@@ -54,7 +55,7 @@ namespace Three_Far_Away.Views
         {
             if (pbStatus.Value < pbStatus.Maximum)
             {
-                pbStatus.Value += 2.7;
+                pbStatus.Value += 7;
             }
             else
             {
