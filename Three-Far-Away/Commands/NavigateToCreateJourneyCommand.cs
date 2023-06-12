@@ -87,7 +87,7 @@ namespace Three_Far_Away.Commands
                 return true;
             if (from == "Home")
             {
-                return Journey.Name.Length > 2 && Journey.Name.Length <= 30 && Journey.Price > 0 && Journey.StartDate >= DateTime.Now && Journey.StartDate < Journey.EndDate &&  Journey.Image != "" && base.CanExecute(parameter);
+                return Journey.Name.Length > 2 && Journey.Name.Length <= 30 && Journey.Price > 0 && Journey.StartDate >= DateTime.Now && Journey.StartDate <= Journey.EndDate &&  Journey.Image != "" && base.CanExecute(parameter);
             }
             else if (from == "None")
             {

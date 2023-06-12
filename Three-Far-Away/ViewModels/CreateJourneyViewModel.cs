@@ -74,11 +74,16 @@ namespace Three_Far_Away.ViewModels
 			set
 			{
 				Journey.StartDate = value;
-				OnPropertyChanged(nameof(StartDate));
+                OnPropertyChanged(nameof(EndDate));
+                OnPropertyChanged(nameof(StartDate));
                 ClearErrors(nameof(StartDate)); ;
                 if (StartDate<DateTime.Now)
                 {
                     AddError("Start Time Cannot Be In Past", nameof(StartDate));
+                }
+                if (EndDate < StartDate)
+                {
+                    AddError("End Time Cannot Be Before Start Time", nameof(EndDate));
                 }
             }
 		}
@@ -92,6 +97,7 @@ namespace Three_Far_Away.ViewModels
 			{
 				Journey.EndDate = value;
 				OnPropertyChanged(nameof(EndDate));
+                OnPropertyChanged(nameof(StartDate));
                 ClearErrors(nameof(EndDate)); ;
                 if (EndDate < StartDate)
                 {
