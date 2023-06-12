@@ -184,7 +184,7 @@ namespace Three_Far_Away.ViewModels
 
         private void HandleJourneyDeleted(object sender, EventArgs e)
         {
-            if (journeys.Count == 1)
+            if (journeys.Count == 1 && page > 0)
             {
                 PreviousPageCommand.Execute(null);
                 return;

@@ -233,7 +233,7 @@ namespace Three_Far_Away.ViewModels
 
         private void HandleAttractionDeleted(object sender, EventArgs e)
         {
-            if (Attractions.Count == 1)
+            if (Attractions.Count == 1 && page > 0)
             {
                 PreviousPageCommand.Execute(null);
                 return;
