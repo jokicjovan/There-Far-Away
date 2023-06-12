@@ -38,20 +38,21 @@ namespace Three_Far_Away.Commands
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     _createAttractionMapViewModel._attractionService.Update(_createAttractionMapViewModel.Attraction);
+                    EventBus.FireEvent("Attractions");
                 }
             }
             else
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show("Are you certain you wish to submit the new journey?", "Add Confirmation", MessageBoxButton.YesNo);
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you certain you wish to submit the new attraction?", "Add Confirmation", MessageBoxButton.YesNo);
 
 
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     Attraction created = _createAttractionMapViewModel._attractionService.Create(_createAttractionMapViewModel.Attraction);
+                    EventBus.FireEvent("Attractions");
                 }
             }
 
-            EventBus.FireEvent("AgentAttractions");
         }
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

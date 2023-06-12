@@ -36,7 +36,7 @@ namespace Three_Far_Away.Views
             InitializeComponent();
             timer = new DispatcherTimer(DispatcherPriority.Normal);
             
-            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Interval = TimeSpan.FromSeconds(0.1);
             timer.Tick += Timer_Tick;
             mediaElement.MediaOpened += MediaElement_MediaOpened;
         }
@@ -55,7 +55,7 @@ namespace Three_Far_Away.Views
         {
             if (pbStatus.Value < pbStatus.Maximum)
             {
-                pbStatus.Value += 7;
+                pbStatus.Value += 0.7;
             }
             else
             {

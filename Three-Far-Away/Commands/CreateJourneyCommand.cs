@@ -40,20 +40,22 @@ namespace Three_Far_Away.Commands
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     _createJourneyAttractionsViewModel._journeyService.Update(_createJourneyAttractionsViewModel.Journey);
+                    EventBus.FireEvent("AgentJourneys");
                 }
             }
             else
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show("Are you certain you wish to submit the new attraction?", "Add Confirmation", MessageBoxButton.YesNo);
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you certain you wish to submit the new journey?", "Add Confirmation", MessageBoxButton.YesNo);
 
 
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     Journey created = _createJourneyAttractionsViewModel._journeyService.Create(_createJourneyAttractionsViewModel.Journey);
+                    EventBus.FireEvent("AgentJourneys");
                 }
             }
 
-            EventBus.FireEvent("AgentJourneys");
+            
         }
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

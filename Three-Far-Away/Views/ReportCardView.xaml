@@ -25,7 +25,7 @@
                 Width="100">
                 <Border.Background>
                     <ImageBrush 
-                       ImageSource="{Binding Image, Converter={StaticResource Base64ImageConverter}}"/>
+                       ImageSource="{Binding Image, Converter={StaticResource Base64ImageConverter}}" Stretch="UniformToFill"/>
                 </Border.Background>
             </Border>
 

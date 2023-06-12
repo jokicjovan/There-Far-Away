@@ -135,8 +135,7 @@
 
                 </Grid>
                 <Grid Grid.Row="6" Width="400" Height="350" Background="#EBB9B9">
-                    <wpf:Map MouseRightButtonDown="myMap_MouseDown"
-                             PreviewMouseWheel="myMap_PreviewMouseWheel"
+                    <wpf:Map
                              x:Name="myMap" 
                              ZoomLevel="6.3"
                              Center="44.01667, 20.91667"

@@ -106,9 +106,8 @@
             </Grid>
 
             <StackPanel Grid.Column="1">
-                <wpf:Map MouseRightButtonDown="myMap_MouseDown"
+                <wpf:Map
                          Height="200"
-                         PreviewMouseWheel="myMap_PreviewMouseWheel"
                          x:Name="myMap" 
                          ZoomLevel="14"
                          Center="{Binding Center, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -116,7 +115,9 @@
                     <wpf:MapItemsControl ItemsSource="{Binding Locations}">
                         <wpf:MapItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <wpf:Pushpin  Location="{Binding Location}"  Content="{Binding Name}">
+                                <wpf:Pushpin Background="White"  Location="{Binding Location}">
+                                    <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}"/>
+
                                 </wpf:Pushpin>
                             </DataTemplate>
                         </wpf:MapItemsControl.ItemTemplate>
